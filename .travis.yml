@@ -15,3 +15,6 @@ script:
   - docker exec -i ansible-role-zsh useradd testuser --create-home
   - ZSH_USER=testuser molecule --debug converge
   - molecule destroy
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
