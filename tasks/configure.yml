@@ -18,11 +18,12 @@
     src: "{{ zsh_config_path }}/.zshrc"
     path: "{{ zsh_user_config }}"
     state: link
-    owner: "{{ ansible_user_id }}"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user }}"
   tags: [ zsh ]
 
 - name: Set zsh as default shell
   user:
-    name: "{{ ansible_user_id }}"
+    name: "{{ zsh_user }}"
     shell: /bin/zsh
   tags: [ zsh ]

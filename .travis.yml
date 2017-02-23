@@ -7,4 +7,11 @@ services:
   - docker
 
 install: pip install molecule docker-py
-script: molecule --debug test
+script:
+  # normal test
+  - ZSH_USER=root molecule --debug test
+  # test for other zsh_user
+  - molecule create
+  - docker exec -it ansible-role-zsh adduser testuser --create-home
+  - ZSH_USER=testuser molecule --debug converge
+  - molecule destroy

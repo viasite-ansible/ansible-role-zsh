@@ -8,3 +8,17 @@
 - [powerline](https://github.com/powerline/powerline)
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 - [percol](https://github.com/mooz/percol) (for Ctrl+R pretty history)
+
+## Usage
+Setup for ansible remote user:
+```
+- hosts: all
+  roles:
+    - zsh
+```
+Setup for other user:
+```
+- hosts: all
+  roles:
+    - { role: zsh, zsh_user: otheruser }
+```

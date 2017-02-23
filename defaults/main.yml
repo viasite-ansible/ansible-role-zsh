@@ -1,5 +1,7 @@
 ---
 
+zsh_user: "{{ ansible_user_id }}"
+
 zsh_config_version: 827fd4d
 zsh_config_path: /etc/zsh-config
 
@@ -9,4 +11,4 @@ zsh_oh_my_zsh_path: /usr/share/oh-my-zsh
 zsh_syntax_highlighting_version: 9523d6d
 zsh_syntax_highlighting_path: /usr/share/zsh-syntax-highlighting
 
-zsh_user_config: "{{ ansible_env.HOME}}/.zshrc"
+zsh_user_config: "~{{ zsh_user }}/.zshrc"
