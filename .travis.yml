@@ -12,6 +12,6 @@ script:
   - ZSH_USER=root molecule --debug test
   # test for other zsh_user
   - molecule create
-  - docker exec -it ansible-role-zsh adduser testuser --create-home
+  - docker exec -i ansible-role-zsh useradd testuser --create-home
   - ZSH_USER=testuser molecule --debug converge
   - molecule destroy
