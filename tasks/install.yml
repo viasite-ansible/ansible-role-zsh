@@ -1,0 +1,46 @@
+---
+
+- name: Install zsh and git
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - zsh
+    - git
+    - tmux
+
+- name: Clone oh-my-zsh repo
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: "{{ zsh_oh_my_zsh_path }}"
+    version: "{{ zsh_oh_my_zsh_version }}"
+  tags: [ zsh ]
+
+- name: Clone popstas/zsh-config
+  git:
+    repo: https://github.com/popstas/zsh-config.git
+    dest: "{{ zsh_config_path }}"
+    version: "{{ zsh_config_version }}"
+  tags: [ zsh ]
+
+- name: Clone zsh-syntax-highlighting
+  git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+    dest: "{{ zsh_syntax_highlighting_path }}"
+    version: "{{ zsh_syntax_highlighting_version }}"
+  tags: [ zsh ]
+
+- name: Install pip
+  apt:
+    name: python-pip
+    state: present
+  tags: [ zsh ]
+
+- name: Install percol and powerline
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - percol # https://github.com/mooz/percol
+    - powerline-status
+  tags: [ zsh ]

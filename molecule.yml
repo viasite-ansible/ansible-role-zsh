@@ -1,0 +1,16 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+docker:
+  containers:
+    - name: ansible-role-zsh
+      image: ubuntu
+      image_version: latest
+      ansible_groups:
+        - group1
+
+ansible:
+  playbook: tests/playbook.yml

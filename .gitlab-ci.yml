@@ -1,0 +1,5 @@
+---
+
+test:
+  script:
+    - molecule --debug test

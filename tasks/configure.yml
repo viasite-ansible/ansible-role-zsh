@@ -1,0 +1,28 @@
+---
+
+- name: Check zshrc
+  stat:
+    path: "{{ zsh_user_config }}" # default: $HOME/.zshrc
+  register: zsh_register_zshrc
+  tags: [ zsh ]
+
+- name: remove standard zshrc if it is not link
+  file:
+    path: "{{ zsh_user_config }}"
+    state: absent
+  when: zsh_register_zshrc.stat.exists and not zsh_register_zshrc.stat.islnk
+  tags: [ zsh ]
+
+- name: symlink zshrc
+  file:
+    src: "{{ zsh_config_path }}/.zshrc"
+    path: "{{ zsh_user_config }}"
+    state: link
+    owner: "{{ ansible_user_id }}"
+  tags: [ zsh ]
+
+- name: Set zsh as default shell
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /bin/zsh
+  tags: [ zsh ]
