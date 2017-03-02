@@ -2,7 +2,7 @@
 galaxy_info:
   author: Stanislav Popov
   company: Viasite
-  description: Install and configure popstas/zsh-config and oh-my-zsh
+  description: Install and configure viasite/zsh-config and oh-my-zsh
   license: MIT
   min_ansible_version: 1.8
   platforms:

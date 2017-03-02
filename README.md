@@ -3,7 +3,7 @@
 ## Includes:
 - zsh
 - tmux
-- [popstas/zsh-config](https://github.com/popstas/zsh-config)
+- [viasite/zsh-config](https://github.com/viasite/zsh-config)
 - [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 - [powerline](https://github.com/powerline/powerline)
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)

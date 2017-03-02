@@ -16,9 +16,9 @@
     version: "{{ zsh_oh_my_zsh_version }}"
   tags: [ zsh ]
 
-- name: Clone popstas/zsh-config
+- name: Clone viasite/zsh-config
   git:
-    repo: https://github.com/popstas/zsh-config.git
+    repo: https://github.com/viasite/zsh-config.git
     dest: "{{ zsh_config_path }}"
     version: "{{ zsh_config_version }}"
   tags: [ zsh ]
