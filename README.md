@@ -58,7 +58,7 @@ Via playbook:
 
 Via command:
 ```
-ansible-playbook -i hosts zsh.yml --extra_vars="zsh_user=otheruser"
+ansible-playbook -i hosts zsh.yml --extra-vars="zsh_user=otheruser"
 ```
 
 
