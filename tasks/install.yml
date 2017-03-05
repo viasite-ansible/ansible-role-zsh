@@ -5,6 +5,16 @@
     repo: https://github.com/robbyrussell/oh-my-zsh.git
     dest: "{{ zsh_oh_my_zsh_path }}"
 
+- name: Check zsh version
+  shell: "zsh --version | cut -d ' ' -f2"
+  register: zsh_register_version
+  changed_when: false
+
+- name: Remove zsh-syntax-highlighting if zsh < 4.3.17
+  set_fact:
+    zsh_plugins: "{{ zsh_plugins | difference(['zsh-syntax-highlighting']) }}"
+  when: zsh_register_version.stdout | version_compare('4.3.17', '<')
+
 - name: Clone zsh-syntax-highlighting plugin
   git:
     repo: https://github.com/zsh-users/zsh-syntax-highlighting.git

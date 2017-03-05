@@ -10,6 +10,10 @@ galaxy_info:
       versions:
         - trusty
         - xenial
+    - name: Debian
+      versions:
+        - squeeze
+        - wheezy
     - name: Darwin
       versions:
         - '10.12'

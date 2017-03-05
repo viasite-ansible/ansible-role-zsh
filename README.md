@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/viasite-ansible/ansible-role-zsh.svg?branch=master)](https://travis-ci.org/viasite-ansible/ansible-role-zsh)
 
-Tested on Ubuntu 14.04, Ubuntu 16.04, macOS 10.12.
+Tested on Debian 6, Ubuntu 14.04, Ubuntu 16.04, macOS 10.12.
 
 Please, check settings in `defaults/main.yml` before provision!
 You can test role in vagrant:
@@ -15,7 +15,7 @@ vagrant up
 - [powerlevel9k theme](https://github.com/bhilburn/powerlevel9k)
 - [fzf-zsh](https://github.com/Treri/fzf-zsh)
 - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
-- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) (except Debian Squeeze)
 - [zsh-command-time](https://github.com/popstas/zsh-command-time)
 
 
