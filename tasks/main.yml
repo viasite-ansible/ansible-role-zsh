@@ -1,4 +1,15 @@
 ---
 
+- include: install-debian.yml
+  when: ansible_os_family == "Debian"
+  tags: [ zsh, install ]
+
+- include: install-osx.yml
+  when: ansible_os_family == "Darwin"
+  tags: [ zsh, install ]
+
 - include: install.yml
+  tags: [ zsh, install ]
+
 - include: configure.yml
+  tags: [ zsh, configure ]

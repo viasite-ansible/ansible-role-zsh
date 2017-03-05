@@ -1,0 +1,14 @@
+---
+- name: Install zsh, git
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - zsh
+    - git
+
+- name: Install tmux
+  apt:
+    name: tmux
+    state: present
+  when: "'tmux' in zsh_plugins"

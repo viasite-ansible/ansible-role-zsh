@@ -1,0 +1,83 @@
+# {{ ansible_managed }}
+
+export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="{{ zsh_theme }}"
+HIST_STAMPS="{{ zsh_hist_stamps }}"
+
+export UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
+
+# For Solarized
+export TERM="xterm-256color"
+
+# home & end keys work
+bindkey '\e[1~' beginning-of-line
+bindkey '\e[4~' end-of-line
+
+# default editor
+export EDITOR="{{ zsh_editor }}"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+
+# Would you like to use another custom folder than $ZSH/custom?
+ZSH_CUSTOM="$ZSH/custom"
+
+plugins=({{ zsh_plugins | join(" ") }})
+# plugin common-aliases breaks execution of php scripts with shebang, why?
+
+export PATH="{{ zsh_path | join(":") }}"
+
+source "$ZSH/oh-my-zsh.sh"
+
+# zsh-command-time
+ZSH_COMMAND_TIME_MIN_SECONDS="{{ zsh_command_time_min_seconds }}"
+ZSH_COMMAND_TIME_ECHO="{{ zsh_command_time_echo }}"
+
+# fzf
+export FZF_DEFAULT_OPTS="{{ zsh_fzf_default_opts }}"
+
+# zsh-autosuggestions
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE={{ zsh_autosuggestions_max_length }}
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240" # gray highlight
+bindkey '{{ zsh_autosuggestions_bind_key }}' autosuggest-accept # autosuggest on {{ zsh_autosuggestions_bind_key }}
+
+# powerlevel9k
+POWERLEVEL9K_SHORTEN_DIR_LENGTH={{ zsh_powerlevel9k_shorten_dir_length }}
+POWERLEVEL9K_STATUS_VERBOSE={{ zsh_powerlevel9k_status_verbose }}
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=({{ zsh_powerlevel9k_left_prompt | join(" ") }})
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=({{ zsh_powerlevel9k_right_prompt | join(" ") }})
+
+{% if zsh_powerlevel_custom_elements is defined and zsh_powerlevel_custom_elements %}
+{% for element in zsh_powerlevel_custom_elements %}
+{% set prefix = "POWERLEVEL9K_CUSTOM_" + element.name | upper %}
+{{ prefix }}="{{ element.command }}"
+{{ prefix }}_BACKGROUND="{{ element.background }}"
+{{ prefix }}_FOREGROUND="{{ element.foreground }}"
+{% endfor %}
+{% endif %}
+
+POWERLEVEL9K_PROMPT_ON_NEWLINE={{ zsh_powerlevel9k_prompt_on_newline_bool }}
+POWERLEVEL9K_RPROMPT_ON_NEWLINE=false
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+
+POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND="{{ zsh_powerlevel9k_context_default_foreground }}"
+POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND="{{ zsh_powerlevel9k_context_default_background }}"
+POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND="{{ zsh_powerlevel9k_context_root_foreground }}"
+POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND="{{ zsh_powerlevel9k_context_root_background }}"
+
+POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="{{ zsh_powerlevel9k_dir_foreground }}"
+POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="{{ zsh_powerlevel9k_dir_background }}"
+POWERLEVEL9K_DIR_HOME_FOREGROUND="{{ zsh_powerlevel9k_dir_foreground }}"
+POWERLEVEL9K_DIR_HOME_BACKGROUND="{{ zsh_powerlevel9k_dir_background }}"
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="{{ zsh_powerlevel9k_dir_foreground }}"
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="{{ zsh_powerlevel9k_dir_background }}"
+
+POWERLEVEL9K_VCS_CLEAN_BACKGROUND="{{ zsh_powerlevel9k_vcs_clean_background }}"
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND="{{ zsh_powerlevel9k_vcs_modified_background }}"
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND="{{ zsh_powerlevel9k_vcs_untracked_background }}"
+
+# user configs
+[[ -r /etc/zsh/zshrc.local ]] && source /etc/zsh/zshrc.local
+[[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"

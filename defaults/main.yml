@@ -2,13 +2,85 @@
 
 zsh_user: "{{ ansible_user_id }}"
 
-zsh_config_version: 827fd4d
-zsh_config_path: /etc/zsh-config
+# .zshrc config
+zsh_theme: "powerlevel9k/powerlevel9k"
+zsh_hist_stamps: yyyy-mm-dd
+zsh_update_interval: 30
+zsh_editor: vim
 
-zsh_oh_my_zsh_version: d2725d4
-zsh_oh_my_zsh_path: /usr/share/oh-my-zsh
+zsh_path:
+  - /usr/local/sbin
+  - /usr/local/bin
+  - /usr/sbin
+  - /usr/bin
+  - /sbin
+  - /bin
+  - /usr/games
+  - /usr/local/games
 
-zsh_syntax_highlighting_version: 9523d6d
-zsh_syntax_highlighting_path: /usr/share/zsh-syntax-highlighting
+zsh_plugins:
+  - command-not-found
+  - command-time
+  - debian
+  - docker
+  - docker-compose
+  - fancy-ctrl-z
+  - fzf-zsh
+  - git-extras
+  - gnu-utils
+  - history
+  - jump
+  - pip
+  - python
+  - tmux
+  - vagrant
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting # must be last
 
-zsh_user_config: "~{{ zsh_user }}/.zshrc"
+# zsh-autosuggestions
+zsh_autosuggestions_max_length: 15
+zsh_autosuggestions_bind_key: ""
+
+# fzf
+zsh_fzf_height: "100%"
+zsh_fzf_reverse: yes
+zsh_fzf_border: no
+
+# command-time
+zsh_command_time_min_seconds: 3
+zsh_command_time_echo: ""
+
+# powerlevel9k
+zsh_powerlevel9k_left_prompt:
+  - context
+  - dir
+
+zsh_powerlevel9k_right_prompt:
+  - status
+  - background_jobs
+  - vcs
+  - custom_command_time
+  - time
+
+zsh_powerlevel_custom_elements:
+  - name: command_time
+    command: "zsh_command_time"
+    background: "248"
+    foreground: "000"
+
+zsh_powerlevel9k_prompt_on_newline: no
+zsh_powerlevel9k_shorten_dir_length: 3
+zsh_powerlevel9k_status_verbose: 0
+
+# dir (context) colors
+zsh_powerlevel9k_context_default_foreground: white
+zsh_powerlevel9k_context_default_background: "024" # blue
+zsh_powerlevel9k_context_root_foreground: white
+zsh_powerlevel9k_context_root_background: "124" # red
+zsh_powerlevel9k_dir_foreground: white
+zsh_powerlevel9k_dir_background: "240" # gray
+
+# vcs colors
+zsh_powerlevel9k_vcs_clean_background: "100" # dirty green
+zsh_powerlevel9k_vcs_modified_background: "094" # orange
+zsh_powerlevel9k_vcs_untracked_background: "094" # orange

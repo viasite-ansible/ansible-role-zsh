@@ -8,12 +8,15 @@ services:
 
 install: pip install molecule docker-py
 script:
+  - export MOLECULE_APTPROXY_PATH="$PWD/00aptproxy" && touch "$MOLECULE_APTPROXY_PATH"
+
   # normal test
-  - ZSH_USER=root molecule --debug test
+  - MOLECULE_ZSH_USER=root molecule --debug test
+
   # test for other zsh_user
   - molecule create
   - docker exec -i ansible-role-zsh useradd testuser --create-home
-  - ZSH_USER=testuser molecule --debug converge
+  - MOLECULE_ZSH_USER=testuser molecule --debug converge
   - molecule destroy
 
 notifications:

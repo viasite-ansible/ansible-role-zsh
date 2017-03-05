@@ -1,46 +1,58 @@
 ---
 
-- name: Install zsh and git
-  apt:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - zsh
-    - git
-    - tmux
-
 - name: Clone oh-my-zsh repo
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh.git
     dest: "{{ zsh_oh_my_zsh_path }}"
-    version: "{{ zsh_oh_my_zsh_version }}"
-  tags: [ zsh ]
 
-- name: Clone viasite/zsh-config
-  git:
-    repo: https://github.com/viasite/zsh-config.git
-    dest: "{{ zsh_config_path }}"
-    version: "{{ zsh_config_version }}"
-  tags: [ zsh ]
-
-- name: Clone zsh-syntax-highlighting
+- name: Clone zsh-syntax-highlighting plugin
   git:
     repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
-    dest: "{{ zsh_syntax_highlighting_path }}"
+    dest: "{{ zsh_custom_path }}/plugins/zsh-syntax-highlighting"
     version: "{{ zsh_syntax_highlighting_version }}"
-  tags: [ zsh ]
+  when: "'zsh-syntax-highlighting' in zsh_plugins"
 
-- name: Install pip
-  apt:
-    name: python-pip
-    state: present
-  tags: [ zsh ]
+- name: Clone zsh-autosuggestions plugin
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions.git
+    dest: "{{ zsh_custom_path }}/plugins/zsh-autosuggestions"
+    version: "{{ zsh_autosuggestions_version }}"
+  when: "'zsh-autosuggestions' in zsh_plugins"
 
-- name: Install percol and powerline
-  pip:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - percol # https://github.com/mooz/percol
-    - powerline-status
-  tags: [ zsh ]
+- name: Clone powerlevel9k theme
+  git:
+    repo: https://github.com/bhilburn/powerlevel9k.git
+    dest: "{{ zsh_custom_path }}/themes/powerlevel9k"
+    version: "{{ zsh_powerlevel9k_version }}"
+  when: zsh_theme == "powerlevel9k/powerlevel9k"
+
+- name: Clone command-time plugin
+  git:
+    repo: https://github.com/popstas/zsh-command-time.git
+    dest: "{{ zsh_custom_path }}/plugins/command-time"
+  when: "'command-time' in zsh_plugins"
+
+- name: Clone fzf plugin
+  git:
+    repo: https://github.com/junegunn/fzf.git
+    dest: "{{ zsh_custom_path }}/plugins/fzf"
+  when: "'fzf-zsh' in zsh_plugins"
+
+- name: Install fzf
+  command: "{{ zsh_custom_path }}/plugins/fzf/install --key-bindings --no-completion --no-update-rc"
+  args:
+    creates: "{{ zsh_custom_path }}/plugins/fzf/bin/fzf"
+  when: "'fzf-zsh' in zsh_plugins"
+
+- name: Clone fzf-zsh plugin
+  git:
+    repo: https://github.com/Treri/fzf-zsh.git
+    dest: "{{ zsh_custom_path }}/plugins/fzf-zsh"
+  when: "'fzf-zsh' in zsh_plugins"
+
+- name: Set directory permissions
+  file:
+    name: "{{ zsh_oh_my_zsh_path }}"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user }}"
+    recurse: yes

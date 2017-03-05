@@ -1,29 +1,13 @@
 ---
 
-- name: Check zshrc
-  stat:
-    path: "{{ zsh_user_config }}" # default: $HOME/.zshrc
-  register: zsh_register_zshrc
-  tags: [ zsh ]
-
-- name: remove standard zshrc if it is not link
-  file:
-    path: "{{ zsh_user_config }}"
-    state: absent
-  when: zsh_register_zshrc.stat.exists and not zsh_register_zshrc.stat.islnk
-  tags: [ zsh ]
-
-- name: symlink zshrc
-  file:
-    src: "{{ zsh_config_path }}/.zshrc"
-    path: "{{ zsh_user_config }}"
-    state: link
+- name: Write .zshrc config
+  template:
+    src: zshrc.j2
+    dest: "{{ zsh_user_config }}"
     owner: "{{ zsh_user }}"
-    group: "{{ zsh_user }}"
-  tags: [ zsh ]
+    group: "{{ zsh_user_group }}"
 
 - name: Set zsh as default shell
   user:
     name: "{{ zsh_user }}"
     shell: /bin/zsh
-  tags: [ zsh ]
