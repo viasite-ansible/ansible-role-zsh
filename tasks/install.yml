@@ -64,5 +64,5 @@
   file:
     name: "{{ zsh_oh_my_zsh_path }}"
     owner: "{{ zsh_user }}"
-    group: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
     recurse: yes
