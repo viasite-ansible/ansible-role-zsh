@@ -23,12 +23,23 @@ COMPLETION_WAITING_DOTS="true"
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM="$ZSH/custom"
 
-plugins=({{ zsh_plugins | join(" ") }})
+{% if 'zsh-syntax-highlighting' in zsh_plugins %}
+# zsh-syntax-highlighting sourcing later, see https://github.com/zsh-users/zsh-syntax-highlighting/issues/286
+{% endif %}
+plugins=({{ zsh_plugins | difference(['zsh-syntax-highlighting']) | join(" ") }})
 # plugin common-aliases breaks execution of php scripts with shebang, why?
 
 export PATH="{{ zsh_path | join(":") }}"
 
 source "$ZSH/oh-my-zsh.sh"
+
+{% if 'zsh-syntax-highlighting' in zsh_plugins %}
+# https://github.com/zsh-users/zsh-syntax-highlighting/issues/286#issuecomment-284261033,
+# will fixed after zsh-autosuggestion v0.3.3
+if (( ZSHRC_LOAD_ONCE++ == 0 )); then
+    source "${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+{% endif %}
 
 # zsh-command-time
 ZSH_COMMAND_TIME_MIN_SECONDS="{{ zsh_command_time_min_seconds }}"

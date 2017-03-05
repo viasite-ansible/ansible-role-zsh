@@ -34,6 +34,7 @@ zsh_plugins:
   - python
   - tmux
   - vagrant
+  - zsh_reload
   - zsh-autosuggestions
   - zsh-syntax-highlighting # must be last
 
