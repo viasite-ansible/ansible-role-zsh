@@ -68,3 +68,4 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     recurse: yes
+  changed_when: false
