@@ -9,11 +9,13 @@
   shell: "zsh --version | cut -d ' ' -f2"
   register: zsh_register_version
   changed_when: false
+  tags: configure
 
 - name: Remove zsh-syntax-highlighting if zsh < 4.3.17
   set_fact:
     zsh_plugins: "{{ zsh_plugins | difference(['zsh-syntax-highlighting']) }}"
   when: zsh_register_version.stdout | version_compare('4.3.17', '<')
+  tags: configure
 
 - name: Clone zsh-syntax-highlighting plugin
   git:
