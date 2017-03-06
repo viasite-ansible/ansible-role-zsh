@@ -51,7 +51,9 @@ export FZF_DEFAULT_OPTS="{{ zsh_fzf_default_opts }}"
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE={{ zsh_autosuggestions_max_length }}
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240" # gray highlight
+{% if zsh_autosuggestions_bind_key %}
 bindkey '{{ zsh_autosuggestions_bind_key }}' autosuggest-accept # autosuggest on {{ zsh_autosuggestions_bind_key }}
+{% endif %}
 
 # powerlevel9k
 POWERLEVEL9K_SHORTEN_DIR_LENGTH={{ zsh_powerlevel9k_shorten_dir_length }}
