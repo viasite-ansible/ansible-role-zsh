@@ -41,6 +41,7 @@ zsh_plugins:
 # zsh-autosuggestions
 zsh_autosuggestions_max_length: 15
 zsh_autosuggestions_bind_key: ""
+zsh_autosuggestions_bind_key_2: ""
 
 # fzf
 zsh_fzf_height: "100%"

@@ -54,6 +54,9 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240" # gray highlight
 {% if zsh_autosuggestions_bind_key %}
 bindkey '{{ zsh_autosuggestions_bind_key }}' autosuggest-accept # autosuggest on {{ zsh_autosuggestions_bind_key }}
 {% endif %}
+{% if zsh_autosuggestions_bind_key_2 %}
+bindkey '{{ zsh_autosuggestions_bind_key_2 }}' autosuggest-accept # autosuggest on {{ zsh_autosuggestions_bind_key_2 }}
+{% endif %}
 
 # powerlevel9k
 POWERLEVEL9K_SHORTEN_DIR_LENGTH={{ zsh_powerlevel9k_shorten_dir_length }}
