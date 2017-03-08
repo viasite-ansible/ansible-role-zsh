@@ -19,13 +19,17 @@ vagrant up
   with workaround for [#zsh-syntax-highlighting/286](https://github.com/zsh-users/zsh-syntax-highlighting/issues/286)
 - [zsh-command-time](https://github.com/popstas/zsh-command-time)
 
-
-
 ## Features
 - customize powerlevel9k theme prompt segments and colors
 - default colors tested with solarized dark and default grey terminal in putty
 - add custom prompt elements from yml
 - custom zsh config with `~/.zshrc.local` or `/etc/zshrc.local`
+
+## 1.5 mins demo
+![1.5 mins demo](https://github.com/popstas/popstas.github.io/blob/master/images/2017-03/ansible-role-zsh-demo.gif?raw=true)
+
+## Color schemes
+![colors demo](https://github.com/popstas/popstas.github.io/blob/master/images/2017-03/ansible-role-zsh-colors.gif?raw=true)
 
 
 
@@ -37,9 +41,11 @@ ansible-galaxy install viasite-ansible.zsh
 
 Write playbook:
 ```
-hosts: all
-roles:
-  - viasite-ansible.zsh
+- hosts: all
+  vars:
+    zsh_autosuggestions_bind_key: "^U"
+  roles:
+    - viasite-ansible.zsh
 ```
 
 Provision playbook:
@@ -57,7 +63,7 @@ Via playbook:
     - { role: viasite-ansible.zsh, zsh_user: otheruser }
 ```
 
-Via command:
+Or via command:
 ```
 ansible-playbook -i hosts zsh.yml --extra-vars="zsh_user=otheruser"
 ```
