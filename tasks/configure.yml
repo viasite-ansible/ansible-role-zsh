@@ -6,6 +6,7 @@
     dest: "{{ zsh_user_config }}"
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
+    backup: yes
 
 - name: Set zsh as default shell
   user:
