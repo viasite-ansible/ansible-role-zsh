@@ -14,13 +14,12 @@ galaxy_info:
       versions:
         - squeeze
         - wheezy
-    - name: Darwin
+    - name: MacOSX
       versions:
-        - '10.12'
-  categories:
+        - 10.12
+  galaxy_tags:
     - system
     - shell
     - user
     - zsh
-    - oh-my-zsh
 dependencies: []
