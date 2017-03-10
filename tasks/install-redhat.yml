@@ -1,0 +1,15 @@
+---
+- name: Install zsh, git, wget
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - zsh
+    - git
+    - wget
+
+- name: Install tmux
+  yum:
+    name: tmux
+    state: present
+  when: "'tmux' in zsh_plugins"
