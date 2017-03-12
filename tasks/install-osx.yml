@@ -12,4 +12,4 @@
   homebrew:
     name: tmux
     state: present
-  when: "'tmux' in zsh_plugins"
+  when: "'tmux' in zsh_antigen_bundles"

@@ -3,7 +3,6 @@
 zsh_user: "{{ ansible_user_id }}"
 
 # .zshrc config
-zsh_theme: "powerlevel9k/powerlevel9k"
 zsh_hist_stamps: yyyy-mm-dd
 zsh_update_interval: 30
 zsh_editor: vim
@@ -18,25 +17,37 @@ zsh_path:
   - /usr/games
   - /usr/local/games
 
-zsh_plugins:
-  - command-not-found
-  - command-time
+zsh_antigen_bundles:
+  #- command-not-found # +900 ms on OSX!!
   - debian
   - docker
   - docker-compose
   - fancy-ctrl-z
-  - fzf-zsh
   - git-extras
   - gnu-utils
-  - history
-  - jump
   - pip
   - python
   - tmux
   - vagrant
   - zsh_reload
-  - zsh-autosuggestions
-  - zsh-syntax-highlighting # must be last
+
+  #- junegunn/fzf
+  #- Treri/fzf-zsh
+  #- ytet5uy4/fzf-widgets
+  #- "/Users/popstas/projects/shell/fzf-widgets --no-local-clone"
+  - zsh-users/zsh-autosuggestions
+  - popstas/zsh-command-time
+  - urbainvaes/fzf-marks # replaces jump plugin, mark, jump and Ctrl+G
+  - unixorn/autoupdate-antigen.zshplugin
+
+  #- tysonwolker/iterm-tab-colors # random tab colors depends of pwd
+  #- wbinglee/zsh-wakatime
+  #- denolfe/zsh-travis # git-trav, go to travis of project
+  #- Tarrasch/zsh-bd # bd, back directory
+
+  - zsh-users/zsh-syntax-highlighting # must be last
+
+zsh_antigen_theme: "bhilburn/powerlevel9k powerlevel9k"
 
 # zsh-autosuggestions
 zsh_autosuggestions_max_length: 15

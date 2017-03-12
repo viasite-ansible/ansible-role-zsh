@@ -1,11 +1,35 @@
 # {{ ansible_managed }}
 
-export ZSH="$HOME/.oh-my-zsh"
+source {{ zsh_antigen_path }}/antigen/antigen.zsh
 
-ZSH_THEME="{{ zsh_theme }}"
+antigen use oh-my-zsh
+
+{% for bundle in zsh_antigen_bundles -%}
+    {%- if 'zsh-syntax-highlighting' in bundle -%}
+        {% if zsh_register_version.stdout | version_compare('4.3.17', '>=') -%}
+# https://github.com/zsh-users/zsh-syntax-highlighting/issues/286#issuecomment-284261033,
+# will fixed after zsh-autosuggestion v0.3.3
+if (( ZSHRC_LOAD_ONCE++ == 0 )); then
+    antigen bundle {{ bundle }}
+fi
+        {%- endif %}
+    {% else -%}
+        antigen bundle {{ bundle }}
+{% endif -%}
+{% endfor %}
+
+antigen theme {{ zsh_antigen_theme }}
+
+antigen apply
+
+###
+
+ANTIGEN_PLUGIN_UPDATE_DAYS={{ zsh_update_interval }}
+ANTIGEN_SYSTEM_UPDATE_DAYS={{ zsh_update_interval }}
+
 HIST_STAMPS="{{ zsh_hist_stamps }}"
 
-export UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
+UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
 
 # For Solarized
 export TERM="xterm-256color"
@@ -20,33 +44,24 @@ export EDITOR="{{ zsh_editor }}"
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
 
-# Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM="$ZSH/custom"
-
-{% if 'zsh-syntax-highlighting' in zsh_plugins %}
-# zsh-syntax-highlighting sourcing later, see https://github.com/zsh-users/zsh-syntax-highlighting/issues/286
-{% endif %}
-plugins=({{ zsh_plugins | difference(['zsh-syntax-highlighting']) | join(" ") }})
-# plugin common-aliases breaks execution of php scripts with shebang, why?
-
 export PATH="{{ zsh_path | join(":") }}"
-
-source "$ZSH/oh-my-zsh.sh"
-
-{% if 'zsh-syntax-highlighting' in zsh_plugins %}
-# https://github.com/zsh-users/zsh-syntax-highlighting/issues/286#issuecomment-284261033,
-# will fixed after zsh-autosuggestion v0.3.3
-if (( ZSHRC_LOAD_ONCE++ == 0 )); then
-    source "${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-fi
-{% endif %}
 
 # zsh-command-time
 ZSH_COMMAND_TIME_MIN_SECONDS="{{ zsh_command_time_min_seconds }}"
 ZSH_COMMAND_TIME_ECHO="{{ zsh_command_time_echo }}"
 
 # fzf
+export FZF_TMUX=0
 export FZF_DEFAULT_OPTS="{{ zsh_fzf_default_opts }}"
+
+# fzf-widgets
+#bindkey '^@'   fzf-select-widget
+#bindkey '^@c'  fzf-change-dir
+#bindkey '^@f'  fzf-edit-files
+#bindkey '^r'   fzf-exec-history
+#bindkey '^r'   fzf-history-widget
+#bindkey '^@ga' fzf-git-add
+#bindkey '^@gb' fzf-git-checkout
 
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE={{ zsh_autosuggestions_max_length }}

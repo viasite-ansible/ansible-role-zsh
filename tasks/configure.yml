@@ -1,5 +1,11 @@
 ---
 
+- name: Check zsh version
+  shell: "zsh --version | cut -d ' ' -f2"
+  register: zsh_register_version
+  changed_when: false
+  tags: configure
+
 - name: Write .zshrc config
   template:
     src: zshrc.j2

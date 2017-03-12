@@ -1,14 +1,16 @@
 ---
 zsh_user_group: "{% if ansible_os_family == 'Darwin' %}staff{% else %}{{ zsh_user }}{% endif %}"
-zsh_oh_my_zsh_path: "~{{ zsh_user }}/.oh-my-zsh"
+zsh_antigen_path: "~{{ zsh_user }}/.antigen"
 zsh_user_config: "~{{ zsh_user }}/.zshrc"
-zsh_custom_path: "~{{ zsh_user }}/.oh-my-zsh/custom"
 
+zsh_fzf_os: linux
+zsh_fzf_arch: "{% if '64' in ansible_architecture %}amd64{% else %}386{% endif %}"
+zsh_fzf_url: "https://github.com/junegunn/fzf-bin/releases/download/{{ zsh_fzf_version }}/fzf-{{ zsh_fzf_version }}-{{ zsh_fzf_os }}_{{ zsh_fzf_arch }}.tgz"
+zsh_antigen_fzf_path: "{{ zsh_antigen_path }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-junegunn-SLASH-fzf.git"
 zsh_fzf_default_opts: "--height {{ zsh_fzf_height }}{% if zsh_fzf_reverse %} --reverse{% endif %}{% if zsh_fzf_border %} --border{% endif %}"
 
 zsh_powerlevel9k_prompt_on_newline_bool: "{% if zsh_powerlevel9k_prompt_on_newline %}true{% else %}false{% endif %}"
 
 # plugins git versions
-zsh_powerlevel9k_version: v0.5.0
-zsh_autosuggestions_version: v0.3.3
-zsh_syntax_highlighting_version: 0.5.0
+zsh_fzf_version: 0.16.6
+zsh_antigen_version: v1.4.1

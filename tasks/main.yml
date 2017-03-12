@@ -17,3 +17,6 @@
 
 - include: configure.yml
   tags: [ zsh, configure ]
+
+- include: post-install.yml
+  tags: [ zsh, install ]
