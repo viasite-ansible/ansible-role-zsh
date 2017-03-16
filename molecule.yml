@@ -30,7 +30,7 @@ docker:
       volume_mounts:
         - ${MOLECULE_APTPROXY_PATH}:/etc/apt/apt.conf.d/00aptproxy
 
-    - name: ansible-role-zsh-centos
+    - name: ansible-role-zsh-centos-7
       image: centos
       image_version: 7
 
