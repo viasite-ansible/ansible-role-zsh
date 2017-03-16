@@ -1,5 +1,20 @@
 ---
 
+- name: Install zsh, git, wget
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - zsh
+    - git
+    - wget
+
+- name: Install tmux
+  package:
+    name: tmux
+    state: present
+  when: "'tmux' in zsh_plugins"
+
 - name: Clone oh-my-zsh repo
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh.git
