@@ -6,18 +6,33 @@ driver:
   name: docker
 docker:
   containers:
-    - name: ansible-role-zsh-ubuntu
+    #- name: ansible-role-zsh-debian-7
+    #  image: debian
+    #  image_version: 7
+    #  volume_mounts:
+    #    - ${MOLECULE_APTPROXY_PATH}:/etc/apt/apt.conf.d/00aptproxy
+
+    #- name: ansible-role-zsh-debian-8
+    #  image: debian
+    #  image_version: 8
+    #  volume_mounts:
+    #    - ${MOLECULE_APTPROXY_PATH}:/etc/apt/apt.conf.d/00aptproxy
+
+    #- name: ansible-role-zsh-ubuntu-1404
+    #  image: ubuntu
+    #  image_version: 14.04
+    #  volume_mounts:
+    #    - ${MOLECULE_APTPROXY_PATH}:/etc/apt/apt.conf.d/00aptproxy
+
+    - name: ansible-role-zsh-ubuntu-1604
       image: ubuntu
       image_version: 16.04
       volume_mounts:
         - ${MOLECULE_APTPROXY_PATH}:/etc/apt/apt.conf.d/00aptproxy
-      ansible_groups:
-        - group1
+
     - name: ansible-role-zsh-centos
       image: centos
       image_version: 7
-      ansible_groups:
-        - group1
 
 #driver:
 #  name: vagrant
