@@ -1,5 +1,4 @@
 ---
-
 test:
   script:
     # normal test
