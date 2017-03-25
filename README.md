@@ -11,13 +11,16 @@ vagrant up
 ## Includes:
 - zsh
 - tmux (if plugin enabled)
+- [antigen](https://github.com/zsh-users/antigen)
 - [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 - [powerlevel9k theme](https://github.com/bhilburn/powerlevel9k)
-- [fzf-zsh](https://github.com/Treri/fzf-zsh)
 - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) (except Debian Squeeze),
   with workaround for [#zsh-syntax-highlighting/286](https://github.com/zsh-users/zsh-syntax-highlighting/issues/286)
 - [zsh-command-time](https://github.com/popstas/zsh-command-time)
+- [urbainvaes/fzf-marks](https://github.com/popstas/urbainvaes/fzf-marks)
+- [unixorn/autoupdate-antigen.zshplugin](https://github.com/unixorn/autoupdate-antigen.zshplugin)
+- [ytet5uy4/fzf-widgets](https://github.com/ytet5uy4/fzf-widgets)
 
 ## Features
 - customize powerlevel9k theme prompt segments and colors
