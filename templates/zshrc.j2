@@ -18,6 +18,9 @@ fi
 {% endif -%}
 {% endfor %}
 
+{% if zsh_register_version.stdout | version_compare('5.0.8', '<') -%}
+POWERLEVEL9K_INSTALLATION_PATH={{ zsh_antigen_path }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-bhilburn-SLASH-powerlevel9k.git
+{% endif %}
 antigen theme {{ zsh_antigen_theme }}
 
 antigen apply
