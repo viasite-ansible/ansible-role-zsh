@@ -17,6 +17,9 @@ zsh_path:
   - /usr/games
   - /usr/local/games
 
+# fzf_widget extracted to variable for testing purposes
+fzf_widgets: ytet5uy4/fzf-widgets
+
 zsh_antigen_bundles:
   #- command-not-found # +900 ms on OSX!!
   - debian
@@ -35,7 +38,7 @@ zsh_antigen_bundles:
   - popstas/zsh-command-time
   - unixorn/autoupdate-antigen.zshplugin
   - urbainvaes/fzf-marks # replaces jump plugin, mark, jump and Ctrl+G
-  - ytet5uy4/fzf-widgets
+  - "{{ fzf_widgets }}"
 
   #- tysonwolker/iterm-tab-colors # random tab colors depends of pwd
   #- wbinglee/zsh-wakatime
@@ -45,6 +48,24 @@ zsh_antigen_bundles:
   - zsh-users/zsh-syntax-highlighting # must be last
 
 zsh_antigen_theme: "bhilburn/powerlevel9k powerlevel9k"
+
+zsh_hotkeys:
+  # home & end keys work
+  - { hotkey: '\e[1~', action: beginning-of-line }
+  - { hotkey: '\e[4~', action: end-of-line }
+  # fzf-widgets
+  - { hotkey: '^@',    action: fzf-select-widget }
+  - { hotkey: '^@c',   action: fzf-change-dir }
+  - { hotkey: '^\',    action: fzf-change-recent-dir }
+  - { hotkey: '^@g',   action: fzf-change-repository }
+  - { hotkey: '^@f',   action: fzf-edit-files }
+  - { hotkey: '^@.',   action: fzf-edit-dotfiles }
+  - { hotkey: '^@s',   action: fzf-exec-ssh }
+  - { hotkey: '^@ga',  action: fzf-git-add }
+  - { hotkey: '^@gb',  action: fzf-git-checkout }
+  - { hotkey: '^r',    action: fzf-history }
+  - { hotkey: '{{ zsh_autosuggestions_bind_key }}',   action: autosuggest-accept, bundle: zsh-users/zsh-autosuggestions }
+  - { hotkey: '{{ zsh_autosuggestions_bind_key_2 }}', action: autosuggest-accept, bundle: zsh-users/zsh-autosuggestions }
 
 # zsh-autosuggestions
 zsh_autosuggestions_max_length: 15

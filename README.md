@@ -88,3 +88,13 @@ Note: I don't use `tmux-fzf` and don't tested work of it.
 ## Configure
 You should not edit `~/.zshrc`! 
 Add your custom config to `~/.zshrc.local` (per user) or `/etc/zshrc.local` (global).
+
+### Hotkeys
+You can view hotkeys in [defaults/main.yml](defaults/main.yml), `zsh_hotkeys`.
+
+Sample hotkey definitions:
+``` yaml
+- { hotkey: '^r', action: 'fzf-history' }
+# with dependency of bundle
+- { hotkey: '`', action: autosuggest-accept, bundle: zsh-users/zsh-autosuggestions }
+```

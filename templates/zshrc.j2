@@ -37,10 +37,6 @@ UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
 # For Solarized
 export TERM="xterm-256color"
 
-# home & end keys work
-bindkey '\e[1~' beginning-of-line
-bindkey '\e[4~' end-of-line
-
 # default editor
 export EDITOR="{{ zsh_editor }}"
 
@@ -48,6 +44,13 @@ export EDITOR="{{ zsh_editor }}"
 COMPLETION_WAITING_DOTS="true"
 
 export PATH="{{ zsh_path | join(":") }}"
+
+# hotkeys
+{% for hotkey in zsh_hotkeys %}
+{% if hotkey.hotkey != '' and (hotkey.bundle is not defined or hotkey.bundle in zsh_antigen_bundles) %}
+bindkey '{{ hotkey.hotkey }}' {{ hotkey.action }}
+{% endif %}
+{% endfor %}
 
 # zsh-command-time
 ZSH_COMMAND_TIME_MIN_SECONDS="{{ zsh_command_time_min_seconds }}"
@@ -57,24 +60,15 @@ ZSH_COMMAND_TIME_ECHO="{{ zsh_command_time_echo }}"
 export FZF_TMUX=0
 export FZF_DEFAULT_OPTS="{{ zsh_fzf_default_opts }}"
 
-# fzf-widgets
-#bindkey '^@'   fzf-select-widget
-#bindkey '^@c'  fzf-change-dir
-#bindkey '^@f'  fzf-edit-files
-#bindkey '^r'   fzf-exec-history
-#bindkey '^r'   fzf-history-widget
-#bindkey '^@ga' fzf-git-add
-#bindkey '^@gb' fzf-git-checkout
+# fzf-widgets: fzf-change-reset-dir
+{% if zsh_register_version.stdout | version_compare('5.0', '>=') -%}
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+{% endif %}
 
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE={{ zsh_autosuggestions_max_length }}
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240" # gray highlight
-{% if zsh_autosuggestions_bind_key %}
-bindkey '{{ zsh_autosuggestions_bind_key }}' autosuggest-accept # autosuggest on {{ zsh_autosuggestions_bind_key }}
-{% endif %}
-{% if zsh_autosuggestions_bind_key_2 %}
-bindkey '{{ zsh_autosuggestions_bind_key_2 }}' autosuggest-accept # autosuggest on {{ zsh_autosuggestions_bind_key_2 }}
-{% endif %}
 
 # powerlevel9k
 POWERLEVEL9K_SHORTEN_DIR_LENGTH={{ zsh_powerlevel9k_shorten_dir_length }}
