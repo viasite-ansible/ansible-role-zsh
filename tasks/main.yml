@@ -19,4 +19,4 @@
   tags: [ zsh, configure ]
 
 - include: post-install.yml
-  tags: [ zsh, install ]
+  tags: [ zsh, install, post_install ]

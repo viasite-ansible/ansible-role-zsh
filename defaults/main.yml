@@ -31,14 +31,11 @@ zsh_antigen_bundles:
   - vagrant
   - zsh_reload
 
-  #- junegunn/fzf
-  #- Treri/fzf-zsh
-  #- ytet5uy4/fzf-widgets
-  #- "/Users/popstas/projects/shell/fzf-widgets --no-local-clone"
   - zsh-users/zsh-autosuggestions
   - popstas/zsh-command-time
-  - urbainvaes/fzf-marks # replaces jump plugin, mark, jump and Ctrl+G
   - unixorn/autoupdate-antigen.zshplugin
+  - urbainvaes/fzf-marks # replaces jump plugin, mark, jump and Ctrl+G
+  - ytet5uy4/fzf-widgets
 
   #- tysonwolker/iterm-tab-colors # random tab colors depends of pwd
   #- wbinglee/zsh-wakatime

@@ -6,9 +6,3 @@
   become_user: "{{ zsh_user }}"
   changed_when: false
   failed_when: false
-
-#- name: Install fzf
-#  command: "{{ zsh_antigen_fzf_path }}/install --key-bindings --no-completion --no-update-rc"
-#  args:
-#    creates: "{{ zsh_antigen_fzf_path }}/bin/fzf"
-#  when: "'junegunn/fzf' in zsh_antigen_bundles"

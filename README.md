@@ -8,6 +8,13 @@ You can test role in vagrant:
 vagrant up
 ```
 
+## TODO
+- zero-knowledge install
+- powerline fonts
+- upgrade instructions
+- hotkeys
+- vagrant only for localhost
+
 ## Includes:
 - zsh
 - tmux (if plugin enabled)
@@ -18,9 +25,9 @@ vagrant up
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) (except Debian Squeeze),
   with workaround for [#zsh-syntax-highlighting/286](https://github.com/zsh-users/zsh-syntax-highlighting/issues/286)
 - [zsh-command-time](https://github.com/popstas/zsh-command-time)
-- [urbainvaes/fzf-marks](https://github.com/popstas/urbainvaes/fzf-marks)
 - [unixorn/autoupdate-antigen.zshplugin](https://github.com/unixorn/autoupdate-antigen.zshplugin)
 - [ytet5uy4/fzf-widgets](https://github.com/ytet5uy4/fzf-widgets)
+- [urbainvaes/fzf-marks](https://github.com/popstas/urbainvaes/fzf-marks)
 
 ## Features
 - customize powerlevel9k theme prompt segments and colors
@@ -37,12 +44,12 @@ vagrant up
 
 
 ## Install
-Download role:
+1. Download role:
 ```
 ansible-galaxy install viasite-ansible.zsh
 ```
 
-Write playbook:
+2. Write playbook:
 ```
 - hosts: all
   vars:
@@ -51,7 +58,7 @@ Write playbook:
     - viasite-ansible.zsh
 ```
 
-Provision playbook:
+3. Provision playbook:
 ```
 ansible-playbook -i "localhost," -c local zsh.yml
 ```
@@ -70,6 +77,11 @@ Or via command:
 ```
 ansible-playbook -i hosts zsh.yml --extra-vars="zsh_user=otheruser"
 ```
+
+4. Install fzf **without shell extensions**, [download binary](https://github.com/junegunn/fzf-bin/releases)
+or `brew install fzf` for macOS.
+
+Note: I don't use `tmux-fzf` and don't tested work of it.
 
 
 

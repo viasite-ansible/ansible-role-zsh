@@ -16,19 +16,6 @@
     remote_src: yes
     creates: /usr/local/bin/fzf
 
-#- name: Clone fzf plugin
-#  git:
-#    repo: https://github.com/junegunn/fzf.git
-#    dest: "{{ zsh_custom_path }}/plugins/fzf"
-#    version: master
-#  when: "'fzf-zsh' in zsh_plugins"
-#
-#- name: Install fzf
-#  command: "{{ zsh_custom_path }}/plugins/fzf/install --key-bindings --no-completion --no-update-rc"
-#  args:
-#    creates: "{{ zsh_custom_path }}/plugins/fzf/bin/fzf"
-#  when: "'fzf-zsh' in zsh_plugins"
-#
 - name: Set directory permissions
   file:
     name: "{{ zsh_antigen_path }}"
