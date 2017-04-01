@@ -8,13 +8,19 @@
   become: yes
   become_user: "{{ zsh_user }}"
 
-# TODO: global install?
+- name: Check fzf installed
+  command: which fzf
+  changed_when: false
+  failed_when: false
+  register: zsh_register_fzf_command
+
 - name: Download fzf
   unarchive:
     src: "{{ zsh_fzf_url }}"
     dest: /usr/local/bin
     remote_src: yes
     creates: /usr/local/bin/fzf
+  when: zsh_register_fzf_command.rc == 1
 
 - name: Set directory permissions
   file:
