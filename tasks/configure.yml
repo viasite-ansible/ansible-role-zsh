@@ -8,7 +8,7 @@
 
 - name: Set zsh_version variable
   set_fact:
-    zsh_version: zsh_register_version.stdout
+    zsh_version: "{{ zsh_register_version.stdout }}"
 
 - name: Check commands exists
   command: "which {{ item.command }}"

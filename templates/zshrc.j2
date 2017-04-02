@@ -1,40 +1,40 @@
 # {{ ansible_managed }}
+# zsh version: {{ zsh_version }}
 
 source {{ zsh_antigen_path }}/antigen/antigen.zsh
 
 antigen use oh-my-zsh
 
 {% for bundle in zsh_antigen_bundles -%}
-    {%- if 'zsh-syntax-highlighting' in bundle or bundle is mapping and 'zsh-syntax-highlighting' in bundle.name -%}
+    {%- if bundle is mapping -%}
+        {% set valid = true -%}
+        {% set command_not_exists = [] -%}
+
+        {%- if bundle.when is defined and not bundle.when -%}
+            {% set valid = false -%}
+        {% endif -%}
+
+        {% if bundle.command is defined -%}
+            {% for cmd in zsh_register_commands_exists.results -%}
+                {% if cmd.cmd is defined and cmd.cmd[1] == bundle.command and cmd.rc == 1 -%}
+                    {% if command_not_exists.append(1) %}{% endif -%}
+                {% endif -%}
+            {% endfor -%}
+        {% endif -%}
+
+        {% if valid and not command_not_exists %}
+            {%- if 'zsh-syntax-highlighting' in bundle.name -%}
 # will fixed in zsh-autosuggestion v0.4 - https://github.com/zsh-users/zsh-autosuggestions/pull/218
 if (( ZSHRC_LOAD_ONCE++ == 0 )); then
-    antigen bundle {% if bundle is mapping %}{{ bundle.name }}{% else %}{{ bundle }}{% endif %}
-
+    antigen bundle {{ bundle.name }}
 fi
-{% else -%}
-        {%- if bundle is mapping -%}
-            {% set valid = true -%}
-            {% set command_not_exists = [] -%}
-
-            {%- if bundle.when is defined and not bundle.when -%}
-                {% set valid = false -%}
-            {% endif -%}
-
-            {% if bundle.command is defined -%}
-                {% for cmd in zsh_register_commands_exists.results -%}
-                    {% if cmd.cmd is defined and cmd.cmd[1] == bundle.command and cmd.rc == 1 -%}
-                        {% if command_not_exists.append(1) %}{% endif -%}
-                    {% endif -%}
-                {% endfor -%}
-            {% endif -%}
-
-            {% if valid and not command_not_exists %}
+            {% else -%}
 antigen bundle {{ bundle.name }}
-{% endif %}
-        {%- else %}
+{% endif -%}
+        {% endif -%}
+    {%- else -%}
 antigen bundle {{ bundle }}
 {% endif %}
-{% endif -%}
 {% endfor %}
 
 {% if zsh_version | version_compare('5.0.8', '<') -%}
