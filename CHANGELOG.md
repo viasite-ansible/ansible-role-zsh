@@ -2,6 +2,16 @@
 # [master](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.0.0...v) (2017-04-02)
 
 
+### Bug Fixes
+
+* remove zsh_check_commands, now it calculates dynamically ([84c36ca](https://github.com/viasite-ansible/ansible-role-zsh/commit/84c36ca))
+
+
+### Features
+
+* zsh_antigen_bundles_extras for custom bundles ([b07a894](https://github.com/viasite-ansible/ansible-role-zsh/commit/b07a894)), closes [#5](https://github.com/viasite-ansible/ansible-role-zsh/issues/5)
+
+
 
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/viasite-ansible/ansible-role-zsh/compare/v1.1.6...v2.0.0) (2017-04-02)

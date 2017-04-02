@@ -48,7 +48,9 @@ zsh_antigen_bundles:
   - "{{ fzf_widgets }}"
   # must be last, don't work on zsh < 4.3.17
   - name: zsh-users/zsh-syntax-highlighting
-    when: "{{ zsh_register_version.stdout | version_compare('4.3.17', '>=') }}"
+    when: "{{ zsh_version | version_compare('4.3.17', '>=') }}"
+
+zsh_antigen_bundles_extras: []
 
 zsh_antigen_theme: "bhilburn/powerlevel9k powerlevel9k"
 

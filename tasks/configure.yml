@@ -6,6 +6,10 @@
   changed_when: false
   tags: configure
 
+- name: Set zsh_version variable
+  set_fact:
+    zsh_version: zsh_register_version.stdout
+
 - name: Check commands exists
   command: "which {{ item.command }}"
   with_items: "{{ zsh_antigen_bundles }}"
@@ -13,6 +17,10 @@
   changed_when: false
   when: item.command is defined
   register: zsh_register_commands_exists
+
+- name: Merge buldles lists
+  set_fact:
+    zsh_antigen_bundles: "{{ zsh_antigen_bundles }} + {{ zsh_antigen_bundles_extras }}"
 
 - name: Write .zshrc config
   template:

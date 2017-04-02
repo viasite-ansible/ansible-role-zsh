@@ -155,3 +155,37 @@ Useful to set `autosuggest-accept` to <kbd>`</kbd> hotkey, but it conflicts with
 - <kbd>Ctrl+@,S</kbd> - fzf-exec-ssh (used your ~/.)
 - <kbd>Ctrl+@,G,A</kbd> - fzf-git-add
 - <kbd>Ctrl+@,G,B</kbd> - fzf-git-checkout
+
+
+
+## Configure bundles
+You can check default bundles in [defaults/main.yml](defaults/main.yml#L37).
+If you like default bundles, but you want to add your bundles, use `zsh_antigen_bundles_extras` variable.
+If you want to remove some default bundles, you should use `zsh_antigen_bundles` variable.
+
+Format of list matches [antigen](https://github.com/zsh-users/antigen#antigen-bundle). All bellow variants valid:
+``` yaml
+- docker # oh-my-zsh plugin
+- zsh-users/zsh-autosuggestions # plugin from github
+- zsh-users/zsh-autosuggestions@v0.3.3 # plugin from github with fixed version
+- ~/projects/zsh/my-plugin --no-local-clone # plugin from local directory
+```
+
+Note that bundles can use conditions for load. There are two types of conditions:
+
+1. Command conditions. Just add `command` to bundle:
+``` yaml
+- { name: docker, command: docker }
+- name: docker-compose
+  command: docker-compose
+```
+Bundles `docker` and `docker-compose` will be added to config only if commands exists on target system.
+
+2. When conditions. You can define any ansible conditions as you define in `when` in tasks:
+``` yaml
+# load only for zsh >= 4.3.17
+- name: zsh-users/zsh-syntax-highlighting
+  when: "{{ zsh_version | version_compare('4.3.17', '>=') }}"
+# load only for macOS
+- { name: brew, when: ansible_os_family != "Darwin" }
+```
