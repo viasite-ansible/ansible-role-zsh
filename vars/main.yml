@@ -13,4 +13,4 @@ zsh_powerlevel9k_prompt_on_newline_bool: "{% if zsh_powerlevel9k_prompt_on_newli
 
 # plugins git versions
 zsh_fzf_version: 0.16.6
-zsh_antigen_version: v1.4.1
+zsh_antigen_version: master
