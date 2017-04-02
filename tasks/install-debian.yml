@@ -7,9 +7,3 @@
     - zsh
     - git
     - wget
-
-- name: Install tmux
-  apt:
-    name: tmux
-    state: present
-  when: "'tmux' in zsh_antigen_bundles"
