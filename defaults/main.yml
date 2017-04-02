@@ -18,20 +18,41 @@ zsh_path:
   - /usr/local/games
 
 # fzf_widget extracted to variable for testing purposes
-fzf_widgets: ytet5uy4/fzf-widgets
+fzf_widgets: popstas/fzf-widgets
 
-zsh_antigen_bundles:
-  #- command-not-found # +900 ms on OSX!!
-  - debian
+zsh_check_commands:
+  - brew
+  - composer
   - docker
   - docker-compose
+  - go
+  - gulp
+  - http
+  - pip
+  - rake
+  - symfony
+  - tmux
+  - vagrant
+
+zsh_antigen_bundles:
+  - { name: command-not-found, when: ansible_os_family != "Darwin" } # +900 ms on OSX!!
+  - { name: brew, command: brew }
+  - { name: composer, command: composer }
+  - { name: debian, when: ansible_os_family == "Debian" }
+  - { name: docker, command: docker }
+  - { name: docker-compose, command: docker-compose }
   - fancy-ctrl-z
   - git-extras
   - gnu-utils
-  - pip
+  - { name: httpie, command: http }
+  - { name: go, command: go }
+  - { name: gulp, command: gulp }
+  - { name: pip, command: pip }
+  - { name: rake, command: rake }
+  - { name: symfony2, command: symfony }
   - python
-  - tmux
-  - vagrant
+  - { name: tmux, command: tmux }
+  - { name: vagrant, command: vagrant }
   - zsh_reload
 
   - zsh-users/zsh-autosuggestions
@@ -39,13 +60,9 @@ zsh_antigen_bundles:
   - unixorn/autoupdate-antigen.zshplugin
   - urbainvaes/fzf-marks # replaces jump plugin, mark, jump and Ctrl+G
   - "{{ fzf_widgets }}"
-
-  #- tysonwolker/iterm-tab-colors # random tab colors depends of pwd
-  #- wbinglee/zsh-wakatime
-  #- denolfe/zsh-travis # git-trav, go to travis of project
-  #- Tarrasch/zsh-bd # bd, back directory
-
-  - zsh-users/zsh-syntax-highlighting # must be last
+  # must be last, don't work on zsh < 4.3.17
+  - name: zsh-users/zsh-syntax-highlighting
+    when: "{{ zsh_register_version.stdout | version_compare('4.3.17', '>=') }}"
 
 zsh_antigen_theme: "bhilburn/powerlevel9k powerlevel9k"
 

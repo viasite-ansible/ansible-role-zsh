@@ -5,16 +5,35 @@ source {{ zsh_antigen_path }}/antigen/antigen.zsh
 antigen use oh-my-zsh
 
 {% for bundle in zsh_antigen_bundles -%}
-    {%- if 'zsh-syntax-highlighting' in bundle -%}
-        {% if zsh_register_version.stdout | version_compare('4.3.17', '>=') -%}
-# https://github.com/zsh-users/zsh-syntax-highlighting/issues/286#issuecomment-284261033,
-# will fixed after zsh-autosuggestion v0.3.3
+    {%- if 'zsh-syntax-highlighting' in bundle or bundle is mapping and 'zsh-syntax-highlighting' in bundle.name -%}
+# will fixed in zsh-autosuggestion v0.4 - https://github.com/zsh-users/zsh-autosuggestions/pull/218
 if (( ZSHRC_LOAD_ONCE++ == 0 )); then
-    antigen bundle {{ bundle }}
+    antigen bundle {% if bundle is mapping %}{{ bundle.name }}{% else %}{{ bundle }}{% endif %}
+
 fi
-        {%- endif %}
-    {% else -%}
-        antigen bundle {{ bundle }}
+    {%- else -%}
+        {%- if bundle is mapping -%}
+            {% set valid = true -%}
+            {% set command_not_exists = [] -%}
+
+            {%- if bundle.when is defined and not bundle.when -%}
+                {% set valid = false -%}
+            {% endif -%}
+
+            {% if bundle.command is defined -%}
+                {% for cmd in zsh_register_commands_exists.results -%}
+                    {% if cmd.cmd[1] == bundle.command and cmd.rc == 1 -%}
+                        {% if command_not_exists.append(1) %}{% endif -%}
+                    {% endif -%}
+                {% endfor -%}
+            {% endif -%}
+
+            {% if valid and not command_not_exists %}
+antigen bundle {{ bundle.name }}
+{% endif %}
+        {%- else %}
+antigen bundle {{ bundle }}
+{% endif %}
 {% endif -%}
 {% endfor %}
 
