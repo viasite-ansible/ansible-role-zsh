@@ -1,23 +1,26 @@
 ---
-
 language: python
 python: "2.7"
 sudo: required
 services:
   - docker
 
-install: pip install molecule docker-py
-script:
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
+install:
+  - pip install molecule docker
+before_script:
   - export MOLECULE_APTPROXY_PATH="$PWD/00aptproxy" && touch "$MOLECULE_APTPROXY_PATH"
-
+script:
   # normal test
-  - MOLECULE_ZSH_USER=root molecule --debug test
+  - MOLECULE_ZSH_USER=root molecule test
 
   # test for other zsh_user
   - molecule create
-  - docker exec -i ansible-role-zsh-ubuntu useradd testuser --create-home
-  - docker exec -i ansible-role-zsh-centos useradd testuser --create-home
-  - MOLECULE_ZSH_USER=testuser molecule --debug converge
+  - docker exec -i ansible-role-zsh-ubuntu-1604 useradd testuser --create-home
+  - docker exec -i ansible-role-zsh-centos-7 useradd testuser --create-home
+  - MOLECULE_ZSH_USER=testuser molecule converge
   - molecule destroy
 
 notifications:

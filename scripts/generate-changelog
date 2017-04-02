@@ -1,0 +1,31 @@
+#!/bin/bash
+
+HELP="
+1. If github branch exists,
+rename origin to origin_origin,
+rename copy github to origin.
+
+2. Generate CHANGELOG.md
+
+3. Reverts all branch operations at step 1
+"
+
+IS_BRANCH_RENAME=$(git remote | grep -c github)
+
+# 1.
+if [ "$IS_BRANCH_RENAME" = "1" ]; then
+    git remote rename origin origin_origin
+    git remote rename github origin
+fi
+
+# 2.
+conventional-changelog -p angular -o CHANGELOG.md -r 0
+sed -i.bak 's/# \[\]/# [master]/g' CHANGELOG.md
+rm CHANGELOG.md.bak
+git add CHANGELOG.md
+
+# 3.
+if [ "$IS_BRANCH_RENAME" = "1" ]; then
+    git remote rename origin github
+    git remote rename origin_origin origin
+fi
