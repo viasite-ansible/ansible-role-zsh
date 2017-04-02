@@ -1,16 +1,31 @@
 <a name=""></a>
-# [master](https://github.com/viasite-ansible/ansible-role-zsh/compare/v1.1.6...v) (2017-03-20)
+# [master](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.0.0...v) (2017-04-02)
+
+
+
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/viasite-ansible/ansible-role-zsh/compare/v1.1.6...v2.0.0) (2017-04-02)
 
 
 ### Bug Fixes
 
+* change antigen version to `master` for idempotency ([dee73e8](https://github.com/viasite-ansible/ansible-role-zsh/commit/dee73e8))
+* check for fzf installed any way ([d5f8aae](https://github.com/viasite-ansible/ansible-role-zsh/commit/d5f8aae))
+* don't install tmux if plugin enabled, but enable plugin if tmux installed ([640ab24](https://github.com/viasite-ansible/ansible-role-zsh/commit/640ab24))
+* install.sh tested on ubuntu and debian ([bcb9112](https://github.com/viasite-ansible/ansible-role-zsh/commit/bcb9112))
 * merge install-* files, use `package` module ([a2f89b9](https://github.com/viasite-ansible/ansible-role-zsh/commit/a2f89b9))
+* powerlevel9k correct load on zsh 4.3 ([ce2f629](https://github.com/viasite-ansible/ansible-role-zsh/commit/ce2f629))
 * white color in phpstorm solarized dark terminal ([422f99c](https://github.com/viasite-ansible/ansible-role-zsh/commit/422f99c))
 
 
 ### Features
 
 * add naive RedHat support ([102080b](https://github.com/viasite-ansible/ansible-role-zsh/commit/102080b))
+* antigen plugin manager ([80f4eab](https://github.com/viasite-ansible/ansible-role-zsh/commit/80f4eab))
+* junegunn/fzf replaced with more functional ytet5uy4/fzf-widgets ([ffd2d6e](https://github.com/viasite-ansible/ansible-role-zsh/commit/ffd2d6e))
+* load plugin only if command exists in system or if custom `when` is true ([e9288c2](https://github.com/viasite-ansible/ansible-role-zsh/commit/e9288c2)), closes [#2](https://github.com/viasite-ansible/ansible-role-zsh/issues/2)
+* zero-knowledge install.sh, docs ([d145b59](https://github.com/viasite-ansible/ansible-role-zsh/commit/d145b59))
+* zsh_hotkeys with bundle dependency ([cbacc3d](https://github.com/viasite-ansible/ansible-role-zsh/commit/cbacc3d)), closes [#4](https://github.com/viasite-ansible/ansible-role-zsh/issues/4)
 
 
 
