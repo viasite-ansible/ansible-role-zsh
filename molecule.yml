@@ -2,35 +2,36 @@
 dependency:
   name: galaxy
 
-#driver:
-#  name: docker
-#docker:
-#  containers:
-#    - name: ansible-role-zsh-ubuntu
-#      image: ubuntu
-#      image_version: 16.04
-#      volume_mounts:
-#        - ${MOLECULE_APTPROXY_PATH}:/etc/apt/apt.conf.d/00aptproxy
-#    - name: ansible-role-zsh-centos
-#      image: centos
-#      image_version: 7
-
 driver:
-  name: vagrant
-vagrant:
-  platforms:
-    - name: xenial64
-      box: bento/ubuntu-16.04
-  providers:
-    - name: virtualbox
-      type: virtualbox
-      options:
-        memory: 512
-        cpus: 2
-  instances:
-    - name: vagrant-01
-      raw_config_args:
-        - "vm.synced_folder '${MOLECULE_APT_CONF_D_PATH}', '/etc/apt/apt.conf.d'"
+  name: docker
+docker:
+  containers:
+    - name: ansible-role-zsh-ubuntu
+      image: ubuntu
+      image_version: 16.04
+      volume_mounts:
+        - ${MOLECULE_APTPROXY_PATH}:/etc/apt/apt.conf.d/00aptproxy
+
+    - name: ansible-role-zsh-centos
+      image: centos
+      image_version: 7
+
+#driver:
+#  name: vagrant
+#vagrant:
+#  platforms:
+#    - name: xenial64
+#      box: bento/ubuntu-16.04
+#  providers:
+#    - name: virtualbox
+#      type: virtualbox
+#      options:
+#        memory: 512
+#        cpus: 2
+#  instances:
+#    - name: vagrant-01
+#      raw_config_args:
+#        - "vm.synced_folder '${MOLECULE_APT_CONF_D_PATH}', '/etc/apt/apt.conf.d'"
 
 ansible:
   playbook: tests/playbook.yml
