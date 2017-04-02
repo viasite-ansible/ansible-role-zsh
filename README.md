@@ -79,7 +79,7 @@ sudo ansible-galaxy install viasite-ansible.zsh
 sudo ansible-playbook -i "localhost," -c local playbook.yml
 ```
 
-It will install zsh environment for ansible remote user. If you want to setup zsh for other user,
+It will install zsh environment for ansible remote user. If you want to setup zsh for other users,
 you should define variable `zsh_user`:
 
 Via playbook:
@@ -87,6 +87,7 @@ Via playbook:
 - hosts: all
   roles:
     - { role: viasite-ansible.zsh, zsh_user: otheruser }
+    - { role: viasite-ansible.zsh, zsh_user: thirduser }
 ```
 
 Or via command:
