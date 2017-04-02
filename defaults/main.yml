@@ -3,7 +3,6 @@
 zsh_user: "{{ ansible_user_id }}"
 
 # .zshrc config
-zsh_theme: "powerlevel9k/powerlevel9k"
 zsh_hist_stamps: yyyy-mm-dd
 zsh_update_interval: 30
 zsh_editor: vim
@@ -18,25 +17,72 @@ zsh_path:
   - /usr/games
   - /usr/local/games
 
-zsh_plugins:
-  - command-not-found
-  - command-time
-  - debian
+# fzf_widget extracted to variable for testing purposes
+fzf_widgets: popstas/fzf-widgets
+
+zsh_check_commands:
+  - brew
+  - composer
   - docker
   - docker-compose
-  - fancy-ctrl-z
-  - fzf-zsh
-  - git-extras
-  - gnu-utils
-  - history
-  - jump
+  - go
+  - gulp
+  - http
   - pip
-  - python
+  - rake
+  - symfony
   - tmux
   - vagrant
+
+zsh_antigen_bundles:
+  - { name: command-not-found, when: ansible_os_family != "Darwin" } # +900 ms on OSX!!
+  - { name: brew, command: brew }
+  - { name: composer, command: composer }
+  - { name: debian, when: ansible_os_family == "Debian" }
+  - { name: docker, command: docker }
+  - { name: docker-compose, command: docker-compose }
+  - fancy-ctrl-z
+  - git-extras
+  - gnu-utils
+  - { name: httpie, command: http }
+  - { name: go, command: go }
+  - { name: gulp, command: gulp }
+  - { name: pip, command: pip }
+  - { name: rake, command: rake }
+  - { name: symfony2, command: symfony }
+  - python
+  - { name: tmux, command: tmux }
+  - { name: vagrant, command: vagrant }
   - zsh_reload
-  - zsh-autosuggestions
-  - zsh-syntax-highlighting # must be last
+
+  - zsh-users/zsh-autosuggestions
+  - popstas/zsh-command-time
+  - unixorn/autoupdate-antigen.zshplugin
+  - urbainvaes/fzf-marks # replaces jump plugin, mark, jump and Ctrl+G
+  - "{{ fzf_widgets }}"
+  # must be last, don't work on zsh < 4.3.17
+  - name: zsh-users/zsh-syntax-highlighting
+    when: "{{ zsh_register_version.stdout | version_compare('4.3.17', '>=') }}"
+
+zsh_antigen_theme: "bhilburn/powerlevel9k powerlevel9k"
+
+zsh_hotkeys:
+  # home & end keys work
+  - { hotkey: '\e[1~', action: beginning-of-line }
+  - { hotkey: '\e[4~', action: end-of-line }
+  # fzf-widgets
+  - { hotkey: '^@',    action: fzf-select-widget }
+  - { hotkey: '^@c',   action: fzf-change-dir }
+  - { hotkey: '^\',    action: fzf-change-recent-dir }
+  - { hotkey: '^@g',   action: fzf-change-repository }
+  - { hotkey: '^@f',   action: fzf-edit-files }
+  - { hotkey: '^@.',   action: fzf-edit-dotfiles }
+  - { hotkey: '^@s',   action: fzf-exec-ssh }
+  - { hotkey: '^@ga',  action: fzf-git-add }
+  - { hotkey: '^@gb',  action: fzf-git-checkout }
+  - { hotkey: '^r',    action: fzf-history }
+  - { hotkey: '{{ zsh_autosuggestions_bind_key }}',   action: autosuggest-accept, bundle: zsh-users/zsh-autosuggestions }
+  - { hotkey: '{{ zsh_autosuggestions_bind_key_2 }}', action: autosuggest-accept, bundle: zsh-users/zsh-autosuggestions }
 
 # zsh-autosuggestions
 zsh_autosuggestions_max_length: 15

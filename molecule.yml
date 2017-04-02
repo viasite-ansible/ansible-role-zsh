@@ -1,4 +1,7 @@
 ---
+dependency:
+  name: galaxy
+
 driver:
   name: docker
 docker:
@@ -37,18 +40,11 @@ docker:
 #  platforms:
 #    - name: xenial64
 #      box: bento/ubuntu-16.04
-#      ansible_groups:
-#        - group1
 #  providers:
 #    - name: virtualbox
 #      type: virtualbox
-#      options:
-#        memory: 512
-#        cpus: 2
 #  instances:
 #    - name: vagrant-01
-#      ansible_groups:
-#        - group_1
 #      raw_config_args:
 #        - "vm.synced_folder '${MOLECULE_APT_CONF_D_PATH}', '/etc/apt/apt.conf.d'"
 

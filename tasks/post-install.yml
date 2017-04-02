@@ -1,0 +1,8 @@
+---
+# it will fail, but it install all bundles for user
+- name: Install antigen bundles
+  command: "/bin/zsh {{ zsh_user_config }}"
+  become: yes
+  become_user: "{{ zsh_user }}"
+  changed_when: false
+  failed_when: false

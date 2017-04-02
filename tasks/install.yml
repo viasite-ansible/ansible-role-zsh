@@ -9,81 +9,32 @@
     - git
     - wget
 
-- name: Install tmux
-  package:
-    name: tmux
-    state: present
-  when: "'tmux' in zsh_plugins"
-
-- name: Clone oh-my-zsh repo
+- name: Clone antigen
   git:
-    repo: https://github.com/robbyrussell/oh-my-zsh.git
-    dest: "{{ zsh_oh_my_zsh_path }}"
-    version: master
+    repo: https://github.com/zsh-users/antigen.git
+    dest: "{{ zsh_antigen_path }}/antigen"
+    version: "{{ zsh_antigen_version }}"
+  become: yes
+  become_user: "{{ zsh_user }}"
 
-- name: Check zsh version
-  shell: "zsh --version | cut -d ' ' -f2"
-  register: zsh_register_version
+- name: Check fzf installed
+  command: which fzf
   changed_when: false
-  tags: configure
+  failed_when: false
+  register: zsh_register_fzf_command
 
-- name: Remove zsh-syntax-highlighting if zsh < 4.3.17
-  set_fact:
-    zsh_plugins: "{{ zsh_plugins | difference(['zsh-syntax-highlighting']) }}"
-  when: zsh_register_version.stdout | version_compare('4.3.17', '<')
-  tags: configure
-
-- name: Clone zsh-syntax-highlighting plugin
-  git:
-    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
-    dest: "{{ zsh_custom_path }}/plugins/zsh-syntax-highlighting"
-    version: "{{ zsh_syntax_highlighting_version }}"
-  when: "'zsh-syntax-highlighting' in zsh_plugins"
-
-- name: Clone zsh-autosuggestions plugin
-  git:
-    repo: https://github.com/zsh-users/zsh-autosuggestions.git
-    dest: "{{ zsh_custom_path }}/plugins/zsh-autosuggestions"
-    version: "{{ zsh_autosuggestions_version }}"
-  when: "'zsh-autosuggestions' in zsh_plugins"
-
-- name: Clone powerlevel9k theme
-  git:
-    repo: https://github.com/bhilburn/powerlevel9k.git
-    dest: "{{ zsh_custom_path }}/themes/powerlevel9k"
-    version: "{{ zsh_powerlevel9k_version }}"
-  when: zsh_theme == "powerlevel9k/powerlevel9k"
-
-- name: Clone command-time plugin
-  git:
-    repo: https://github.com/popstas/zsh-command-time.git
-    dest: "{{ zsh_custom_path }}/plugins/command-time"
-    version: master
-  when: "'command-time' in zsh_plugins"
-
-- name: Clone fzf plugin
-  git:
-    repo: https://github.com/junegunn/fzf.git
-    dest: "{{ zsh_custom_path }}/plugins/fzf"
-    version: master
-  when: "'fzf-zsh' in zsh_plugins"
-
-- name: Install fzf
-  command: "{{ zsh_custom_path }}/plugins/fzf/install --key-bindings --no-completion --no-update-rc"
-  args:
-    creates: "{{ zsh_custom_path }}/plugins/fzf/bin/fzf"
-  when: "'fzf-zsh' in zsh_plugins"
-
-- name: Clone fzf-zsh plugin
-  git:
-    repo: https://github.com/Treri/fzf-zsh.git
-    dest: "{{ zsh_custom_path }}/plugins/fzf-zsh"
-    version: master
-  when: "'fzf-zsh' in zsh_plugins"
+- name: Download fzf
+  unarchive:
+    src: "{{ zsh_fzf_url }}"
+    dest: /usr/local/bin
+    remote_src: yes
+    creates: /usr/local/bin/fzf
+  become: yes
+  when: zsh_register_fzf_command.rc == 1
 
 - name: Set directory permissions
   file:
-    name: "{{ zsh_oh_my_zsh_path }}"
+    name: "{{ zsh_antigen_path }}"
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     recurse: yes
