@@ -23,7 +23,6 @@ fzf_widgets: popstas/fzf-widgets
 zsh_antigen_bundles:
   - { name: command-not-found, when: ansible_os_family != "Darwin" } # +900 ms on OSX!!
   - { name: brew, command: brew }
-  - { name: composer, command: composer }
   - { name: debian, when: ansible_os_family == "Debian" }
   - { name: docker, command: docker }
   - { name: docker-compose, command: docker-compose }
