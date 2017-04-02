@@ -1,17 +1,18 @@
 ---
 
-- name: Check commands exists
-  command: "which {{ item }}"
-  with_items: "{{ zsh_check_commands }}"
-  failed_when: false
-  changed_when: false
-  register: zsh_register_commands_exists
-
 - name: Check zsh version
   shell: "zsh --version | cut -d ' ' -f2"
   register: zsh_register_version
   changed_when: false
   tags: configure
+
+- name: Check commands exists
+  command: "which {{ item.command }}"
+  with_items: "{{ zsh_antigen_bundles }}"
+  failed_when: false
+  changed_when: false
+  when: item.command is defined
+  register: zsh_register_commands_exists
 
 - name: Write .zshrc config
   template:

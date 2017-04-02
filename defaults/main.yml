@@ -20,20 +20,6 @@ zsh_path:
 # fzf_widget extracted to variable for testing purposes
 fzf_widgets: popstas/fzf-widgets
 
-zsh_check_commands:
-  - brew
-  - composer
-  - docker
-  - docker-compose
-  - go
-  - gulp
-  - http
-  - pip
-  - rake
-  - symfony
-  - tmux
-  - vagrant
-
 zsh_antigen_bundles:
   - { name: command-not-found, when: ansible_os_family != "Darwin" } # +900 ms on OSX!!
   - { name: brew, command: brew }
