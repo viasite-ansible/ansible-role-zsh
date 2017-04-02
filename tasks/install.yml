@@ -29,7 +29,6 @@
     dest: /usr/local/bin
     remote_src: yes
     creates: /usr/local/bin/fzf
-  become: yes
   when: zsh_register_fzf_command.rc == 1
 
 - name: Set directory permissions
