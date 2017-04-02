@@ -62,7 +62,7 @@ sudo apt-get install ansible
 
 1. Download role:
 ```
-ansible-galaxy install viasite-ansible.zsh
+sudo ansible-galaxy install viasite-ansible.zsh
 ```
 
 2. Write playbook or use [playbook.yml](playbook.yml):
@@ -76,7 +76,7 @@ ansible-galaxy install viasite-ansible.zsh
 
 3. Provision playbook:
 ```
-ansible-playbook -i "localhost," -c local playbook.yml
+sudo ansible-playbook -i "localhost," -c local playbook.yml
 ```
 
 It will install zsh environment for ansible remote user. If you want to setup zsh for other user,
