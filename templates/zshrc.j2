@@ -1,6 +1,8 @@
 # {{ ansible_managed }}
 # zsh version: {{ zsh_version }}
 
+export TERM="{{ zsh_term }}"
+
 source {{ zsh_antigen_path }}/antigen/antigen.zsh
 
 antigen use oh-my-zsh
@@ -52,9 +54,6 @@ ANTIGEN_SYSTEM_UPDATE_DAYS={{ zsh_update_interval }}
 HIST_STAMPS="{{ zsh_hist_stamps }}"
 
 UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
-
-# For Solarized
-export TERM="xterm-256color"
 
 # default editor
 export EDITOR="{{ zsh_editor }}"

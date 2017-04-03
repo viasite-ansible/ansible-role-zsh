@@ -6,6 +6,7 @@ zsh_user: "{{ ansible_user_id }}"
 zsh_hist_stamps: yyyy-mm-dd
 zsh_update_interval: 30
 zsh_editor: vim
+zsh_term: xterm-256color
 
 zsh_path:
   - /usr/local/sbin
