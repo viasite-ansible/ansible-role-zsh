@@ -18,9 +18,13 @@
   when: item.command is defined
   register: zsh_register_commands_exists
 
-- name: Merge buldles lists
+- name: Merge bundles lists
   set_fact:
     zsh_antigen_bundles: "{{ zsh_antigen_bundles }} + {{ zsh_antigen_bundles_extras }}"
+
+- name: Merge hotkeys lists
+  set_fact:
+    zsh_hotkeys: "{{ zsh_hotkeys }} + {{ zsh_hotkeys_extras }}"
 
 - name: Write .zshrc config
   template:

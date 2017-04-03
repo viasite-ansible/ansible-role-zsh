@@ -140,6 +140,12 @@ Sample hotkey definitions:
 
 Useful to set `autosuggest-accept` to <kbd>`</kbd> hotkey, but it conflicts with Midnight Commander (break Ctrl+O subshell).
 
+You can add your custom hotkeys without replace default hotkeys with `zsh_hotkeys_extras` variable:
+``` yaml
+zsh_hotkeys_extras:
+  - { hotkey: '^[^[[D', action: backward-word } # alt+left
+  - { hotkey: '^[^[[C', action: forward-word } # alt+right
+```
 
 #### Default hotkeys from plugins:
 - <kbd>&rarr;</kbd> - accept autosuggestion

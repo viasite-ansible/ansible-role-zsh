@@ -72,6 +72,8 @@ zsh_hotkeys:
   - { hotkey: '{{ zsh_autosuggestions_bind_key }}',   action: autosuggest-accept, bundle: zsh-users/zsh-autosuggestions }
   - { hotkey: '{{ zsh_autosuggestions_bind_key_2 }}', action: autosuggest-accept, bundle: zsh-users/zsh-autosuggestions }
 
+zsh_hotkeys_extras: []
+
 # zsh-autosuggestions
 zsh_autosuggestions_max_length: 15
 zsh_autosuggestions_bind_key: ""
