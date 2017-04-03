@@ -7,6 +7,8 @@ source {{ zsh_antigen_path }}/antigen/antigen.zsh
 
 antigen use oh-my-zsh
 
+{% set bundles_enabled = [] %}
+
 {% for bundle in zsh_antigen_bundles -%}
     {%- if bundle is mapping -%}
         {% set valid = true -%}
@@ -31,10 +33,12 @@ if (( ZSHRC_LOAD_ONCE++ == 0 )); then
     antigen bundle {{ bundle.name }}
 fi
             {% else -%}
+{% if bundles_enabled.append(bundle.name) %}{% endif -%}
 antigen bundle {{ bundle.name }}
 {% endif -%}
         {% endif -%}
     {%- else -%}
+{% if bundles_enabled.append(bundle) %}{% endif -%}
 antigen bundle {{ bundle }}
 {% endif %}
 {% endfor %}
@@ -65,7 +69,7 @@ export PATH="{{ zsh_path | join(":") }}"
 
 # hotkeys
 {% for hotkey in zsh_hotkeys %}
-{% if hotkey.hotkey != '' and (hotkey.bundle is not defined or hotkey.bundle in zsh_antigen_bundles) %}
+{% if hotkey.hotkey != '' and (hotkey.bundle is not defined or hotkey.bundle in bundles_enabled) %}
 bindkey '{{ hotkey.hotkey }}' {{ hotkey.action }}
 {% endif %}
 {% endfor %}
