@@ -41,14 +41,14 @@ zsh_antigen_bundles:
   - { name: vagrant, command: vagrant }
   - zsh_reload
 
-  - zsh-users/zsh-autosuggestions
+  # on zsh 4.3.10 autosuggestions breaks multiline commands with \
+  - { name: zsh-users/zsh-autosuggestions, when: "{{ zsh_version | version_compare('5.0', '>=') }}" }
   - popstas/zsh-command-time
   - unixorn/autoupdate-antigen.zshplugin
   - urbainvaes/fzf-marks # replaces jump plugin, mark, jump and Ctrl+G
   - "{{ fzf_widgets }}"
   # must be last, don't work on zsh < 4.3.17
-  - name: zsh-users/zsh-syntax-highlighting
-    when: "{{ zsh_version | version_compare('4.3.17', '>=') }}"
+  - { name: zsh-users/zsh-syntax-highlighting, when: "{{ zsh_version | version_compare('4.3.17', '>=') }}" }
 
 zsh_antigen_bundles_extras: []
 
