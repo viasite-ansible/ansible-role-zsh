@@ -1,5 +1,50 @@
 <a name=""></a>
-# [master](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.0.0...v) (2017-04-02)
+# [master](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.0.4...v) (2017-04-03)
+
+
+
+<a name="2.0.4"></a>
+## [2.0.4](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.0.3...v2.0.4) (2017-04-03)
+
+
+### Bug Fixes
+
+* hotkeys with bundle dependency don't enabled if bundle was dict ([4187981](https://github.com/viasite-ansible/ansible-role-zsh/commit/4187981))
+
+
+### Features
+
+* add copy-earlier-word to widgets ([f6064b9](https://github.com/viasite-ansible/ansible-role-zsh/commit/f6064b9))
+* zsh_hotkeys_extras variable for custom hotkeys ([e7e8b25](https://github.com/viasite-ansible/ansible-role-zsh/commit/e7e8b25))
+
+
+
+<a name="2.0.3"></a>
+## [2.0.3](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.0.2...v2.0.3) (2017-04-03)
+
+
+### Bug Fixes
+
+* add debian jessie to platforms ([995c601](https://github.com/viasite-ansible/ansible-role-zsh/commit/995c601))
+* move TERM var above theme, for zsh 4.3 ([7030837](https://github.com/viasite-ansible/ansible-role-zsh/commit/7030837))
+* zsh, disable autosuggestions for zsh 4.3 ([76521c9](https://github.com/viasite-ansible/ansible-role-zsh/commit/76521c9))
+
+
+
+<a name="2.0.2"></a>
+## [2.0.2](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.0.1...v2.0.2) (2017-04-02)
+
+
+### Bug Fixes
+
+* fzf install for macOS ([ce924e6](https://github.com/viasite-ansible/ansible-role-zsh/commit/ce924e6))
+* remove composer plugin from defaults ([7dd8aa3](https://github.com/viasite-ansible/ansible-role-zsh/commit/7dd8aa3))
+* zsh-syntax-highlighting loaded on zsh 4.3.10 ([6062c8d](https://github.com/viasite-ansible/ansible-role-zsh/commit/6062c8d))
+
+
+
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.0.0...v2.0.1) (2017-04-02)
 
 
 ### Bug Fixes
@@ -9,7 +54,7 @@
 
 ### Features
 
-* zsh_antigen_bundles_extras for custom bundles ([b07a894](https://github.com/viasite-ansible/ansible-role-zsh/commit/b07a894)), closes [#5](https://github.com/viasite-ansible/ansible-role-zsh/issues/5)
+* zsh_antigen_bundles_extras for custom bundles ([0e2ac6a](https://github.com/viasite-ansible/ansible-role-zsh/commit/0e2ac6a)), closes [#5](https://github.com/viasite-ansible/ansible-role-zsh/issues/5)
 
 
 

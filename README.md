@@ -145,6 +145,8 @@ You can add your custom hotkeys without replace default hotkeys with `zsh_hotkey
 zsh_hotkeys_extras:
   - { hotkey: '^[^[[D', action: backward-word } # alt+left
   - { hotkey: '^[^[[C', action: forward-word } # alt+right
+  # Example <Ctrl+.><Ctrl+,> inserts 2nd argument from end of prev. cmd
+  - { hotkey: '^[,', action: copy-earlier-word } # ctrl+,
 ```
 
 #### Default hotkeys from plugins:

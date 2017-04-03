@@ -67,6 +67,9 @@ COMPLETION_WAITING_DOTS="true"
 
 export PATH="{{ zsh_path | join(":") }}"
 
+autoload -Uz copy-earlier-word
+zle -N copy-earlier-word
+
 # hotkeys
 {% for hotkey in zsh_hotkeys %}
 {% if hotkey.hotkey != '' and (hotkey.bundle is not defined or hotkey.bundle in bundles_enabled) %}
