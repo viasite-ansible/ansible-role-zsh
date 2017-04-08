@@ -160,9 +160,10 @@ zsh_hotkeys_extras:
 - <kbd>Ctrl+@,G</kbd> - fzf-change-repository
 - <kbd>Ctrl+@,F</kbd> - fzf-edit-files
 - <kbd>Ctrl+@,.</kbd> - fzf-edit-dotfiles
-- <kbd>Ctrl+@,S</kbd> - fzf-exec-ssh (used your ~/.)
-- <kbd>Ctrl+@,G,A</kbd> - fzf-git-add
-- <kbd>Ctrl+@,G,B</kbd> - fzf-git-checkout
+- <kbd>Ctrl+@,S</kbd> - fzf-exec-ssh (using your ~/.ssh/config)
+- <kbd>Ctrl+@,G,A</kbd> - fzf-git-add-file
+- <kbd>Ctrl+@,G,B</kbd> - fzf-git-checkout-branch
+- <kbd>Ctrl+@,G,D</kbd> - fzf-git-delete-branches
 
 
 

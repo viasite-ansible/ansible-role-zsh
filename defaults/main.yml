@@ -18,8 +18,7 @@ zsh_path:
   - /usr/games
   - /usr/local/games
 
-# fzf_widget extracted to variable for testing purposes
-fzf_widgets: popstas/fzf-widgets
+fzf_widgets: ytet5uy4/fzf-widgets
 
 zsh_antigen_bundles:
   - { name: command-not-found, when: ansible_os_family != "Darwin" } # +900 ms on OSX!!
@@ -65,10 +64,11 @@ zsh_hotkeys:
   - { hotkey: '^@g',   action: fzf-change-repository }
   - { hotkey: '^@f',   action: fzf-edit-files }
   - { hotkey: '^@.',   action: fzf-edit-dotfiles }
+  - { hotkey: '^r',    action: fzf-insert-history }
   - { hotkey: '^@s',   action: fzf-exec-ssh }
-  - { hotkey: '^@ga',  action: fzf-git-add }
-  - { hotkey: '^@gb',  action: fzf-git-checkout }
-  - { hotkey: '^r',    action: fzf-history }
+  - { hotkey: '^@ga',  action: fzf-git-add-files }
+  - { hotkey: '^@gb',  action: fzf-git-checkout-branch }
+  - { hotkey: '^@gd',  action: fzf-git-delete-branches }
   - { hotkey: '{{ zsh_autosuggestions_bind_key }}',   action: autosuggest-accept, bundle: zsh-users/zsh-autosuggestions }
   - { hotkey: '{{ zsh_autosuggestions_bind_key_2 }}', action: autosuggest-accept, bundle: zsh-users/zsh-autosuggestions }
 
@@ -83,6 +83,7 @@ zsh_autosuggestions_bind_key_2: ""
 zsh_fzf_height: "100%"
 zsh_fzf_reverse: yes
 zsh_fzf_border: no
+zsh_fzf_ctrl_r_opts: '--exact'
 
 # command-time
 zsh_command_time_min_seconds: 3
