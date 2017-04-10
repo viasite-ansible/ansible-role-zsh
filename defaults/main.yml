@@ -47,7 +47,8 @@ zsh_antigen_bundles:
   - urbainvaes/fzf-marks # replaces jump plugin, mark, jump and Ctrl+G
   - "{{ fzf_widgets }}"
   # must be last, don't work on zsh < 4.3.17
-  - { name: zsh-users/zsh-syntax-highlighting, when: "{{ zsh_version | default(false) | version_compare('4.3.17', '>=') }}" }
+  #- { name: zsh-users/zsh-syntax-highlighting, when: "{{ zsh_version | default(false) | version_compare('4.3.17', '>=') }}" }
+  - { name: zdharma/fast-syntax-highlighting, when: "{{ zsh_version | default(false) | version_compare('4.3.17', '>=') }}" }
 
 zsh_antigen_bundles_extras: []
 
