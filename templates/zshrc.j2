@@ -2,6 +2,16 @@
 # zsh version: {{ zsh_version }}
 
 export TERM="{{ zsh_term }}"
+export EDITOR="{{ zsh_editor }}"
+export PATH="{{ zsh_path | join(":") }}"
+
+HIST_STAMPS="{{ zsh_hist_stamps }}"
+UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
+COMPLETION_WAITING_DOTS="true"
+
+ANTIGEN_PLUGIN_UPDATE_DAYS={{ zsh_update_interval }}
+ANTIGEN_SYSTEM_UPDATE_DAYS={{ zsh_update_interval }}
+
 
 source {{ zsh_antigen_path }}/antigen/antigen.zsh
 
@@ -51,21 +61,6 @@ antigen theme {{ zsh_antigen_theme }}
 antigen apply
 
 ###
-
-ANTIGEN_PLUGIN_UPDATE_DAYS={{ zsh_update_interval }}
-ANTIGEN_SYSTEM_UPDATE_DAYS={{ zsh_update_interval }}
-
-HIST_STAMPS="{{ zsh_hist_stamps }}"
-
-UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
-
-# default editor
-export EDITOR="{{ zsh_editor }}"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-export PATH="{{ zsh_path | join(":") }}"
 
 autoload -Uz copy-earlier-word
 zle -N copy-earlier-word
