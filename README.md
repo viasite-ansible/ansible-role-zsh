@@ -79,9 +79,9 @@ sudo ansible-galaxy install viasite-ansible.zsh
 sudo ansible-playbook -i "localhost," -c local playbook.yml
 ```
 
-For macOS you should not run ansible-playbook with sudo and cannot apply role to root user:
+If you want to provision role for root user on macOS, you should install packages manually:
 ```
-ansible-playbook -i "localhost," -c local playbook.yml
+brew install zsh git wget
 ```
 
 It will install zsh environment for ansible remote user. If you want to setup zsh for other users,
