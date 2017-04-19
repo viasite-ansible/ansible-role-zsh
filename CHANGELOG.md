@@ -1,5 +1,59 @@
 <a name=""></a>
-# [master](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.0.4...v) (2017-04-03)
+# [master](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.2...v) (2017-04-19)
+
+
+
+<a name="2.1.2"></a>
+## [2.1.2](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.1...v2.1.2) (2017-04-19)
+
+
+### Bug Fixes
+
+* removed debian plugin from zsh_antigen_bundles ([ddb600e](https://github.com/viasite-ansible/ansible-role-zsh/commit/ddb600e)), closes [#6](https://github.com/viasite-ansible/ansible-role-zsh/issues/6)
+
+
+### BREAKING CHANGES
+
+* Now plugin `debian` should be added to `zsh_antigen_bundles` for using.
+
+
+
+<a name="2.1.1"></a>
+## [2.1.1](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.0...v2.1.1) (2017-04-16)
+
+
+### Bug Fixes
+
+* HIST_STAMPS, COMPLETION_WAITING_DOTS don't work if it before antigen apply ([4093191](https://github.com/viasite-ansible/ansible-role-zsh/commit/4093191))
+* provision role for root on macOS ([2d1f939](https://github.com/viasite-ansible/ansible-role-zsh/commit/2d1f939))
+
+
+### Features
+
+* zsh-users/zsh-syntax-highlighting -> zdharma/fast-syntax-highlighting ([ff3542f](https://github.com/viasite-ansible/ansible-role-zsh/commit/ff3542f))
+
+
+
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.0.4...v2.1.0) (2017-04-08)
+
+
+### Bug Fixes
+
+* role broken on 'Check commands exists' when skipped ([0676934](https://github.com/viasite-ansible/ansible-role-zsh/commit/0676934))
+
+
+### Features
+
+* new widget: fzf-git-delete-branches, add --exact to insert-history ([15d22a4](https://github.com/viasite-ansible/ansible-role-zsh/commit/15d22a4))
+
+
+### BREAKING CHANGES
+
+* Renamed fzf-git-add to fzf-git-add-files
+Renamed fzf-git-checkout to fzf-git-checkout-branch
+
+See ytet5uy4/fzf-widgets#2
 
 
 
@@ -14,7 +68,7 @@
 
 ### Features
 
-* add copy-earlier-word to widgets ([f6064b9](https://github.com/viasite-ansible/ansible-role-zsh/commit/f6064b9))
+* add copy-earlier-word to widgets ([ec4382b](https://github.com/viasite-ansible/ansible-role-zsh/commit/ec4382b))
 * zsh_hotkeys_extras variable for custom hotkeys ([e7e8b25](https://github.com/viasite-ansible/ansible-role-zsh/commit/e7e8b25))
 
 
