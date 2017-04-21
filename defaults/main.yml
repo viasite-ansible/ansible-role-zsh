@@ -25,6 +25,7 @@ zsh_antigen_bundles:
   - { name: brew, command: brew }
   - { name: docker, command: docker }
   - { name: docker-compose, command: docker-compose }
+  - { name: viasite/drupal-scripts, command: drs }
   - fancy-ctrl-z
   - git-extras
   - gnu-utils
