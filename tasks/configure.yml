@@ -10,6 +10,10 @@
   set_fact:
     zsh_version: "{{ zsh_register_version.stdout }}"
 
+- name: Merge bundles lists
+  set_fact:
+    zsh_antigen_bundles: "{{ zsh_antigen_bundles }} + {{ zsh_antigen_bundles_extras }}"
+
 - name: Check commands exists
   command: "which {{ item.command }}"
   with_items: "{{ zsh_antigen_bundles }}"
@@ -17,10 +21,6 @@
   changed_when: false
   when: item.command is defined
   register: zsh_register_commands_exists
-
-- name: Merge bundles lists
-  set_fact:
-    zsh_antigen_bundles: "{{ zsh_antigen_bundles }} + {{ zsh_antigen_bundles_extras }}"
 
 - name: Merge hotkeys lists
   set_fact:
