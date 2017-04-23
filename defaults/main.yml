@@ -61,17 +61,18 @@ zsh_hotkeys:
   - { hotkey: '\e[1~', action: beginning-of-line }
   - { hotkey: '\e[4~', action: end-of-line }
   # fzf-widgets
-  - { hotkey: '^@',    action: fzf-select-widget }
-  - { hotkey: '^@c',   action: fzf-change-dir }
-  - { hotkey: '^\',    action: fzf-change-recent-dir }
-  - { hotkey: '^@g',   action: fzf-change-repository }
-  - { hotkey: '^@f',   action: fzf-edit-files }
-  - { hotkey: '^@.',   action: fzf-edit-dotfiles }
-  - { hotkey: '^r',    action: fzf-insert-history }
-  - { hotkey: '^@s',   action: fzf-exec-ssh }
-  - { hotkey: '^@ga',  action: fzf-git-add-files }
-  - { hotkey: '^@gb',  action: fzf-git-checkout-branch }
-  - { hotkey: '^@gd',  action: fzf-git-delete-branches }
+  - { hotkey: '^@',    action: fzf-select-widget,       bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@c',   action: fzf-change-dir,          bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^\',    action: fzf-change-recent-dir,   bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@g',   action: fzf-change-repository,   bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@f',   action: fzf-edit-files,          bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@.',   action: fzf-edit-dotfiles,       bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^r',    action: fzf-insert-history,      bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@k',   action: fzf-kill-processes,      bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@s',   action: fzf-exec-ssh,            bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@ga',  action: fzf-git-add-files,       bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@gb',  action: fzf-git-checkout-branch, bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@gd',  action: fzf-git-delete-branches, bundle: "{{ fzf_widgets }}" }
   - { hotkey: '{{ zsh_autosuggestions_bind_key }}',   action: autosuggest-accept, bundle: zsh-users/zsh-autosuggestions }
   - { hotkey: '{{ zsh_autosuggestions_bind_key_2 }}', action: autosuggest-accept, bundle: zsh-users/zsh-autosuggestions }
 
