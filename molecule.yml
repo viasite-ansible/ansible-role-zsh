@@ -53,3 +53,8 @@ ansible:
   group_vars:
     all:
       zsh_user: ${MOLECULE_ZSH_USER}
+      zsh_antigen_bundles_extras:
+        - { name: test/in-list, when: true }
+        - { name: test/not-in-list, when: false }
+        - { name: test/command-exists, command: zsh }
+        - { name: test/command-not-exists, command: not-exists-commanddd }
