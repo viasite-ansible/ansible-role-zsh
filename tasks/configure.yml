@@ -38,3 +38,11 @@
   user:
     name: "{{ zsh_user }}"
     shell: /bin/zsh
+
+- name: Add skip_global_compinit for disable early compinit call in Ubuntu
+  lineinfile:
+    regexp: "skip_global_compinit=1"
+    line: "skip_global_compinit=1"
+    dest: /etc/zsh/zshenv
+    state: present
+  when: ansible_distribution == 'Ubuntu'
