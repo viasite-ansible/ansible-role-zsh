@@ -10,7 +10,6 @@ Tested on Debian 6, Ubuntu 14.04, Ubuntu 16.04, macOS 10.12, CentOS 7.
 - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) (except Debian Squeeze),
   with workaround for [#zsh-syntax-highlighting/286](https://github.com/zsh-users/zsh-syntax-highlighting/issues/286)
-- [zsh-command-time](https://github.com/popstas/zsh-command-time)
 - [unixorn/autoupdate-antigen.zshplugin](https://github.com/unixorn/autoupdate-antigen.zshplugin)
 - [ytet5uy4/fzf-widgets](https://github.com/ytet5uy4/fzf-widgets)
 - [urbainvaes/fzf-marks](https://github.com/popstas/urbainvaes/fzf-marks)

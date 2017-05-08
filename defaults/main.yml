@@ -117,7 +117,7 @@ zsh_powerlevel9k_right_prompt:
   - status
   - background_jobs
   - vcs
-  - custom_command_time
+  - command_execution_time
   - time
 
 zsh_powerlevel_custom_elements:
@@ -143,3 +143,7 @@ zsh_powerlevel9k_vcs_foreground: "232" # about black on any palette
 zsh_powerlevel9k_vcs_clean_background: "100" # dirty green
 zsh_powerlevel9k_vcs_modified_background: "094" # orange
 zsh_powerlevel9k_vcs_untracked_background: "094" # orange
+
+# command execution time
+zsh_powerlevel9k_command_execution_time_foreground: "000"
+zsh_powerlevel9k_command_execution_time_background: "248"
