@@ -126,6 +126,9 @@ zsh_powerlevel_custom_elements:
     background: "248"
     foreground: "000"
 
+zsh_powerlevel9k_hide_host_on_local: yes
+zsh_powerlevel9k_always_show_context: no # hide hostname and username from prompt on local machine
+zsh_powerlevel9k_always_show_user: no # hide username from prompt on local machine
 zsh_powerlevel9k_prompt_on_newline: no
 zsh_powerlevel9k_shorten_dir_length: 3
 zsh_powerlevel9k_status_verbose: 0

@@ -10,6 +10,8 @@ zsh_antigen_fzf_path: "{{ zsh_antigen_path }}/repos/https-COLON--SLASH--SLASH-gi
 zsh_fzf_default_opts: "--height {{ zsh_fzf_height }}{% if zsh_fzf_reverse %} --reverse{% endif %}{% if zsh_fzf_border %} --border{% endif %}"
 
 zsh_powerlevel9k_prompt_on_newline_bool: "{% if zsh_powerlevel9k_prompt_on_newline %}true{% else %}false{% endif %}"
+zsh_powerlevel9k_always_show_context_bool: "{% if zsh_powerlevel9k_always_show_context %}true{% else %}false{% endif %}"
+zsh_powerlevel9k_always_show_user_bool: "{% if zsh_powerlevel9k_always_show_user %}true{% else %}false{% endif %}"
 
 # plugins git versions
 zsh_fzf_version: 0.16.6
