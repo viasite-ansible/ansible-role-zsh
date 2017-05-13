@@ -30,7 +30,7 @@ antigen use oh-my-zsh
 
         {% if bundle.command is defined -%}
             {% for cmd in zsh_register_commands_exists.results -%}
-                {% if cmd.cmd is defined and cmd.cmd[1] == bundle.command and cmd.rc == 1 -%}
+                {% if cmd.cmd is defined and cmd.rc != 0 and cmd.item.command == bundle.command -%}
                     {% if command_not_exists.append(1) %}{% endif -%}
                 {% endif -%}
             {% endfor -%}

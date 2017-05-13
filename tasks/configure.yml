@@ -15,7 +15,7 @@
     zsh_antigen_bundles: "{{ zsh_antigen_bundles }} + {{ zsh_antigen_bundles_extras }}"
 
 - name: Check commands exists
-  command: "which {{ item.command }}"
+  shell: "command -v {{ item.command }} || which {{ item.command }}"
   with_items: "{{ zsh_antigen_bundles }}"
   failed_when: false
   changed_when: false
