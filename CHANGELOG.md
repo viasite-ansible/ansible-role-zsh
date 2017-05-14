@@ -1,5 +1,86 @@
-<a name=""></a>
-# [master](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.2...v) (2017-04-19)
+<a name="3.0.0"></a>
+# [master](https://github.com/viasite-ansible/ansible-role-zsh/compare/v3.0.0...v) (2017-05-14)
+
+
+### Features
+
+* upgrade to antigen v2 ([a85cc77](https://github.com/viasite-ansible/ansible-role-zsh/commit/a85cc77)), closes [#12](https://github.com/viasite-ansible/ansible-role-zsh/issues/12)
+
+
+
+<a name="2.1.8"></a>
+## [2.1.8](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.7...v2.1.8) (2017-05-13)
+
+
+### Bug Fixes
+
+* make working command conditions on clean centos ([71399b8](https://github.com/viasite-ansible/ansible-role-zsh/commit/71399b8)), closes [#8](https://github.com/viasite-ansible/ansible-role-zsh/issues/8)
+
+
+
+<a name="2.1.7"></a>
+## [2.1.7](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.6...v2.1.7) (2017-05-13)
+
+
+### Bug Fixes
+
+* replace popstas/zsh-command-time to native powerlevel9k segment ([24e3480](https://github.com/viasite-ansible/ansible-role-zsh/commit/24e3480)), closes [#13](https://github.com/viasite-ansible/ansible-role-zsh/issues/13)
+
+
+### Features
+
+* hide host and/or user on local machine (powerlevel9k 0.6 feature) ([12630d4](https://github.com/viasite-ansible/ansible-role-zsh/commit/12630d4)), closes [#15](https://github.com/viasite-ansible/ansible-role-zsh/issues/15)
+
+
+
+<a name="2.1.6"></a>
+## [2.1.6](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.5...v2.1.6) (2017-04-26)
+
+
+### Bug Fixes
+
+* skip early compinit execute on Ubuntu ([f581c7b](https://github.com/viasite-ansible/ansible-role-zsh/commit/f581c7b)), closes [#9](https://github.com/viasite-ansible/ansible-role-zsh/issues/9)
+
+
+### Features
+
+* add docker widgets from updated ytet5uy4/fzf-widgets ([ee84bf3](https://github.com/viasite-ansible/ansible-role-zsh/commit/ee84bf3))
+
+
+
+<a name="2.1.5"></a>
+## [2.1.5](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.4...v2.1.5) (2017-04-25)
+
+
+### Bug Fixes
+
+* make condition for disable command-not-found for macOS ([d789633](https://github.com/viasite-ansible/ansible-role-zsh/commit/d789633)), closes [#7](https://github.com/viasite-ansible/ansible-role-zsh/issues/7)
+
+
+
+<a name="2.1.4"></a>
+## [2.1.4](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.3...v2.1.4) (2017-04-23)
+
+
+### Bug Fixes
+
+* support check `command` exists for zsh_antigen_bundles_extras ([b6e4284](https://github.com/viasite-ansible/ansible-role-zsh/commit/b6e4284))
+
+
+### Features
+
+* add fzf-kill-process to ytet5uy4/fzf-widgets ([8bc9e93](https://github.com/viasite-ansible/ansible-role-zsh/commit/8bc9e93))
+* add viasite/drall, viasite/server-scripts bundles ([74d3451](https://github.com/viasite-ansible/ansible-role-zsh/commit/74d3451))
+
+
+
+<a name="2.1.3"></a>
+## [2.1.3](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.2...v2.1.3) (2017-04-21)
+
+
+### Features
+
+* add viasite/drupal-scripts bundle for drs ([7371bde](https://github.com/viasite-ansible/ansible-role-zsh/commit/7371bde))
 
 
 
