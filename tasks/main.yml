@@ -10,7 +10,7 @@
   tags: [ zsh, install, post_install ]
 
 - name: Reset antigen cache
-  command: "/bin/zsh {{ zsh_user_config }} -c 'source ~/.antigen/antigen/antigen.zsh; antigen reset'"
+  command: "/bin/zsh -c 'source {{ zsh_user_config }}; antigen reset'"
   become: yes
   become_user: "{{ zsh_user }}"
   changed_when: false
