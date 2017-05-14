@@ -11,13 +11,15 @@
   # brew don't work from root user on macOS
   when: not (zsh_user == 'root' and ansible_os_family == 'Darwin')
 
-- name: Clone antigen
+- name: Clone antigen {{ zsh_antigen_version }}
   git:
     repo: https://github.com/zsh-users/antigen.git
     dest: "{{ zsh_antigen_path }}/antigen"
     version: "{{ zsh_antigen_version }}"
+    force: yes
   become: yes
   become_user: "{{ zsh_user }}"
+  register: zsh_register_antigen_clone
 
 - name: Check fzf installed
   command: which fzf

@@ -20,6 +20,9 @@ zsh_path:
 
 fzf_widgets: ytet5uy4/fzf-widgets
 
+zsh_antigen_version: v2.0.2
+zsh_fzf_version: 0.16.7
+
 zsh_antigen_bundles:
   - { name: command-not-found, when: "{{ ansible_os_family != 'Darwin' }}" } # too slow on OSX
   - { name: brew, command: brew }

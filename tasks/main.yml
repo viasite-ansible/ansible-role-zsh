@@ -8,3 +8,11 @@
 
 - include: post-install.yml
   tags: [ zsh, install, post_install ]
+
+- name: Reset antigen cache
+  command: "/bin/zsh {{ zsh_user_config }} -c 'source ~/.antigen/antigen/antigen.zsh; antigen reset'"
+  become: yes
+  become_user: "{{ zsh_user }}"
+  changed_when: false
+  failed_when: false
+  tags: always
