@@ -26,6 +26,16 @@
   set_fact:
     zsh_hotkeys: "{{ zsh_hotkeys }} + {{ zsh_hotkeys_extras }}"
 
+- name: Check antigen version
+  shell: "cat {{ zsh_antigen_path }}/antigen/VERSION | tr -d 'v'"
+  register: zsh_register_antigen_version
+  changed_when: false
+  tags: configure
+
+- name: Set zsh_antigen_installed_version variable
+  set_fact:
+    zsh_antigen_installed_version: "{{ zsh_register_antigen_version.stdout }}"
+
 - name: Write .zshrc config
   template:
     src: zshrc.j2

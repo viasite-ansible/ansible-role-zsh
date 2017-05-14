@@ -1,5 +1,6 @@
 # {{ ansible_managed }}
 # zsh version: {{ zsh_version }}
+# antigen version: {{ zsh_antigen_installed_version }}
 
 export TERM="{{ zsh_term }}"
 export EDITOR="{{ zsh_editor }}"
@@ -9,6 +10,7 @@ HIST_STAMPS="{{ zsh_hist_stamps }}"
 UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
 COMPLETION_WAITING_DOTS="true"
 
+ANTIGEN_BUNDLES=$HOME/.antigen/bundles
 ANTIGEN_PLUGIN_UPDATE_DAYS={{ zsh_update_interval }}
 ANTIGEN_SYSTEM_UPDATE_DAYS={{ zsh_update_interval }}
 
@@ -53,9 +55,12 @@ antigen bundle {{ bundle }}
 {% endif %}
 {% endfor %}
 
-{% if zsh_version | version_compare('5.0.8', '<') -%}
+{% if zsh_antigen_installed_version | version_compare(2.0, '>=') %}
+POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
+{% elif zsh_version | version_compare('5.0.8', '<') %}
 POWERLEVEL9K_INSTALLATION_PATH={{ zsh_antigen_path }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-bhilburn-SLASH-powerlevel9k.git
 {% endif %}
+
 antigen theme {{ zsh_antigen_theme }}
 
 antigen apply

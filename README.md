@@ -2,6 +2,10 @@
 
 Tested on Debian 6, Ubuntu 14.04, Ubuntu 16.04, macOS 10.12, CentOS 7.
 
+**For upgrade from viasite-ansible.zsh 1.x, 2.x to 3.0 see [below](#upgrade).**
+
+
+
 ## Includes:
 - zsh
 - [antigen](https://github.com/zsh-users/antigen)
@@ -104,6 +108,28 @@ ansible-playbook -i hosts zsh.yml --extra-vars="zsh_user=otheruser"
 or `brew install fzf` for macOS.
 
 Note: I don't use `tmux-fzf` and don't tested work of it.
+
+
+
+## Upgrade
+viasite-ansible.zsh v3.0 introduces antigen v2.0, it don't have backward compatibility to antigen 1.x.
+
+I don't spent much time for smooth upgrade, therefore you should do some manual actions:
+
+1. You should provision role twice, sorry for that, 
+2. After provision role you should login in shell and execute `antigen reset`
+
+After reopen shell all should be done.
+
+### Downgrade to antigen v1
+Antigen v2 much faster (up to 2x more faster startup), but if something went wrong, you can downgrade to antigen v1,
+see note for zsh 4.3 users below. After downgrade you also should execute `antigen reset`.
+
+### For users with zsh 4.x
+Antigen v2 not work on zsh < 5.0, if you use zsh 4.x, please add to you playbook:
+``` yaml
+zsh_antigen_version: v1.4.1
+```
 
 
 
