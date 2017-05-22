@@ -20,7 +20,7 @@ zsh_path:
 
 fzf_widgets: ytet5uy4/fzf-widgets
 
-zsh_antigen_version: develop
+zsh_antigen_version: master
 zsh_fzf_version: 0.16.7
 
 zsh_antigen_bundles:
