@@ -67,6 +67,11 @@ antigen apply
 
 ###
 
+{% if not zsh_share_history %}
+unsetopt share_history
+{% endif %}
+
+
 autoload -Uz copy-earlier-word
 zle -N copy-earlier-word
 
