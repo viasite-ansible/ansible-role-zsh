@@ -74,12 +74,23 @@ zsh_hotkeys:
   - { hotkey: '^@s',   action: fzf-exec-ssh,                 bundle: "{{ fzf_widgets }}" }
   - { hotkey: '^\' ,   action: fzf-change-recent-directory,  bundle: "{{ fzf_widgets }}" }
   - { hotkey: '^r',    action: fzf-insert-history,           bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^xf',   action: fzf-insert-files,             bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^xd',   action: fzf-insert-directory,         bundle: "{{ fzf_widgets }}" }
 
   # fzf-widgets: Git
-  - { hotkey: '^@g',   action: fzf-git-change-repository,    bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@g',   action: fzf-select-git-widget,        bundle: "{{ fzf_widgets }}" }
   - { hotkey: '^@ga',  action: fzf-git-add-files,            bundle: "{{ fzf_widgets }}" }
-  - { hotkey: '^@gc',  action: fzf-git-checkout-branch,      bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@gc',  action: fzf-git-change-repository,    bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@gco', action: fzf-git-checkout-branch,      bundle: "{{ fzf_widgets }}" }
   - { hotkey: '^@gd',  action: fzf-git-delete-branches,      bundle: "{{ fzf_widgets }}" }
+
+  # fzf-widgets: GitHub
+  - { hotkey: '^@gh',   action: fzf-select-github-widget,    bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@ghi',  action: fzf-github-show-issue,       bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@ghe',  action: fzf-github-edit-issue,       bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@gho',  action: fzf-github-open-issue,       bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@ghc',  action: fzf-github-close-issue,      bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@ghco', action: fzf-github-comment-issue,    bundle: "{{ fzf_widgets }}" }
 
   # fzf-widgets: Docker
   - { hotkey: '^@d',   action: fzf-select-docker-widget,     bundle: "{{ fzf_widgets }}" }
