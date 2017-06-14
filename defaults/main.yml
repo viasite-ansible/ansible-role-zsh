@@ -38,6 +38,7 @@ zsh_antigen_bundles:
   - { name: pip, command: pip }
   - { name: rake, command: rake }
   - { name: symfony2, command: symfony }
+  - { name: systemd, command: systemctl }
   - python
   - { name: tmux, command: tmux }
   - { name: vagrant, command: vagrant }
