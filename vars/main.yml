@@ -3,7 +3,7 @@ zsh_user_group: "{% if ansible_os_family == 'Darwin' %}staff{% else %}{{ zsh_use
 zsh_antigen_path: "~{{ zsh_user }}/.antigen"
 zsh_user_config: "~{{ zsh_user }}/.zshrc"
 
-zsh_fzf_os: linux
+zsh_fzf_os: "{{ ansible_os_family }}"
 zsh_fzf_arch: "{% if '64' in ansible_architecture %}amd64{% else %}386{% endif %}"
 zsh_fzf_url: "https://github.com/junegunn/fzf-bin/releases/download/{{ zsh_fzf_version }}/fzf-{{ zsh_fzf_version }}-{{ zsh_fzf_os }}_{{ zsh_fzf_arch }}.tgz"
 zsh_antigen_fzf_path: "{{ zsh_antigen_path }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-junegunn-SLASH-fzf.git"
