@@ -60,10 +60,11 @@ But this alias can break you scripts, that using `su`.
 ## Install for real machine
 
 ### Zero-knowledge install:
-If you use Ubuntu or Debian and not familiar with Ansible, you can just execute [install.sh](install.sh) on target machine:
+If you using Ubuntu or Debian and not familiar with Ansible, you can just execute [install.sh](install.sh) on target machine:
 ```
 curl https://raw.githubusercontent.com/viasite-ansible/ansible-role-zsh/master/install.sh | bash
 ```
+It will install zsh for root and current user.
 Then [configure terminal application](#configure-terminal-application).
 
 
