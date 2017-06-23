@@ -46,7 +46,10 @@ Note: you cannot install vagrant on VPS like Digital Ocean or in Docker. Use loc
 ### `su username` caused errors
 See [antigen issue](https://github.com/zsh-users/antigen/issues/136).
 If both root and su user using antigen, you should use `su - username` in place of `su username`.
-You can try to fix it, add to `~/.zshrc.local`:
+
+Or you can use bundled alias `suser`.
+
+Also, you can try to fix it, add to `~/.zshrc.local`:
 ```
 alias su='su -'
 ```
