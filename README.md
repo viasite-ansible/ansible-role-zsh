@@ -88,6 +88,9 @@ sudo ansible-galaxy install viasite-ansible.zsh
 ```
 - hosts: all
   vars:
+    zsh_antigen_bundles_extras:
+      - nvm
+      - joel-porquet/zsh-dircolors-solarized
     zsh_autosuggestions_bind_key: "^U"
   roles:
     - viasite-ansible.zsh
@@ -213,7 +216,7 @@ zsh_hotkeys_extras:
 
 ## Configure bundles
 You can check default bundles in [defaults/main.yml](defaults/main.yml#L37).
-If you like default bundles, but you want to add your bundles, use `zsh_antigen_bundles_extras` variable.
+If you like default bundles, but you want to add your bundles, use `zsh_antigen_bundles_extras` variable (see example playbook above).
 If you want to remove some default bundles, you should use `zsh_antigen_bundles` variable.
 
 Format of list matches [antigen](https://github.com/zsh-users/antigen#antigen-bundle). All bellow variants valid:
