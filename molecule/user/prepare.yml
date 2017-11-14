@@ -1,0 +1,10 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: False
+  tasks:
+    - name: create testuser
+      user:
+        name: testuser
+        home: /home/testuser
+        shell: /bin/bash
