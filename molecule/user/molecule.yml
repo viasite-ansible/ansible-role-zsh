@@ -39,8 +39,6 @@ platforms:
 #      type: virtualbox
 #  instances:
 #    - name: vagrant-01
-#      raw_config_args:
-#        - "vm.synced_folder '${MOLECULE_APT_CONF_D_PATH}', '/etc/apt/apt.conf.d'"
 
 lint:
   name: yamllint
