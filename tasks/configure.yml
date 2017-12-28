@@ -48,6 +48,7 @@
   user:
     name: "{{ zsh_user }}"
     shell: /bin/zsh
+  become: true
 
 - name: Add skip_global_compinit for disable early compinit call in Ubuntu
   lineinfile:
