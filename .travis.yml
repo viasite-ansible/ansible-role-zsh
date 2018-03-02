@@ -8,9 +8,9 @@ services:
 before_install:
   - docker --version
 install:
-  - pip install molecule docker
+  - pip install molecule docker==2.7.0
 script:
-  - molecule --debug test --all
+  - molecule test --all
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
