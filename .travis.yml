@@ -10,7 +10,7 @@ before_install:
 install:
   - pip install molecule docker
 script:
-  - molecule test --all
+  - molecule --debug test --all
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
