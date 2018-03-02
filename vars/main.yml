@@ -1,14 +1,32 @@
 ---
 zsh_user_group: "{% if ansible_os_family == 'Darwin' %}staff{% else %}{{ zsh_user }}{% endif %}"
 zsh_antigen_path: "~{{ zsh_user }}/.antigen"
+zsh_zplug_path: "~{{ zsh_user }}/.zplug"
 zsh_user_config: "~{{ zsh_user }}/.zshrc"
 
 zsh_fzf_os: linux
 zsh_fzf_arch: "{% if '64' in ansible_architecture %}amd64{% else %}386{% endif %}"
 zsh_fzf_url: "https://github.com/junegunn/fzf-bin/releases/download/{{ zsh_fzf_version }}/fzf-{{ zsh_fzf_version }}-{{ zsh_fzf_os }}_{{ zsh_fzf_arch }}.tgz"
 zsh_antigen_fzf_path: "{{ zsh_antigen_path }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-junegunn-SLASH-fzf.git"
+# TODO zplug_fzf_path
 zsh_fzf_default_opts: "--height {{ zsh_fzf_height }}{% if zsh_fzf_reverse %} --reverse{% endif %}{% if zsh_fzf_border %} --border{% endif %}"
 
 zsh_powerlevel9k_prompt_on_newline_bool: "{% if zsh_powerlevel9k_prompt_on_newline %}true{% else %}false{% endif %}"
 zsh_powerlevel9k_always_show_context_bool: "{% if zsh_powerlevel9k_always_show_context %}true{% else %}false{% endif %}"
 zsh_powerlevel9k_always_show_user_bool: "{% if zsh_powerlevel9k_always_show_user %}true{% else %}false{% endif %}"
+
+zsh_plugin_managers:
+  antigen:
+    path: "~{{ zsh_user }}/.antigen"
+    dest: "~{{ zsh_user }}/.antigen/antigen"
+    repo: https://github.com/zsh-users/antigen.git
+    version: master
+    source_path: "~{{ zsh_user }}/.antigen/antigen.zsh"
+    include_command: "antigen bundle"
+  zplug:
+    path: "~{{ zsh_user }}/.zplug"
+    dest: "~{{ zsh_user }}/.zplug"
+    repo: https://github.com/zplug/zplug
+    version: master
+    source_path: "~{{ zsh_user }}/.zplug/init.zsh"
+    include_command: "zplug"

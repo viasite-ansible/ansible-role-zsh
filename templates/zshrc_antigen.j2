@@ -21,7 +21,7 @@ antigen use oh-my-zsh
 
 {% set bundles_enabled = [] %}
 
-{% for bundle in zsh_antigen_bundles -%}
+{% for bundle in zsh_plugins -%}
     {%- if bundle is mapping -%}
         {% set valid = true -%}
         {% set command_not_exists = [] -%}
@@ -61,7 +61,7 @@ POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k/powerlevel
 POWERLEVEL9K_INSTALLATION_PATH={{ zsh_antigen_path }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-bhilburn-SLASH-powerlevel9k.git
 {% endif %}
 
-antigen theme {{ zsh_antigen_theme }}
+antigen theme {{ zsh_theme }}
 
 antigen apply
 

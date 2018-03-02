@@ -1,5 +1,10 @@
 ---
 
+- name: Register zsh_pm variable
+  set_fact:
+    zsh_pm: "{{ zsh_plugin_managers[zsh_plugin_manager] }}"
+  tags: always
+
 - include: install.yml
   tags: [ zsh, install ]
 
@@ -16,3 +21,4 @@
   changed_when: false
   failed_when: false
   tags: always
+  when: zsh_plugin_manager == 'antigen'

@@ -2,20 +2,20 @@
 driver:
   name: docker
 platforms:
-  - name: ansible-role-zsh-debian-7
-    image: debian:7
-
-  - name: ansible-role-zsh-debian-8
-    image: debian:8
-
-  - name: ansible-role-zsh-ubuntu-1404
-    image: ubuntu:14.04
+#  - name: ansible-role-zsh-debian-7
+#    image: debian:7
+#
+#  - name: ansible-role-zsh-debian-8
+#    image: debian:8
+#
+#  - name: ansible-role-zsh-ubuntu-1404
+#    image: ubuntu:14.04
 
   - name: ansible-role-zsh-ubuntu-1604
     image: ubuntu:16.04
 
-  - name: ansible-role-zsh-centos-7
-    image: centos:7
+#  - name: ansible-role-zsh-centos-7
+#    image: centos:7
 
 #driver:
 #  name: vagrant
@@ -34,6 +34,8 @@ lint:
 
 provisioner:
   name: ansible
+  options:
+    tags: config
   playbooks:
     create: ../resources/create.yml
     prepare: ../resources/prepare.yml
@@ -43,7 +45,8 @@ provisioner:
     group_vars:
       all:
         zsh_user: root
-        zsh_antigen_bundles_extras:
+        zsh_plugin_manager: zplug
+        zsh_plugins_extras:
           - { name: test/in-list, when: true }
           - { name: test/not-in-list, when: false }
           - { name: test/command-exists, command: zsh }

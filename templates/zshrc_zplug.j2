@@ -1,6 +1,5 @@
 # {{ ansible_managed }}
 # zsh version: {{ zsh_version }}
-# antigen version: {{ zsh_antigen_installed_version }}
 
 export TERM="{{ zsh_term }}"
 export EDITOR="{{ zsh_editor }}"
@@ -10,60 +9,73 @@ HIST_STAMPS="{{ zsh_hist_stamps }}"
 UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
 COMPLETION_WAITING_DOTS="true"
 
+{% if zsh_plugin_manager == 'antigen' %}
 ANTIGEN_BUNDLES=$HOME/.antigen/bundles
 ANTIGEN_PLUGIN_UPDATE_DAYS={{ zsh_update_interval }}
 ANTIGEN_SYSTEM_UPDATE_DAYS={{ zsh_update_interval }}
-
-
-source {{ zsh_antigen_path }}/antigen/antigen.zsh
-
-antigen use oh-my-zsh
-
-{% set bundles_enabled = [] %}
-
-{% for bundle in zsh_plugins -%}
-    {%- if bundle is mapping -%}
-        {% set valid = true -%}
-        {% set command_not_exists = [] -%}
-
-        {%- if bundle.when is defined and not bundle.when -%}
-            {% set valid = false -%}
-        {% endif -%}
-
-        {% if bundle.command is defined -%}
-            {% for cmd in zsh_register_commands_exists.results -%}
-                {% if cmd.cmd is defined and cmd.rc != 0 and cmd.item.command == bundle.command -%}
-                    {% if command_not_exists.append(1) %}{% endif -%}
-                {% endif -%}
-            {% endfor -%}
-        {% endif -%}
-
-        {% if valid and not command_not_exists %}
-            {%- if 'zsh-syntax-highlighting' in bundle.name or 'fast-syntax-highlighting' in bundle.name -%}
-# will fixed in zsh-autosuggestion v0.4 - https://github.com/zsh-users/zsh-autosuggestions/pull/218
-if (( ZSHRC_LOAD_ONCE++ == 0 )); then
-    antigen bundle {{ bundle.name }}
-fi
-{% else -%}
-{% if bundles_enabled.append(bundle.name) %}{% endif -%}
-antigen bundle {{ bundle.name }}
 {% endif -%}
-        {% endif -%}
-    {%- else -%}
-{% if bundles_enabled.append(bundle) %}{% endif -%}
-antigen bundle {{ bundle }}
-{% endif %}
+
+{% if zsh_plugin_manager == 'zplug' %}
+export ZPLUG_HOME={{ zsh_pm.path }}
+{% endif -%}
+
+source {{ zsh_pm.source_path }}
+
+{%- if zsh_plugin_manager == 'antigen' %}antigen use oh-my-zsh{% endif -%}
+
+{% set plugins_enabled = [] %}
+
+{% for plugin in zsh_plugins -%}
+    {%- if plugin is not mapping -%}
+    {% set plugin = { 'name': plugin } %}
+    {% endif %}
+
+{% set valid = true -%}
+    {% set command_not_exists = [] -%}
+    {% set include_command = zsh_pm.include_command + ' ' + 
+    (('plugins/' if not '/' in plugin.name else '') + plugin.name + ', from:' + plugin.from 
+    if zsh_plugin_manager == 'zplug' and plugin.from is defined 
+    else plugin.name) -%}
+
+    {%- if plugin.when is defined and not plugin.when -%}
+        {% set valid = false -%}
+    {% endif -%}
+
+    {% if plugin.command is defined and zsh_register_commands_exists is defined -%}
+        {% for cmd in zsh_register_commands_exists.results -%}
+            {% if cmd.cmd is defined and cmd.rc != 0 and cmd.item.command == plugin.command -%}
+                {% if command_not_exists.append(1) %}{% endif -%}
+            {% endif -%}
+        {% endfor -%}
+    {% endif -%}
+
+    {%- if valid and not command_not_exists %}
+        {%- if plugins_enabled.append(plugin.name) %}{% endif -%}
+{{ include_command }}
+    {%- endif -%}
 {% endfor %}
 
+{% if zsh_plugin_manager == 'antigen' %}
 {% if zsh_antigen_installed_version | version_compare(2.0, '>=') %}
 POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
 {% elif zsh_version | version_compare('5.0.8', '<') %}
 POWERLEVEL9K_INSTALLATION_PATH={{ zsh_antigen_path }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-bhilburn-SLASH-powerlevel9k.git
 {% endif %}
+{% endif %}
 
-antigen theme {{ zsh_theme }}
+{% if zsh_plugin_manager == 'antigen' %}antigen theme {{ zsh_theme }} powerlevel9k{% endif %}
+{% if zsh_plugin_manager == 'zplug' %}zplug '{{ zsh_theme.name }}', as:theme, use:powerlevel9k.zsh-theme{% endif %}
 
+{% if zsh_plugin_manager == 'antigen' %}
 antigen apply
+{% endif %}
+
+{% if zsh_plugin_manager == 'zplug' %}
+if ! zplug check --verbose; then
+    zplug install
+fi
+zplug load
+{% endif %}
 
 ###
 
@@ -77,7 +89,7 @@ zle -N copy-earlier-word
 
 # hotkeys
 {% for hotkey in zsh_hotkeys %}
-{% if hotkey.hotkey != '' and (hotkey.bundle is not defined or hotkey.bundle in bundles_enabled) %}
+{% if hotkey.hotkey != '' and (hotkey.bundle is not defined or hotkey.bundle in plugins_enabled) %}
 bindkey '{{ hotkey.hotkey }}' {{ hotkey.action }}
 {% endif %}
 {% endfor %}

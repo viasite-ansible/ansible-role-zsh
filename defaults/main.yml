@@ -21,32 +21,34 @@ zsh_path:
 
 fzf_widgets: ytet5uy4/fzf-widgets
 
-zsh_antigen_version: master
+zsh_plugin_manager: zplug
+
 zsh_fzf_version: 0.17.3
 
-zsh_antigen_bundles:
-  - { name: command-not-found, when: "{{ ansible_os_family != 'Darwin' }}" } # too slow on OSX
-  - { name: brew, command: brew }
-  - { name: docker, command: docker }
-  - { name: docker-compose, command: docker-compose }
-  - fancy-ctrl-z
-  - git-extras
-  - gnu-utils
-  - { name: httpie, command: http }
-  - { name: go, command: go }
-  - { name: gulp, command: gulp }
-  - { name: pip, command: pip }
-  - { name: rake, command: rake }
-  - { name: symfony2, command: symfony }
-  - { name: systemd, command: systemctl }
-  - python
-  - { name: tmux, command: tmux }
-  - { name: vagrant, command: vagrant }
+zsh_plugins:
+  - { name: lib/history, from: oh-my-zsh, when: "{{ zsh_plugin_manager == 'zplug' }}" }
+  - { name: command-not-found, from: oh-my-zsh, when: "{{ ansible_os_family != 'Darwin' }}" } # too slow on OSX
+  - { name: brew, command: brew, from: oh-my-zsh }
+  - { name: docker, command: docker, from: oh-my-zsh }
+  - { name: docker-compose, command: docker-compose, from: oh-my-zsh }
+  - { name: fancy-ctrl-z, from: oh-my-zsh }
+  - { name: git-extras, from: oh-my-zsh }
+  - { name: gnu-utils, from: oh-my-zsh }
+  - { name: httpie, command: http, from: oh-my-zsh }
+  - { name: go, command: go, from: oh-my-zsh }
+  - { name: gulp, command: gulp, from: oh-my-zsh }
+  - { name: pip, command: pip, from: oh-my-zsh }
+  - { name: rake, command: rake, from: oh-my-zsh }
+  - { name: symfony2, command: symfony, from: oh-my-zsh }
+  - { name: systemd, command: systemctl, from: oh-my-zsh }
+  - { name: python, from: oh-my-zsh }
+  - { name: tmux, command: tmux, from: oh-my-zsh }
+  - { name: vagrant, command: vagrant, from: oh-my-zsh }
   - { name: viasite/drall, command: drall }
   - { name: viasite/drupal-scripts, command: drs }
   - { name: viasite/server-scripts, command: dbdump }
   - { name: viasite-ansible/zsh-ansible-server, command: ansible-deploy }
-  - zsh_reload
+  - { name: zsh_reload, from: oh-my-zsh }
 
   # on zsh 4.3.10 autosuggestions breaks multiline commands with \
   - { name: zsh-users/zsh-autosuggestions, when: "{{ zsh_version | default(false) | version_compare('5.0', '>=') }}" }
@@ -58,9 +60,9 @@ zsh_antigen_bundles:
   #- { name: zsh-users/zsh-syntax-highlighting, when: "{{ zsh_version | default(false) | version_compare('4.3.17', '>=') }}" }
   - { name: zdharma/fast-syntax-highlighting, when: "{{ zsh_version | default(false) | version_compare('4.3.17', '>=') }}" }
 
-zsh_antigen_bundles_extras: []
+zsh_plugins_extras: []
 
-zsh_antigen_theme: "bhilburn/powerlevel9k powerlevel9k"
+zsh_theme: { name: bhilburn/powerlevel9k, use: powerlevel9k }
 
 zsh_hotkeys:
   # home & end keys work
