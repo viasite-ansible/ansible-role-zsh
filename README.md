@@ -88,7 +88,7 @@ sudo ansible-galaxy install viasite-ansible.zsh
 ```
 - hosts: all
   vars:
-    zsh_antigen_bundles_extras:
+    zsh_plugins_extras:
       - nvm
       - joel-porquet/zsh-dircolors-solarized
     zsh_autosuggestions_bind_key: "^U"
@@ -147,6 +147,15 @@ Antigen v2 not work on zsh < 5.0, if you use zsh 4.x, please add to you playbook
 zsh_antigen_version: v1.4.1
 ```
 
+### Upgrade to zplug
+Since viasite-ansible.zsh v4.0 you can choose between Antigen and Zplug managers with `zsh_plugin_manager` variable.
+
+#### Deprecated variables:
+  - zsh_antigen_theme
+  - zsh_antigen_version
+  - zsh_antigen_path
+  - zsh_antigen_bundles
+  - zsh_antigen_bundles_extras
 
 
 ## Configure
@@ -216,8 +225,8 @@ zsh_hotkeys_extras:
 
 ## Configure bundles
 You can check default bundles in [defaults/main.yml](defaults/main.yml#L37).
-If you like default bundles, but you want to add your bundles, use `zsh_antigen_bundles_extras` variable (see example playbook above).
-If you want to remove some default bundles, you should use `zsh_antigen_bundles` variable.
+If you like default bundles, but you want to add your bundles, use `zsh_plugins_extras` variable (see example playbook above).
+If you want to remove some default bundles, you should use `zsh_plugins` variable.
 
 Format of list matches [antigen](https://github.com/zsh-users/antigen#antigen-bundle). All bellow variants valid:
 ``` yaml

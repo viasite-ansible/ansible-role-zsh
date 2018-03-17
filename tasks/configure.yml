@@ -4,19 +4,21 @@
   shell: "zsh --version | cut -d ' ' -f2"
   register: zsh_register_version
   changed_when: false
-  tags: configure
+  tags: config
 
 - name: Set zsh_version variable
   set_fact:
     zsh_version: "{{ zsh_register_version.stdout }}"
+  tags: config
 
 - name: Merge bundles lists
   set_fact:
-    zsh_antigen_bundles: "{{ zsh_antigen_bundles }} + {{ zsh_antigen_bundles_extras }}"
+    zsh_plugins: "{{ zsh_plugins }} + {{ zsh_plugins_extras }}"
+  tags: config
 
 - name: Check commands exists
   shell: "command -v {{ item.command }} || which {{ item.command }}"
-  with_items: "{{ zsh_antigen_bundles }}"
+  with_items: "{{ zsh_plugins }}"
   failed_when: false
   changed_when: false
   when: item.command is defined
@@ -25,24 +27,27 @@
 - name: Merge hotkeys lists
   set_fact:
     zsh_hotkeys: "{{ zsh_hotkeys }} + {{ zsh_hotkeys_extras }}"
+  tags: config
 
 - name: Check antigen version
   shell: "cat {{ zsh_antigen_path }}/antigen/VERSION | tr -d 'v'"
   register: zsh_register_antigen_version
   changed_when: false
-  tags: configure
+  when: zsh_plugin_manager == 'antigen'
 
 - name: Set zsh_antigen_installed_version variable
   set_fact:
     zsh_antigen_installed_version: "{{ zsh_register_antigen_version.stdout }}"
+  when: zsh_plugin_manager == 'antigen'
 
 - name: Write .zshrc config
   template:
-    src: zshrc.j2
+    src: "zshrc_{{ zsh_plugin_manager }}.j2"
     dest: "{{ zsh_user_config }}"
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: yes
+  tags: config
 
 - name: Set zsh as default shell
   user:

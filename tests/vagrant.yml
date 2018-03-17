@@ -2,3 +2,5 @@
 - hosts: all
   roles:
     - ../..
+  vars:
+    zsh_autosuggestions_bind_key: "^U"

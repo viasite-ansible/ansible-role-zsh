@@ -5,6 +5,7 @@
   become_user: "{{ zsh_user }}"
   changed_when: false
   failed_when: false
+  when: zsh_plugin_manager == 'antigen'
 
 # it will fail, but it install all bundles for user
 - name: Update antigen bundles
@@ -13,3 +14,4 @@
   become_user: "{{ zsh_user }}"
   changed_when: false
   failed_when: false
+  when: zsh_plugin_manager == 'antigen'

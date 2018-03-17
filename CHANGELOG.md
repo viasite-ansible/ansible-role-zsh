@@ -64,7 +64,7 @@
 
 ### Bug Fixes
 
-* support check `command` exists for zsh_antigen_bundles_extras ([b6e4284](https://github.com/viasite-ansible/ansible-role-zsh/commit/b6e4284))
+* support check `command` exists for zsh_plugins_extras ([b6e4284](https://github.com/viasite-ansible/ansible-role-zsh/commit/b6e4284))
 
 
 ### Features
@@ -90,12 +90,12 @@
 
 ### Bug Fixes
 
-* removed debian plugin from zsh_antigen_bundles ([ddb600e](https://github.com/viasite-ansible/ansible-role-zsh/commit/ddb600e)), closes [#6](https://github.com/viasite-ansible/ansible-role-zsh/issues/6)
+* removed debian plugin from zsh_plugins ([ddb600e](https://github.com/viasite-ansible/ansible-role-zsh/commit/ddb600e)), closes [#6](https://github.com/viasite-ansible/ansible-role-zsh/issues/6)
 
 
 ### BREAKING CHANGES
 
-* Now plugin `debian` should be added to `zsh_antigen_bundles` for using.
+* Now plugin `debian` should be added to `zsh_plugins` for using.
 
 
 
@@ -189,7 +189,7 @@ See ytet5uy4/fzf-widgets#2
 
 ### Features
 
-* zsh_antigen_bundles_extras for custom bundles ([0e2ac6a](https://github.com/viasite-ansible/ansible-role-zsh/commit/0e2ac6a)), closes [#5](https://github.com/viasite-ansible/ansible-role-zsh/issues/5)
+* zsh_plugins_extras for custom bundles ([0e2ac6a](https://github.com/viasite-ansible/ansible-role-zsh/commit/0e2ac6a)), closes [#5](https://github.com/viasite-ansible/ansible-role-zsh/issues/5)
 
 
 
