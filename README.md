@@ -31,6 +31,8 @@ Tested on Debian 6, Ubuntu 14.04, Ubuntu 16.04, macOS 10.12, CentOS 7.
 ## Color schemes
 ![colors demo](https://github.com/popstas/popstas.github.io/blob/master/images/2017-03/ansible-role-zsh-colors.gif?raw=true)
 
+## Midnight Commander Solarized Dark skin
+If you using Solarized Dark scheme and `mc`, you should want to install skin, then set `zsh_mc_solarized_skin: yes`
 
 
 ## Demo install in Vagrant
@@ -172,6 +174,9 @@ Profiles - Colors - Color Presets... - select Solarized Dark
 Settings - Window - Appearance - Font settings
 
 You can download [Solarized Dark for Putty](https://github.com/altercation/solarized/tree/master/putty-colors-solarized).
+
+#### Gnome Terminal
+gnome-terminal have built-in Solarized Dark, note that you should select both background color scheme and palette scheme.
 
 
 

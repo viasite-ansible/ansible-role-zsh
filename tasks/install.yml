@@ -21,6 +21,16 @@
   become_user: "{{ zsh_user }}"
   register: zsh_register_antigen_clone
 
+- name: Clone iwfmp/mc-solarized-skin
+  git:
+    repo: https://github.com/iwfmp/mc-solarized-skin.git
+    version: master
+    dest: "~{{ zsh_user }}/.mc/lib/mc-solarized"
+    force: yes
+  become: yes
+  become_user: "{{ zsh_user }}"
+  when: zsh_mc_solarized_skin
+
 - name: Check fzf installed
   command: which fzf
   changed_when: false

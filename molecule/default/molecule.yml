@@ -43,6 +43,7 @@ provisioner:
     group_vars:
       all:
         zsh_user: root
+        zsh_mc_solarized_skin: yes
         zsh_antigen_bundles_extras:
           - { name: test/in-list, when: true }
           - { name: test/not-in-list, when: false }
