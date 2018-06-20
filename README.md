@@ -201,6 +201,18 @@ zsh_hotkeys_extras:
   - { hotkey: '^[,', action: copy-earlier-word } # ctrl+,
 ```
 
+### Aliases
+You can use aliases for your command with easy deploy.
+Aliases config mostly same as hotkeys config:
+
+``` yaml
+zsh_aliases:
+  - { alias: 'dfh', action: 'df -h | grep -v docker' }
+# with dependency of bundle and without replace default asiases
+- zsh_aliases_extra
+  - { alias: 'dfh', action: 'df -h | grep -v docker', bundle: }
+```
+
 #### Default hotkeys from plugins:
 - <kbd>&rarr;</kbd> - accept autosuggestion
 - <kbd>Ctrl+Z</kbd> - move current application to background, press again for return to foreground

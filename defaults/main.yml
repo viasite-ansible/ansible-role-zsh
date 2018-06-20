@@ -111,6 +111,14 @@ zsh_hotkeys:
 
 zsh_hotkeys_extras: []
 
+# only single quotes allowed in action
+zsh_aliases:
+  - { alias: 'apt-update-list-upgrade', action: 'apt update && apt upgrade --dry-run | grep Inst | sort | fzf && apt upgrade' }
+  - { alias: 'dfh',                     action: 'df -h | grep -v docker' }
+  - { alias: 'ubuntu-release',          action: 'lsb_release -a' }
+  - { alias: '', action: '' }
+
+
 # zsh-autosuggestions
 zsh_autosuggestions_max_length: 15
 zsh_autosuggestions_bind_key: ""

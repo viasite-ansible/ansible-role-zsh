@@ -84,6 +84,13 @@ bindkey '{{ hotkey.hotkey }}' {{ hotkey.action }}
 {% endif %}
 {% endfor %}
 
+# aliases
+{% for alias in zsh_aliases %}
+{% if alias.alias != '' and (alias.bundle is not defined or alias.bundle in bundles_enabled) %}
+alias '{{ alias.alias }}'="{{ alias.action }}"
+{% endif %}
+{% endfor %}
+
 # fzf
 export FZF_TMUX=0
 export FZF_DEFAULT_OPTS="{{ zsh_fzf_default_opts }}"
