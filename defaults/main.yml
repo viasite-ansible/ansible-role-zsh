@@ -62,6 +62,9 @@ zsh_antigen_bundles:
 
 zsh_antigen_bundles_extras: []
 
+# useful for deploy many zsh users at host, without duplicate and without write access
+zsh_shared: no
+
 zsh_antigen_theme: "bhilburn/powerlevel9k powerlevel9k"
 
 zsh_hotkeys:

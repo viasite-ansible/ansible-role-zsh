@@ -14,6 +14,11 @@
   set_fact:
     zsh_antigen_bundles: "{{ zsh_antigen_bundles }} + {{ zsh_antigen_bundles_extras }}"
 
+- name: Disable autoupdate if zsh_shared install
+  set_fact:
+    zsh_update_interval: 0
+  when: zsh_shared
+
 - name: Check commands exists
   shell: "command -v {{ item.command }} || which {{ item.command }}"
   with_items: "{{ zsh_antigen_bundles }}"
@@ -36,10 +41,13 @@
   set_fact:
     zsh_antigen_installed_version: "{{ zsh_register_antigen_version.stdout }}"
 
+- debug: var=zsh_antigen_path
+- debug: var=zsh_antigen_installed_version
+
 - name: Write .zshrc config
   template:
     src: zshrc.j2
-    dest: "{{ zsh_user_config }}"
+    dest: "{{ zsh_config }}"
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: yes
@@ -49,6 +57,7 @@
     name: "{{ zsh_user }}"
     shell: /bin/zsh
   become: true
+  when: not zsh_shared
 
 - name: Add skip_global_compinit for disable early compinit call in Ubuntu
   lineinfile:

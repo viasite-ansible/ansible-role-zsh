@@ -131,6 +131,29 @@ Note: I don't use `tmux-fzf` and don't tested work of it.
 
 
 
+## Multiuser shared install
+If you have 10+ users on host, probably you don't want manage tens of configurations and thousands of files.
+
+In this case you can deploy single zsh config and include it to all users.
+
+It causes some limitations:
+
+- Users have read only access to zsh config
+- Users cannot disable global enabled bundles
+- Possible bugs such cache write permission denied
+- Possible bugs with oh-my-zsh themes
+
+For install shared configuration you should set `zsh_shared: yes`.
+Configuration will install to `/usr/share/zsh-config`, then you just can include to user config:
+
+``` bash
+source /usr/share/zsh-config/.zshrc
+```
+
+You can still provision custom configs for several users.
+
+
+
 ## Upgrade
 viasite-ansible.zsh v3.0 introduces antigen v2.0, it don't have backward compatibility to antigen 1.x.
 

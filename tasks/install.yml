@@ -29,7 +29,7 @@
     force: yes
   become: yes
   become_user: "{{ zsh_user }}"
-  when: zsh_mc_solarized_skin
+  when: zsh_mc_solarized_skin and not zsh_shared
 
 - name: Check fzf installed
   command: which fzf

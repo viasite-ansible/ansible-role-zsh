@@ -10,14 +10,20 @@ HIST_STAMPS="{{ zsh_hist_stamps }}"
 UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
 COMPLETION_WAITING_DOTS="true"
 
-ANTIGEN_BUNDLES=$HOME/.antigen/bundles
-ANTIGEN_PLUGIN_UPDATE_DAYS={{ zsh_update_interval }}
-ANTIGEN_SYSTEM_UPDATE_DAYS={{ zsh_update_interval }}
+# ADOTDIR="{{ zsh_antigen_path }}"
+{% if zsh_shared %}
+ANTIGEN_AUTO_CONFIG=false # disable updates
+_ANTIGEN_THEME_COMPAT=false # disable theme cache
+{% endif %}
+
+ANTIGEN_BUNDLES="{{ zsh_antigen_path }}/bundles"
+ANTIGEN_PLUGIN_UPDATE_DAYS="{{ zsh_update_interval }}"
+ANTIGEN_SYSTEM_UPDATE_DAYS="{{ zsh_update_interval }}"
 
 {% if zsh_mc_solarized_skin %}export MC_SKIN="$HOME/.mc/lib/mc-solarized/solarized.ini"{% endif %}
 
 
-source {{ zsh_antigen_path }}/antigen/antigen.zsh
+source "{{ zsh_antigen_path }}/antigen/antigen.zsh"
 
 antigen use oh-my-zsh
 
