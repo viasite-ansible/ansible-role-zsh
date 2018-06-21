@@ -22,8 +22,8 @@ ANTIGEN_SYSTEM_UPDATE_DAYS="{{ zsh_update_interval }}"
 
 {% if zsh_mc_solarized_skin %}export MC_SKIN="$HOME/.mc/lib/mc-solarized/solarized.ini"{% endif %}
 
-
-source "{{ zsh_antigen_path }}/antigen/antigen.zsh"
+# don't quote this path
+source {{ zsh_antigen_path }}/antigen/antigen.zsh
 
 antigen use oh-my-zsh
 
