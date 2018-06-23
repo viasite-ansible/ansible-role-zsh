@@ -10,20 +10,19 @@ HIST_STAMPS="{{ zsh_hist_stamps }}"
 UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
 COMPLETION_WAITING_DOTS="true"
 
-# ADOTDIR="{{ zsh_antigen_path }}"
+# ADOTDIR="{{ zsh_antigen_path_compat }}"
 {% if zsh_shared %}
 ANTIGEN_AUTO_CONFIG=false # disable updates
 _ANTIGEN_THEME_COMPAT=false # disable theme cache
 {% endif %}
 
-ANTIGEN_BUNDLES="{{ zsh_antigen_path }}/bundles"
+ANTIGEN_BUNDLES="{{ zsh_antigen_path_compat }}/bundles"
 ANTIGEN_PLUGIN_UPDATE_DAYS="{{ zsh_update_interval }}"
 ANTIGEN_SYSTEM_UPDATE_DAYS="{{ zsh_update_interval }}"
 
 {% if zsh_mc_solarized_skin %}export MC_SKIN="$HOME/.mc/lib/mc-solarized/solarized.ini"{% endif %}
 
-# don't quote this path
-source {{ zsh_antigen_path }}/antigen/antigen.zsh
+source "{{ zsh_antigen_path_compat }}/antigen/antigen.zsh"
 
 antigen use oh-my-zsh
 
@@ -66,7 +65,7 @@ antigen bundle {{ bundle }}
 {% if zsh_antigen_installed_version | version_compare(2.0, '>=') %}
 POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
 {% elif zsh_version | version_compare('5.0.8', '<') %}
-POWERLEVEL9K_INSTALLATION_PATH={{ zsh_antigen_path }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-bhilburn-SLASH-powerlevel9k.git
+POWERLEVEL9K_INSTALLATION_PATH={{ zsh_antigen_path_compat }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-bhilburn-SLASH-powerlevel9k.git
 {% endif %}
 
 antigen theme {{ zsh_antigen_theme }}

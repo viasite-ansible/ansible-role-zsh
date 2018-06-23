@@ -35,14 +35,12 @@
   shell: "cat {{ zsh_antigen_path }}/antigen/VERSION | tr -d 'v'"
   register: zsh_register_antigen_version
   changed_when: false
+  become: true
   tags: configure
 
 - name: Set zsh_antigen_installed_version variable
   set_fact:
     zsh_antigen_installed_version: "{{ zsh_register_antigen_version.stdout }}"
-
-- debug: var=zsh_antigen_path
-- debug: var=zsh_antigen_installed_version
 
 - name: Write .zshrc config
   template:

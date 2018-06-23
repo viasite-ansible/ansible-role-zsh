@@ -2,6 +2,7 @@
 zsh_user_group: "{% if ansible_os_family == 'Darwin' %}staff{% else %}{{ zsh_user }}{% endif %}"
 zsh_antigen_path: "{% if zsh_shared %}/usr/share/zsh-config{% else %}~{{ zsh_user }}/.antigen{% endif %}"
 zsh_config: "{% if zsh_shared %}/usr/share/zsh-config/.zshrc{% else %}~{{ zsh_user }}/.zshrc{% endif %}"
+zsh_antigen_path_compat: "{{ zsh_antigen_path | replace('~' + zsh_user, '$HOME') }}"
 
 zsh_fzf_os: linux
 zsh_fzf_arch: "{% if '64' in ansible_architecture %}amd64{% else %}386{% endif %}"
