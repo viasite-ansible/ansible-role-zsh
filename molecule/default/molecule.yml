@@ -1,0 +1,51 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: ansible-role-zsh-debian-7
+    image: debian:7
+
+  - name: ansible-role-zsh-debian-8
+    image: debian:8
+
+  - name: ansible-role-zsh-ubuntu-1404
+    image: ubuntu:14.04
+
+  - name: ansible-role-zsh-ubuntu-1604
+    image: ubuntu:16.04
+
+  - name: ansible-role-zsh-centos-7
+    image: centos:7
+
+#driver:
+#  name: vagrant
+#  provider:
+#    name: virtualbox
+#platforms:
+#  - name: xenial64
+#    box: bento/ubuntu-16.04
+
+verifier:
+  name: testinfra
+
+lint:
+  name: yamllint
+  enabled: False
+
+provisioner:
+  name: ansible
+  playbooks:
+    create: ../resources/create.yml
+    prepare: ../resources/prepare.yml
+    converge: ../resources/playbook.yml
+    destroy: ../resources/destroy.yml
+  inventory:
+    group_vars:
+      all:
+        zsh_user: root
+        zsh_mc_solarized_skin: yes
+        zsh_antigen_bundles_extras:
+          - { name: test/in-list, when: true }
+          - { name: test/not-in-list, when: false }
+          - { name: test/command-exists, command: zsh }
+          - { name: test/command-not-exists, command: not-exists-commanddd }

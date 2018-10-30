@@ -1,0 +1,9 @@
+---
+- hosts: all
+  vars:
+    # your extra bundles here
+    zsh_antigen_bundles_extras: []
+    # your variables here
+    zsh_autosuggestions_bind_key: "^U"
+  roles:
+    - viasite-ansible.zsh

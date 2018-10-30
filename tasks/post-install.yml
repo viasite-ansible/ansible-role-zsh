@@ -1,0 +1,15 @@
+---
+- name: Reset antigen cache
+  command: "/bin/zsh -c 'source {{ zsh_user_config }}; antigen reset'"
+  become: yes
+  become_user: "{{ zsh_user }}"
+  changed_when: false
+  failed_when: false
+
+# it will fail, but it install all bundles for user
+- name: Update antigen bundles
+  command: "/bin/zsh -c 'source {{ zsh_user_config }}; antigen update'"
+  become: yes
+  become_user: "{{ zsh_user }}"
+  changed_when: false
+  failed_when: false

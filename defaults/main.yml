@@ -3,10 +3,12 @@
 zsh_user: "{{ ansible_user_id }}"
 
 # .zshrc config
-zsh_theme: "powerlevel9k/powerlevel9k"
 zsh_hist_stamps: yyyy-mm-dd
-zsh_update_interval: 30
+zsh_share_history: no
+zsh_update_interval: 30 # set 0 for disable autoupdates
 zsh_editor: vim
+zsh_term: xterm-256color
+zsh_mc_solarized_skin: no
 
 zsh_path:
   - /usr/local/sbin
@@ -18,25 +20,96 @@ zsh_path:
   - /usr/games
   - /usr/local/games
 
-zsh_plugins:
-  - command-not-found
-  - command-time
-  - debian
-  - docker
-  - docker-compose
+fzf_widgets: ytet5uy4/fzf-widgets
+
+zsh_antigen_version: master
+zsh_fzf_version: 0.17.4
+
+zsh_antigen_bundles:
+  - { name: command-not-found, when: "{{ ansible_os_family != 'Darwin' }}" } # too slow on OSX
+  - { name: brew, command: brew }
+  - { name: docker, command: docker }
+  - { name: docker-compose, command: docker-compose }
   - fancy-ctrl-z
-  - fzf-zsh
   - git-extras
   - gnu-utils
-  - history
-  - jump
-  - pip
+  - { name: httpie, command: http }
+  - { name: go, command: go }
+  - { name: gulp, command: gulp }
+  - { name: pip, command: pip }
+  - { name: rake, command: rake }
+  - { name: symfony2, command: symfony }
+  - { name: systemd, command: systemctl }
   - python
-  - tmux
-  - vagrant
+  - { name: tmux, command: tmux }
+  - { name: vagrant, command: vagrant }
+  - { name: viasite/drall, command: drall }
+  - { name: viasite/drupal-scripts, command: drs }
+  - { name: viasite/server-scripts, command: dbdump }
+  - { name: viasite-ansible/zsh-ansible-server, command: ansible-deploy }
   - zsh_reload
-  - zsh-autosuggestions
-  - zsh-syntax-highlighting # must be last
+
+  # on zsh 4.3.10 autosuggestions breaks multiline commands with \
+  - { name: zsh-users/zsh-autosuggestions, when: "{{ zsh_version | default(false) | version_compare('5.0', '>=') }}" }
+  - popstas/zsh-command-time
+  - { name: unixorn/autoupdate-antigen.zshplugin, when: "{{ zsh_update_interval > 0 }}" }
+  - urbainvaes/fzf-marks # replaces jump plugin, mark, jump and Ctrl+G
+  - "{{ fzf_widgets }}"
+  # must be last, don't work on zsh < 4.3.17
+  #- { name: zsh-users/zsh-syntax-highlighting, when: "{{ zsh_version | default(false) | version_compare('4.3.17', '>=') }}" }
+  - { name: zdharma/fast-syntax-highlighting, when: "{{ zsh_version | default(false) | version_compare('4.3.17', '>=') }}" }
+
+zsh_antigen_bundles_extras: []
+
+zsh_antigen_theme: "bhilburn/powerlevel9k powerlevel9k"
+
+zsh_hotkeys:
+  # home & end keys work
+  - { hotkey: '\e[1~', action: beginning-of-line }
+  - { hotkey: '\e[4~', action: end-of-line }
+
+  # fzf-widgets
+  - { hotkey: '^@' ,   action: fzf-select-widget,            bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@.' ,  action: fzf-edit-dotfiles,            bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@c',   action: fzf-change-directory,         bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@f',   action: fzf-edit-files,               bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@k',   action: fzf-kill-processes,           bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@s',   action: fzf-exec-ssh,                 bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^\' ,   action: fzf-change-recent-directory,  bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^r',    action: fzf-insert-history,           bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^xf',   action: fzf-insert-files,             bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^xd',   action: fzf-insert-directory,         bundle: "{{ fzf_widgets }}" }
+
+  # fzf-widgets: Git
+  - { hotkey: '^@g',   action: fzf-select-git-widget,        bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@ga',  action: fzf-git-add-files,            bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@gc',  action: fzf-git-change-repository,    bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@gco', action: fzf-git-checkout-branch,      bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@gd',  action: fzf-git-delete-branches,      bundle: "{{ fzf_widgets }}" }
+
+  # fzf-widgets: GitHub
+  - { hotkey: '^@gh',   action: fzf-select-github-widget,    bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@ghi',  action: fzf-github-show-issue,       bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@ghe',  action: fzf-github-edit-issue,       bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@gho',  action: fzf-github-open-issue,       bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@ghc',  action: fzf-github-close-issue,      bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@ghco', action: fzf-github-comment-issue,    bundle: "{{ fzf_widgets }}" }
+
+  # fzf-widgets: Docker
+  - { hotkey: '^@d',   action: fzf-select-docker-widget,     bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@dk',  action: fzf-docker-kill-containers,   bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@dl',  action: fzf-docker-logs-container,    bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@dr',  action: fzf-docker-remove-containers, bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@dri', action: fzf-docker-remove-images,     bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@drv', action: fzf-docker-remove-volumes,    bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@dsa', action: fzf-docker-start-containers,  bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@dso', action: fzf-docker-stop-containers,   bundle: "{{ fzf_widgets }}" }
+
+  # autosuggestions
+  - { hotkey: '{{ zsh_autosuggestions_bind_key }}',   action: autosuggest-accept, bundle: zsh-users/zsh-autosuggestions }
+  - { hotkey: '{{ zsh_autosuggestions_bind_key_2 }}', action: autosuggest-accept, bundle: zsh-users/zsh-autosuggestions }
+
+zsh_hotkeys_extras: []
 
 # zsh-autosuggestions
 zsh_autosuggestions_max_length: 15
@@ -47,6 +120,7 @@ zsh_autosuggestions_bind_key_2: ""
 zsh_fzf_height: "100%"
 zsh_fzf_reverse: yes
 zsh_fzf_border: no
+zsh_fzf_ctrl_r_opts: '--exact'
 
 # command-time
 zsh_command_time_min_seconds: 3
@@ -61,7 +135,7 @@ zsh_powerlevel9k_right_prompt:
   - status
   - background_jobs
   - vcs
-  - custom_command_time
+  - command_execution_time
   - time
 
 zsh_powerlevel_custom_elements:
@@ -70,16 +144,19 @@ zsh_powerlevel_custom_elements:
     background: "248"
     foreground: "000"
 
+zsh_powerlevel9k_hide_host_on_local: yes
+zsh_powerlevel9k_always_show_context: no # hide hostname and username from prompt on local machine
+zsh_powerlevel9k_always_show_user: no # hide username from prompt on local machine
 zsh_powerlevel9k_prompt_on_newline: no
 zsh_powerlevel9k_shorten_dir_length: 3
 zsh_powerlevel9k_status_verbose: 0
 
 # dir (context) colors
-zsh_powerlevel9k_context_default_foreground: white
+zsh_powerlevel9k_context_default_foreground: "255" # white
 zsh_powerlevel9k_context_default_background: "024" # blue
-zsh_powerlevel9k_context_root_foreground: white
+zsh_powerlevel9k_context_root_foreground: "255" # white
 zsh_powerlevel9k_context_root_background: "124" # red
-zsh_powerlevel9k_dir_foreground: white
+zsh_powerlevel9k_dir_foreground: "255" # white
 zsh_powerlevel9k_dir_background: "240" # gray
 
 # vcs colors
@@ -87,3 +164,7 @@ zsh_powerlevel9k_vcs_foreground: "232" # about black on any palette
 zsh_powerlevel9k_vcs_clean_background: "100" # dirty green
 zsh_powerlevel9k_vcs_modified_background: "094" # orange
 zsh_powerlevel9k_vcs_untracked_background: "094" # orange
+
+# command execution time
+zsh_powerlevel9k_command_execution_time_foreground: "000"
+zsh_powerlevel9k_command_execution_time_background: "248"

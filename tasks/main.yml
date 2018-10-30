@@ -1,15 +1,18 @@
 ---
 
-- include: install-debian.yml
-  when: ansible_os_family == "Debian"
-  tags: [ zsh, install ]
-
-- include: install-osx.yml
-  when: ansible_os_family == "Darwin"
-  tags: [ zsh, install ]
-
 - include: install.yml
   tags: [ zsh, install ]
 
 - include: configure.yml
   tags: [ zsh, configure ]
+
+- include: post-install.yml
+  tags: [ zsh, install, post_install ]
+
+- name: Reset antigen cache
+  command: "/bin/zsh -c 'source {{ zsh_user_config }}; antigen reset'"
+  become: yes
+  become_user: "{{ zsh_user }}"
+  changed_when: false
+  failed_when: false
+  tags: always

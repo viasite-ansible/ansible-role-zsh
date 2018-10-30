@@ -1,62 +1,104 @@
 # {{ ansible_managed }}
+# zsh version: {{ zsh_version }}
+# antigen version: {{ zsh_antigen_installed_version }}
 
-export ZSH="$HOME/.oh-my-zsh"
-
-ZSH_THEME="{{ zsh_theme }}"
-HIST_STAMPS="{{ zsh_hist_stamps }}"
-
-export UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
-
-# For Solarized
-export TERM="xterm-256color"
-
-# home & end keys work
-bindkey '\e[1~' beginning-of-line
-bindkey '\e[4~' end-of-line
-
-# default editor
+export TERM="{{ zsh_term }}"
 export EDITOR="{{ zsh_editor }}"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM="$ZSH/custom"
-
-{% if 'zsh-syntax-highlighting' in zsh_plugins %}
-# zsh-syntax-highlighting sourcing later, see https://github.com/zsh-users/zsh-syntax-highlighting/issues/286
-{% endif %}
-plugins=({{ zsh_plugins | difference(['zsh-syntax-highlighting']) | join(" ") }})
-# plugin common-aliases breaks execution of php scripts with shebang, why?
-
 export PATH="{{ zsh_path | join(":") }}"
 
-source "$ZSH/oh-my-zsh.sh"
+HIST_STAMPS="{{ zsh_hist_stamps }}"
+UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
+COMPLETION_WAITING_DOTS="true"
 
-{% if 'zsh-syntax-highlighting' in zsh_plugins %}
-# https://github.com/zsh-users/zsh-syntax-highlighting/issues/286#issuecomment-284261033,
-# will fixed after zsh-autosuggestion v0.3.3
+ANTIGEN_BUNDLES=$HOME/.antigen/bundles
+ANTIGEN_PLUGIN_UPDATE_DAYS={{ zsh_update_interval }}
+ANTIGEN_SYSTEM_UPDATE_DAYS={{ zsh_update_interval }}
+
+{% if zsh_mc_solarized_skin %}export MC_SKIN="$HOME/.mc/lib/mc-solarized/solarized.ini"{% endif %}
+
+
+source {{ zsh_antigen_path }}/antigen/antigen.zsh
+
+antigen use oh-my-zsh
+
+{% set bundles_enabled = [] %}
+
+{% for bundle in zsh_antigen_bundles -%}
+    {%- if bundle is mapping -%}
+        {% set valid = true -%}
+        {% set command_not_exists = [] -%}
+
+        {%- if bundle.when is defined and not bundle.when -%}
+            {% set valid = false -%}
+        {% endif -%}
+
+        {% if bundle.command is defined -%}
+            {% for cmd in zsh_register_commands_exists.results -%}
+                {% if cmd.cmd is defined and cmd.rc != 0 and cmd.item.command == bundle.command -%}
+                    {% if command_not_exists.append(1) %}{% endif -%}
+                {% endif -%}
+            {% endfor -%}
+        {% endif -%}
+
+        {% if valid and not command_not_exists %}
+            {%- if 'zsh-syntax-highlighting' in bundle.name or 'fast-syntax-highlighting' in bundle.name -%}
+# will fixed in zsh-autosuggestion v0.4 - https://github.com/zsh-users/zsh-autosuggestions/pull/218
 if (( ZSHRC_LOAD_ONCE++ == 0 )); then
-    source "${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    antigen bundle {{ bundle.name }}
 fi
+{% else -%}
+{% if bundles_enabled.append(bundle.name) %}{% endif -%}
+antigen bundle {{ bundle.name }}
+{% endif -%}
+        {% endif -%}
+    {%- else -%}
+{% if bundles_enabled.append(bundle) %}{% endif -%}
+antigen bundle {{ bundle }}
+{% endif %}
+{% endfor %}
+
+{% if zsh_antigen_installed_version | version_compare(2.0, '>=') %}
+POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
+{% elif zsh_version | version_compare('5.0.8', '<') %}
+POWERLEVEL9K_INSTALLATION_PATH={{ zsh_antigen_path }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-bhilburn-SLASH-powerlevel9k.git
 {% endif %}
 
-# zsh-command-time
-ZSH_COMMAND_TIME_MIN_SECONDS="{{ zsh_command_time_min_seconds }}"
-ZSH_COMMAND_TIME_ECHO="{{ zsh_command_time_echo }}"
+antigen theme {{ zsh_antigen_theme }}
+
+antigen apply
+
+###
+
+{% if not zsh_share_history %}
+unsetopt share_history
+{% endif %}
+
+
+autoload -Uz copy-earlier-word
+zle -N copy-earlier-word
+
+# hotkeys
+{% for hotkey in zsh_hotkeys %}
+{% if hotkey.hotkey != '' and (hotkey.bundle is not defined or hotkey.bundle in bundles_enabled) %}
+bindkey '{{ hotkey.hotkey }}' {{ hotkey.action }}
+{% endif %}
+{% endfor %}
 
 # fzf
+export FZF_TMUX=0
 export FZF_DEFAULT_OPTS="{{ zsh_fzf_default_opts }}"
+
+# fzf-widgets: fzf-change-reset-dir
+{% if zsh_version | version_compare('5.0', '>=') -%}
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+{% endif %}
+declare -p FZF_WIDGETS_OPTS > /dev/null 2>&1 && FZF_WIDGETS_OPTS[insert-history]="{{ zsh_fzf_ctrl_r_opts }}"
+declare -p FZF_WIDGET_OPTS > /dev/null 2>&1 && FZF_WIDGET_OPTS[insert-history]="{{ zsh_fzf_ctrl_r_opts }}"
 
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE={{ zsh_autosuggestions_max_length }}
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240" # gray highlight
-{% if zsh_autosuggestions_bind_key %}
-bindkey '{{ zsh_autosuggestions_bind_key }}' autosuggest-accept # autosuggest on {{ zsh_autosuggestions_bind_key }}
-{% endif %}
-{% if zsh_autosuggestions_bind_key_2 %}
-bindkey '{{ zsh_autosuggestions_bind_key_2 }}' autosuggest-accept # autosuggest on {{ zsh_autosuggestions_bind_key_2 }}
-{% endif %}
 
 # powerlevel9k
 POWERLEVEL9K_SHORTEN_DIR_LENGTH={{ zsh_powerlevel9k_shorten_dir_length }}
@@ -64,6 +106,10 @@ POWERLEVEL9K_STATUS_VERBOSE={{ zsh_powerlevel9k_status_verbose }}
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=({{ zsh_powerlevel9k_left_prompt | join(" ") }})
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=({{ zsh_powerlevel9k_right_prompt | join(" ") }})
+{% if zsh_powerlevel9k_hide_host_on_local %}DEFAULT_USER=$USER{% endif %}
+
+POWERLEVEL9K_ALWAYS_SHOW_CONTEXT={{ zsh_powerlevel9k_always_show_context_bool }}
+POWERLEVEL9K_ALWAYS_SHOW_USER={{ zsh_powerlevel9k_always_show_user_bool }}
 
 {% if zsh_powerlevel_custom_elements is defined and zsh_powerlevel_custom_elements %}
 {% for element in zsh_powerlevel_custom_elements %}
@@ -73,6 +119,9 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=({{ zsh_powerlevel9k_right_prompt | join(" ")
 {{ prefix }}_FOREGROUND="{{ element.foreground }}"
 {% endfor %}
 {% endif %}
+
+# https://github.com/bhilburn/powerlevel9k#command_execution_time
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD="{{ zsh_command_time_min_seconds }}"
 
 POWERLEVEL9K_PROMPT_ON_NEWLINE={{ zsh_powerlevel9k_prompt_on_newline_bool }}
 POWERLEVEL9K_RPROMPT_ON_NEWLINE=false
@@ -96,6 +145,12 @@ POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND="{{ zsh_powerlevel9k_vcs_untracked_backgro
 POWERLEVEL9K_VCS_CLEAN_FOREGROUND="{{ zsh_powerlevel9k_vcs_foreground }}"
 POWERLEVEL9K_VCS_MODIFIED_FOREGROUND="{{ zsh_powerlevel9k_vcs_foreground }}"
 POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND="{{ zsh_powerlevel9k_vcs_foreground }}"
+
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND="{{ zsh_powerlevel9k_command_execution_time_foreground }}"
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="{{ zsh_powerlevel9k_command_execution_time_background }}"
+
+# Aliases
+alias suser='su -'
 
 # user configs
 [[ -r /etc/zsh/zshrc.local ]] && source /etc/zsh/zshrc.local

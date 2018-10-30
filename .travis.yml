@@ -1,23 +1,16 @@
 ---
-
 language: python
 python: "2.7"
 sudo: required
 services:
   - docker
 
-install: pip install molecule docker-py
+before_install:
+  - docker --version
+install:
+  - pip install molecule docker==2.7.0
 script:
-  - export MOLECULE_APTPROXY_PATH="$PWD/00aptproxy" && touch "$MOLECULE_APTPROXY_PATH"
-
-  # normal test
-  - MOLECULE_ZSH_USER=root molecule --debug test
-
-  # test for other zsh_user
-  - molecule create
-  - docker exec -i ansible-role-zsh useradd testuser --create-home
-  - MOLECULE_ZSH_USER=testuser molecule --debug converge
-  - molecule destroy
+  - molecule test --all
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
