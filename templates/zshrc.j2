@@ -118,7 +118,7 @@ POWERLEVEL9K_STATUS_VERBOSE={{ zsh_powerlevel9k_status_verbose }}
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=({{ zsh_powerlevel9k_left_prompt | join(" ") }})
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=({{ zsh_powerlevel9k_right_prompt | join(" ") }})
-{% if zsh_powerlevel9k_hide_host_on_local %}DEFAULT_USER=$USER{% endif %}
+{% if zsh_powerlevel9k_hide_host_on_local and zsh_user != 'root' %}DEFAULT_USER=$USER{% endif %}
 
 POWERLEVEL9K_ALWAYS_SHOW_CONTEXT={{ zsh_powerlevel9k_always_show_context_bool }}
 POWERLEVEL9K_ALWAYS_SHOW_USER={{ zsh_powerlevel9k_always_show_user_bool }}
