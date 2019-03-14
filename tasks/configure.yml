@@ -3,6 +3,7 @@
 - name: Check zsh version
   shell: "zsh --version | cut -d ' ' -f2"
   register: zsh_register_version
+  check_mode: no
   changed_when: false
   tags: configure
 
@@ -36,6 +37,7 @@
   register: zsh_register_antigen_version
   changed_when: false
   become: true
+  check_mode: no
   tags: configure
 
 - name: Set zsh_antigen_installed_version variable

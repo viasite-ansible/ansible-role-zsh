@@ -35,6 +35,7 @@
   command: which fzf
   changed_when: false
   failed_when: false
+  check_mode: no
   register: zsh_register_fzf_command
 
 - name: Download fzf
