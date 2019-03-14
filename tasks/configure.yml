@@ -25,6 +25,7 @@
   with_items: "{{ zsh_antigen_bundles }}"
   failed_when: false
   changed_when: false
+  check_mode: no
   when: item.command is defined
   register: zsh_register_commands_exists
 
