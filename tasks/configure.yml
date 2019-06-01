@@ -43,7 +43,7 @@
 
 - name: Set zsh_antigen_installed_version variable
   set_fact:
-    zsh_antigen_installed_version: "{{ zsh_register_antigen_version.stdout }}"
+    zsh_antigen_installed_version: "3.0"
 
 - name: Write .zshrc config
   template:
