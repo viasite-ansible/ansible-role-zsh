@@ -4,6 +4,7 @@
     zsh_antigen_bundles_extras:
       - nvm
       - joel-porquet/zsh-dircolors-solarized
+      - MichaelAquilina/zsh-you-should-use
     zsh_autosuggestions_bind_key: "^U"
   roles:
     - ansible-role-zsh
