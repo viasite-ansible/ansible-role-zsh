@@ -62,11 +62,11 @@ antigen bundle {{ bundle }}
 {% endif %}
 {% endfor %}
 
-{% if zsh_antigen_installed_version is version(2.0, '>=') %}
+#{% if zsh_antigen_installed_version is version(2.0, '>=') %}
 POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
-{% elif zsh_version is version('5.0.8', '<') %}
-POWERLEVEL9K_INSTALLATION_PATH={{ zsh_antigen_path_compat }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-bhilburn-SLASH-powerlevel9k.git
-{% endif %}
+#{% elif zsh_version is version('5.0.8', '<') %}
+#POWERLEVEL9K_INSTALLATION_PATH={{ zsh_antigen_path_compat }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-bhilburn-SLASH-powerlevel9k.git
+#{% endif %}
 
 antigen theme {{ zsh_antigen_theme }}
 
