@@ -54,7 +54,7 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: yes
-  when: zsh_antigen_installed_version is defined
+  when: zsh_antigen_installed_version
 
 - name: Set zsh as default shell
   user:
