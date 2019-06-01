@@ -7,7 +7,6 @@
       - MichaelAquilina/zsh-you-should-use
       - oldratlee/hacker-quotes
       - horosgrisa/mysql-colorize
-      - zsh-users/zsh-autosuggestions
     zsh_autosuggestions_bind_key: "^U"
   roles:
     - ansible-role-zsh
