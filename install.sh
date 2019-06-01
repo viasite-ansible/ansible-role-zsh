@@ -12,10 +12,10 @@ if [ -f /etc/apt/sources.list.d/ansible-ansible-jessie.list ]; then
     sudo sed -i 's/jessie/trusty/g' /etc/apt/sources.list.d/ansible-ansible-jessie.list
 fi
 sudo apt-get update
-sudo apt-get install curl ansible -y
+sudo apt-get install ansible python-apt zsh git wget -y
 
-title "Install viasite-ansible.zsh"
-sudo ansible-galaxy install viasite-ansible.zsh --force
+title "Install ansible-role-zsh"
+sudo ansible-galaxy install git+https://github.com/hybridadmin/ansible-role-zsh.git --force
 
 title "Download playbook to /tmp/zsh.yml"
 curl https://raw.githubusercontent.com/viasite-ansible/ansible-role-zsh/master/playbook.yml > /tmp/zsh.yml
