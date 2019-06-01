@@ -45,7 +45,7 @@
   set_fact:
     zsh_antigen_installed_version: "{{ zsh_register_antigen_version.stdout }}"
 
-- debug: msg="{{ zsh_antigen_installed_version }}"
+#- debug: msg="{{ zsh_antigen_installed_version }}"
 
 - name: Write .zshrc config
   template:
@@ -54,7 +54,7 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: yes
-  when: zsh_antigen_installed_version
+  when: zsh_antigen_installed_version == true
 
 - name: Set zsh as default shell
   user:
