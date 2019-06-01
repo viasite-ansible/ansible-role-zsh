@@ -5,6 +5,7 @@
       - nvm
       - joel-porquet/zsh-dircolors-solarized
       - MichaelAquilina/zsh-you-should-use
+      - oldratlee/hacker-quotes
     zsh_autosuggestions_bind_key: "^U"
   roles:
     - ansible-role-zsh
