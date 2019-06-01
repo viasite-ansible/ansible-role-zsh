@@ -1,9 +1,9 @@
 ---
-- hosts: all
+- hosts: localhost
   vars:
-    # your extra bundles here
-    zsh_antigen_bundles_extras: []
-    # your variables here
+    zsh_antigen_bundles_extras:
+      - nvm
+      - joel-porquet/zsh-dircolors-solarized
     zsh_autosuggestions_bind_key: "^U"
   roles:
-    - viasite-ansible.zsh
+    - ansible-role-zsh
