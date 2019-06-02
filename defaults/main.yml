@@ -20,6 +20,9 @@ zsh_path:
   - /usr/games
   - /usr/local/games
 
+# Install oh-my-zsh
+install_omz: false
+
 fzf_widgets: ytet5uy4/fzf-widgets
 
 zsh_antigen_version: master
