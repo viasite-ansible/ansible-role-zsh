@@ -13,7 +13,7 @@
   
 - name: Install oh-my-zsh
   shell: 'sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
-  when: install_omz == true
+  when: install_omz == "true"
   
 - name: Clone antigen {{ zsh_antigen_version }}
   git:
