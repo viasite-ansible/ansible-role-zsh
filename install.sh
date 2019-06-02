@@ -18,7 +18,7 @@ title "Install ansible-role-zsh"
 sudo ansible-galaxy install git+https://github.com/hybridadmin/ansible-role-zsh.git --force
 
 title "Download playbook to /tmp/zsh.yml"
-curl https://raw.githubusercontent.com/viasite-ansible/ansible-role-zsh/master/playbook.yml > /tmp/zsh.yml
+curl https://raw.githubusercontent.com/hybridadmin/ansible-role-zsh/master/playbook.yml > /tmp/zsh.yml
 
 title "Provision playbook for root"
 sudo ansible-playbook -i "localhost," -c local /tmp/zsh.yml
