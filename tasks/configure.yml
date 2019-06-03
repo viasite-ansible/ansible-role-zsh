@@ -55,6 +55,30 @@
     group: "{{ zsh_user_group }}"
     backup: yes
   when: zsh_antigen_installed_version | length > 0
+  
+- name: Create powerline config directory
+  file:
+    path: ~/.config/powerline-shell
+    state: directory
+  when: use_powerline == "true"
+  
+- name: Write powerline-config.json
+  template:
+    src: powerline-config.j2
+    dest: config.json
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    backup: yes
+  when: use_powerline == "true"
+  
+- name: Write powerline-theme.py
+  template:
+    src: powerline-theme.j2
+    dest: powerline-theme.py
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    backup: yes
+  when: use_powerline == "true"
 
 - name: Set zsh as default shell
   user:
