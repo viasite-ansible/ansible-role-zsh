@@ -64,7 +64,7 @@ But this alias can break you scripts, that using `su`.
 ### Zero-knowledge install:
 If you using Ubuntu or Debian and not familiar with Ansible, you can just execute [install.sh](install.sh) on target machine:
 ```
-curl https://raw.githubusercontent.com/viasite-ansible/ansible-role-zsh/master/install.sh | bash
+curl https://raw.githubusercontent.com/hybridadmin/ansible-role-zsh/master/install.sh | bash
 ```
 It will install zsh for root and current user.
 Then [configure terminal application](#configure-terminal-application).
@@ -95,7 +95,7 @@ sudo ansible-galaxy install viasite-ansible.zsh
       - joel-porquet/zsh-dircolors-solarized
     zsh_autosuggestions_bind_key: "^U"
   roles:
-    - viasite-ansible.zsh
+    - ansible-role-zsh
 ```
 
 3. Provision playbook:
@@ -115,8 +115,8 @@ Via playbook:
 ```
 - hosts: all
   roles:
-    - { role: viasite-ansible.zsh, zsh_user: otheruser }
-    - { role: viasite-ansible.zsh, zsh_user: thirduser }
+    - { role: ansible-role-zsh, zsh_user: otheruser }
+    - { role: ansible-role-zsh, zsh_user: thirduser }
 ```
 
 Or via command:
