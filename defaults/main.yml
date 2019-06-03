@@ -20,9 +20,6 @@ zsh_path:
   - /usr/games
   - /usr/local/games
 
-# Install oh-my-zsh
-install_omz: false
-
 # Use powerline
 use_powerline: false
 
