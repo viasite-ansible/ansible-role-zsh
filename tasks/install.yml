@@ -15,6 +15,11 @@
   shell: 'sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
   when: install_omz == "true"
   
+- name: Install powerline-shell
+  pip:
+    name: powerline-shell
+  when: use_powerline == "true"
+  
 - name: Clone antigen {{ zsh_antigen_version }}
   git:
     repo: https://github.com/zsh-users/antigen.git
