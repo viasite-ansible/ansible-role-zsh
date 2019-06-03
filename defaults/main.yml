@@ -23,6 +23,9 @@ zsh_path:
 # Install oh-my-zsh
 install_omz: false
 
+# Use powerline
+use_powerline: false
+
 fzf_widgets: ytet5uy4/fzf-widgets
 
 zsh_antigen_version: master
