@@ -113,6 +113,7 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE={{ zsh_autosuggestions_max_length }}
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240" # gray highlight
 
 # powerlevel9k
+{% if use_powerline == "false" %}
 POWERLEVEL9K_SHORTEN_DIR_LENGTH={{ zsh_powerlevel9k_shorten_dir_length }}
 POWERLEVEL9K_STATUS_VERBOSE={{ zsh_powerlevel9k_status_verbose }}
 
@@ -162,7 +163,7 @@ POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND="{{ zsh_powerlevel9k_vcs_foreground }}"
 
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND="{{ zsh_powerlevel9k_command_execution_time_foreground }}"
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="{{ zsh_powerlevel9k_command_execution_time_background }}"
-
+{% else %}
 ## Powerline config
 if [[ -r /usr/share/powerline/bindings/zsh/powerline.zsh ]]; then
         powerline-daemon -q
@@ -187,6 +188,7 @@ function install_powerline_precmd() {
 if [ "$TERM" != "linux" ]; then
     install_powerline_precmd
 fi
+{% endif %}
 
 # Aliases
 alias suser='su -'
