@@ -62,6 +62,7 @@ antigen bundle {{ bundle }}
 {% endif %}
 {% endfor %}
 
+{% if use_powerline == "false" %}
 {% if zsh_antigen_installed_version is version(2.0, '>=') %}
 POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
 {% elif zsh_version is version('5.0.8', '<') %}
@@ -69,6 +70,7 @@ POWERLEVEL9K_INSTALLATION_PATH={{ zsh_antigen_path_compat }}/repos/https-COLON--
 {% endif %}
 
 antigen theme {{ zsh_antigen_theme }}
+{% endif %}
 
 antigen apply
 
