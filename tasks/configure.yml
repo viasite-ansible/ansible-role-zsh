@@ -79,6 +79,10 @@
     group: "{{ zsh_user_group }}"
     backup: yes
   when: use_powerline == "true"
+  
+- name: Configure nanorc for syntax highlighting
+  shell: cat ~/.nano/nanorc >> ~/.nanorc
+  when: use_powerline == "true"
 
 - name: Set zsh as default shell
   user:
