@@ -80,6 +80,15 @@
     backup: yes
   when: use_powerline == "true"
   
+- name: Write .nanorc
+  template:
+    src: nanorc.j2
+    dest: "{{ zsh_user_dir }}/.nanorc"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    backup: yes
+  when: use_powerline == "true"
+  
 - name: Configure nanorc for syntax highlighting
   shell: cat ~/.nano/nanorc >> ~/.nanorc
   when: use_powerline == "true"
