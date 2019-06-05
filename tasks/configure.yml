@@ -56,13 +56,13 @@
     backup: yes
   when: zsh_antigen_installed_version | length > 0
   
-- name: Create powerline config directory
+- name: Create powerline-shell config dir
   file:
     path: "{{ zsh_user_dir }}/.config/powerline-shell"
     state: directory
   when: use_powerline == "true"
   
-- name: Write powerline-config.json
+- name: Write powerline-shell config
   template:
     src: powerline-config.j2
     dest: "{{ zsh_user_dir }}/.config/powerline-shell/config.json"
@@ -71,7 +71,7 @@
     backup: yes
   when: use_powerline == "true"
   
-- name: Write powerline-theme.py
+- name: Write powerline-shell theme
   template:
     src: powerline-theme.j2
     dest: "{{ zsh_user_dir }}/.config/powerline-shell/powerline-theme.py"
@@ -80,7 +80,7 @@
     backup: yes
   when: use_powerline == "true"
   
-- name: Write .nanorc
+- name: Write nanorc file 
   template:
     src: nanorc.j2
     dest: "{{ zsh_user_dir }}/.nanorc"
