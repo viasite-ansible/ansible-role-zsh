@@ -9,6 +9,7 @@
     - git
     - wget
     - grc
+    - yadm
   # brew don't work from root user on macOS
   when: not (zsh_user == 'root' and ansible_os_family == 'Darwin')
   
