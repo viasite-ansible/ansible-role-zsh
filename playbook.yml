@@ -1,5 +1,8 @@
 ---
 - hosts: localhost
+  vars_prompt:
+    - name: "dotfile_repo_url"
+      prompt: "dotfile repo url"
   vars:
     zsh_antigen_bundles_extras:
       - nvm
