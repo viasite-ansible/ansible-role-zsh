@@ -11,6 +11,7 @@ zsh_term: xterm-256color
 zsh_mc_solarized_skin: no
 
 zsh_path:
+  - "$HOME/.bin"
   - /usr/local/sbin
   - /usr/local/bin
   - /usr/sbin

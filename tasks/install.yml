@@ -38,12 +38,21 @@
   check_mode: no
   register: zsh_register_fzf_command
 
+- name: Ensure users home binary folder is present
+  file:
+    path: "{{ zsh_fzf_path }}"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: u=rwx,g=rwx,o=rx
+    state: directory
+  when: not zsh_shared
+
 - name: Download fzf
   unarchive:
     src: "{{ zsh_fzf_url }}"
-    dest: /usr/local/bin
+    dest: "{{ zsh_fzf_path }}"
     remote_src: yes
-    creates: /usr/local/bin/fzf
+    creates: "{{ zsh_fzf_path }}/fzf"
   when: zsh_register_fzf_command.rc == 1
 
 - name: Set directory permissions
