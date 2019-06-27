@@ -11,7 +11,7 @@ zsh_term: xterm-256color
 zsh_mc_solarized_skin: no
 
 zsh_path:
-  - "$HOME/.bin"
+  - "{{ zsh_fzf_path }}"
   - /usr/local/sbin
   - /usr/local/bin
   - /usr/sbin
@@ -130,6 +130,7 @@ zsh_autosuggestions_bind_key: ""
 zsh_autosuggestions_bind_key_2: ""
 
 # fzf
+zsh_fzf_path: "$HOME/bin"
 zsh_fzf_height: "100%"
 zsh_fzf_reverse: yes
 zsh_fzf_border: no

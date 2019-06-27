@@ -38,21 +38,32 @@
   check_mode: no
   register: zsh_register_fzf_command
 
+- name: Set zsh_fzf_path to /usr/local/bin
+  set_fact:
+    zsh_fzf_path: /usr/local/bin
+  changed_when: false
+  when: zsh_shared
+
+- name: Set zsh_fzf_path_absolute
+  set_fact:
+    zsh_fzf_path_absolute: "{{ zsh_fzf_path | replace('$HOME', '~' + zsh_user) }}"
+  changed_when: false
+
 - name: Ensure users home binary folder is present
   file:
-    path: "{{ zsh_fzf_path }}"
+    path: "{{ zsh_fzf_path_absolute }}"
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     mode: u=rwx,g=rwx,o=rx
     state: directory
   when: not zsh_shared
 
-- name: Download fzf
+- name: "Download fzf to {{ zsh_fzf_path_absolute }}"
   unarchive:
     src: "{{ zsh_fzf_url }}"
-    dest: "{{ zsh_fzf_path }}"
+    dest: "{{ zsh_fzf_path_absolute }}"
     remote_src: yes
-    creates: "{{ zsh_fzf_path }}/fzf"
+    creates: "{{ zsh_fzf_path_absolute }}/fzf"
   when: zsh_register_fzf_command.rc == 1
 
 - name: Set directory permissions
