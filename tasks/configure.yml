@@ -37,7 +37,6 @@
   shell: "cat {{ zsh_antigen_path }}/antigen/VERSION | tr -d 'v'"
   register: zsh_register_antigen_version
   changed_when: false
-  become: true
   check_mode: no
   tags: configure
 
