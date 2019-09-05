@@ -69,7 +69,7 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: yes
-  when: use_powerline == "true"
+  when: use_powerline == true
   
 - name: Write powerline-shell theme
   template:
@@ -78,7 +78,7 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: yes
-  when: use_powerline == "true"
+  when: use_powerline == true
   
 - name: Write nanorc file 
   template:
@@ -87,18 +87,18 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: yes
-  when: use_powerline == "true"
+  when: use_powerline == true
   
 - name: Configure nanorc for syntax highlighting
   shell: cat ~/.nano/nanorc >> ~/.nanorc
-  when: use_powerline == "true"
+  when: use_powerline == true
   
 - name: Clone dotfile repo
   command: "yadm clone {{ dotfile_repo_url }}"
   become: yes
   become_user: "{{ zsh_user }}"
   when: 
-  - use_powerline == "true"
+  - use_powerline == true
   - dotfile_repo_url is defined
 
 - name: Set zsh as default shell
