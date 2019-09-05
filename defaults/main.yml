@@ -2,6 +2,7 @@
 
 zsh_user: "{{ ansible_user_id }}"
 zsh_user_dir: "{{ ansible_user_dir }}"
+dotfile_repo_url: ""
 
 # .zshrc config
 zsh_hist_stamps: yyyy-mm-dd
