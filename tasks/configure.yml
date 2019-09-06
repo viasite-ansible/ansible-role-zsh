@@ -14,7 +14,7 @@
 - name: Merge bundles lists
   set_fact:
     zsh_antigen_bundles: "{{ zsh_antigen_bundles }} + {{ zsh_antigen_bundles_extras }}"
-  when: zsh_version is defined
+  when: zsh_version != ""
 
 - name: Disable autoupdate if zsh_shared install
   set_fact:
@@ -27,7 +27,7 @@
   failed_when: false
   changed_when: false
   check_mode: no
-  when: item.command is defined and zsh_version is defined
+  when: item.command is defined and zsh_version != ""
   register: zsh_register_commands_exists
 
 - name: Merge hotkeys lists
