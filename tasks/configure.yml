@@ -9,12 +9,12 @@
 
 - name: Set zsh_version variable
   set_fact:
-    #zsh_version: "{{ zsh_register_version.stdout }}"
-    zsh_version: 5.4.1
+    zsh_version: "{{ zsh_register_version.stdout }}"
     
 - name: Merge bundles lists
   set_fact:
     zsh_antigen_bundles: "{{ zsh_antigen_bundles }} + {{ zsh_antigen_bundles_extras }}"
+  when: zsh_version is defined
 
 - name: Disable autoupdate if zsh_shared install
   set_fact:
