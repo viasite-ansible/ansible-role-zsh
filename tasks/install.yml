@@ -21,7 +21,7 @@
 
 - name: Install grc
   package:
-    name: "{{ item.name }}"
+    name: "grc"
     state: present
   when: ansible_os_family == 'Debian' 
 
