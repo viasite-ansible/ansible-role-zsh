@@ -14,7 +14,7 @@
 - name: Merge bundles lists
   set_fact:
     zsh_antigen_bundles: "{{ zsh_antigen_bundles }} + {{ zsh_antigen_bundles_extras }}"
-  when: zsh_version is defined
+  when: zsh_version != ""
 
 - name: Disable autoupdate if zsh_shared install
   set_fact:
