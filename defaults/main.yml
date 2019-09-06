@@ -24,7 +24,6 @@ zsh_path:
 
 # Use powerline
 use_powerline: false
-zsh_version: 5.4.1
 
 fzf_widgets: ytet5uy4/fzf-widgets
 
