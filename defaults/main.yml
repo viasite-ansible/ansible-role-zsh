@@ -28,7 +28,7 @@ use_powerline: false
 fzf_widgets: ytet5uy4/fzf-widgets
 
 zsh_antigen_version: master
-zsh_fzf_version: 0.17.4
+zsh_fzf_version: 0.18.0
 
 zsh_antigen_bundles:
   - { name: command-not-found, when: "{{ ansible_os_family != 'Darwin' }}" } # too slow on OSX
@@ -55,7 +55,7 @@ zsh_antigen_bundles:
   - zsh_reload
 
   # on zsh 4.3.10 autosuggestions breaks multiline commands with \
-  - { name: zsh-users/zsh-autosuggestions, when: "{{ zsh_version | default(false) is version_compare('5.0', '>=') }}" }
+  - { name: zsh-users/zsh-autosuggestions }
   - popstas/zsh-command-time
   - { name: unixorn/autoupdate-antigen.zshplugin, when: "{{ zsh_update_interval > 0 }}" }
   - urbainvaes/fzf-marks # replaces jump plugin, mark, jump and Ctrl+G
@@ -63,7 +63,7 @@ zsh_antigen_bundles:
   # must be last, don't work on zsh < 4.3.17
   #- { name: zsh-users/zsh-syntax-highlighting, when: "{{ zsh_version | default(false) | version('4.3.17', '>=') }}" }
   # bug with text paste in fast-syntax-highlighting v1.21, see https://github.com/zdharma/fast-syntax-highlighting/issues/30
-  - { name: zdharma/fast-syntax-highlighting@v1.2, when: "{{ zsh_version | default(false) is version_compare('4.3.17', '>=') }}" }
+  - { name: zdharma/fast-syntax-highlighting@v1.54 }
 
 zsh_antigen_bundles_extras: []
 
