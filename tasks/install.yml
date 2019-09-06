@@ -25,7 +25,7 @@
     - { name: "yadm" , when: "{{ ansible_os_family == 'Debian' }}" } 
   # brew don't work from root user on macOS
   when: not (zsh_user == 'root' and ansible_os_family == 'Darwin')
-  ignore_errors: yes
+  ignore_errors: '{{ ansible_check_mode }}'
   
 - name: Install powerline-shell
   pip:
