@@ -1,12 +1,5 @@
 ---
 
-- name: install remi repo
-  yum:
-    name: "http://rpms.remirepo.net/enterprise/remi-release-{{ ansible_distribution_major_version }}.rpm"
-    state: present
-  register: result
-  when: ansible_os_family == "RedHat"
-  
 - name: add yadm repository
   shell: yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/thelocehiliosan/yadm/repo/epel-7/thelocehiliosan-yadm-epel-7.repo
   args:
@@ -21,7 +14,7 @@
     - { name: "zsh" }
     - { name: "git" }
     - { name: "wget" }
-    - { name: "grc" , when: "{{ ansible_os_family == 'Debian' }}" }
+#    - { name: "grc" , when: "{{ ansible_os_family == 'Debian' }}" }
     - { name: "yadm" , when: "{{ ansible_os_family == 'Debian' }}" } 
   # brew don't work from root user on macOS
   when: not (zsh_user == 'root' and ansible_os_family == 'Darwin')
