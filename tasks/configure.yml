@@ -27,7 +27,7 @@
   failed_when: false
   changed_when: false
   check_mode: no
-  when: item.command is defined and zsh_version != ""
+  when: item.command is defined and zsh_antigen_bundles is defined
   register: zsh_register_commands_exists
 
 - name: Merge hotkeys lists
