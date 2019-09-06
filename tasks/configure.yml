@@ -9,8 +9,9 @@
 
 - name: Set zsh_version variable
   set_fact:
-    zsh_version: "{{ zsh_register_version.stdout }}"
-
+    #zsh_version: "{{ zsh_register_version.stdout }}"
+    zsh_version: 5.4.1
+    
 - name: Merge bundles lists
   set_fact:
     zsh_antigen_bundles: "{{ zsh_antigen_bundles }} + {{ zsh_antigen_bundles_extras }}"
