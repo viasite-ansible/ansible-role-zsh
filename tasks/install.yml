@@ -23,7 +23,7 @@
   package:
     name: "grc"
     state: present
-  when: ansible_os_family == "Debian" 
+  when: ansible_os_family == 'Debian' 
   
 - name: ubuntu python pip pre-requisites
   include_tasks: ubuntu-python.yml
