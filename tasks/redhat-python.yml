@@ -1,0 +1,35 @@
+- name: "add python3 repo"
+  yum:
+    name: "https://centos7.iuscommunity.org/ius-release.rpm"
+    state: present
+
+- name: "python3: install packages"
+  become: true
+  yum:
+    name: ['python36u', 'python36u-libs', 'python36u-devel', 'python36u-pip']
+    state: present
+  when: not ansible_check_mode
+
+- name: "python3: get python executable"
+  shell: "which {{ python3_command }}"
+  register: python3_which
+
+- name: "python3: install pip"
+  become: true
+  command: "{{ python3_command }} -m ensurepip"
+
+- name: "python3: link executable"
+  become: true
+  file:
+    src: "{{ python3_which.stdout }}"
+    dest: "{{ python3_which.stdout|dirname }}/python"
+    state: link
+  when: 
+  - python3_pyenv == None
+  - not ansible_check_mode
+  
+- name: "python3: get pip executable"
+  shell: "{{ pip3_command }} --version | awk '{print $2}'"
+  register: pip_installed_version
+  changed_when: false
+  check_mode: no
