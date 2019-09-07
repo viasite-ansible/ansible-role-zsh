@@ -32,7 +32,7 @@
 - name: Install powerline-shell
   pip:
     name: powerline-shell
-    executable: "{{ pip_installed_version }}"
+    executable: "{{ pip3_command }}"
   when: use_powerline == true
   
 - name: Clone nanorc repo
