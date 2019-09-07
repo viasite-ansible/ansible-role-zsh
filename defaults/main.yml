@@ -19,6 +19,7 @@ zsh_path:
   - /usr/bin
   - /sbin
   - /bin
+  - "{{ zsh_user }}/.local/bin"
   - /usr/games
   - /usr/local/games
 
