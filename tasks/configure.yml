@@ -95,10 +95,21 @@
   when: use_powerline == true
 
 - name: apply nanorc fix
-  shell: |
-    sed -i 's/normal/white/g' ~/.nano/etc-hosts.nanorc
-    sed -i '/comment/s/^/#/g' ~/.nano/html.nanorc  
-    sed -i '/comment/s/^/#/g' ~/.nano/html.j2.nanorc
+  block:
+  - name: html conf comment fix in nanorc 
+    replace:
+      path: "{{ item }}"
+      regexp: '(.*comment.*)'
+      replace: '#\1'
+    loop:
+    - ~/.nano/html.nanorc
+    - ~/.nano/html.j2.nanorc
+    
+  - name: etc-hosts conf comment fix in nanorc 
+    replace:
+      path: ~/.nano/etc-hosts.nanorc
+      regexp: 'normal'
+      replace: 'white'
   when: use_powerline == true
 
 #- name: Clone dotfile repo
