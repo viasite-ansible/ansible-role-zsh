@@ -109,10 +109,17 @@
   become: true
   when: not zsh_shared
 
+- name: check zsh env
+  stat:
+    path: "/etc/zsh/zshenv"
+  register: zsh_env_stats
+
 - name: Add skip_global_compinit for disable early compinit call in Ubuntu
   lineinfile:
     regexp: "skip_global_compinit=1"
     line: "skip_global_compinit=1"
     dest: /etc/zsh/zshenv
     state: present
-  when: ansible_distribution == 'Ubuntu'
+  when: 
+  - ansible_distribution == 'Ubuntu'
+  - zsh_env_stats.stat.exists
