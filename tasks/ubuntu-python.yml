@@ -10,7 +10,7 @@
   shell: "{{ pip3_command }} --version | awk '{print $2}'"
   register: pip_installed_version
   changed_when: false
-#  check_mode: no
+  check_mode: no
 
 - name: "python3: get python executable"
   shell: "which {{ python3_command }}"
