@@ -109,7 +109,7 @@
   become: true
   when: not zsh_shared
 
-- name: check zsh env
+- name: check zsh env exists
   stat:
     path: "/etc/zsh/zshenv"
   register: zsh_env_stats
