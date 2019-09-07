@@ -24,10 +24,15 @@
     name: "grc"
     state: present
   when: ansible_os_family == 'Debian' 
+  
+- name: python pip pre-requisites
+  include_tasks: ubuntu-python.yml
+  when: ansible_os_family == 'Debian' }}
 
 - name: Install powerline-shell
   pip:
     name: powerline-shell
+    executable: "{{ pip_installed_version }}"
   when: use_powerline == true
   
 - name: Clone nanorc repo
