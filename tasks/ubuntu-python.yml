@@ -22,5 +22,5 @@
     src: "{{ python3_which.stdout }}"
     dest: "{{ python3_which.stdout|dirname }}/python"
     state: link
-  when: python3_which is defined  
-#  when: not ansible_check_mode
+#  when: python3_which is defined  
+  when: not ansible_check_mode
