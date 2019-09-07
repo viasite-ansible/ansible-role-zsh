@@ -61,7 +61,7 @@
   file:
     path: "{{ zsh_user_dir }}/.config/powerline-shell"
     state: directory
-  when: use_powerline == "true"
+  when: use_powerline == true
   
 - name: Write powerline-shell config
   template:
