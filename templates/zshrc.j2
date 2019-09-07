@@ -191,3 +191,21 @@ alias suser='su -'
 # user configs
 [[ -r /etc/zsh/zshrc.local ]] && source /etc/zsh/zshrc.local
 [[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+
+## load dot files
+_load_settings() {
+  _dir="$1"
+  if [ -d "$_dir" ]; then
+    for config in "$_dir"/*.*; do
+      case "$config" in
+        "$_dir"/*.zsh)
+          source $config
+          ;;
+        *)
+          :
+          ;;
+      esac
+    done
+  fi
+}
+_load_settings "$HOME/config"
