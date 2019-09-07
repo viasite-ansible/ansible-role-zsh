@@ -18,6 +18,15 @@
   # brew don't work from root user on macOS
   when: not (zsh_user == 'root' and ansible_os_family == 'Darwin')
   ignore_errors: '{{ ansible_check_mode }}'
+  
+- name: Install additional packages
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages: "{{ my_packages }}"
+  when: 
+  - my_packages is defined
+  - ansible_os_family == 'Debian'
 
 - name: Install grc
   shell: |
