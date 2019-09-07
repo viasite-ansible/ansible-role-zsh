@@ -1,4 +1,7 @@
 ---
+- set_fact:
+    python3_command: "python3"
+    pip3_command: "pip3"
 
 - name: install python3 and pip3
   package:
