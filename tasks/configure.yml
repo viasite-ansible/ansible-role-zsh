@@ -93,7 +93,14 @@
 - name: Configure nanorc for syntax highlighting
   shell: cat ~/.nano/nanorc >> ~/.nanorc
   when: use_powerline == true
-  
+
+- name: apply nanorc fix
+  shell: |
+    sed -i 's/normal/white/g' ~/.nano/etc-hosts.nanorc
+    sed -i '/comment/s/^/#/g' ~/.nano/html.nanorc  
+    sed -i '/comment/s/^/#/g' ~/.nano/html.j2.nanorc
+  when: use_powerline == true
+
 #- name: Clone dotfile repo
 #  command: "yadm clone {{ dotfile_repo_url }} -f"
 #  become: yes
