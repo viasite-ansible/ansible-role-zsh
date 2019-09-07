@@ -20,10 +20,13 @@
   ignore_errors: '{{ ansible_check_mode }}'
 
 - name: Install grc
-  package:
-    name: "grc"
-    state: present
-  when: ansible_os_family == 'Debian' 
+  shell: |
+    git clone https://github.com/garabik/grc.git /tmp/grc
+    cd /tmp/grc
+    ./install.sh
+  when: 
+  - use_powerline == true
+  - ansible_os_family == 'Debian' 
   
 - name: ubuntu python pip pre-requisites
   include_tasks: ubuntu-python.yml
