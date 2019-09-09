@@ -38,3 +38,12 @@
   register: pip_installed_version
   changed_when: false
   check_mode: no
+
+- name: python3 fix for yum
+  replace:
+    path: "{{ item }}"
+    regexp: '\/usr\/bin\/python$'
+    replace: '/usr/bin/python2'
+  loop:
+  - /usr/bin/yum
+  - /usr/libexec/urlgrabber-ext-down
