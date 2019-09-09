@@ -5,6 +5,15 @@
   args:
     creates: /etc/yum.repos.d/thelocehiliosan-yadm-epel-7.repo
   when: ansible_os_family == 'RedHat'
+  
+- name: install required redhat repo
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+  - "https://repo.percona.com/yum/percona-release-latest.noarch.rpm"
+  - "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"  
+  when: ansible_os_family == 'RedHat'
 
 - name: Install zsh, git, wget
   package:
