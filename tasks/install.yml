@@ -55,7 +55,7 @@
     ./install.sh
   when: 
   - use_powerline == true
-  - ansible_os_family == 'Debian'
+#  - ansible_os_family == 'Debian'
   
 - name: Install bat A cat(1) clone
   apt:
