@@ -1,6 +1,7 @@
 - set_fact:
     python3_command: python3.6
-    pip3_command: pip3.6    
+    pip3_command: pip3.6
+    python3_pyenv: null
     
 - name: "add python3 repo"
   yum:
