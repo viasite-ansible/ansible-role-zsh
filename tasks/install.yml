@@ -12,7 +12,8 @@
     state: present
   loop:
   - "https://repo.percona.com/yum/percona-release-latest.noarch.rpm"
-  - "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"  
+  - "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
+  - "http://repo.openfusion.net/centos7-x86_64//keychain-2.8.3-2.el7.noarch.rpm"
   when: ansible_os_family == 'RedHat'
 
 - name: Install zsh, git, wget
@@ -29,13 +30,23 @@
   ignore_errors: '{{ ansible_check_mode }}'
   
 - name: Install additional packages
-  apt:
-    name: "{{ packages }}"
-  vars:
-    packages: "{{ my_packages }}"
-  when: 
-  - my_packages is defined
-  - ansible_os_family == 'Debian'
+  block:
+  - name: ubuntu additional packages
+    apt:
+      name: "{{ packages }}"
+    vars:
+      packages: "{{ my_packages }}"
+    when: ansible_os_family == 'Debian'
+
+  - name: redhat additional packages
+    yum:
+      name: "{{ packages }}"
+    vars:
+      packages: "{{ my_packages }}"
+    when: ansible_os_family == 'RedHat'
+    ignore_errors: yes
+
+  when: my_packages != ""
 
 - name: Install grc
   shell: |
