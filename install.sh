@@ -20,8 +20,5 @@ sudo ansible-galaxy install git+https://github.com/hybridadmin/ansible-role-fanc
 title "Download playbook to /tmp/zsh.yml"
 curl https://raw.githubusercontent.com/hybridadmin/ansible-role-fancy-console/master/playbook.yml > /tmp/zsh.yml
 
-title "Provision playbook for root"
-sudo ansible-playbook -i "localhost," -c local /tmp/zsh.yml --extra-vars="dotfile_repo_url=DOT_FILE_REPO_URL"
-
 title "Provision playbook for $(whoami)"
 sudo ansible-playbook -i "localhost," -c local /tmp/zsh.yml --extra-vars="zsh_user=$(whoami) dotfile_repo_url=DOT_FILE_REPO_URL"
