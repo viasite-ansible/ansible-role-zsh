@@ -1,3 +1,7 @@
+- set_fact:
+    python3_command: python3.6
+    pip3_command: pip3.6    
+    
 - name: "add python3 repo"
   yum:
     name: "https://centos7.iuscommunity.org/ius-release.rpm"
