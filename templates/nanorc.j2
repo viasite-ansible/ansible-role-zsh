@@ -1,6 +1,8 @@
 # {{ ansible_managed }}
 
+{% if ansible_os_family == 'Debian' %}
 set constantshow
+{% endif %}
 set smooth
 set autoindent
 set backup
