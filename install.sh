@@ -24,4 +24,4 @@ title "Provision playbook for $(whoami)"
 sudo ansible-playbook -i "localhost," -c local /tmp/zsh.yml --extra-vars="zsh_user=$(whoami) dotfile_repo_url=DOT_FILE_REPO_URL"
 
 # Centos packages
-my_packages: ["bind-utils","keychain","initscripts","whois","traceroute","zip","jq","curl","mysql-client","moreutils","sysstat","attr","lnav","percona-toolkit"]
+my_packages: ["bind-utils","keychain","whois","traceroute","zip","jq","curl","mysql-client","moreutils","sysstat","attr","lnav","percona-toolkit"]
