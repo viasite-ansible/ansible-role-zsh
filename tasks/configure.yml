@@ -110,7 +110,9 @@
       path: ~/.nano/etc-hosts.nanorc
       regexp: 'normal'
       replace: 'white'
-  when: use_powerline == true
+  when:
+  - not ansible_check_mode
+  - use_powerline == true
 
 #- name: Clone dotfile repo
 #  command: "yadm clone {{ dotfile_repo_url }} -f"
