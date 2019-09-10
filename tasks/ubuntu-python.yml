@@ -20,7 +20,7 @@
 - name: "python3: get python executable"
   shell: "which {{ python3_command }}"
   register: python3_which
-  when: ansible_distribution_release <= 16
+#  when: ansible_distribution_release <= 16
 
 - name: "python3: link executable"
   become: true
