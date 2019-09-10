@@ -76,7 +76,9 @@
   pip:
     name: powerline-shell
     executable: "{{ pip3_command }}"
-  when: use_powerline == true
+  when:
+  - not ansible_check_mode
+  - use_powerline == true
   
 - name: Clone nanorc repo
   git:
