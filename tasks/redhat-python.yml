@@ -47,3 +47,4 @@
   loop:
   - /usr/bin/yum
   - /usr/libexec/urlgrabber-ext-down
+  when: ansible_distribution_major_version <= 7
