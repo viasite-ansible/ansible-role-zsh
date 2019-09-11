@@ -10,6 +10,5 @@
       - oldratlee/hacker-quotes
       - horosgrisa/mysql-colorize
     zsh_autosuggestions_bind_key: "^U"
-    my_packages: ["ipcalc","whois","dnsutils","traceroute","zip","jq","curl","mysql-client","moreutils","sysstat","attr","aptitude","knot-dnsutils","speedtest-cli","keychain","lnav","percona-toolkit"]
   roles:
     - ansible-role-fancy-console
