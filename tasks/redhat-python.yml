@@ -47,4 +47,6 @@
   loop:
   - /usr/bin/yum
   - /usr/libexec/urlgrabber-ext-down
+  - /usr/bin/firewall-cmd
+  - /usr/bin/firewall-offline-cmd
   when: ansible_distribution_major_version <= 7
