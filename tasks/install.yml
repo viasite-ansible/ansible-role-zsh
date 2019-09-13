@@ -1,9 +1,15 @@
 ---
 
 - name: add yadm repository
-  shell: yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/thelocehiliosan/yadm/repo/epel-7/thelocehiliosan-yadm-epel-7.repo
-  args:
-    creates: /etc/yum.repos.d/thelocehiliosan-yadm-epel-7.repo
+  yum_repository:
+    name: thelocehiliosan-yadm-epel-7.repo
+    description: Copr repo for yadm owned by thelocehiliosan
+    baseurl: https://copr-be.cloud.fedoraproject.org/results/thelocehiliosan/yadm/epel-{{ ansible_distribution_major_version }}-$basearch/
+    repo_gpgcheck: 0
+    skip_if_unavailable: True
+    gpgcheck: 1
+    enabled: yes
+    gpgkey: https://copr-be.cloud.fedoraproject.org/results/thelocehiliosan/yadm/pubkey.gpg
   when: ansible_os_family == 'RedHat'
   
 - name: install required redhat repo
@@ -25,7 +31,7 @@
 
   - name: set centos package list
     set_fact:
-      my_packages: "{{ my_packages + ['bind-utils'] }}"
+      my_packages: "{{ my_packages + ['bind-utils','yadm'] }}"
     when: ansible_os_family == 'RedHat'
   
 - name: Install additional packages
