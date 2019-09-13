@@ -33,12 +33,12 @@
   block:
   - name: set ubuntu package list
     set_fact:
-      my_packages: "{{ my_packages + ['ipcalc','whois','dnsutils','traceroute','zip','jq','curl','mysql-client','moreutils','sysstat','attr','aptitude','knot-dnsutils','speedtest-cli','keychain','lnav','percona-toolkit'] }}"
+      my_packages: "{{ my_packages + ['ipcalc','dnsutils','aptitude','knot-dnsutils','speedtest-cli','keychain'] }}"
     when: ansible_os_family == 'Debian'
 
   - name: set centos package list
     set_fact:
-      my_packages: "{{ my_packages + ['bind-utils','whois','traceroute','zip','jq','curl','mysql-client','moreutils','sysstat','attr','lnav','percona-toolkit'] }}"
+      my_packages: "{{ my_packages + ['bind-utils'] }}"
     when: ansible_os_family == 'RedHat'
   
 - name: Install additional packages
