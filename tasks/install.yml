@@ -16,18 +16,6 @@
   - "http://repo.openfusion.net/centos7-x86_64//keychain-2.8.3-2.el7.noarch.rpm"
   - "http://ftp.tu-chemnitz.de/pub/linux/dag/redhat/el7/en/x86_64/rpmforge/RPMS/ipcalc-0.41-1.el7.rf.x86_64.rpm"
   when: ansible_os_family == 'RedHat'
-
-#- name: Install zsh, git, wget
-#  package:
-#    name: "{{ item.name }}"
-#    state: present
-#  loop:
-#    - { name: "zsh" }
-#    - { name: "git" }
-#    - { name: "wget" }
-#    - { name: "yadm" } 
-#  when: not (zsh_user == 'root' and ansible_os_family == 'Darwin')
-#  ignore_errors: '{{ ansible_check_mode }}'
   
 - name: set additional package list
   block:
@@ -42,22 +30,10 @@
     when: ansible_os_family == 'RedHat'
   
 - name: Install additional packages
-  block:
-  - name: ubuntu additional packages
-    apt:
-      name: "{{ packages }}"
+  action: >
+    {{ ansible_pkg_mgr }} name={{ my_packages }} state=present update_cache=yes
     vars:
       packages: "{{ my_packages }}"
-    when: ansible_os_family == 'Debian'
-
-  - name: redhat additional packages
-    yum:
-      name: "{{ packages }}"
-    vars:
-      packages: "{{ my_packages }}"
-    when: ansible_os_family == 'RedHat'
-    ignore_errors: yes
-
   when: my_packages != ""
 
 - name: Install grc
