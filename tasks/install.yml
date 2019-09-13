@@ -17,28 +17,28 @@
   - "http://ftp.tu-chemnitz.de/pub/linux/dag/redhat/el7/en/x86_64/rpmforge/RPMS/ipcalc-0.41-1.el7.rf.x86_64.rpm"
   when: ansible_os_family == 'RedHat'
 
-- name: Install zsh, git, wget
-  package:
-    name: "{{ item.name }}"
-    state: present
-  loop:
-    - { name: "zsh" }
-    - { name: "git" }
-    - { name: "wget" }
-    - { name: "yadm" } 
-  when: not (zsh_user == 'root' and ansible_os_family == 'Darwin')
-  ignore_errors: '{{ ansible_check_mode }}'
+#- name: Install zsh, git, wget
+#  package:
+#    name: "{{ item.name }}"
+#    state: present
+#  loop:
+#    - { name: "zsh" }
+#    - { name: "git" }
+#    - { name: "wget" }
+#    - { name: "yadm" } 
+#  when: not (zsh_user == 'root' and ansible_os_family == 'Darwin')
+#  ignore_errors: '{{ ansible_check_mode }}'
   
 - name: set additional package list
   block:
   - name: set ubuntu package list
     set_fact:
-      my_packages: ["ipcalc","whois","dnsutils","traceroute","zip","jq","curl","mysql-client","moreutils","sysstat","attr","aptitude","knot-dnsutils","speedtest-cli","keychain","lnav","percona-toolkit"]
+      my_packages: "{{ my_packages + ['ipcalc','whois','dnsutils','traceroute','zip','jq','curl','mysql-client','moreutils','sysstat','attr','aptitude','knot-dnsutils','speedtest-cli','keychain','lnav','percona-toolkit'] }}"
     when: ansible_os_family == 'Debian'
 
   - name: set centos package list
     set_fact:
-      my_packages: ["bind-utils","whois","traceroute","zip","jq","curl","mysql-client","moreutils","sysstat","attr","lnav","percona-toolkit"]
+      my_packages: "{{ my_packages + ['bind-utils','whois','traceroute','zip','jq','curl','mysql-client','moreutils','sysstat','attr','lnav','percona-toolkit'] }}"
     when: ansible_os_family == 'RedHat'
   
 - name: Install additional packages
