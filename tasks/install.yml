@@ -13,7 +13,7 @@
   loop:
   - "https://repo.percona.com/yum/percona-release-latest.noarch.rpm"
   - "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
-  - "http://repo.openfusion.net/centos7-x86_64//keychain-2.8.3-2.el7.noarch.rpm"
+  - "http://repo.openfusion.net/centos{{ ansible_distribution_major_version }}-x86_64/keychain-2.8.3-2.el{{ ansible_distribution_major_version }}.noarch.rpm"
   - "http://ftp.tu-chemnitz.de/pub/linux/dag/redhat/el7/en/x86_64/rpmforge/RPMS/ipcalc-0.41-1.el7.rf.x86_64.rpm"
   when: ansible_os_family == 'RedHat'
   
