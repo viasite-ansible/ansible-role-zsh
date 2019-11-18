@@ -50,7 +50,7 @@ zsh_antigen_bundles:
   - zsh_reload
 
   # on zsh 4.3.10 autosuggestions breaks multiline commands with \
-  - { name: zsh-users/zsh-autosuggestions, when: "{{ zsh_version|default(false) | is version('5.0', '>=') }}" }
+  - { name: zsh-users/zsh-autosuggestions, when: "{{ zsh_version|default(false) is version('5.0', '>=') }}" }
   - popstas/zsh-command-time
   - { name: unixorn/autoupdate-antigen.zshplugin, when: "{{ zsh_update_interval > 0 }}" }
   - urbainvaes/fzf-marks # replaces jump plugin, mark, jump and Ctrl+G
