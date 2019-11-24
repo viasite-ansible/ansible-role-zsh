@@ -2,9 +2,6 @@
 driver:
   name: docker
 platforms:
-  - name: ansible-role-zsh-debian-7
-    image: debian:7
-
   - name: ansible-role-zsh-debian-8
     image: debian:8
 

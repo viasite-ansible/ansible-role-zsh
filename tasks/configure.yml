@@ -1,7 +1,9 @@
 ---
 
 - name: Check zsh version
-  shell: "zsh --version | cut -d ' ' -f2"
+  shell: "set -o pipefail; zsh --version | cut -d ' ' -f2"
+  args:
+    executable: /bin/bash
   register: zsh_register_version
   check_mode: no
   changed_when: false
@@ -34,9 +36,14 @@
     zsh_hotkeys: "{{ zsh_hotkeys }} + {{ zsh_hotkeys_extras }}"
 
 - name: Check antigen version
-  shell: "cat {{ zsh_antigen_path }}/antigen/VERSION | tr -d 'v'"
+  shell: |
+    set -o pipefail
+    cat "{{ zsh_antigen_path }}/antigen/VERSION" | tr -d 'v'
+  args:
+    executable: /bin/bash
   register: zsh_register_antigen_version
   changed_when: false
+  failed_when: false
   become: true
   check_mode: no
   tags: configure
@@ -44,6 +51,8 @@
 - name: Set zsh_antigen_installed_version variable
   set_fact:
     zsh_antigen_installed_version: "{{ zsh_register_antigen_version.stdout }}"
+
+- debug: var=zsh_antigen_installed_version
 
 - name: Write .zshrc config
   template:

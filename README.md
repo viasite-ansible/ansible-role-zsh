@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/viasite-ansible/ansible-role-zsh.svg?branch=master)](https://travis-ci.org/viasite-ansible/ansible-role-zsh)
 
-Tested on ~~Debian 6~~, Ubuntu 14.04, Ubuntu 16.04, Ubuntu 18.04, macOS 10.12, CentOS 7.
+Tested on Debian 8, Ubuntu 14.04, Ubuntu 16.04, Ubuntu 18.04, macOS 10.12, CentOS 7.
 
 **For upgrade from viasite-ansible.zsh 1.x, 2.x to 3.0 see [below](#upgrade).**
 
@@ -281,7 +281,7 @@ Bundles `docker` and `docker-compose` will be added to config only if commands e
 ``` yaml
 # load only for zsh >= 4.3.17
 - name: zsh-users/zsh-syntax-highlighting
-  when: "{{ zsh_version | version_compare('4.3.17', '>=') }}"
+  when: "{{ zsh_version is version_compare('4.3.17', '>=') }}"
 # load only for macOS
 - { name: brew, when: "{{ ansible_os_family != 'Darwin' }}" }
 ```
