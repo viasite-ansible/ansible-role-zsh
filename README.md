@@ -281,7 +281,7 @@ Bundles `docker` and `docker-compose` will be added to config only if commands e
 ``` yaml
 # load only for zsh >= 4.3.17
 - name: zsh-users/zsh-syntax-highlighting
-  when: "{{ zsh_version | version_compare('4.3.17', '>=') }}"
+  when: "{{ zsh_version is version('4.3.17', '>=') }}"
 # load only for macOS
 - { name: brew, when: "{{ ansible_os_family != 'Darwin' }}" }
 ```

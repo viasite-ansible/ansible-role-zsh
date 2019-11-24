@@ -62,9 +62,9 @@ antigen bundle {{ bundle }}
 {% endif %}
 {% endfor %}
 
-{% if zsh_antigen_installed_version | version_compare(2.0, '>=') %}
+{% if zsh_antigen_installed_version is version(2.0, '>=') %}
 POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
-{% elif zsh_version | version_compare('5.0.8', '<') %}
+{% elif zsh_version is version('5.0.8', '<') %}
 POWERLEVEL9K_INSTALLATION_PATH={{ zsh_antigen_path_compat }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-bhilburn-SLASH-powerlevel9k.git
 {% endif %}
 
@@ -101,7 +101,7 @@ export FZF_TMUX=0
 export FZF_DEFAULT_OPTS="{{ zsh_fzf_default_opts }}"
 
 # fzf-widgets: fzf-change-reset-dir
-{% if zsh_version | version_compare('5.0', '>=') -%}
+{% if zsh_version is version('5.0', '>=') -%}
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 {% endif %}
