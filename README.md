@@ -6,6 +6,15 @@ Tested on Debian 8, Ubuntu 14.04, Ubuntu 16.04, Ubuntu 18.04, macOS 10.12, CentO
 
 
 
+## Zero-knowledge install:
+If you using Ubuntu or Debian and not familiar with Ansible, you can just execute [install.sh](install.sh) on target machine:
+```
+curl https://raw.githubusercontent.com/viasite-ansible/ansible-role-zsh/master/install.sh | bash
+```
+It will install zsh for root and current user.
+Then [configure terminal application](#configure-terminal-application).
+
+
 ## Includes:
 - zsh
 - [antigen](https://github.com/zsh-users/antigen)
