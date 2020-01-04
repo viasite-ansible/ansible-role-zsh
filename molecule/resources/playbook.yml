@@ -1,4 +1,4 @@
 ---
 - hosts: all
   roles:
-    - ansible-role-zsh
+    - ansible-role-fancy-console
