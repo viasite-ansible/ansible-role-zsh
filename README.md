@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/viasite-ansible/ansible-role-zsh.svg?branch=master)](https://travis-ci.org/viasite-ansible/ansible-role-zsh)
+[![Build Status](https://travis-ci.org/hybridadmin/ansible-role-fancy-console.svg?branch=master)](https://travis-ci.org/hybridadmin/ansible-role-fancy-console)
 
 Tested on ~~Debian 6~~, Ubuntu 14.04, Ubuntu 16.04, Ubuntu 18.04, macOS 10.12, CentOS 7.
 
