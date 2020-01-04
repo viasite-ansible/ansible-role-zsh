@@ -11,7 +11,7 @@
     enabled: yes
     gpgkey: https://copr-be.cloud.fedoraproject.org/results/thelocehiliosan/yadm/pubkey.gpg
   when: ansible_os_family == 'RedHat'
-  
+
 - name: install required redhat repo
   yum:
     name: "{{ item }}"
@@ -21,7 +21,7 @@
   - "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
   - "http://repo.openfusion.net/centos{{ ansible_distribution_major_version }}-x86_64/keychain-2.8.3-2.el{{ ansible_distribution_major_version }}.noarch.rpm"
   when: ansible_os_family == 'RedHat'
-  
+
 - name: set additional package list
   block:
   - name: set ubuntu package list
@@ -33,33 +33,33 @@
     set_fact:
       my_packages: "{{ my_packages + ['bind-utils','yadm'] }}"
     when: ansible_os_family == 'RedHat'
-  
+
 - name: Install additional packages
   action: >
     {{ ansible_pkg_mgr }} name={{ my_packages }} state=present update_cache=yes
     vars:
       packages: "{{ my_packages }}"
-  when: my_packages != ""
+  when: my_packages is defined
 
 - name: Install grc
   shell: |
     git clone https://github.com/garabik/grc.git /tmp/grc
     cd /tmp/grc
     ./install.sh
-  when: 
-  - use_powerline == true
-  
+  when:
+  - use_powerline
+
 - name: Install bat A cat(1) clone
   apt:
-    deb: "https://github.com/sharkdp/bat/releases/download/v{{ bat_version }}/bat_{{ bat_version }}_amd64.deb"    
-  when: 
+    deb: "https://github.com/sharkdp/bat/releases/download/v{{ bat_version }}/bat_{{ bat_version }}_amd64.deb"
+  when:
     - bat_version is defined
     - ansible_os_family == 'Debian'
-  
+
 - name: ubuntu python pip pre-requisites
   include_tasks: ubuntu-python.yml
   when: ansible_os_family == 'Debian'
-  
+
 - name: redhat python pip pre-requisites
   include_tasks: redhat-python.yml
   when: ansible_os_family == 'RedHat'
@@ -70,17 +70,18 @@
     executable: "{{ pip3_command }}"
   when:
   - not ansible_check_mode
-  - use_powerline == true
-  
+  - use_powerline
+
 - name: Clone nanorc repo
   git:
     repo: 'https://github.com/scopatz/nanorc.git'
     dest: "{{ zsh_user_dir }}/.nano"
+    version: "master"
     force: yes
   become: yes
   become_user: "{{ zsh_user }}"
-  when: use_powerline == true
-  
+  when: use_powerline
+
 - name: Clone antigen {{ zsh_antigen_version }}
   git:
     repo: https://github.com/zsh-users/antigen.git
