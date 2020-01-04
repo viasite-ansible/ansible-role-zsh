@@ -9,7 +9,7 @@
     name: "{{ item.name }}"
     state: present
   loop:
-  - { name: "python3", when: "{{ ansible_distribution_release <= 16 }}" }
+  - { name: "python3" }
   - { name: "python3-pip" }
 
 - name: "python3: get pip executable"
