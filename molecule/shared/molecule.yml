@@ -4,17 +4,17 @@ scenario:
 driver:
   name: docker
 platforms:
-  - name: ansible-role-zsh-debian-8
+  - name: ansible-role-fancy-console-debian-8
     image: debian
     image_version: 8
     volume_mounts:
       - ${MOLECULE_APTPROXY_PATH}:/etc/apt/apt.conf.d/00aptproxy
-  - name: ansible-role-zsh-ubuntu-1804
+  - name: ansible-role-fancy-console-ubuntu-1804
     image: ubuntu
     image_version: 18.04
     volume_mounts:
       - ${MOLECULE_APTPROXY_PATH}:/etc/apt/apt.conf.d/00aptproxy
-  - name: ansible-role-zsh-centos-7
+  - name: ansible-role-fancy-console-centos-7
     image: centos
     image_version: 7
 
