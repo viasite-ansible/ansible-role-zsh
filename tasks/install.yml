@@ -26,7 +26,7 @@
   block:
   - name: set ubuntu package list
     set_fact:
-      my_packages: "{{ my_packages + ['ipcalc','dnsutils','aptitude','knot-dnsutils','speedtest-cli','keychain'] }}"
+      my_packages: "{{ my_packages + ['ipcalc','dnsutils','aptitude','keychain'] }}"
     when: ansible_os_family == 'Debian'
 
   - name: set centos package list
