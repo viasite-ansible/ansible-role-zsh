@@ -58,13 +58,13 @@
     group: "{{ zsh_user_group }}"
     backup: yes
   when: zsh_antigen_installed_version | length > 0
-  
+
 - name: Create powerline-shell config dir
   file:
     path: "{{ zsh_user_dir }}/.config/powerline-shell"
     state: directory
   when: use_powerline
-  
+
 - name: Write powerline-shell config
   template:
     src: powerline-config.j2
@@ -73,7 +73,7 @@
     group: "{{ zsh_user_group }}"
     backup: yes
   when: use_powerline
-  
+
 - name: Write powerline-shell theme
   template:
     src: powerline-theme.j2
@@ -82,8 +82,8 @@
     group: "{{ zsh_user_group }}"
     backup: yes
   when: use_powerline
-  
-- name: Write nanorc file 
+
+- name: Write nanorc file
   template:
     src: nanorc.j2
     dest: "{{ zsh_user_dir }}/.nanorc"
@@ -91,14 +91,14 @@
     group: "{{ zsh_user_group }}"
     backup: yes
   when: use_powerline
-  
+
 - name: Configure nanorc for syntax highlighting
   shell: cat ~/.nano/nanorc >> ~/.nanorc
   when: use_powerline
 
 - name: apply nanorc fix
   block:
-  - name: html conf comment fix in nanorc 
+  - name: html conf comment fix in nanorc
     replace:
       path: "{{ item }}"
       regexp: '(.*comment.*)'
@@ -107,7 +107,7 @@
     - ~/.nano/html.nanorc
     - ~/.nano/html.j2.nanorc
     
-  - name: etc-hosts conf comment fix in nanorc 
+  - name: etc-hosts conf comment fix in nanorc
     replace:
       path: ~/.nano/etc-hosts.nanorc
       regexp: 'normal'
@@ -143,6 +143,6 @@
     line: "skip_global_compinit=1"
     dest: /etc/zsh/zshenv
     state: present
-  when: 
+  when:
   - ansible_distribution == 'Ubuntu'
   - zsh_env_stats.stat.exists
