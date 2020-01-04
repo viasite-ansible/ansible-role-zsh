@@ -8,7 +8,7 @@
   package:
     name: "{{ item.name }}"
     state: present
-  loop: 
+  loop:
   - { name: "python3", when: "{{ ansible_distribution_release <= 16 }}" }
   - { name: "python3-pip" }
 
@@ -21,7 +21,7 @@
   check_mode: no
 
 - name: "python3: get python executable"
-  shell: "which {{ python3_command }}"
+  command: "which {{ python3_command }}"
   register: python3_which
   changed_when: false
 #  when: ansible_distribution_release <= 16
