@@ -22,16 +22,16 @@
 #  changed_when: false
 #  check_mode: no
 
-#- name: "python3: get python executable"
-#  command: "which {{ python3_command }}"
-#  register: python3_which
-#  changed_when: false
+- name: "python3: get python executable"
+  command: "which {{ python3_command }}"
+  register: python3_which
+  changed_when: false
 
-#- name: "python3: link executable"
-#  become: true
-#  file:
-#    src: "{{ python3_which.stdout }}"
-#    dest: "{{ python3_which.stdout|dirname }}/python"
-#    state: link
-#  when:
-#  - not ansible_check_mode
+- name: "python3: link executable"
+  become: true
+  file:
+    src: "{{ python3_which.stdout }}"
+    dest: "{{ python3_which.stdout|dirname }}/python"
+    state: link
+  when:
+  - not ansible_check_mode
