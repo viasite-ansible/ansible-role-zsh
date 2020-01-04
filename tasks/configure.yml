@@ -4,6 +4,8 @@
   shell: |
     set -o pipefail
     zsh --version | cut -d ' ' -f2
+  args:
+    executable: /bin/bash
   register: zsh_register_version
   check_mode: no
   changed_when: false
