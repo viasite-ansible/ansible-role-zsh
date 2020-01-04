@@ -24,6 +24,11 @@ platforms:
     image_version: 16.04
     volume_mounts:
       - ${MOLECULE_APTPROXY_PATH}:/etc/apt/apt.conf.d/00aptproxy
+  - name: ansible-role-fancy-console-ubuntu-1804
+    image: ubuntu
+    image_version: 18.04
+    volume_mounts:
+      - ${MOLECULE_APTPROXY_PATH}:/etc/apt/apt.conf.d/00aptproxy
   - name: ansible-role-fancy-console-centos-7
     image: centos
     image_version: 7
