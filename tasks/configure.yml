@@ -12,7 +12,7 @@
 - name: Set zsh_version variable
   set_fact:
     zsh_version: "{{ zsh_register_version.stdout }}"
-    
+
 - name: Merge bundles lists
   set_fact:
     zsh_antigen_bundles: "{{ zsh_antigen_bundles }} + {{ zsh_antigen_bundles_extras }}"
@@ -37,7 +37,9 @@
     zsh_hotkeys: "{{ zsh_hotkeys }} + {{ zsh_hotkeys_extras }}"
 
 - name: Check antigen version
-  shell: "cat {{ zsh_antigen_path }}/antigen/VERSION | tr -d 'v'"
+  shell: |
+    set -o pipefail
+    cat {{ zsh_antigen_path }}/antigen/VERSION | tr -d 'v'
   register: zsh_register_antigen_version
   changed_when: false
   become: true
@@ -61,7 +63,7 @@
   file:
     path: "{{ zsh_user_dir }}/.config/powerline-shell"
     state: directory
-  when: use_powerline == true
+  when: use_powerline
   
 - name: Write powerline-shell config
   template:
@@ -70,7 +72,7 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: yes
-  when: use_powerline == true
+  when: use_powerline
   
 - name: Write powerline-shell theme
   template:
@@ -79,7 +81,7 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: yes
-  when: use_powerline == true
+  when: use_powerline
   
 - name: Write nanorc file 
   template:
@@ -88,11 +90,11 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: yes
-  when: use_powerline == true
+  when: use_powerline
   
 - name: Configure nanorc for syntax highlighting
   shell: cat ~/.nano/nanorc >> ~/.nanorc
-  when: use_powerline == true
+  when: use_powerline
 
 - name: apply nanorc fix
   block:
@@ -112,7 +114,7 @@
       replace: 'white'
   when:
   - not ansible_check_mode
-  - use_powerline == true
+  - use_powerline
 
 #- name: Clone dotfile repo
 #  command: "yadm clone {{ dotfile_repo_url }} -f"
