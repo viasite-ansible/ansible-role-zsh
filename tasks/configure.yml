@@ -1,7 +1,9 @@
 ---
 
 - name: Check zsh version
-  shell: "zsh --version | cut -d ' ' -f2"
+  shell: |
+    set -o pipefail
+    zsh --version | cut -d ' ' -f2
   register: zsh_register_version
   check_mode: no
   changed_when: false
