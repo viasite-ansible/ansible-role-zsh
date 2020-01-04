@@ -26,32 +26,32 @@
   command: "{{ python3_command }} -m ensurepip"
   changed_when: false
 
-- name: "python3: link executable"
-  become: true
-  file:
-    src: "{{ python3_which.stdout }}"
-    dest: "{{ python3_which.stdout|dirname }}/python"
-    state: link
-  when:
-  - python3_pyenv == None
-  - not ansible_check_mode
+#- name: "python3: link executable"
+#  become: true
+#  file:
+#    src: "{{ python3_which.stdout }}"
+#    dest: "{{ python3_which.stdout|dirname }}/python"
+#    state: link
+#  when:
+#  - python3_pyenv == None
+#  - not ansible_check_mode
 
-- name: "python3: get pip executable"
-  shell: |
-    set -o pipefail
-    {{ pip3_command }} --version | awk '{print $2}'
-  register: pip_installed_version
-  changed_when: false
-  check_mode: no
+#- name: "python3: get pip executable"
+#  shell: |
+#    set -o pipefail
+#    {{ pip3_command }} --version | awk '{print $2}'
+#  register: pip_installed_version
+#  changed_when: false
+#  check_mode: no
 
-- name: python3 fix for yum
-  replace:
-    path: "{{ item }}"
-    regexp: '\/usr\/bin\/python$'
-    replace: '/usr/bin/python2'
-  loop:
-  - /usr/bin/yum
-  - /usr/libexec/urlgrabber-ext-down
-  - /usr/bin/firewall-cmd
-  - /usr/bin/firewall-offline-cmd
-  when: ansible_distribution_major_version <= 7
+#- name: python3 fix for yum
+#  replace:
+#    path: "{{ item }}"
+#    regexp: '\/usr\/bin\/python$'
+#    replace: '/usr/bin/python2'
+#  loop:
+#  - /usr/bin/yum
+#  - /usr/libexec/urlgrabber-ext-down
+#  - /usr/bin/firewall-cmd
+#  - /usr/bin/firewall-offline-cmd
+#  when: ansible_distribution_major_version <= 7
