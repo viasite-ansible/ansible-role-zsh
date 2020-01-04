@@ -1,4 +1,5 @@
-- set_fact: set python variables
+- name: set python variables
+  set_fact: 
     python3_command: python3.6
     pip3_command: pip3.6
     python3_pyenv: null
