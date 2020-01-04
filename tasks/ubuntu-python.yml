@@ -1,5 +1,6 @@
 ---
-- set_fact:
+- name: set python variables
+  set_fact:
     python3_command: "python3"
     pip3_command: "pip3"
 
@@ -9,10 +10,12 @@
     state: present
   loop: 
   - { name: "python3", when: "{{ ansible_distribution_release <= 16 }}" }
-  - { name: "python3-pip" } 
-  
+  - { name: "python3-pip" }
+
 - name: "python3: get pip executable"
-  shell: "{{ pip3_command }} --version | awk '{print $2}'"
+  shell: |
+    set -o pipefail
+    {{ pip3_command }} --version | awk '{print $2}'
   register: pip_installed_version
   changed_when: false
   check_mode: no
@@ -20,6 +23,7 @@
 - name: "python3: get python executable"
   shell: "which {{ python3_command }}"
   register: python3_which
+  changed_when: false
 #  when: ansible_distribution_release <= 16
 
 - name: "python3: link executable"
