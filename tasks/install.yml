@@ -41,9 +41,18 @@
       packages: "{{ my_packages }}"
   when: my_packages is defined
 
+- name: Clone grc v1.11.3
+  git:
+    repo: https://github.com/garabik/grc.git
+    dest: "/tmp/grc"
+    version: "v1.11.3"
+    force: yes
+  become: yes
+  become_user: "{{ zsh_user }}"
+  register: zsh_register_grc_clone
+
 - name: Install grc
   shell: |
-    git clone https://github.com/garabik/grc.git /tmp/grc
     cd /tmp/grc
     ./install.sh
   when:
