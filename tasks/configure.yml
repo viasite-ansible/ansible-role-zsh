@@ -106,7 +106,7 @@
     loop:
     - ~/.nano/html.nanorc
     - ~/.nano/html.j2.nanorc
-  
+
   - name: etc-hosts conf comment fix in nanorc
     replace:
       path: ~/.nano/etc-hosts.nanorc
