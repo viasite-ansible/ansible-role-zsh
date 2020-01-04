@@ -16,15 +16,15 @@
     state: present
 #  when: not ansible_check_mode
 
-- name: "python3: get python executable"
-  shell: |
-    set -o pipefail
-    which {{ python3_command }}
-  args:
-    executable: /bin/bash
-  register: python3_which
-  changed_when: false
-  check_mode: no
+#- name: "python3: get python executable"
+#  shell: |
+#    set -o pipefail
+#    which {{ python3_command }}
+#  args:
+#    executable: /bin/bash
+#  register: python3_which
+#  changed_when: false
+#  check_mode: no
 
 - name: "python3: install pip"
   become: true
