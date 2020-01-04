@@ -14,7 +14,7 @@
   package:
     name: ['python3', 'python3-libs', 'python3-devel', 'python3-pip']
     state: present
-  when: not ansible_check_mode
+#  when: not ansible_check_mode
 
 - name: "python3: get python executable"
   shell: |
