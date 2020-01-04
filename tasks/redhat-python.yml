@@ -4,15 +4,15 @@
     pip3_command: pip3
     python3_pyenv: null
 
-- name: "add python3 repo"
-  yum:
-    name: "https://centos7.iuscommunity.org/ius-release.rpm"
-    state: present
+#- name: "add python3 repo"
+#  yum:
+#    name: "https://centos7.iuscommunity.org/ius-release.rpm"
+#    state: present
 
 - name: "python3: install packages"
   become: true
   package:
-    name: ['python36u', 'python36u-libs', 'python36u-devel', 'python36u-pip']
+    name: ['python3', 'python3-libs', 'python3-devel', 'python3-pip']
     state: present
   when: not ansible_check_mode
 
