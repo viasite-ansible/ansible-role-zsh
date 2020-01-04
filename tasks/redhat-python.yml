@@ -11,15 +11,20 @@
 
 - name: "python3: install packages"
   become: true
-  yum:
+  package:
     name: ['python36u', 'python36u-libs', 'python36u-devel', 'python36u-pip']
     state: present
   when: not ansible_check_mode
 
 - name: "python3: get python executable"
-  command: "which {{ python3_command }}"
+  shell: |
+    set -o pipefail
+    which {{ python3_command }}
+  args:
+    executable: /bin/bash
   register: python3_which
   changed_when: false
+  check_mode: no
 
 - name: "python3: install pip"
   become: true
