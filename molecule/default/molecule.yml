@@ -2,19 +2,19 @@
 driver:
   name: docker
 platforms:
-  - name: ansible-role-zsh-debian-7
+  - name: ansible-role-fancy-console-debian-7
     image: debian:7
 
-  - name: ansible-role-zsh-debian-8
+  - name: ansible-role-fancy-console-debian-8
     image: debian:8
 
-  - name: ansible-role-zsh-ubuntu-1404
+  - name: ansible-role-fancy-console-ubuntu-1404
     image: ubuntu:14.04
 
-  - name: ansible-role-zsh-ubuntu-1604
+  - name: ansible-role-fancy-console-ubuntu-1604
     image: ubuntu:16.04
 
-  - name: ansible-role-zsh-centos-7
+  - name: ansible-role-fancy-console-centos-7
     image: centos:7
 
 #driver:
