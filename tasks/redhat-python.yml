@@ -40,6 +40,8 @@
 #  shell: |
 #    set -o pipefail
 #    {{ pip3_command }} --version | awk '{print $2}'
+#  args:
+#    executable: /bin/bash
 #  register: pip_installed_version
 #  changed_when: false
 #  check_mode: no
