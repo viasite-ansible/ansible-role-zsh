@@ -21,6 +21,7 @@ platforms:
 
 verifier:
   name: testinfra
+  enabled: False
 
 lint:
   name: yamllint
