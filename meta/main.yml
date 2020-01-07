@@ -3,20 +3,19 @@ galaxy_info:
   role_name: fancy-console
   author: Tinashe Chikomo
   company: N/A
-  description: oh-my-zsh with powerlevel9k theme, fzf and other plugins
+  description: oh-my-zsh with powerline-shell or powerlevel9k theme, fzf and other plugins
   license: MIT
-  min_ansible_version: 2.0
+  min_ansible_version: 2.4
   platforms:
     - name: Ubuntu
       versions:
-        - trusty
+#        - trusty
         - xenial
         - bionic
     - name: Debian
       versions:
-        - squeeze
-        - wheezy
-        - jessie
+        - stretch
+        - buster
     - name: EL
       versions:
         - 7
