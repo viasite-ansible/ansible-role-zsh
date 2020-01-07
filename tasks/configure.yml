@@ -119,7 +119,7 @@
       path: ~/.nano/etc-hosts.nanorc
       regexp: 'normal'
       replace: 'white'
-  changed_when: False
+    changed_when: False
   when:
   - not ansible_check_mode
   - use_powerline
