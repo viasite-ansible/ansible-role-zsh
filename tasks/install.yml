@@ -26,13 +26,18 @@
   block:
   - name: set ubuntu package list
     set_fact:
-      my_packages: "{{ my_packages + ['ipcalc','dnsutils','aptitude','keychain'] }}"
-    when: ansible_os_family == 'Debian'
+      my_packages: "{{ my_packages + ['mysql-client','ipcalc','dnsutils','aptitude','keychain'] }}"
+    when: ansible_distribution == 'Ubuntu'
+
+  - name: set debian package list
+    set_fact:
+      my_packages: "{{ my_packages + ['default-mysql-client','ipcalc','dnsutils','aptitude','keychain'] }}"
+    when: ansible_distribution == 'Debian'
 
   - name: set centos package list
     set_fact:
-      my_packages: "{{ my_packages + ['bind-utils','yadm'] }}"
-    when: ansible_os_family == 'RedHat'
+      my_packages: "{{ my_packages + ['mysql-client','bind-utils','yadm'] }}"
+    when: ansible_distribution == 'RedHat' or ansible_distribution == 'CentOS'
 
 - name: Install additional packages
   action: >
