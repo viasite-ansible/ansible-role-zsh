@@ -94,10 +94,12 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: yes
+  changed_when: False
   when: use_powerline
 
 - name: Configure nanorc for syntax highlighting
   shell: cat ~/.nano/nanorc >> ~/.nanorc
+  changed_when: False
   when: use_powerline
 
 - name: apply nanorc fix
@@ -107,6 +109,7 @@
       path: "{{ item }}"
       regexp: '(.*comment.*)'
       replace: '#\1'
+    changed_when: False
     loop:
     - ~/.nano/html.nanorc
     - ~/.nano/html.j2.nanorc
@@ -116,6 +119,7 @@
       path: ~/.nano/etc-hosts.nanorc
       regexp: 'normal'
       replace: 'white'
+  changed_when: False
   when:
   - not ansible_check_mode
   - use_powerline
