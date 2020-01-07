@@ -1,7 +1,8 @@
 ---
 galaxy_info:
-  author: Stanislav Popov
-  company: Viasite
+  role_name: fancy-console
+  author: Tinashe Chikomo
+  company: N/A
   description: oh-my-zsh with powerlevel9k theme, fzf and other plugins
   license: MIT
   min_ansible_version: 2.0
