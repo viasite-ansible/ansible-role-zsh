@@ -5,6 +5,15 @@
   any_errors_fatal: true
 
   vars:
+    bat_version: 0.12.1
+    use_powerline: true
+    zsh_antigen_bundles_extras:
+      - nvm
+      - joel-porquet/zsh-dircolors-solarized
+      - MichaelAquilina/zsh-you-should-use
+      - oldratlee/hacker-quotes
+      - horosgrisa/mysql-colorize
+    zsh_autosuggestions_bind_key: "^U"
 
   pre_tasks:
     - name: Update apt cache.
