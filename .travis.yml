@@ -1,16 +1,28 @@
 ---
-language: python
-python: "2.7"
 sudo: required
-services:
-  - docker
+language: python
 
-before_install:
-  - docker --version
+env:
+  global:
+    - ROLE_NAME: fancy-console
+  matrix:
+#    - MOLECULE_DISTRO: centos8
+    - MOLECULE_DISTRO: centos7
+    - MOLECULE_DISTRO: ubuntu1804
+    - MOLECULE_DISTRO: ubuntu1604
+    - MOLECULE_DISTRO: debian10
+    - MOLECULE_DISTRO: debian9
+
+services: docker
+
 install:
-  - pip install molecule docker==4.1.0
+  - pip install molecule docker
+
+before_script:
+  - NAME=$(basename $(pwd)) ROLENAME=$(echo $NAME | sed -e s/ansible-//g) && cd .. &&  ln -fs $NAME $ROLENAME && cd $ROLENAME && pwd
+
 script:
-  - molecule test --all
+  - molecule test
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
