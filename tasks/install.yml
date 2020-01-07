@@ -55,6 +55,7 @@
   shell: |
     cd /tmp/grc
     ./install.sh
+  changed_when: False
   when:
   - use_powerline
 
@@ -89,6 +90,7 @@
     force: yes
   become: yes
   become_user: "{{ zsh_user }}"
+  changed_when: False
   when: use_powerline
 
 - name: Clone antigen {{ zsh_antigen_version }}
