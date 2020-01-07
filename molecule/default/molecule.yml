@@ -1,46 +1,35 @@
----
+dependency:
+  name: galaxy
 driver:
   name: docker
-platforms:
-  - name: ansible-role-fancy-console-ubuntu-1604
-    image: ubuntu:16.04
-
-  - name: ansible-role-fancy-console-ubuntu-1804
-    image: ubuntu:18.04
-
-  - name: ansible-role-fancy-console-centos-7
-    image: centos:7
-
-#driver:
-#  name: vagrant
-#  provider:
-#    name: virtualbox
-#platforms:
-#  - name: xenial64
-#    box: bento/ubuntu-16.04
-
-verifier:
-  name: testinfra
-  enabled: False
-
 lint:
   name: yamllint
-  enabled: False
-
+  enabled: false
+#  options:
+#    config-file: molecule/default/yaml-lint.yml
+platforms:
+  - name: ansible-role-exabgp-${MOLECULE_DISTRO}
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
+#    dockerfile: files/Dockerfile.${distribution}-${version}
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
 provisioner:
   name: ansible
+  log: true
+  options:
+    v: true
+  lint:
+    name: ansible-lint
   playbooks:
-    create: ../resources/create.yml
-    prepare: ../resources/prepare.yml
-    converge: ../resources/playbook.yml
-    destroy: ../resources/destroy.yml
-  inventory:
-    group_vars:
-      all:
-        zsh_user: root
-        zsh_mc_solarized_skin: yes
-        zsh_antigen_bundles_extras:
-          - { name: test/in-list, when: true }
-          - { name: test/not-in-list, when: false }
-          - { name: test/command-exists, command: zsh }
-          - { name: test/command-not-exists, command: not-exists-commanddd }
+    converge: ${MOLECULE_PLAYBOOK:-playbook.yml}
+  config_options:
+    defaults:
+      callback_whitelist: profile_tasks
+      timeout: 60
+verifier:
+  name: goss
+  lint:
+    name: yamllint
