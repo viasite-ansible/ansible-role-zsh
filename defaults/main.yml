@@ -3,7 +3,7 @@
 zsh_user: "{{ ansible_user_id }}"
 zsh_user_dir: "{{ ansible_user_dir }}"
 dotfile_repo_url: ""
-my_packages: ['zsh','git','wget','whois','curl','traceroute','jq','zip','mysql-client','moreutils','attr','sysstat',percona-toolkit,'lnav']
+my_packages: ['zsh','git','wget','whois','curl','traceroute','jq','zip','moreutils','attr','sysstat',percona-toolkit,'lnav']
 
 # .zshrc config
 zsh_hist_stamps: yyyy-mm-dd
