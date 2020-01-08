@@ -83,7 +83,7 @@ sudo apt-get install ansible
 
 1. Download role:
 ```
-sudo ansible-galaxy install viasite-ansible.zsh
+sudo ansible-galaxy install hybridadmin.fancy_console
 ```
 
 2. Write playbook or use [playbook.yml](playbook.yml):
@@ -95,7 +95,7 @@ sudo ansible-galaxy install viasite-ansible.zsh
       - joel-porquet/zsh-dircolors-solarized
     zsh_autosuggestions_bind_key: "^U"
   roles:
-    - ansible-role-zsh
+    - hybridadmin.fancy_console
 ```
 
 3. Provision playbook:
