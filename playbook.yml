@@ -11,4 +11,4 @@
       - horosgrisa/mysql-colorize
     zsh_autosuggestions_bind_key: "^U"
   roles:
-    - ansible-role-fancy-console
+    - hybridadmin.fancy_console
