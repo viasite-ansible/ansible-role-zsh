@@ -4,7 +4,7 @@ language: python
 
 env:
   global:
-    - ROLE_NAME: fancy-console
+    - ROLE_NAME: fancy_console
   matrix:
 #    - MOLECULE_DISTRO: centos8
     - MOLECULE_DISTRO: centos7
@@ -19,7 +19,10 @@ install:
   - pip install molecule docker
 
 before_script:
-  - NAME=$(basename $(pwd)) ROLENAME=$(echo $NAME | sed -e s/ansible-//g) && cd .. &&  ln -fs $NAME $ROLENAME && cd $ROLENAME && pwd
+  #- NAME=$(basename $(pwd)) ROLENAME=$(echo $NAME | sed -e s/ansible-//g) && cd .. &&  ln -fs $NAME $ROLENAME && cd $ROLENAME && pwd
+  - cd ../
+  - mv ansible-role-$ROLE_NAME hybridadmin.$ROLE_NAME
+  - cd hybridadmin.$ROLE_NAME
 
 script:
   - molecule test
