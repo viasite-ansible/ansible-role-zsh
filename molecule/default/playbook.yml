@@ -21,4 +21,4 @@
       when: ansible_os_family == 'Debian'
 
   roles:
-    - role: ansible-role-fancy-console
+    - role: hybridadmin.fancy_console
