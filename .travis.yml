@@ -4,7 +4,7 @@ language: python
 
 env:
   global:
-    - ROLE_NAME: fancy_console
+    - ROLE_NAME: fancy-console
   matrix:
 #    - MOLECULE_DISTRO: centos8
     - MOLECULE_DISTRO: centos7
