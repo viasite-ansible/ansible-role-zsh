@@ -21,8 +21,9 @@ install:
 before_script:
   #- NAME=$(basename $(pwd)) ROLENAME=$(echo $NAME | sed -e s/ansible-//g) && cd .. &&  ln -fs $NAME $ROLENAME && cd $ROLENAME && pwd
   - cd ../
-  - mv ansible-role-$ROLE_NAME hybridadmin.$ROLE_NAME
-  - cd hybridadmin.$ROLE_NAME
+  - GALAXY_ROLE_NAME=$(echo "${ROLE_NAME}" | tr '-' '_')
+  - mv ansible-role-$ROLE_NAME hybridadmin.$GALAXY_ROLE_NAME
+  - cd hybridadmin.$GALAXY_ROLE_NAME
 
 script:
   - molecule test
