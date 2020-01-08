@@ -10,7 +10,7 @@ Tested on ~~Debian 6~~, Ubuntu 14.04, Ubuntu 16.04, Ubuntu 18.04, macOS 10.12, C
 - zsh
 - [antigen](https://github.com/zsh-users/antigen)
 - [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
-- [powerlevel9k theme](https://github.com/bhilburn/powerlevel9k)
+- [powerline-shell](https://github.com/b-ryan/powerline-shell) or [powerlevel9k theme](https://github.com/bhilburn/powerlevel9k)
 - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) (except Debian Squeeze),
   with workaround for [#zsh-syntax-highlighting/286](https://github.com/zsh-users/zsh-syntax-highlighting/issues/286)
