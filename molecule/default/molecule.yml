@@ -8,7 +8,7 @@ lint:
 #  options:
 #    config-file: molecule/default/yaml-lint.yml
 platforms:
-  - name: ansible-role-exabgp-${MOLECULE_DISTRO}
+  - name: ansible-role-${ROLE_NAME}-${MOLECULE_DISTRO}
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
 #    dockerfile: files/Dockerfile.${distribution}-${version}
     command: ${MOLECULE_DOCKER_COMMAND:-""}
