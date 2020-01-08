@@ -1,7 +1,6 @@
 ---
 galaxy_info:
-  role_name: fancy-console
-  author: Tinashe Chikomo
+  author: hybridadmin
   company: N/A
   description: oh-my-zsh with powerline-shell or powerlevel9k theme, fzf and other plugins
   license: MIT
