@@ -7,7 +7,7 @@
   when: ansible_os_family == 'RedHat'
 
 - name: install required redhat repo
-  yum:
+  package:
     name: "{{ item }}"
     state: present
   loop:
