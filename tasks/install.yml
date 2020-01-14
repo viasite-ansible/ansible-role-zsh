@@ -30,7 +30,7 @@
 
   - name: set centos package list
     set_fact:
-      my_packages: "{{ my_packages + ['mysql-client','bind-utils','yadm'] }}"
+      my_packages: "{{ my_packages + ['mysql-client','bind-utils','yadm','bash-completion'] }}"
     when: ansible_distribution == 'RedHat' or ansible_distribution == 'CentOS'
 
 - name: Install additional packages
