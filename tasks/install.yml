@@ -1,15 +1,9 @@
 ---
 
 - name: add yadm repository
-  yum_repository:
-    name: thelocehiliosan-yadm-epel-7.repo
-    description: Copr repo for yadm owned by thelocehiliosan
-    baseurl: https://copr-be.cloud.fedoraproject.org/results/thelocehiliosan/yadm/epel-{{ ansible_distribution_major_version }}-$basearch/
-    repo_gpgcheck: 0
-    skip_if_unavailable: True
-    gpgcheck: 1
-    enabled: yes
-    gpgkey: https://copr-be.cloud.fedoraproject.org/results/thelocehiliosan/yadm/pubkey.gpg
+  get_url:
+    url: "https://download.opensuse.org/repositories/home:TheLocehiliosan:yadm/CentOS_{{ ansible_distribution_major_version }}/home:TheLocehiliosan:yadm.repo"
+    dest: /etc/yum.repos.d/yadm.repo
   when: ansible_os_family == 'RedHat'
 
 - name: install required redhat repo
