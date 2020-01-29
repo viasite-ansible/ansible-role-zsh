@@ -151,6 +151,7 @@
     line: "skip_global_compinit=1"
     dest: /etc/zsh/zshenv
     state: present
+  become: yes
   when:
   - ansible_distribution == 'Ubuntu'
   - zsh_env_stats.stat.exists
