@@ -57,8 +57,6 @@
     ./install.sh
   changed_when: False
   become: yes
-  when:
-  - use_powerline
 
 - name: Install bat A cat(1) clone
   apt:
@@ -70,19 +68,27 @@
 
 - name: ubuntu python pip pre-requisites
   include_tasks: ubuntu-python.yml
-  when: ansible_os_family == 'Debian'
+  when: ansible_os_family == 'Debian' and powerline_version == "shell"
 
 - name: redhat python pip pre-requisites
   include_tasks: redhat-python.yml
-  when: ansible_os_family == 'RedHat'
+  when: ansible_os_family == 'RedHat' and powerline_version == "shell"
 
-- name: Install powerline-shell
-  pip:
-    name: powerline-shell
-    executable: "{{ pip3_command }}"
-  when:
-  - not ansible_check_mode
-  - use_powerline
+- name: install powerline
+  block:
+  - name: install powerline-go
+    command: bash -c "/usr/local/go/bin/go get -u github.com/justjanne/powerline-go"
+    ignore_errors: yes
+    changed_when: false
+    when: powerline_version == "go"
+  
+  - name: Install powerline-shell
+    pip:
+      name: powerline-shell
+      executable: "{{ pip3_command }}"
+    when:
+    - not ansible_check_mode
+    - powerline_version == "shell"
 
 - name: Clone nanorc repo
   git:
@@ -93,7 +99,6 @@
   become: yes
   become_user: "{{ zsh_user }}"
   changed_when: False
-  when: use_powerline
 
 - name: Clone antigen {{ zsh_antigen_version }}
   git:
