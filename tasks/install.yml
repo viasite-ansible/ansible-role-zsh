@@ -38,6 +38,7 @@
     {{ ansible_pkg_mgr }} name={{ my_packages }} state=present update_cache=yes
     vars:
       packages: "{{ my_packages }}"
+  become: yes
   when: my_packages is defined
 
 - name: Clone grc v1.11.3
@@ -55,12 +56,14 @@
     cd /tmp/grc
     ./install.sh
   changed_when: False
+  become: yes
   when:
   - use_powerline
 
 - name: Install bat A cat(1) clone
   apt:
     deb: "https://github.com/sharkdp/bat/releases/download/v{{ bat_version }}/bat_{{ bat_version }}_amd64.deb"
+  become: yes
   when:
     - bat_version is defined
     - ansible_os_family == 'Debian'
@@ -125,6 +128,7 @@
     dest: /usr/local/bin
     remote_src: yes
     creates: /usr/local/bin/fzf
+  become: yes
   when: zsh_register_fzf_command.rc == 1
 
 - name: Set directory permissions
