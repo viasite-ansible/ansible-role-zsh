@@ -1,0 +1,56 @@
+---
+- name: check current golang version
+  command: bash -c "/usr/local/go/bin/go version|sed -e 's/go version go//g'|cut -d' ' -f1"
+  ignore_errors: yes
+  register: go_version
+  changed_when: false
+
+- name: install golang
+  block:
+  - name: download golang tar
+    get_url:
+      url: "https://dl.google.com/go/go{{new_go_version}}.linux-amd64.tar.gz"
+      dest: "/tmp"
+      mode: 0440
+
+  - name: Remove old installation of Go
+    file:
+      path: /usr/local/go
+      state: absent
+    become: yes
+
+  - name: Extract the Go tarball
+    unarchive:
+      src: "/tmp/go{{new_go_version}}.linux-amd64.tar.gz"
+      dest: /usr/local
+      copy: no
+    become: yes
+    
+  - name: create go directories in home
+    file:
+      path: "{{item}}"
+      state: directory
+      owner: "{{ zsh_user }}"
+      group: "{{ zsh_user }}"
+      mode: 0775
+    with_items:
+    - "$HOME/go"
+    - "$HOME/go/bin"
+
+  - name: modify .bashrc
+    blockinfile:
+      dest: "$HOME/.bashrc"
+      block: |
+        export GOPATH=$HOME/go
+        export GOBIN=$GOPATH/bin
+        export PATH=$GOBIN:$PATH:/usr/local/go/bin
+      marker: '# {mark} ANSIBLE MANAGED BLOCK - changes for golang'
+      insertafter: EOF
+      create: yes
+
+#  - name: Update sources
+#    command: "/bin/bash -c 'source $HOME/.bashrc"
+#    become: yes
+#    become_user: "{{ zsh_user }}"
+#    changed_when: false
+#    failed_when: false
