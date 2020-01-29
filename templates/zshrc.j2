@@ -62,7 +62,7 @@ antigen bundle {{ bundle }}
 {% endif %}
 {% endfor %}
 
-{% if use_powerline == "false" %}
+{% if powerline_version == "false" %}
 {% if zsh_antigen_installed_version is version(2.0, '>=') %}
 POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
 {% elif zsh_version is version('5.0.8', '<') %}
@@ -114,7 +114,7 @@ declare -p FZF_WIDGET_OPTS > /dev/null 2>&1 && FZF_WIDGET_OPTS[insert-history]="
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE={{ zsh_autosuggestions_max_length }}
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240" # gray highlight
 
-{% if use_powerline == "false" %}
+{% if powerline_version == "false" %}
 # powerlevel9k
 POWERLEVEL9K_SHORTEN_DIR_LENGTH={{ zsh_powerlevel9k_shorten_dir_length }}
 POWERLEVEL9K_STATUS_VERBOSE={{ zsh_powerlevel9k_status_verbose }}
