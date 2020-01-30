@@ -20,12 +20,12 @@
   block:
   - name: set ubuntu package list
     set_fact:
-      my_packages: "{{ my_packages + ['mysql-client','ipcalc','dnsutils','aptitude','keychain'] }}"
+      my_packages: "{{ my_packages + ['yadm','mysql-client','ipcalc','dnsutils','aptitude','keychain'] }}"
     when: ansible_distribution == 'Ubuntu'
 
   - name: set debian package list
     set_fact:
-      my_packages: "{{ my_packages + ['default-mysql-client','ipcalc','dnsutils','aptitude','keychain'] }}"
+      my_packages: "{{ my_packages + ['yadm','default-mysql-client','ipcalc','dnsutils','aptitude','keychain'] }}"
     when: ansible_distribution == 'Debian'
 
   - name: set centos package list
@@ -41,7 +41,7 @@
   become: yes
   when: my_packages is defined
 
-- name: Clone grc v1.11.3
+- name: clone grc v1.11.3
   git:
     repo: https://github.com/garabik/grc.git
     dest: "/tmp/grc"
@@ -51,14 +51,14 @@
   become_user: "{{ zsh_user }}"
   register: zsh_register_grc_clone
 
-- name: Install grc
+- name: install grc
   shell: |
     cd /tmp/grc
     ./install.sh
   changed_when: False
   become: yes
 
-- name: Install bat A cat(1) clone
+- name: install bat A cat(1) clone
   apt:
     deb: "https://github.com/sharkdp/bat/releases/download/v{{ bat_version }}/bat_{{ bat_version }}_amd64.deb"
   become: yes
@@ -66,15 +66,7 @@
     - bat_version is defined
     - ansible_os_family == 'Debian'
 
-- name: ubuntu python pip pre-requisites
-  include_tasks: ubuntu-python.yml
-  when: ansible_os_family == 'Debian' and powerline_version == "shell"
-
-- name: redhat python pip pre-requisites
-  include_tasks: redhat-python.yml
-  when: ansible_os_family == 'RedHat' and powerline_version == "shell"
-
-- name: install powerline
+- name: install powerline prompt prerequisites
   block:
   - name: install powerline-go
     command: bash -c "/usr/local/go/bin/go get -u github.com/justjanne/powerline-go"
@@ -90,7 +82,7 @@
     - not ansible_check_mode
     - powerline_version == "shell"
 
-- name: Clone nanorc repo
+- name: clone nanorc repo
   git:
     repo: 'https://github.com/scopatz/nanorc.git'
     dest: "{{ zsh_user_dir }}/.nano"
@@ -100,7 +92,7 @@
   become_user: "{{ zsh_user }}"
   changed_when: False
 
-- name: Clone antigen {{ zsh_antigen_version }}
+- name: clone antigen {{ zsh_antigen_version }}
   git:
     repo: https://github.com/zsh-users/antigen.git
     dest: "{{ zsh_antigen_path }}/antigen"
@@ -110,7 +102,7 @@
   become_user: "{{ zsh_user }}"
   register: zsh_register_antigen_clone
 
-- name: Clone iwfmp/mc-solarized-skin
+- name: clone iwfmp/mc-solarized-skin
   git:
     repo: https://github.com/iwfmp/mc-solarized-skin.git
     version: master
@@ -120,7 +112,7 @@
   become_user: "{{ zsh_user }}"
   when: zsh_mc_solarized_skin and not zsh_shared
 
-- name: Check fzf installed
+- name: check fzf installed
   command: which fzf
   changed_when: false
   failed_when: false
@@ -136,7 +128,7 @@
   become: yes
   when: zsh_register_fzf_command.rc == 1
 
-- name: Set directory permissions
+- name: set directory permissions
   file:
     name: "{{ zsh_antigen_path }}"
     owner: "{{ zsh_user }}"
