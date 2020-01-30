@@ -1,12 +1,23 @@
 ---
 
-- include: install.yml
+- name: ubuntu python pip pre-requisites
+  include: ubuntu-python.yml
+  when: ansible_os_family == 'Debian' and powerline_version == "shell"
+
+- name: redhat python pip pre-requisites
+  include: redhat-python.yml
+  when: ansible_os_family == 'RedHat' and powerline_version == "shell"
+  
+- name: installation steps
+  include: install.yml
   tags: [ zsh, install ]
 
-- include: configure.yml
+- name: configuration steps
+  include: configure.yml
   tags: [ zsh, configure ]
 
-- include: post-install.yml
+- name: post installation steps
+  include: post-install.yml
   tags: [ zsh, install, post_install ]
 
 - name: Reset antigen cache
