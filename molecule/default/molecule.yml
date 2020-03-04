@@ -32,7 +32,8 @@ provisioner:
     defaults:
       callback_whitelist: profile_tasks
       timeout: 60
-#verifier:
-#  name: goss
+verifier:
+  name: testinfra
+  enabled: False
 #  lint:
 #    name: yamllint
