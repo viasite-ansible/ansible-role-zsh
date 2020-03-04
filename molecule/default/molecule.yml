@@ -7,8 +7,7 @@ driver:
 #  set -e
 #  yamllint .
 #  ansible-lint
-lint:
-  enabled: false
+#  enabled: false
 #  options:
 #    config-file: molecule/default/yaml-lint.yml
 platforms:
