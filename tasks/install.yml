@@ -84,7 +84,7 @@
 
 - name: get zsh user home folder
   shell: |
-    pwd
+    cat /etc/passwd | grep "{{ zsh_user }}" | cut -d ':' -f6
   changed_when: False
   become: yes
   register: user_home
