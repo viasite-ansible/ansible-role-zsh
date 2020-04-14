@@ -114,7 +114,7 @@
 
   - name: etc-hosts conf comment fix in nanorc
     replace:
-      path: ~/.nano/etc-hosts.nanorc
+      path: "{{ user_home.stdout }}/.nano/etc-hosts.nanorc"
       regexp: 'normal'
       replace: 'white'
     changed_when: False
