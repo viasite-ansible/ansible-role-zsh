@@ -97,7 +97,7 @@
   changed_when: False
 
 - name: Configure nanorc for syntax highlighting
-  shell: cat ~/.nano/nanorc >> ~/.nanorc
+  shell: cat {{ user_home.stdout }}/.nano/nanorc >> ~/.nanorc
   changed_when: False
 
 - name: apply nanorc fix
@@ -109,8 +109,8 @@
       replace: '#\1'
     changed_when: False
     loop:
-    - ~/.nano/html.nanorc
-    - ~/.nano/html.j2.nanorc
+    - {{ user_home.stdout }}/.nano/html.nanorc
+    - {{ user_home.stdout }}/.nano/html.j2.nanorc
 
   - name: etc-hosts conf comment fix in nanorc
     replace:
