@@ -15,7 +15,7 @@ sudo apt-get update
 sudo apt-get install ansible python-apt zsh git wget -y
 
 title "Install ansible-role-zsh"
-sudo ansible-galaxy install git+https://github.com/hybridadmin/ansible-role-fancy-console.git --force
+sudo ansible-galaxy install hybridadmin.fancy_console --force
 
 title "Download playbook to /tmp/zsh.yml"
 curl https://raw.githubusercontent.com/hybridadmin/ansible-role-fancy-console/master/playbook.yml > /tmp/zsh.yml
