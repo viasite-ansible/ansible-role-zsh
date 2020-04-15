@@ -20,17 +20,17 @@
   block:
   - name: set ubuntu package list
     set_fact:
-      my_packages: "{{ my_packages + ['yadm','mysql-client','ipcalc','dnsutils','aptitude','keychain'] }}"
+      my_packages: "{{ my_packages + ['yadm','mysql-client','ipcalc','dnsutils','aptitude','keychain','nmap'] }}"
     when: ansible_distribution == 'Ubuntu'
 
   - name: set debian package list
     set_fact:
-      my_packages: "{{ my_packages + ['yadm','default-mysql-client','ipcalc','dnsutils','aptitude','keychain'] }}"
+      my_packages: "{{ my_packages + ['yadm','default-mysql-client','ipcalc','dnsutils','aptitude','keychain','nmap'] }}"
     when: ansible_distribution == 'Debian'
 
   - name: set centos package list
     set_fact:
-      my_packages: "{{ my_packages + ['mysql-client','bind-utils','yadm','bash-completion'] }}"
+      my_packages: "{{ my_packages + ['mysql-client','bind-utils','yadm','bash-completion','nmap'] }}"
     when: ansible_distribution == 'RedHat' or ansible_distribution == 'CentOS'
 
 - name: Install additional packages
