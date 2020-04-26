@@ -67,6 +67,7 @@
   file:
     path: "{{ zsh_user_dir }}/.config/powerline-shell"
     state: directory
+  changed_when: False
   when: powerline_version == "shell"
 
 - name: Write powerline-shell config
@@ -76,6 +77,7 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: yes
+  changed_when: False
   when: powerline_version == "shell"
 
 - name: Write powerline-shell theme
@@ -85,6 +87,7 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: yes
+  changed_when: False
   when: powerline_version == "shell"
 
 - name: Write nanorc file
