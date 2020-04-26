@@ -1,4 +1,13 @@
 ---
+- name: get zsh user directory
+  shell: |
+    set -o pipefail
+    cat /etc/passwd | grep $(whoami) | cut -d ':' -f6
+  args:
+    executable: /bin/bash
+  register: zsh_user_dir
+  check_mode: no
+  changed_when: false
 
 - name: ubuntu python pip pre-requisites
   include: ubuntu-python.yml
