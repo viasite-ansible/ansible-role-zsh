@@ -82,12 +82,12 @@
     - not ansible_check_mode
     - powerline_version == "shell"
 
-- name: get zsh user home folder
-  shell: |
-    cat /etc/passwd | grep "{{ zsh_user }}" | cut -d ':' -f6
-  changed_when: False
-  become: yes
-  register: user_home
+#- name: get zsh user home folder
+#  shell: |
+#    cat /etc/passwd | grep "{{ zsh_user }}" | cut -d ':' -f6
+#  changed_when: False
+#  become: yes
+#  register: user_home
 
 - name: clone nanorc repo
   git:
