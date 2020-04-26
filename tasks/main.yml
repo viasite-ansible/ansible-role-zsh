@@ -2,7 +2,7 @@
 - name: get zsh user directory
   shell: |
     set -o pipefail
-    cat /etc/passwd | grep $(whoami) | cut -d ':' -f6
+    cat /etc/passwd | grep $(whoami) | cut -d ':' -f6 | head -n1
   args:
     executable: /bin/bash
   register: zsh_user_dir
