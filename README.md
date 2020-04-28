@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/hybridadmin/ansible-role-fancy-console.svg?branch=master)](https://travis-ci.org/hybridadmin/ansible-role-fancy-console)
 
-Tested on Debian 9, Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, CentOS 7.
+Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, CentOS 7.
 
 **For upgrade from viasite-ansible.zsh 1.x, 2.x to 3.0 see [below](#upgrade).**
 
