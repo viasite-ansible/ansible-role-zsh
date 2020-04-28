@@ -8,12 +8,11 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-#        - trusty
         - xenial
         - bionic
+        - focal
     - name: Debian
       versions:
-        - stretch
         - buster
     - name: EL
       versions:
