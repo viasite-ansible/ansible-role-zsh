@@ -6,6 +6,7 @@ export TERM="{{ zsh_term }}"
 export EDITOR="{{ zsh_editor }}"
 export PATH="{{ zsh_path | join(":") }}"
 
+HISTFILE=~/.zsh_history
 HIST_STAMPS="{{ zsh_hist_stamps }}"
 UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
 COMPLETION_WAITING_DOTS="true"
@@ -203,7 +204,10 @@ function install_powerline_precmd() {
   done
   precmd_functions+=(powerline_precmd)
 }
-install_powerline_precmd
+
+if [ "$TERM" != "linux" ]; then
+    install_powerline_precmd
+fi
 
 {% else %}
 ## powerline-shell config
