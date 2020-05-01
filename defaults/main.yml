@@ -28,7 +28,7 @@ zsh_path:
   - /usr/local/games
 
 # Use powerline
-use_powerline: false
+#use_powerline: false
 
 fzf_widgets: ytet5uy4/fzf-widgets
 
