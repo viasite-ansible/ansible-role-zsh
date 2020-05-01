@@ -8,3 +8,6 @@
         content: "Acquire::http::Proxy \"{{ lookup('env', 'APT_PROXY') }}\"; Acquire::https::Proxy \"false\";"
         dest: /etc/apt/apt.conf.d/01proxy
       failed_when: False
+    - name: Update apt cache
+      package:
+        update_cache: yes

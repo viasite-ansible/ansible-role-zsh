@@ -2,12 +2,12 @@
 
 - name: Install zsh, git, wget
   package:
-    name: "{{ item }}"
+    name:
+      - zsh
+      - git
+      - wget
     state: present
-  with_items:
-    - zsh
-    - git
-    - wget
+    update_cache: yes
   # brew don't work from root user on macOS
   when: not (zsh_user == 'root' and ansible_os_family == 'Darwin')
 

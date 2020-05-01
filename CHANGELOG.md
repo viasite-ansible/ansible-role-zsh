@@ -1,9 +1,36 @@
-<a name=""></a>
-# [master](https://github.com/viasite-ansible/ansible-role-zsh/compare/v3.2.3...v) (2018-11-21)
+# [master](https://github.com/viasite-ansible/ansible-role-zsh/compare/v3.2.6...v) (2020-05-01)
+
+
+### Bug Fixes
+
+* configurable zsh_fzf_path variable and change $HOME/.bin to $HOME/bin ([5b9ab7a](https://github.com/viasite-ansible/ansible-role-zsh/commit/5b9ab7a))
+* extending of PATH not just rewrite ([6c2fdd7](https://github.com/viasite-ansible/ansible-role-zsh/commit/6c2fdd7)), closes [#14](https://github.com/viasite-ansible/ansible-role-zsh/issues/14)
+
+
+### Features
+
+* fzf path should be /usr/local/bin only in shared scenarios, otherwise it should be installed in local user home ([e3ada98](https://github.com/viasite-ansible/ansible-role-zsh/commit/e3ada98))
 
 
 
-<a name="3.2.3"></a>
+## [3.2.5](https://github.com/viasite-ansible/ansible-role-zsh/compare/v3.2.4...v3.2.5) (2019-03-14)
+
+
+### Bug Fixes
+
+* check commands in in check mode ([030bc1f](https://github.com/viasite-ansible/ansible-role-zsh/commit/030bc1f)), closes [#31](https://github.com/viasite-ansible/ansible-role-zsh/issues/31)
+
+
+
+## [3.2.4](https://github.com/viasite-ansible/ansible-role-zsh/compare/v3.2.3...v3.2.4) (2019-03-14)
+
+
+### Bug Fixes
+
+* correct run in check mode ([9f6d88b](https://github.com/viasite-ansible/ansible-role-zsh/commit/9f6d88b)), closes [#31](https://github.com/viasite-ansible/ansible-role-zsh/issues/31)
+
+
+
 ## [3.2.3](https://github.com/viasite-ansible/ansible-role-zsh/compare/v3.2.2...v3.2.3) (2018-11-21)
 
 
@@ -22,7 +49,6 @@
 
 
 
-<a name="3.2.2"></a>
 ## [3.2.2](https://github.com/viasite-ansible/ansible-role-zsh/compare/v3.2.1...v3.2.2) (2018-06-13)
 
 
@@ -32,7 +58,6 @@
 
 
 
-<a name="3.2.1"></a>
 ## [3.2.1](https://github.com/viasite-ansible/ansible-role-zsh/compare/v3.2.0...v3.2.1) (2018-05-01)
 
 
@@ -42,7 +67,6 @@
 
 
 
-<a name="3.2.0"></a>
 # [3.2.0](https://github.com/viasite-ansible/ansible-role-zsh/compare/v3.1.2...v3.2.0) (2018-01-11)
 
 
@@ -59,7 +83,6 @@
 
 
 
-<a name="3.1.2"></a>
 ## [3.1.2](https://github.com/viasite-ansible/ansible-role-zsh/compare/v3.1.1...v3.1.2) (2017-06-21)
 
 
@@ -69,7 +92,6 @@
 
 
 
-<a name="3.1.1"></a>
 ## [3.1.1](https://github.com/viasite-ansible/ansible-role-zsh/compare/v3.1.0...v3.1.1) (2017-06-14)
 
 
@@ -84,7 +106,6 @@
 
 
 
-<a name="3.1.0"></a>
 # [3.1.0](https://github.com/viasite-ansible/ansible-role-zsh/compare/v3.0.3...v3.1.0) (2017-05-27)
 
 
@@ -94,7 +115,6 @@
 
 
 
-<a name="3.0.3"></a>
 ## [3.0.3](https://github.com/viasite-ansible/ansible-role-zsh/compare/v3.0.2...v3.0.3) (2017-05-27)
 
 
@@ -104,7 +124,6 @@
 
 
 
-<a name="3.0.2"></a>
 ## [3.0.2](https://github.com/viasite-ansible/ansible-role-zsh/compare/v3.0.1...v3.0.2) (2017-05-26)
 
 
@@ -119,7 +138,6 @@
 
 
 
-<a name="3.0.1"></a>
 ## [3.0.1](https://github.com/viasite-ansible/ansible-role-zsh/compare/v3.0.0...v3.0.1) (2017-05-14)
 
 
@@ -134,7 +152,6 @@
 
 
 
-<a name="2.1.8"></a>
 ## [2.1.8](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.7...v2.1.8) (2017-05-13)
 
 
@@ -144,7 +161,6 @@
 
 
 
-<a name="2.1.7"></a>
 ## [2.1.7](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.6...v2.1.7) (2017-05-13)
 
 
@@ -159,7 +175,6 @@
 
 
 
-<a name="2.1.6"></a>
 ## [2.1.6](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.5...v2.1.6) (2017-04-26)
 
 
@@ -174,7 +189,6 @@
 
 
 
-<a name="2.1.5"></a>
 ## [2.1.5](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.4...v2.1.5) (2017-04-25)
 
 
@@ -184,7 +198,6 @@
 
 
 
-<a name="2.1.4"></a>
 ## [2.1.4](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.3...v2.1.4) (2017-04-23)
 
 
@@ -200,7 +213,6 @@
 
 
 
-<a name="2.1.3"></a>
 ## [2.1.3](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.2...v2.1.3) (2017-04-21)
 
 
@@ -210,7 +222,6 @@
 
 
 
-<a name="2.1.2"></a>
 ## [2.1.2](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.1...v2.1.2) (2017-04-19)
 
 
@@ -219,13 +230,7 @@
 * removed debian plugin from zsh_antigen_bundles ([ddb600e](https://github.com/viasite-ansible/ansible-role-zsh/commit/ddb600e)), closes [#6](https://github.com/viasite-ansible/ansible-role-zsh/issues/6)
 
 
-### BREAKING CHANGES
 
-* Now plugin `debian` should be added to `zsh_antigen_bundles` for using.
-
-
-
-<a name="2.1.1"></a>
 ## [2.1.1](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.1.0...v2.1.1) (2017-04-16)
 
 
@@ -241,7 +246,6 @@
 
 
 
-<a name="2.1.0"></a>
 # [2.1.0](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.0.4...v2.1.0) (2017-04-08)
 
 
@@ -255,14 +259,7 @@
 * new widget: fzf-git-delete-branches, add --exact to insert-history ([15d22a4](https://github.com/viasite-ansible/ansible-role-zsh/commit/15d22a4)), closes [ytet5uy4/fzf-widgets#2](https://github.com/ytet5uy4/fzf-widgets/issues/2)
 
 
-### BREAKING CHANGES
 
-* Renamed fzf-git-add to fzf-git-add-files
-Renamed fzf-git-checkout to fzf-git-checkout-branch
-
-
-
-<a name="2.0.4"></a>
 ## [2.0.4](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.0.3...v2.0.4) (2017-04-03)
 
 
@@ -278,7 +275,6 @@ Renamed fzf-git-checkout to fzf-git-checkout-branch
 
 
 
-<a name="2.0.3"></a>
 ## [2.0.3](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.0.2...v2.0.3) (2017-04-03)
 
 
@@ -290,7 +286,6 @@ Renamed fzf-git-checkout to fzf-git-checkout-branch
 
 
 
-<a name="2.0.2"></a>
 ## [2.0.2](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.0.1...v2.0.2) (2017-04-02)
 
 
@@ -302,7 +297,6 @@ Renamed fzf-git-checkout to fzf-git-checkout-branch
 
 
 
-<a name="2.0.1"></a>
 ## [2.0.1](https://github.com/viasite-ansible/ansible-role-zsh/compare/v2.0.0...v2.0.1) (2017-04-02)
 
 
@@ -317,7 +311,6 @@ Renamed fzf-git-checkout to fzf-git-checkout-branch
 
 
 
-<a name="2.0.0"></a>
 # [2.0.0](https://github.com/viasite-ansible/ansible-role-zsh/compare/v1.1.6...v2.0.0) (2017-04-02)
 
 
@@ -343,7 +336,6 @@ Renamed fzf-git-checkout to fzf-git-checkout-branch
 
 
 
-<a name="1.1.5"></a>
 ## [1.1.5](https://github.com/viasite-ansible/ansible-role-zsh/compare/v1.1.4...v1.1.5) (2017-03-09)
 
 
@@ -353,7 +345,6 @@ Renamed fzf-git-checkout to fzf-git-checkout-branch
 
 
 
-<a name="1.1.4"></a>
 ## [1.1.4](https://github.com/viasite-ansible/ansible-role-zsh/compare/v1.1.3...v1.1.4) (2017-03-08)
 
 
@@ -363,7 +354,6 @@ Renamed fzf-git-checkout to fzf-git-checkout-branch
 
 
 
-<a name="1.1.3"></a>
 ## [1.1.3](https://github.com/viasite-ansible/ansible-role-zsh/compare/v1.1.2...v1.1.3) (2017-03-08)
 
 
@@ -373,7 +363,6 @@ Renamed fzf-git-checkout to fzf-git-checkout-branch
 
 
 
-<a name="1.1.2"></a>
 ## [1.1.2](https://github.com/viasite-ansible/ansible-role-zsh/compare/v1.1.1...v1.1.2) (2017-03-06)
 
 
@@ -386,7 +375,6 @@ Renamed fzf-git-checkout to fzf-git-checkout-branch
 
 
 
-<a name="1.1.1"></a>
 ## [1.1.1](https://github.com/viasite-ansible/ansible-role-zsh/compare/v1.1.0...v1.1.1) (2017-03-05)
 
 
@@ -396,7 +384,6 @@ Renamed fzf-git-checkout to fzf-git-checkout-branch
 
 
 
-<a name="1.1.0"></a>
 # [1.1.0](https://github.com/viasite-ansible/ansible-role-zsh/compare/v1.0.0...v1.1.0) (2017-03-05)
 
 
@@ -413,7 +400,6 @@ Renamed fzf-git-checkout to fzf-git-checkout-branch
 
 
 
-<a name="1.0.0"></a>
 # [1.0.0](https://github.com/viasite-ansible/ansible-role-zsh/compare/1c12b96...v1.0.0) (2017-02-23)
 
 
