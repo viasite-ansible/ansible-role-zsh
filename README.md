@@ -11,7 +11,8 @@ If you using Ubuntu or Debian and not familiar with Ansible, you can just execut
 ```
 curl https://raw.githubusercontent.com/viasite-ansible/ansible-role-zsh/master/install.sh | bash
 ```
-It will install zsh for root and current user.
+It will install pip3, ansible and setup zsh for root and current user.
+
 Then [configure terminal application](#configure-terminal-application).
 
 
