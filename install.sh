@@ -5,6 +5,7 @@ title() {
     printf "\n${color}$1${nc}\n"
 }
 
+# https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-rhel-centos-or-fedora
 title "Install Ansible"
 sudo apt-get install software-properties-common -y
 sudo apt-add-repository ppa:ansible/ansible -y
