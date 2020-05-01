@@ -6,7 +6,7 @@
 
   vars:
     bat_version: 0.15.0
-    use_powerline: true
+    powerline_version: "shell"
     zsh_antigen_bundles_extras:
       - nvm
       - joel-porquet/zsh-dircolors-solarized
