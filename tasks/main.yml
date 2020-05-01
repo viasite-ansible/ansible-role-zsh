@@ -16,7 +16,11 @@
 - name: redhat python pip pre-requisites
   include: redhat-python.yml
   when: ansible_os_family == 'RedHat' and powerline_version == "shell"
-  
+
+- name: golang installation
+  include: golang-install.yml
+  when: powerline_version == "go"
+
 - name: installation steps
   include: install.yml
   tags: [ zsh, install ]
