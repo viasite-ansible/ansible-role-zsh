@@ -2,9 +2,6 @@
 
 Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, CentOS 7.
 
-**For upgrade from viasite-ansible.zsh 1.x, 2.x to 3.0 see [below](#upgrade).**
-
-
 
 ## Includes:
 - zsh
@@ -151,26 +148,6 @@ source /usr/share/zsh-config/.zshrc
 ```
 
 You can still provision custom configs for several users.
-
-
-
-## Upgrade
-viasite-ansible.zsh v3.0 introduces antigen v2.0, it don't have backward compatibility to antigen 1.x.
-
-I don't spent much time for smooth upgrade, therefore you probably should do some manual actions:
-if powerlevel9k prompt don't loaded after provision role, you should execute `antigen reset`.
-
-After reopen shell all should be done.
-
-### Downgrade to antigen v1
-Antigen v2 much faster (up to 2x more faster startup), but if something went wrong, you can downgrade to antigen v1,
-see note for zsh 4.3 users below.
-
-### For users with zsh 4.x
-Antigen v2 not work on zsh < 5.0, if you use zsh 4.x, please add to you playbook:
-``` yaml
-zsh_antigen_version: v1.4.1
-```
 
 
 
