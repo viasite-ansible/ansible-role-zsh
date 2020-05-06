@@ -197,6 +197,7 @@ function powerline_precmd() {
             __DURATION="$(($__ERT - ${__TIMER:-__ERT}))"
     fi
     eval "$(${=POWERLINE_CMD} -shell zsh -mode $POWERLINE_FONT_MODE -duration $__DURATION -error $__ERRCODE)"
+    unset __TIMER
 }
 
 function install_powerline_precmd() {
