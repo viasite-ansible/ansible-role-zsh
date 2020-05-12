@@ -7,13 +7,12 @@ title() {
 
 # https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-rhel-centos-or-fedora
 title "Install Ansible"
-sudo apt-get install software-properties-common -y
-sudo apt-add-repository ppa:ansible/ansible -y
-if [ -f /etc/apt/sources.list.d/ansible-ansible-jessie.list ]; then
-    sudo sed -i 's/jessie/trusty/g' /etc/apt/sources.list.d/ansible-ansible-jessie.list
-fi
+sudo python get-pip.py
+export PATH=$PATH:~/.local/bin
+sudo pip install ansible
+
 sudo apt-get update
-sudo apt-get install ansible python-apt zsh git wget -y
+sudo apt-get install python-apt zsh git wget -y
 
 title "Install ansible-role-zsh"
 sudo ansible-galaxy install hybridadmin.fancy_console --force
