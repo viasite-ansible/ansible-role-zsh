@@ -162,6 +162,8 @@ POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="{{ zsh_powerlevel9k_command_exec
 # Aliases
 alias suser='su -'
 
+{% if zsh_load_etc_profile %}source /etc/profile{% endif %}
+
 # user configs
 [[ -r /etc/zsh/zshrc.local ]] && source /etc/zsh/zshrc.local
 [[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
