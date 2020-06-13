@@ -22,8 +22,7 @@ Then [configure terminal application](#configure-terminal-application).
 - [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 - [powerlevel9k theme](https://github.com/bhilburn/powerlevel9k)
 - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
-- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) (except Debian Squeeze),
-  with workaround for [#zsh-syntax-highlighting/286](https://github.com/zsh-users/zsh-syntax-highlighting/issues/286)
+- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 - [unixorn/autoupdate-antigen.zshplugin](https://github.com/unixorn/autoupdate-antigen.zshplugin)
 - [ytet5uy4/fzf-widgets](https://github.com/ytet5uy4/fzf-widgets)
 - [urbainvaes/fzf-marks](https://github.com/popstas/urbainvaes/fzf-marks)
@@ -33,6 +32,7 @@ Then [configure terminal application](#configure-terminal-application).
 - default colors tested with solarized dark and default grey terminal in putty
 - add custom prompt elements from yml
 - custom zsh config with `~/.zshrc.local` or `/etc/zshrc.local`
+- load `/etc/profile.d` scripts
 - install only plugins that useful for your machine. For example, plugin `docker` will not install if you have not Docker
 
 ## 1.5 mins demo
@@ -54,46 +54,22 @@ Note: you cannot install vagrant on VPS like Digital Ocean or in Docker. Use loc
 
 
 
-## Known bugs
-### `su username` caused errors
-See [antigen issue](https://github.com/zsh-users/antigen/issues/136).
-If both root and su user using antigen, you should use `su - username` in place of `su username`.
-
-Or you can use bundled alias `suser`.
-
-Also, you can try to fix it, add to `~/.zshrc.local`:
-```
-alias su='su -'
-```
-But this alias can break you scripts, that using `su`.
-
-
-
 ## Install for real machine
-
-### Zero-knowledge install:
-If you using Ubuntu or Debian and not familiar with Ansible, you can just execute [install.sh](install.sh) on target machine:
-```
-curl https://raw.githubusercontent.com/viasite-ansible/ansible-role-zsh/master/install.sh | bash
-```
-It will install zsh for root and current user.
-Then [configure terminal application](#configure-terminal-application).
-
+Zero-knowledge install: see [above](#zero-knowledge-install).
 
 ### Manual install
 
 0. [Install Ansible](http://docs.ansible.com/ansible/intro_installation.html).
 For Ubuntu:
 ``` bash
-sudo apt-get install software-properties-common
-sudo apt-add-repository ppa:ansible/ansible
-sudo apt-get update
-sudo apt-get install ansible
+sudo apt update
+sudo apt install python3-pip -y
+sudo pip3 install ansible
 ```
 
 1. Download role:
 ```
-sudo ansible-galaxy install viasite-ansible.zsh
+ansible-galaxy install viasite-ansible.zsh --force
 ```
 
 2. Write playbook or use [playbook.yml](playbook.yml):
@@ -131,7 +107,7 @@ Via playbook:
 
 Or via command:
 ```
-ansible-playbook -i hosts zsh.yml --extra-vars="zsh_user=otheruser"
+ansible-playbook -i hosts zsh.yml -e zsh_user=otheruser
 ```
 
 4. Install fzf **without shell extensions**, [download binary](https://github.com/junegunn/fzf-bin/releases)
@@ -161,26 +137,6 @@ source /usr/share/zsh-config/.zshrc
 ```
 
 You can still provision custom configs for several users.
-
-
-
-## Upgrade
-viasite-ansible.zsh v3.0 introduces antigen v2.0, it don't have backward compatibility to antigen 1.x.
-
-I don't spent much time for smooth upgrade, therefore you probably should do some manual actions:
-if powerlevel9k prompt don't loaded after provision role, you should execute `antigen reset`.
-
-After reopen shell all should be done.
-
-### Downgrade to antigen v1
-Antigen v2 much faster (up to 2x more faster startup), but if something went wrong, you can downgrade to antigen v1,
-see note for zsh 4.3 users below.
-
-### For users with zsh 4.x
-Antigen v2 not work on zsh < 5.0, if you use zsh 4.x, please add to you playbook:
-``` yaml
-zsh_antigen_version: v1.4.1
-```
 
 
 
@@ -296,3 +252,38 @@ Bundles `docker` and `docker-compose` will be added to config only if commands e
 - { name: brew, when: "{{ ansible_os_family != 'Darwin' }}" }
 ```
 Note: you should wrap condition in `"{{ }}"`
+
+
+
+## Upgrade
+viasite-ansible.zsh v3.0 introduces antigen v2.0, it don't have backward compatibility to antigen 1.x.
+
+I don't spent much time for smooth upgrade, therefore you probably should do some manual actions:
+if powerlevel9k prompt don't loaded after provision role, you should execute `antigen reset`.
+
+After reopen shell all should be done.
+
+### Downgrade to antigen v1
+Antigen v2 much faster (up to 2x more faster startup), but if something went wrong, you can downgrade to antigen v1,
+see note for zsh 4.3 users below.
+
+### For users with zsh 4.x
+Antigen v2 not work on zsh < 5.0, if you use zsh 4.x, please add to you playbook:
+``` yaml
+zsh_antigen_version: v1.4.1
+```
+
+
+## Known bugs
+### `su username` caused errors
+See [antigen issue](https://github.com/zsh-users/antigen/issues/136).
+If both root and su user using antigen, you should use `su - username` in place of `su username`.
+
+Or you can use bundled alias `suser`.
+
+Also, you can try to fix it, add to `~/.zshrc.local`:
+```
+alias su='su -'
+```
+But this alias can break you scripts, that using `su`.
+
