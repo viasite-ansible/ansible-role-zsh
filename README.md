@@ -86,7 +86,7 @@ ansible-galaxy install viasite-ansible.zsh --force
 
 3. Provision playbook:
 ```
-sudo ansible-playbook -i "localhost," -c local playbook.yml
+ansible-playbook -i "localhost," -c local -K playbook.yml
 ```
 
 If you want to provision role for root user on macOS, you should install packages manually:

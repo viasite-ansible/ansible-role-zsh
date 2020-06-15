@@ -19,10 +19,10 @@ title "Download playbook to /tmp/zsh.yml"
 curl https://raw.githubusercontent.com/viasite-ansible/ansible-role-zsh/master/playbook.yml > /tmp/zsh.yml
 
 title "Provision playbook for root"
-sudo ansible-playbook -i "localhost," -c local /tmp/zsh.yml
+ansible-playbook -i "localhost," -c local -b /tmp/zsh.yml
 
 title "Provision playbook for $(whoami)"
-sudo ansible-playbook -i "localhost," -c local /tmp/zsh.yml --extra-vars="zsh_user=$(whoami)"
+ansible-playbook -i "localhost," -c local -b /tmp/zsh.yml --extra-vars="zsh_user=$(whoami)"
 
 title "Finished! Please, restart your shell."
 echo ""
