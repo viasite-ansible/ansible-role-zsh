@@ -39,6 +39,8 @@ zsh_antigen_bundles:
   - { name: httpie, command: http }
   - { name: golang, command: go }
   - { name: gulp, command: gulp }
+  - { name: helm, command: helm }
+  - { name: kubectl, command: kubectl }
   - { name: pip, command: pip }
   - { name: rake, command: rake }
   - { name: symfony2, command: symfony }
