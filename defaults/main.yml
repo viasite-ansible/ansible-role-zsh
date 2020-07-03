@@ -177,6 +177,10 @@ zsh_powerlevel9k_context_root_foreground: "255" # white
 zsh_powerlevel9k_context_root_background: "124" # red
 zsh_powerlevel9k_dir_foreground: "255" # white
 zsh_powerlevel9k_dir_background: "240" # gray
+zsh_powerlevel9k_dir_etc_foreground: "{{ zsh_powerlevel9k_dir_foreground }}"
+zsh_powerlevel9k_dir_etc_background: "{{ zsh_powerlevel9k_dir_background }}"
+zsh_powerlevel9k_dir_path_highlight_foreground: "{{ zsh_powerlevel9k_dir_foreground }}"
+zsh_powerlevel9k_dir_path_highlight_background: "{{ zsh_powerlevel9k_dir_background }}"
 
 # vcs colors
 zsh_powerlevel9k_vcs_foreground: "232" # about black on any palette
