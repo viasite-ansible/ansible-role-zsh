@@ -4,17 +4,11 @@
     pip3_command: pip3
     python3_pyenv: null
 
-#- name: "add python3 repo"
-#  yum:
-#    name: "https://centos7.iuscommunity.org/ius-release.rpm"
-#    state: present
-
 - name: "python3: install packages"
   become: true
   package:
     name: ['python3']
     state: present
-#  when: not ansible_check_mode
 
 #- name: "python3: get python executable"
 #  shell: |
@@ -30,35 +24,3 @@
   become: true
   command: "{{ python3_command }} -m ensurepip"
   changed_when: false
-
-#- name: "python3: link executable"
-#  become: true
-#  file:
-#    src: "{{ python3_which.stdout }}"
-#    dest: "{{ python3_which.stdout|dirname }}/python"
-#    state: link
-#  when:
-#  - python3_pyenv == None
-#  - not ansible_check_mode
-
-#- name: "python3: get pip executable"
-#  shell: |
-#    set -o pipefail
-#    {{ pip3_command }} --version | awk '{print $2}'
-#  args:
-#    executable: /bin/bash
-#  register: pip_installed_version
-#  changed_when: false
-#  check_mode: no
-
-#- name: python3 fix for yum
-#  replace:
-#    path: "{{ item }}"
-#    regexp: '\/usr\/bin\/python$'
-#    replace: '/usr/bin/python2'
-#  loop:
-#  - /usr/bin/yum
-#  - /usr/libexec/urlgrabber-ext-down
-#  - /usr/bin/firewall-cmd
-#  - /usr/bin/firewall-offline-cmd
-#  when: ansible_distribution_major_version <= 7
