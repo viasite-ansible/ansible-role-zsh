@@ -13,7 +13,6 @@ driver:
 platforms:
   - name: ansible-role-${ROLE_NAME}-${MOLECULE_DISTRO}
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
-#    dockerfile: files/Dockerfile.${distribution}-${version}
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -35,5 +34,3 @@ provisioner:
 verifier:
   name: testinfra
   enabled: False
-#  lint:
-#    name: yamllint
