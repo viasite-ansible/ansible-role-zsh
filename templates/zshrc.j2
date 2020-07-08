@@ -172,8 +172,8 @@ POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="{{ zsh_powerlevel9k_command_exec
 
 {% elif powerline_version == "go" %}
 ## powerline-go config
-POWERLINE_BIN="$GOPATH/bin/powerline-go"
-[ "$TERM" != "linux" -a -f "$POWERLINE_BIN" ] || return 0
+POWERLINE_BIN="$(which powerline-go)"
+#POWERLINE_BIN="$GOPATH/bin/powerline-go"
 POWERLINE_FONT_MODE="patched"
 POWERLINE_MODULES_LEFT="time,venv,user,host,ssh,cwd,perms,git,hg,ssh,root"
 POWERLINE_MODULES_RIGHT="exit,duration,git,vgo,docker,kube"
@@ -186,25 +186,27 @@ POWERLINE_CMD="${POWERLINE_BIN} -shorten-gke-names -modules ${POWERLINE_MODULES_
 zmodload zsh/datetime
 
 function preexec() {
-    __TIMER=$EPOCHREALTIME
+  __TIMER=$EPOCHREALTIME
 }
 
 function powerline_precmd() {
-    local __ERRCODE=$?
-    local __DURATION=0
-    if [ -n $__TIMER ] ; then
-            local __ERT=$EPOCHREALTIME
-            __DURATION="$(($__ERT - ${__TIMER:-__ERT}))"
-    fi
-    eval "$(${=POWERLINE_CMD} -shell zsh -mode $POWERLINE_FONT_MODE -duration $__DURATION -error $__ERRCODE)"
-    unset __TIMER
+  local __ERRCODE=$?
+  local __DURATION=0
+
+  if [ -n $__TIMER ]; then
+    local __ERT=$EPOCHREALTIME
+    __DURATION="$(($__ERT - ${__TIMER:-__ERT}))"
+  fi
+
+  eval "$($GOPATH/bin/powerline-go -error $__ERRCODE -modules ${POWERLINE_MODULES_LEFT} -shell zsh -eval -duration $__DURATION -numeric-exit-codes -modules-right ${POWERLINE_MODULES_RIGHT})"
+  unset __TIMER
 }
 
 function install_powerline_precmd() {
   for s in "${precmd_functions[@]}"; do
-        if [ "$s" = "powerline_precmd" ]; then
-          return
-        fi
+    if [ "$s" = "powerline_precmd" ]; then
+      return
+    fi
   done
   precmd_functions+=(powerline_precmd)
 }
