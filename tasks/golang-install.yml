@@ -34,8 +34,8 @@
       group: "{{ zsh_user }}"
       mode: 0775
     with_items:
-    - "$HOME/go"
-    - "$HOME/go/bin"
+    - "{{ zsh_user_dir.stdout }}/go"
+    - "{{ zsh_user_dir.stdout }}/go/bin"
 
 #  - name: modify .bashrc
 #    blockinfile:
