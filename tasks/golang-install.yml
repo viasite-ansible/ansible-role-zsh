@@ -37,20 +37,20 @@
     - "{{ zsh_user_dir.stdout }}/go"
     - "{{ zsh_user_dir.stdout }}/go/bin"
 
-#  - name: modify .bashrc
-#    blockinfile:
-#      dest: "$HOME/.bashrc"
-#      block: |
-#        export GOPATH=$HOME/go
-#        export GOBIN=$GOPATH/bin
-#        export PATH=$GOBIN:$PATH:/usr/local/go/bin
-#      marker: '# {mark} ANSIBLE MANAGED BLOCK - changes for golang'
-#      insertafter: EOF
-#      create: yes
+  - name: modify .bashrc
+    blockinfile:
+      dest: "$HOME/.bashrc"
+      block: |
+        export GOPATH=$HOME/go
+        export GOBIN=$GOPATH/bin
+        export PATH=$GOBIN:$PATH:/usr/local/go/bin
+      marker: '# {mark} ANSIBLE MANAGED BLOCK - changes for golang'
+      insertafter: EOF
+      create: yes
 
-#  - name: Update sources
-#    command: "/bin/bash -c 'source $HOME/.bashrc"
-#    become: yes
-#    become_user: "{{ zsh_user }}"
-#    changed_when: false
-#    failed_when: false
+  - name: Update sources
+    command: "/bin/bash -c 'source $HOME/.bashrc"
+    become: yes
+    become_user: "{{ zsh_user }}"
+    changed_when: false
+    failed_when: false
