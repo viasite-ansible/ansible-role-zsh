@@ -18,6 +18,7 @@
       src: "https://dl.google.com/go/go{{new_go_version}}.linux-amd64.tar.gz"
       dest: /usr/local
       remote_src: yes
+    become: yes
 
 #    get_url:
 #      url: "https://dl.google.com/go/go{{new_go_version}}.linux-amd64.tar.gz"
