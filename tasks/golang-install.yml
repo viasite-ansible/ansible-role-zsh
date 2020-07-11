@@ -7,24 +7,29 @@
 
 - name: install golang
   block:
-  - name: download golang tar
-    get_url:
-      url: "https://dl.google.com/go/go{{new_go_version}}.linux-amd64.tar.gz"
-      dest: "/tmp"
-      mode: 0440
-
   - name: Remove old installation of Go
     file:
       path: /usr/local/go
       state: absent
     become: yes
 
-  - name: Extract the Go tarball
+  - name: download golang tar
     unarchive:
-      src: "/tmp/go{{new_go_version}}.linux-amd64.tar.gz"
+      src: "https://dl.google.com/go/go{{new_go_version}}.linux-amd64.tar.gz"
       dest: /usr/local
-      copy: no
-    become: yes
+      remote_src: yes
+
+#    get_url:
+#      url: "https://dl.google.com/go/go{{new_go_version}}.linux-amd64.tar.gz"
+#      dest: "/tmp"
+#      mode: 0440
+
+#  - name: Extract the Go tarball
+#    unarchive:
+#      src: "/tmp/go{{new_go_version}}.linux-amd64.tar.gz"
+#      dest: /usr/local
+#      copy: no
+#    become: yes
     
   - name: create go directories in home
     file:
