@@ -20,18 +20,6 @@
       remote_src: yes
     become: yes
 
-#    get_url:
-#      url: "https://dl.google.com/go/go{{new_go_version}}.linux-amd64.tar.gz"
-#      dest: "/tmp"
-#      mode: 0440
-
-#  - name: Extract the Go tarball
-#    unarchive:
-#      src: "/tmp/go{{new_go_version}}.linux-amd64.tar.gz"
-#      dest: /usr/local
-#      copy: no
-#    become: yes
-    
   - name: create go directories in home
     file:
       path: "{{item}}"
@@ -55,7 +43,7 @@
       create: yes
 
   - name: Update sources
-    command: "/bin/bash -c 'source $HOME/.bashrc"
+    command: "/bin/bash -c 'source $HOME/.bashrc'"
     become: yes
     become_user: "{{ zsh_user }}"
     changed_when: false
