@@ -3,7 +3,7 @@
 zsh_user: "{{ ansible_user_id }}"
 zsh_user_dir: "{{ ansible_user_dir }}"
 dotfile_repo_url: ""
-my_packages: ['zsh','git','wget','whois','curl','traceroute','jq','zip','moreutils','attr','sysstat',percona-toolkit,'lnav']
+my_packages: ['zsh', 'git', 'wget', 'whois', 'curl', 'traceroute', 'jq', 'zip', 'moreutils', 'attr', 'sysstat', 'percona-toolkit', 'lnav']
 new_go_version: "1.14.4"
 powerline_version: "shell"
 zsh_fzf_version: 0.21.1
@@ -74,13 +74,13 @@ zsh_hotkeys:
   - { hotkey: '\e[4~', action: end-of-line }
 
   # fzf-widgets
-  - { hotkey: '^@' ,   action: fzf-select-widget,            bundle: "{{ fzf_widgets }}" }
-  - { hotkey: '^@.' ,  action: fzf-edit-dotfiles,            bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@',   action: fzf-select-widget,            bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^@.',  action: fzf-edit-dotfiles,            bundle: "{{ fzf_widgets }}" }
   - { hotkey: '^@c',   action: fzf-change-directory,         bundle: "{{ fzf_widgets }}" }
   - { hotkey: '^@f',   action: fzf-edit-files,               bundle: "{{ fzf_widgets }}" }
   - { hotkey: '^@k',   action: fzf-kill-processes,           bundle: "{{ fzf_widgets }}" }
   - { hotkey: '^@s',   action: fzf-exec-ssh,                 bundle: "{{ fzf_widgets }}" }
-  - { hotkey: '^\' ,   action: fzf-change-recent-directory,  bundle: "{{ fzf_widgets }}" }
+  - { hotkey: '^\',   action: fzf-change-recent-directory,  bundle: "{{ fzf_widgets }}" }
   - { hotkey: '^r',    action: fzf-insert-history,           bundle: "{{ fzf_widgets }}" }
   - { hotkey: '^xf',   action: fzf-insert-files,             bundle: "{{ fzf_widgets }}" }
   - { hotkey: '^xd',   action: fzf-insert-directory,         bundle: "{{ fzf_widgets }}" }

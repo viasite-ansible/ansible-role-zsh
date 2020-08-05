@@ -15,14 +15,14 @@
 
   - name: download golang tar
     unarchive:
-      src: "https://dl.google.com/go/go{{new_go_version}}.linux-amd64.tar.gz"
+      src: "https://dl.google.com/go/go{{ new_go_version }}.linux-amd64.tar.gz"
       dest: /usr/local
       remote_src: yes
     become: yes
 
   - name: create go directories in home
     file:
-      path: "{{item}}"
+      path: "{{ item }}"
       state: directory
       owner: "{{ zsh_user }}"
       group: "{{ zsh_user }}"

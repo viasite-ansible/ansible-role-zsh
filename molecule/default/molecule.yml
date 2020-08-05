@@ -3,15 +3,12 @@ dependency:
 driver:
   name: docker
 
-#lint: |
-#  set -e
-#  yamllint .
-#  ansible-lint
-#  enabled: false
-#  options:
-#    config-file: molecule/default/yaml-lint.yml
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
 platforms:
-  - name: ansible-role-${ROLE_NAME}-${MOLECULE_DISTRO}
+  - name: ansible-role-${ROLE_NAME:-fancy_console}-${MOLECULE_DISTRO:-centos7}
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:

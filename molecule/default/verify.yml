@@ -35,11 +35,13 @@
     - name: Register test files
       shell: "ls {{ goss_test_directory }}/test_*.yml"
       register: test_files
+      changed_when: false
 
     - name: Execute Goss tests
       command: "{{ goss_dst }} -g {{ item }} validate --format {{ goss_format }}"
       register: test_results
       with_items: "{{ test_files.stdout_lines }}"
+      changed_when: false
 
     - name: Display details about the Goss results
       debug:

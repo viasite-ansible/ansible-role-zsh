@@ -25,7 +25,7 @@
 
   - name: set debian package list
     set_fact:
-      my_packages: "{{ my_packages + ['yadm','default-mysql-client','ipcalc','dnsutils','aptitude','keychain','perl-doc','procps','man-db','libnet-ifconfig-wrapper-perl','telnet','mtr'] }}"
+      my_packages: "{{ my_packages + ['yadm','default-mysql-client','ipcalc','dnsutils','aptitude','keychain','perl-doc','procps','man-db','telnet','mtr'] }}"
     when: ansible_distribution == 'Debian'
 
   - name: set centos package list
@@ -73,7 +73,7 @@
     ignore_errors: yes
     changed_when: false
     when: powerline_version == "go"
-  
+
   - name: Install powerline-shell
     pip:
       name: powerline-shell

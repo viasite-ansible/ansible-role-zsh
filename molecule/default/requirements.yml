@@ -1,0 +1,4 @@
+---
+- src: https://github.com/hybridadmin/ansible-role-fancy-console
+  version: master
+  name: hybridadmin.fancy_console
