@@ -20,7 +20,7 @@
   block:
   - name: set ubuntu package list
     set_fact:
-      my_packages: "{{ my_packages + ['yadm','mysql-client','ipcalc','dnsutils','aptitude','keychain','nmap'] }}"
+      my_packages: "{{ my_packages + ['yadm','mysql-client','ipcalc','dnsutils','aptitude','keychain','nmap','moreutils'] }}"
     when: ansible_distribution == 'Ubuntu'
 
   - name: set debian package list
