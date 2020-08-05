@@ -17,7 +17,7 @@
 
 - name: add mariadb repo
   shell: |
-    set -e
+    set -o pipefail
     curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
   changed_when: false
   when: ansible_os_family == 'RedHat'
