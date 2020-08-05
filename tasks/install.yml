@@ -11,16 +11,22 @@
     name: "{{ item }}"
     state: present
   loop:
-  - "https://repo.percona.com/yum/percona-release-latest.noarch.rpm"
+#  - "https://repo.percona.com/yum/percona-release-latest.noarch.rpm"
   - "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
-#  - "http://repo.openfusion.net/centos{{ ansible_distribution_major_version }}-x86_64/keychain-2.8.3-2.el{{ ansible_distribution_major_version }}.noarch.rpm"
+  when: ansible_os_family == 'RedHat'
+
+- name: add mariadb repo
+  shell: |
+    set -e
+    curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+  changed_when: false
   when: ansible_os_family == 'RedHat'
 
 - name: set additional package list
   block:
   - name: set ubuntu package list
     set_fact:
-      my_packages: "{{ my_packages + ['yadm','mysql-client','ipcalc','dnsutils','aptitude','keychain','nmap','moreutils'] }}"
+      my_packages: "{{ my_packages + ['yadm','mysql-client','ipcalc','dnsutils','aptitude','keychain','nmap','moreutils','percona-toolkit'] }}"
     when: ansible_distribution == 'Ubuntu'
 
   - name: set debian package list
@@ -30,7 +36,7 @@
 
   - name: set centos package list
     set_fact:
-      my_packages: "{{ my_packages + ['keychain','mysql-client','bind-utils','yadm','bash-completion','nmap'] }}"
+      my_packages: "{{ my_packages + ['keychain','MariaDB-client','bind-utils','yadm','bash-completion','nmap'] }}"
     when: ansible_distribution == 'RedHat' or ansible_distribution == 'CentOS'
 
 - name: Install additional packages
