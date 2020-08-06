@@ -47,11 +47,11 @@
   become: yes
   when: my_packages is defined
 
-- name: clone grc v1.11.3
+- name: clone grc 
   git:
     repo: https://github.com/garabik/grc.git
     dest: "/tmp/grc"
-    version: "v1.11.3"
+    version: "{{ grc_version }}"
     force: yes
   become: yes
   become_user: "{{ zsh_user }}"

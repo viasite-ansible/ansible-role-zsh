@@ -7,6 +7,7 @@ my_packages: ['zsh', 'git', 'wget', 'whois', 'curl', 'traceroute', 'jq', 'zip', 
 new_go_version: "1.14.4"
 powerline_version: "shell"
 zsh_fzf_version: 0.21.1
+grc_version: v1.11.3
 
 # .zshrc config
 zsh_hist_stamps: yyyy-mm-dd
