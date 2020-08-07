@@ -124,15 +124,6 @@
   when:
   - not ansible_check_mode
 
-#- name: Clone dotfile repo
-#  command: "yadm clone {{ dotfile_repo_url }} -f"
-#  become: yes
-#  become_user: "{{ zsh_user }}"
-#  when: 
-#  - use_powerline == true
-#  - dotfile_repo_url is defined
-#  ignore_errors: yes
-
 - name: Set zsh as default shell
   user:
     name: "{{ zsh_user }}"

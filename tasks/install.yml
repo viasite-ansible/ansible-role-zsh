@@ -11,7 +11,6 @@
     name: "{{ item }}"
     state: present
   loop:
-#  - "https://repo.percona.com/yum/percona-release-latest.noarch.rpm"
   - "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
   when: ansible_os_family == 'RedHat'
 
@@ -88,13 +87,6 @@
     - not ansible_check_mode
     - powerline_version == "shell"
 
-#- name: get zsh user home folder
-#  shell: |
-#    cat /etc/passwd | grep "{{ zsh_user }}" | cut -d ':' -f6
-#  changed_when: False
-#  become: yes
-#  register: user_home
-
 - name: clone nanorc repo
   git:
     repo: 'https://github.com/scopatz/nanorc.git'
@@ -119,7 +111,7 @@
   git:
     repo: https://github.com/iwfmp/mc-solarized-skin.git
     version: master
-    dest: "~{{ zsh_user }}/.mc/lib/mc-solarized"
+    dest: "{{ zsh_user_dir.stdout }}/.mc/lib/mc-solarized"
     force: yes
   become: yes
   become_user: "{{ zsh_user }}"

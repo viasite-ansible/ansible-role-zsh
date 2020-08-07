@@ -12,6 +12,7 @@
       path: /usr/local/go
       state: absent
     become: yes
+    changed_when: false
 
   - name: download golang tar
     unarchive:
@@ -19,6 +20,7 @@
       dest: /usr/local
       remote_src: yes
     become: yes
+    changed_when: false
 
   - name: create go directories in home
     file:

@@ -5,8 +5,9 @@
   any_errors_fatal: true
 
   vars:
+    zsh_user: "zopfli"
     bat_version: 0.15.0
-    powerline_version: "shell"
+    powerline_version: "go"
     zsh_antigen_bundles_extras:
       - nvm
       - joel-porquet/zsh-dircolors-solarized
@@ -19,6 +20,11 @@
     - name: Update apt cache.
       apt: update_cache=yes cache_valid_time=600
       when: ansible_os_family == 'Debian'
+      changed_when: false
+
+    - name: Add test user {{ zsh_user }}
+      user:
+        name: "{{ zsh_user }}"
 
   roles:
     - role: ansible-role-fancy-console
