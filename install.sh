@@ -7,9 +7,9 @@ title() {
 
 # https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-rhel-centos-or-fedora
 title "Install Ansible"
-sudo python get-pip.py
+sudo python3 get-pip.py
 export PATH=$PATH:~/.local/bin
-sudo pip install ansible
+sudo pip3 install ansible
 
 sudo apt-get update
 sudo apt-get install python-apt zsh git wget -y

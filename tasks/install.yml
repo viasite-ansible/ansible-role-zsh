@@ -71,7 +71,7 @@
     - bat_version is defined
     - ansible_os_family == 'Debian'
 
-- name: install powerline prompt prerequisites
+- name: install justjanne/powerline-go prompt
   block:
   - name: install powerline-go
     command: bash -c "/usr/local/go/bin/go get -u github.com/justjanne/powerline-go"
