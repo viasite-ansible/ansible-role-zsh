@@ -28,15 +28,6 @@ Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, Cent
 If you using Solarized Dark scheme and `mc`, you should want to install skin, then set `zsh_mc_solarized_skin: yes`
 
 
-## Demo install in Vagrant
-You can test work of role before install in real machine.
-Just execute `vagrant up`, then `vagrant ssh` for enter in virtual machine.
-
-Note: you cannot install vagrant on VPS like Digital Ocean or in Docker. Use local machine for it.
-[Download](https://www.vagrantup.com/downloads.html) and install vagrant for your operating system.
-
-
-
 ## Known bugs
 ### `su username` caused errors
 See [antigen issue](https://github.com/zsh-users/antigen/issues/136).
@@ -49,7 +40,6 @@ Also, you can try to fix it, add to `~/.zshrc.local`:
 alias su='su -'
 ```
 But this alias can break you scripts, that using `su`.
-
 
 
 ## Install for real machine
@@ -65,7 +55,7 @@ Then [configure terminal application](#configure-terminal-application).
 
 ### Manual install
 
-0. [Install Ansible](http://docs.ansible.com/ansible/intro_installation.html).
+[Install Ansible](http://docs.ansible.com/ansible/intro_installation.html).
 For Ubuntu:
 ``` bash
 sudo apt-get install software-properties-common
@@ -73,6 +63,13 @@ sudo apt-add-repository ppa:ansible/ansible
 sudo apt-get update
 sudo apt-get install ansible
 ```
+
+For CentOS:
+``` bash
+yum install epel-release
+yum install ansible
+```
+
 
 1. Download role:
 ```
@@ -83,9 +80,13 @@ sudo ansible-galaxy install hybridadmin.fancy_console
 ```
 - hosts: all
   vars:
+    powerline_version: "go"
     zsh_antigen_bundles_extras:
       - nvm
       - joel-porquet/zsh-dircolors-solarized
+      - MichaelAquilina/zsh-you-should-use
+      - oldratlee/hacker-quotes
+      - horosgrisa/mysql-colorize
     zsh_autosuggestions_bind_key: "^U"
   roles:
     - hybridadmin.fancy_console
