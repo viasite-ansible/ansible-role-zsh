@@ -56,6 +56,7 @@ Then [configure terminal application](#configure-terminal-application).
 ### Manual install
 
 [Install Ansible](http://docs.ansible.com/ansible/intro_installation.html).
+
 For Ubuntu:
 ``` bash
 sudo apt-get install software-properties-common
