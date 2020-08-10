@@ -3,6 +3,7 @@ language: python
 python:
   - '3.8'
 env:
+  - DOCKER_API_VERSION=1.38
   global:
     - ROLE_NAME: fancy-console
     - secure: TPl1LzBxtBSR3IaI9NB9zDvOMfXKAYDJLJqMfFXyjwezT2iwQA3E82BdoJQGGgt3qCBSjoJKrzgATau7CX0QN4D6c+SenEqHDTzES2ZNyUg48pwtbedTn00Pwxjahf6+oWFmg3a2+VARpQVNKXYhAJxLdR5rOr6IO6/YsLlEZH+vtL/qwq8PE3Do+N0LdZvAxzoVJsf0ZK0obmq5hchREbq7es9e+PQHV4F7hmrHjJaPKeJCboEvbMqb86n0QyOwGZo62wjQ/4FSKBmjE4AgsC5afUzxmJjdaJ5+EELH/OK4ocpeOUmmNdPSc/uOGaQvACupNR+gn4AY/GsxgdCcHdFTGA6VXsPP+oATP2pDdFgydfq9H3VRymlbsJ+HhmW3+X2cgsf4yInOAltADj6oPGRNwzmxT2I1ygIhs7VqbEO6BuazRPu4uuiNeusSbIL3GsyjRgaxHjeSwuiyTpil8GVGJRJJq5VYbU8BLuRcoyXn7e086V2DlZChuORmVRqpsVT9OfphNthVoKxucSEY1JOQeTWxqqG1O7g7TsYAYbe5It5GVuAWX3ftCCBiSxQCZDbf/jysiq68je5G4klNVFHrJz9ehTqwF3CLb1Nio9UQ7I0hCt5k74F/Omf+NBnmQ9rm6ocRZpA0AUFK9ocoCMoGfuc37k2XOvHwMs6eMXE=
