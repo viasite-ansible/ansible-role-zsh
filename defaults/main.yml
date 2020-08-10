@@ -8,6 +8,7 @@ powerline_version: "shell"
 new_go_version: "1.14.7"
 zsh_fzf_version: 0.22.0
 grc_version: v1.11.3
+bat_version: 0.15.4
 
 # .zshrc config
 zsh_hist_stamps: yyyy-mm-dd
@@ -67,7 +68,7 @@ zsh_antigen_bundles_extras: []
 # useful for deploy many zsh users at host, without duplicate and without write access
 zsh_shared: no
 
-zsh_antigen_theme: "bhilburn/powerlevel9k powerlevel9k"
+zsh_antigen_theme: ""
 
 zsh_hotkeys:
   # home & end keys work
@@ -139,46 +140,3 @@ zsh_fzf_ctrl_r_opts: '--exact'
 # command-time
 zsh_command_time_min_seconds: 3
 zsh_command_time_echo: ""
-
-# powerlevel9k
-zsh_powerlevel9k_left_prompt:
-  - context
-  - dir
-
-zsh_powerlevel9k_right_prompt:
-  - status
-  - background_jobs
-  - vcs
-  - command_execution_time
-  - time
-
-zsh_powerlevel_custom_elements:
-  - name: command_time
-    command: "zsh_command_time"
-    background: "248"
-    foreground: "000"
-
-zsh_powerlevel9k_hide_host_on_local: yes
-zsh_powerlevel9k_always_show_context: no # hide hostname and username from prompt on local machine
-zsh_powerlevel9k_always_show_user: no # hide username from prompt on local machine
-zsh_powerlevel9k_prompt_on_newline: no
-zsh_powerlevel9k_shorten_dir_length: 3
-zsh_powerlevel9k_status_verbose: 0
-
-# dir (context) colors
-zsh_powerlevel9k_context_default_foreground: "255" # white
-zsh_powerlevel9k_context_default_background: "024" # blue
-zsh_powerlevel9k_context_root_foreground: "255" # white
-zsh_powerlevel9k_context_root_background: "124" # red
-zsh_powerlevel9k_dir_foreground: "255" # white
-zsh_powerlevel9k_dir_background: "240" # gray
-
-# vcs colors
-zsh_powerlevel9k_vcs_foreground: "232" # about black on any palette
-zsh_powerlevel9k_vcs_clean_background: "100" # dirty green
-zsh_powerlevel9k_vcs_modified_background: "094" # orange
-zsh_powerlevel9k_vcs_untracked_background: "094" # orange
-
-# command execution time
-zsh_powerlevel9k_command_execution_time_foreground: "000"
-zsh_powerlevel9k_command_execution_time_background: "248"

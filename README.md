@@ -1,13 +1,13 @@
 [![Build Status](https://travis-ci.org/hybridadmin/ansible-role-fancy-console.svg?branch=master)](https://travis-ci.org/hybridadmin/ansible-role-fancy-console)
 
-Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, CentOS 7.
+Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, CentOS 7, CentOS 8.
 
 
 ## Includes:
 - zsh
 - [antigen](https://github.com/zsh-users/antigen)
 - [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
-- [powerline-go](https://github.com/justjanne/powerline-go) or [powerline-shell](https://github.com/b-ryan/powerline-shell) or [powerlevel9k theme](https://github.com/bhilburn/powerlevel9k)
+- [powerline-go](https://github.com/justjanne/powerline-go) or [powerline-shell](https://github.com/b-ryan/powerline-shell)
 - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) (except Debian Squeeze),
   with workaround for [#zsh-syntax-highlighting/286](https://github.com/zsh-users/zsh-syntax-highlighting/issues/286)
@@ -16,7 +16,6 @@ Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, Cent
 - [urbainvaes/fzf-marks](https://github.com/popstas/urbainvaes/fzf-marks)
 
 ## Features
-- customize powerlevel9k theme prompt segments and colors
 - default colors tested with solarized dark and default grey terminal in putty
 - add custom prompt elements from yml
 - custom zsh config with `~/.zshrc.local` or `/etc/zshrc.local`

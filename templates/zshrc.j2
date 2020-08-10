@@ -66,16 +66,6 @@ antigen bundle {{ bundle }}
 {% endif %}
 {% endfor %}
 
-{% if powerline_version == "false" %}
-{% if zsh_antigen_installed_version is version(2.0, '>=') %}
-POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
-{% elif zsh_version is version('5.0.8', '<') %}
-POWERLEVEL9K_INSTALLATION_PATH={{ zsh_antigen_path_compat }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-bhilburn-SLASH-powerlevel9k.git
-{% endif %}
-
-antigen theme {{ zsh_antigen_theme }}
-{% endif %}
-
 antigen apply
 
 ###
@@ -118,59 +108,7 @@ declare -p FZF_WIDGET_OPTS > /dev/null 2>&1 && FZF_WIDGET_OPTS[insert-history]="
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE={{ zsh_autosuggestions_max_length }}
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240" # gray highlight
 
-{% if powerline_version == "false" %}
-# powerlevel9k
-POWERLEVEL9K_SHORTEN_DIR_LENGTH={{ zsh_powerlevel9k_shorten_dir_length }}
-POWERLEVEL9K_STATUS_VERBOSE={{ zsh_powerlevel9k_status_verbose }}
-
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=({{ zsh_powerlevel9k_left_prompt | join(" ") }})
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=({{ zsh_powerlevel9k_right_prompt | join(" ") }})
-{% if zsh_powerlevel9k_hide_host_on_local and zsh_user != 'root' %}DEFAULT_USER=$USER{% endif %}
-
-POWERLEVEL9K_ALWAYS_SHOW_CONTEXT={{ zsh_powerlevel9k_always_show_context_bool }}
-POWERLEVEL9K_ALWAYS_SHOW_USER={{ zsh_powerlevel9k_always_show_user_bool }}
-
-{% if zsh_powerlevel_custom_elements is defined and zsh_powerlevel_custom_elements %}
-{% for element in zsh_powerlevel_custom_elements %}
-{% set prefix = "POWERLEVEL9K_CUSTOM_" + element.name | upper %}
-{{ prefix }}="{{ element.command }}"
-{{ prefix }}_BACKGROUND="{{ element.background }}"
-{{ prefix }}_FOREGROUND="{{ element.foreground }}"
-{% endfor %}
-{% endif %}
-
-# https://github.com/bhilburn/powerlevel9k#command_execution_time
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD="{{ zsh_command_time_min_seconds }}"
-
-POWERLEVEL9K_PROMPT_ON_NEWLINE={{ zsh_powerlevel9k_prompt_on_newline_bool }}
-POWERLEVEL9K_RPROMPT_ON_NEWLINE=false
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-
-POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND="{{ zsh_powerlevel9k_context_default_foreground }}"
-POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND="{{ zsh_powerlevel9k_context_default_background }}"
-POWERLEVEL9K_CONTEXT_REMOTE_FOREGROUND="{{ zsh_powerlevel9k_context_default_foreground }}"
-POWERLEVEL9K_CONTEXT_REMOTE_BACKGROUND="{{ zsh_powerlevel9k_context_default_background }}"
-POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND="{{ zsh_powerlevel9k_context_root_foreground }}"
-POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND="{{ zsh_powerlevel9k_context_root_background }}"
-
-POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="{{ zsh_powerlevel9k_dir_foreground }}"
-POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="{{ zsh_powerlevel9k_dir_background }}"
-POWERLEVEL9K_DIR_HOME_FOREGROUND="{{ zsh_powerlevel9k_dir_foreground }}"
-POWERLEVEL9K_DIR_HOME_BACKGROUND="{{ zsh_powerlevel9k_dir_background }}"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="{{ zsh_powerlevel9k_dir_foreground }}"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="{{ zsh_powerlevel9k_dir_background }}"
-
-POWERLEVEL9K_VCS_CLEAN_BACKGROUND="{{ zsh_powerlevel9k_vcs_clean_background }}"
-POWERLEVEL9K_VCS_MODIFIED_BACKGROUND="{{ zsh_powerlevel9k_vcs_modified_background }}"
-POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND="{{ zsh_powerlevel9k_vcs_untracked_background }}"
-POWERLEVEL9K_VCS_CLEAN_FOREGROUND="{{ zsh_powerlevel9k_vcs_foreground }}"
-POWERLEVEL9K_VCS_MODIFIED_FOREGROUND="{{ zsh_powerlevel9k_vcs_foreground }}"
-POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND="{{ zsh_powerlevel9k_vcs_foreground }}"
-
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND="{{ zsh_powerlevel9k_command_execution_time_foreground }}"
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="{{ zsh_powerlevel9k_command_execution_time_background }}"
-
-{% elif powerline_version == "go" %}
+{% if powerline_version == "go" %}
 ## powerline-go config
 POWERLINE_BIN="$(which powerline-go)"
 #POWERLINE_BIN="$GOPATH/bin/powerline-go"
