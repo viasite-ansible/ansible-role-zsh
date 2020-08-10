@@ -21,11 +21,8 @@ Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, Cent
 - custom zsh config with `~/.zshrc.local` or `/etc/zshrc.local`
 - install only plugins that useful for your machine. For example, plugin `docker` will not install if you have not Docker
 
-## 1.5 mins demo
-![1.5 mins demo](https://github.com/popstas/popstas.github.io/blob/master/images/2017-03/ansible-role-zsh-demo.gif?raw=true)
-
-## Color schemes
-![colors demo](https://github.com/popstas/popstas.github.io/blob/master/images/2017-03/ansible-role-zsh-colors.gif?raw=true)
+## screen capture
+![screen capture](https://github.com/hybridadmin/ansible-role-fancy-console/raw/master/console.png?raw=true)
 
 ## Midnight Commander Solarized Dark skin
 If you using Solarized Dark scheme and `mc`, you should want to install skin, then set `zsh_mc_solarized_skin: yes`
