@@ -21,30 +21,17 @@
   changed_when: false
   when: ansible_os_family == 'RedHat'
 
-- name: set additional package list
-  block:
-  - name: set ubuntu package list
-    set_fact:
-      my_packages: "{{ my_packages + ['yadm','mysql-client','ipcalc','dnsutils','aptitude','keychain','nmap','moreutils','percona-toolkit'] }}"
-    when: ansible_distribution == 'Ubuntu'
-
-  - name: set debian package list
-    set_fact:
-      my_packages: "{{ my_packages + ['yadm','default-mysql-client','ipcalc','dnsutils','aptitude','keychain','perl-doc','procps','man-db','telnet','mtr'] }}"
-    when: ansible_distribution == 'Debian'
-
-  - name: set centos package list
-    set_fact:
-      my_packages: "{{ my_packages + ['keychain','MariaDB-client','bind-utils','yadm','bash-completion','nmap'] }}"
-    when: ansible_distribution == 'RedHat' or ansible_distribution == 'CentOS'
+- name: list required packages
+  debug:
+    msg: "{{ pkg_requirements }}"
 
 - name: Install additional packages
   action: >
-    {{ ansible_pkg_mgr }} name={{ my_packages }} state=present update_cache=yes
+    {{ ansible_pkg_mgr }} name={{ pkg_requirements }} state=present update_cache=yes
     vars:
-      packages: "{{ my_packages }}"
+      packages: "{{ pkg_requirements }}"
   become: yes
-  when: my_packages is defined
+  when: pkg_requirements is defined
 
 - name: clone grc
   git:
@@ -55,6 +42,7 @@
   become: yes
   become_user: "{{ zsh_user }}"
   register: zsh_register_grc_clone
+  changed_when: false
 
 - name: install grc
   shell: |

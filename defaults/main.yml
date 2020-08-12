@@ -2,8 +2,7 @@
 
 zsh_user: "{{ ansible_user_id }}"
 zsh_user_dir: "{{ ansible_user_dir }}"
-dotfile_repo_url: ""
-my_packages: ['zsh', 'git', 'wget', 'whois', 'curl', 'traceroute', 'jq', 'zip', 'attr', 'sysstat', 'lnav']
+
 powerline_version: "shell"
 new_go_version: "1.14.7"
 zsh_fzf_version: 0.22.0
