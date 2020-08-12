@@ -4,11 +4,12 @@
     pip3_command: pip3
     python3_pyenv: null
 
-- name: "python3: install packages"
-  become: true
+- name: install python3 and pip3
   package:
-    name: ['python3']
+    name: "{{ item }}"
     state: present
+  loop:
+  - "{{ python_requirements }}"
 
 #- name: "python3: get python executable"
 #  shell: |
@@ -24,3 +25,4 @@
   become: true
   command: "{{ python3_command }} -m ensurepip"
   changed_when: false
+  when: ansible_os_family == 'RedHat'

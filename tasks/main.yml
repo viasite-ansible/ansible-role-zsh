@@ -9,13 +9,9 @@
   check_mode: no
   changed_when: false
 
-- name: ubuntu python pip pre-requisites
-  include: ubuntu-python.yml
-  when: ansible_os_family == 'Debian' and powerline_version == "shell"
-
-- name: redhat python pip pre-requisites
-  include: redhat-python.yml
-  when: ansible_os_family == 'RedHat' and powerline_version == "shell"
+- name: python pip pre-requisites
+  include: python-install.yml
+  when: powerline_version == "shell"
 
 - name: golang installation
   include: golang-install.yml

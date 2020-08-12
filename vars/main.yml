@@ -52,3 +52,12 @@ _pkg_requirements:
     - nmap
 
 pkg_requirements: "{{ _pkg_requirements['default'] + _pkg_requirements[ansible_distribution] }}"
+
+_python_requirements:
+  Debian:
+    - python3
+    - python3-pip
+  RedHat:
+    - python3
+
+python_requirements: "{{ _python_requirements[ansible_os_family] }}"
