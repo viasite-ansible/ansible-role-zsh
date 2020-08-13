@@ -4,6 +4,7 @@
   get_url:
     url: "https://download.opensuse.org/repositories/home:TheLocehiliosan:yadm/CentOS_{{ ansible_distribution_major_version }}/home:TheLocehiliosan:yadm.repo"
     dest: /etc/yum.repos.d/yadm.repo
+    mode: 644
   when: ansible_os_family == 'RedHat'
 
 - name: install required redhat repo
