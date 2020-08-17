@@ -4,7 +4,7 @@ Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, Cent
 
 
 ## Includes:
-- zsh
+- [zsh](http://zsh.sourceforge.net)
 - [antigen](https://github.com/zsh-users/antigen)
 - [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 - [powerline-go](https://github.com/justjanne/powerline-go) or [powerline-shell](https://github.com/b-ryan/powerline-shell)
