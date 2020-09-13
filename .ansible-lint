@@ -1,5 +1,5 @@
 # https://ansible-lint.readthedocs.io/en/latest/configuring.html#configuration-file
 
 skip_list:
-  - skip_ansible_list
+  - skip_ansible_lint
   - '106'
