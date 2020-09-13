@@ -7,7 +7,7 @@
   vars:
     zsh_user: "zopfli"
     bat_version: 0.15.4
-    powerline_version: "shell"
+    powerline_version: "go"
     zsh_antigen_bundles_extras:
       - nvm
       - joel-porquet/zsh-dircolors-solarized

@@ -18,6 +18,7 @@
     unarchive:
       src: "https://dl.google.com/go/go{{ new_go_version }}.linux-amd64.tar.gz"
       dest: /usr/local
+      mode: '0755'
       remote_src: yes
     become: yes
     changed_when: false
@@ -36,6 +37,7 @@
   - name: modify .bashrc
     blockinfile:
       dest: "$HOME/.bashrc"
+      mode: '0644'
       block: |
         export GOPATH=$HOME/go
         export GOBIN=$GOPATH/bin
