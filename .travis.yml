@@ -1,4 +1,5 @@
 sudo: required
+dist: focal
 language: python
 python:
   - '3.8'
