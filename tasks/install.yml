@@ -7,7 +7,13 @@
     mode: 644
   when: ansible_os_family == 'RedHat'
 
-- name: install required redhat repo
+- name: add epel repo gpg key
+  rpm_key:
+    state: present
+    key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-8
+  when: (ansible_os_family == 'RedHat' and ansible_distribution_major_version == "8")
+
+- name: install required epel repo
   package:
     name: "{{ item }}"
     state: present
