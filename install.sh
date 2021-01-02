@@ -11,8 +11,10 @@ if [[ -f /etc/redhat-release ]]; then
 	yum install epel-release
 	yum install ansible
 else
-	sudo apt-get install software-properties-common
-	sudo apt-add-repository ppa:ansible/ansible
+        if [[ $(cat /etc/os-release | grep "VER.*ID" | sed -e 's/VERSION_ID="//g' | cut -d '.' -f1) -lt 20 ]]; then
+	        sudo apt-get install software-properties-common
+	        sudo apt-add-repository ppa:ansible/ansible
+	fi
 	sudo apt-get update
 	sudo apt-get install ansible
 fi
@@ -27,4 +29,4 @@ title "Download playbook to /tmp/zsh.yml"
 curl https://raw.githubusercontent.com/hybridadmin/ansible-role-fancy-console/master/playbook.yml > /tmp/zsh.yml
 
 title "Provision playbook for current user: $(whoami)"
-sudo ansible-playbook -i "localhost," -c local /tmp/zsh.yml --extra-vars="zsh_user=$(whoami)"
+sudo ansible-playbook -i "localhost," -c local /tmp/zsh.yml --extra-vars="zsh_user=${USER}"

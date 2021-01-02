@@ -1,6 +1,20 @@
 ---
+- name: get latest golang version
+  shell: |
+    set -o pipefail
+    curl -s https://github.com/golang/go/releases | grep "rel.*-branch.go1" | head -n1 | cut -d ' ' -f8 | sed 's/go//'
+  args:
+    executable: /bin/bash
+  ignore_errors: yes
+  register: latest_go_version
+  changed_when: false
+
 - name: check current golang version
-  command: bash -c "/usr/local/go/bin/go version|sed -e 's/go version go//g'|cut -d' ' -f1"
+  shell: |
+    set -o pipefail
+    /usr/local/go/bin/go version|sed -e 's/go version go//g'|cut -d' ' -f1
+  args:
+    executable: /bin/bash
   ignore_errors: yes
   register: go_version
   changed_when: false
@@ -13,15 +27,21 @@
       state: absent
     become: yes
     changed_when: false
+    when:
+    - not latest_go_version.stdout == go_version.stdout
+    - go_version.stdout | length <= 0
 
   - name: download golang tar
     unarchive:
-      src: "https://dl.google.com/go/go{{ new_go_version }}.linux-amd64.tar.gz"
+      src: "https://dl.google.com/go/go{{ latest_go_version.stdout }}.linux-amd64.tar.gz"
       dest: /usr/local
       mode: '0755'
       remote_src: yes
     become: yes
     changed_when: false
+    when:
+    - not latest_go_version.stdout == go_version.stdout
+    - go_version.stdout | length <= 0
 
   - name: create go directories in home
     file:

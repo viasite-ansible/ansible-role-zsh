@@ -63,7 +63,11 @@
 - name: install justjanne/powerline-go prompt
   block:
   - name: install powerline-go
-    command: bash -c "/usr/local/go/bin/go get -u github.com/justjanne/powerline-go"
+    shell: |
+      set -o pipefail
+      /usr/local/go/bin/go get -u github.com/justjanne/powerline-go
+    args:
+      executable: /bin/bash
     ignore_errors: yes
     changed_when: false
     when: powerline_version == "go"

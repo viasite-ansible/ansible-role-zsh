@@ -2,6 +2,9 @@
 - hosts: localhost
   vars:
     powerline_version: "go"
+    zsh_fzf_version: 0.24.4
+    grc_version: v1.11.3
+    bat_version: 0.17.1
     zsh_antigen_bundles_extras:
       - nvm
       - joel-porquet/zsh-dircolors-solarized

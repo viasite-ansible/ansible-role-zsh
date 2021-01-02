@@ -110,8 +110,8 @@ Via playbook:
 ```
 - hosts: all
   roles:
-    - { role: ansible-role-zsh, zsh_user: otheruser }
-    - { role: ansible-role-zsh, zsh_user: thirduser }
+    - { role: hybridadmin.fancy_console, zsh_user: otheruser }
+    - { role: hybridadmin.fancy_console, zsh_user: thirduser }
 ```
 
 Or via command:

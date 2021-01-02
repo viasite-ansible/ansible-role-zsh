@@ -3,11 +3,12 @@
 zsh_user: "{{ ansible_user_id }}"
 zsh_user_dir: "{{ ansible_user_dir }}"
 
-powerline_version: "shell"
-new_go_version: "1.14.7"
-zsh_fzf_version: 0.22.0
+powerline_version: "go"
+#new_go_version: "1.15.6"
+zsh_fzf_version: 0.24.4
 grc_version: v1.11.3
-bat_version: 0.15.4
+bat_version: 0.17.1
+
 
 # .zshrc config
 zsh_hist_stamps: yyyy-mm-dd

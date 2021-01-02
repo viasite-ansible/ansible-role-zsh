@@ -26,5 +26,6 @@ galaxy_info:
     - shell
     - user
     - zsh
-    - powerline
+    - powerline-go
+    - powerline-shell
 dependencies: []
