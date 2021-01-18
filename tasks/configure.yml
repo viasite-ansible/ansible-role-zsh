@@ -105,7 +105,7 @@
   changed_when: False
 
 - name: Configure nanorc for syntax highlighting
-  shell: cat "include {{ zsh_user_dir.stdout }}/.nano/nanorc" >> {{ zsh_user_dir.stdout }}/.nanorc
+  shell: echo 'include {{ zsh_user_dir.stdout }}/.nano/*.nanorc' >> {{ zsh_user_dir.stdout }}/.nanorc
   changed_when: False
 
 - name: apply nanorc fix
