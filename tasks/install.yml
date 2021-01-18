@@ -40,30 +40,49 @@
   become: yes
   when: pkg_requirements is defined
 
-- name: clone grc
+- name: get latest garabik/grc version
+  shell: |
+    set -o pipefail
+    curl --silent "https://api.github.com/repos/garabik/grc/releases/latest" |  grep '"tag_name":' |sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//g'
+  args:
+      executable: /bin/bash
+  become: true
+  register: grc_version
+  changed_when: false
+
+- name: clone garabik/grc {{ grc_version.stdout }}
   git:
     repo: https://github.com/garabik/grc.git
     dest: "/tmp/grc"
-    version: "{{ grc_version }}"
+    version: "{{ grc_version.stdout }}"
     force: yes
   become: yes
   become_user: "{{ zsh_user }}"
   register: zsh_register_grc_clone
   changed_when: false
 
-- name: install grc
+- name: install garabik/grc {{ grc_version.stdout }}
   shell: |
     cd /tmp/grc
     ./install.sh
   changed_when: False
   become: yes
 
-- name: install bat A cat(1) clone
+- name: get latest sharkdp/bat version
+  shell: |
+    set -o pipefail
+    curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" |  grep '"tag_name":' |sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//g'
+  args:
+      executable: /bin/bash
+  become: true
+  register: bat_version
+
+- name: install sharkdp/bat {{ bat_version.stdout }}
   apt:
-    deb: "https://github.com/sharkdp/bat/releases/download/v{{ bat_version }}/bat_{{ bat_version }}_amd64.deb"
+    deb: "https://github.com/sharkdp/bat/releases/download/v{{ bat_version.stdout }}/bat_{{ bat_version.stdout }}_amd64.deb"
   become: yes
   when:
-    - bat_version is defined
+    - bat_version.stdout is defined
     - ansible_os_family == 'Debian'
 
 - name: install justjanne/powerline-go prompt
@@ -86,22 +105,14 @@
     - not ansible_check_mode
     - powerline_version == "shell"
 
-#- name: clone nanorc repo
-#  git:
-#    repo: 'https://github.com/scopatz/nanorc.git'
-#    dest: "{{ zsh_user_dir.stdout }}/.nano"
-#    version: "master"
-#    force: yes
-#  become: yes
-#  become_user: "{{ zsh_user }}"
-#  changed_when: False
-
-- name: install nano syntax highlighting using automatic installer script
-  shell: |
-    set -o pipefail
-    curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh
-  args:
-    executable: /bin/bash
+- name: install nano syntax highlighting
+  git:
+    repo: 'https://github.com/scopatz/nanorc.git'
+    dest: "{{ zsh_user_dir.stdout }}/.nano"
+    version: "master"
+    force: yes
+  become: yes
+  become_user: "{{ zsh_user }}"
   changed_when: False
 
 - name: clone antigen {{ zsh_antigen_version }}
@@ -131,7 +142,17 @@
   check_mode: no
   register: zsh_register_fzf_command
 
-- name: Download fzf
+- name: get latest junegunn/fzf version
+  shell: |
+    set -o pipefail
+    curl --silent "https://api.github.com/repos/junegunn/fzf/releases/latest" |  grep '"tag_name":' |sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//g'
+  args:
+      executable: /bin/bash
+  become: true
+  register: zsh_fzf_version
+  changed_when: false
+
+- name: Download junegunn/fzf {{ zsh_fzf_version.stdout }}
   unarchive:
     src: "{{ zsh_fzf_url }}"
     dest: /usr/local/bin

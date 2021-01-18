@@ -18,8 +18,8 @@
   changed_when: False
   register: is_wsl
 
-#- name: systemd-resolved pre-requisites
-#  include: systemd-resolved.yml
+- name: systemd-resolved pre-requisites
+  include: systemd-resolved.yml
 
 - name: python pip pre-requisites
   include: python-install.yml
