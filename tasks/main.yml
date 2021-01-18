@@ -9,6 +9,18 @@
   check_mode: no
   changed_when: false
 
+- name: check if wsl
+  shell: |
+    set -o pipefail
+    if [[ "$(uname -a | grep 'microsoft.*standard')" =~ .*"microsoft".* ]]; then echo "true"; else echo "false"; fi
+  args:
+    executable: /bin/bash
+  changed_when: False
+  register: is_wsl
+
+#- name: systemd-resolved pre-requisites
+#  include: systemd-resolved.yml
+
 - name: python pip pre-requisites
   include: python-install.yml
   when: powerline_version == "shell"

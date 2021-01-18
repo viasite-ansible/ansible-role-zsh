@@ -8,8 +8,8 @@ lint: |
   yamllint .
   ansible-lint
 platforms:
-  - name: ansible-role-${ROLE_NAME:-fancy_console}-${MOLECULE_DISTRO:-centos7}
-    image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
+  - name: ansible-role-${ROLE_NAME:-fancy_console}-${MOLECULE_DISTRO:-ubuntu2004}
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2004}-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -20,10 +20,10 @@ provisioner:
   log: true
   options:
     v: true
-  lint:
-    name: ansible-lint
-  playbooks:
-    converge: ${MOLECULE_PLAYBOOK:-playbook.yml}
+#  lint:
+#    name: ansible-lint
+#  playbooks:
+#    converge: ${MOLECULE_PLAYBOOK:-playbook.yml}
   config_options:
     defaults:
       callback_whitelist: profile_tasks
@@ -32,5 +32,5 @@ provisioner:
       bin_ansible_callbacks: yes
       verbosity: 1
 verifier:
-  name: testinfra
+  name: ansible
   enabled: False

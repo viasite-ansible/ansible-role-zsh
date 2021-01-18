@@ -1,0 +1,58 @@
+---
+- name: stop and disable systemd-resolved
+  systemd:
+    name: systemd-resolved
+    state: stopped
+    enabled: no
+    masked: yes
+  changed_when: false
+
+- name: edit systemd-resolved conf
+  replace:
+    path:  /etc/systemd/resolved.conf
+    regexp: "{{ item.name }}"
+    replace: "{{ item.value }}"
+  loop:
+    - { name: "^((#|)DNS=.*)", value: "DNS=127.0.0.1" }
+    - { name: "^((#|)MulticastDNS=.*)", value: "MulticastDNS=no" }
+    - { name: "^((#|)DNSStubListener=.*)", value: "DNSStubListener=no" }
+  changed_when: false
+
+- name: check network manager conf exists
+  stat:
+    path: /etc/NetworkManager/NetworkManager.conf
+  register: nmconf
+
+- name: edit networkmanager conf
+  lineinfile:
+    path: /etc/NetworkManager/NetworkManager.conf
+    regexp: "{{ item.name }}"
+    insertafter: '\[main\]'
+    line: "{{ item.value }}"
+  loop:
+    - { name: "^((#|)dns=.*)", value: "dns=none" }
+    - { name: "^((#|)systemd-resolved=.*)", value: "systemd-resolved=false" }
+  when:
+  - ansible_os_family == 'RedHat'
+  - nmconf.stat.exists
+
+- name: delete /etc/resolv.conf
+  shell: |
+    set -o pipefail
+    rm -rf /etc/resolv.conf
+  args:
+    executable: /bin/bash
+  changed_when: False
+  become: yes
+  when:
+    - ansible_virtualization_type == 'docker'
+    - is_wsl == 'true'
+
+- name: add custom /etc/resolv.conf
+  ansible.builtin.template:
+    src: "resolvconf/resolv.conf.j2"
+    dest: /etc/resolv.conf
+    mode: '0644'
+  when:
+    - ansible_virtualization_type == 'docker'
+    - is_wsl == 'true'

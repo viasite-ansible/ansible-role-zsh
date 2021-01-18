@@ -105,7 +105,7 @@
   changed_when: False
 
 - name: Configure nanorc for syntax highlighting
-  shell: cat "{{ zsh_user_dir.stdout }}/.nano/nanorc" >> ~/.nanorc
+  shell: cat "include {{ zsh_user_dir.stdout }}/.nano/nanorc" >> {{ zsh_user_dir.stdout }}/.nanorc
   changed_when: False
 
 - name: apply nanorc fix
@@ -126,8 +126,8 @@
       regexp: 'normal'
       replace: 'white'
     changed_when: False
-  when:
-  - not ansible_check_mode
+
+  when: not ansible_check_mode
 
 - name: Set zsh as default shell
   user:

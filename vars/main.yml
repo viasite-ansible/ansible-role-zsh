@@ -46,6 +46,7 @@ _pkg_requirements:
     - nmap
     - moreutils
     - percona-toolkit
+    - perl-doc
   CentOS:
     - MariaDB-client
     - bind-utils
