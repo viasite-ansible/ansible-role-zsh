@@ -18,6 +18,7 @@
   ignore_errors: yes
   register: go_version
   changed_when: false
+  failed_when: go_version.rc >= 128
 
 - name: install golang
   block:
