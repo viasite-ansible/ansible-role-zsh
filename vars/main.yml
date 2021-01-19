@@ -18,6 +18,8 @@ _pkg_requirements:
     - git
     - yadm
     - wget
+    - ruby
+    - ruby-dev
     - keychain
     - whois
     - curl
