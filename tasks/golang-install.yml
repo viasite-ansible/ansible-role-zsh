@@ -8,6 +8,7 @@
   ignore_errors: yes
   register: latest_go_version
   changed_when: false
+  when: not skip_golang_install
 
 - name: check current golang version
   shell: |
@@ -19,6 +20,7 @@
   register: go_version
   changed_when: false
   failed_when: go_version.rc >= 128
+  when: not skip_golang_install
 
 - name: install golang
   block:
@@ -29,8 +31,9 @@
     become: yes
     changed_when: false
     when:
-    - not latest_go_version.stdout == go_version.stdout
-    - go_version.stdout | length >= 0
+      - not skip_golang_install
+      - not latest_go_version.stdout == go_version.stdout
+      - go_version.stdout | length >= 0
 
   - name: download golang tar
     unarchive:
@@ -41,8 +44,9 @@
     become: yes
     changed_when: false
     when:
-    - not latest_go_version.stdout == go_version.stdout
-    - go_version.stdout | length <= 0
+      - not skip_golang_install
+      - not latest_go_version.stdout == go_version.stdout
+      - go_version.stdout | length <= 0
 
   - name: create go directories in home
     file:
@@ -52,8 +56,8 @@
       group: "{{ zsh_user }}"
       mode: 0775
     with_items:
-    - "{{ zsh_user_dir.stdout }}/go"
-    - "{{ zsh_user_dir.stdout }}/go/bin"
+      - "{{ zsh_user_dir.stdout }}/go"
+      - "{{ zsh_user_dir.stdout }}/go/bin"
 
   - name: modify .bashrc
     blockinfile:
