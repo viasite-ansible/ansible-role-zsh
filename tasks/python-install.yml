@@ -1,8 +1,4 @@
-- name: set python variables
-  set_fact:
-    python3_command: python3
-    pip3_command: pip3
-    python3_pyenv: null
+---
 
 - name: install python3 and pip3
   package:
@@ -26,3 +22,13 @@
   command: "{{ python3_command }} -m ensurepip"
   changed_when: false
   when: ansible_os_family == 'RedHat'
+
+- name: "python3: get pip executable"
+  shell: |
+    set -o pipefail
+    which {{ pip3_command }}
+  args:
+    executable: /bin/bash
+  register: pip3_which
+  changed_when: false
+  failed_when: pip3_which.rc >= 2

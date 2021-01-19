@@ -43,7 +43,9 @@
 - name: Install required pip packages
   pip:
     name: "{{ pip_packages }}"
-    executable: pip3
+    executable: "{{ pip3_which.stdout }}"
+  when:
+    - pip3_which is defined
 
 - name: get latest garabik/grc version
   shell: |

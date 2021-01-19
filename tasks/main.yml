@@ -23,7 +23,6 @@
 
 - name: python pip pre-requisites
   include: python-install.yml
-  when: powerline_version == "shell"
 
 - name: golang installation
   include: golang-install.yml

@@ -12,7 +12,7 @@
 - name: check current golang version
   shell: |
     set -o pipefail
-    /usr/local/go/bin/go version|sed -e 's/go version go//g'|cut -d' ' -f1
+    /usr/local/go/bin/go version|sed -e 's/go version go//g'|cut -d ' ' -f1
   args:
     executable: /bin/bash
   ignore_errors: yes
@@ -30,7 +30,7 @@
     changed_when: false
     when:
     - not latest_go_version.stdout == go_version.stdout
-    - go_version.stdout | length <= 0
+    - go_version.stdout | length >= 0
 
   - name: download golang tar
     unarchive:
