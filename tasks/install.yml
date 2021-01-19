@@ -54,7 +54,7 @@
   git:
     repo: https://github.com/garabik/grc.git
     dest: "/tmp/grc"
-    version: "{{ grc_version.stdout }}"
+    version: "v{{ grc_version.stdout }}"
     force: yes
   become: yes
   become_user: "{{ zsh_user }}"
@@ -76,6 +76,7 @@
       executable: /bin/bash
   become: true
   register: bat_version
+  changed_when: false
 
 - name: install sharkdp/bat {{ bat_version.stdout }}
   apt:

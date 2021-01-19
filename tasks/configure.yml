@@ -56,7 +56,7 @@
 
 - name: Write .zshrc config
   template:
-    src: zshrc.j2
+    src: "zsh/zshrc.j2"
     dest: "{{ zsh_config }}"
     owner: "{{ zsh_user }}"
     mode: '0644'
@@ -74,7 +74,7 @@
 
 - name: Write powerline-shell config
   template:
-    src: powerline-config.j2
+    src: "powerline-shell/powerline-config.j2"
     dest: "{{ zsh_user_dir.stdout }}/.config/powerline-shell/config.json"
     owner: "{{ zsh_user }}"
     mode: '0644'
@@ -85,7 +85,7 @@
 
 - name: Write powerline-shell theme
   template:
-    src: powerline-theme.j2
+    src: "powerline-shell/powerline-theme.j2"
     dest: "{{ zsh_user_dir.stdout }}/.config/powerline-shell/powerline-theme.py"
     owner: "{{ zsh_user }}"
     mode: '0644'
@@ -96,7 +96,7 @@
 
 - name: Write nanorc file
   template:
-    src: nanorc.j2
+    src: "nano/nanorc.j2"
     dest: "{{ zsh_user_dir.stdout }}/.nanorc"
     owner: "{{ zsh_user }}"
     mode: '0644'

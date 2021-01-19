@@ -7,7 +7,7 @@
     masked: yes
   changed_when: false
 
-- name: edit systemd-resolved conf
+- name: edit /etc/systemd/resolved.conf
   replace:
     path:  /etc/systemd/resolved.conf
     regexp: "{{ item.name }}"
@@ -23,7 +23,7 @@
     path: /etc/NetworkManager/NetworkManager.conf
   register: nmconf
 
-- name: edit networkmanager conf
+- name: edit /etc/NetworkManager/NetworkManager.conf
   lineinfile:
     path: /etc/NetworkManager/NetworkManager.conf
     regexp: "{{ item.name }}"
@@ -48,7 +48,7 @@
     - ansible_virtualization_type == 'docker'
     - is_wsl == 'true'
 
-- name: add custom /etc/resolv.conf
+- name: add custom nameservers in /etc/resolv.conf
   ansible.builtin.template:
     src: "resolvconf/resolv.conf.j2"
     dest: /etc/resolv.conf
@@ -56,3 +56,13 @@
   when:
     - ansible_virtualization_type == 'docker'
     - is_wsl == 'true'
+
+- name: add custom wsl settings in wsl/wsl.conf.j2
+  ansible.builtin.template:
+    src: "wsl/wsl.conf.j2"
+    dest: /etc/wsl.conf
+    mode: '0644'
+  become: yes
+  when:
+    - ansible_virtualization_type == 'docker'
+    - is_wsl y== 'true'
