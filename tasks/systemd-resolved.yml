@@ -1,4 +1,15 @@
 ---
+- name: "get status of systemd-resolved service"
+  shell: |
+    set -o pipefail
+    systemctl is-enabled systemd-resolved
+  args:
+    executable: /bin/bash
+  check_mode: no
+  failed_when: systemd_resolved_status.rc >= 2
+  changed_when: false
+  register: systemd_resolved_status
+
 - name: stop and disable systemd-resolved
   systemd:
     name: systemd-resolved
@@ -6,6 +17,7 @@
     enabled: no
     masked: yes
   changed_when: false
+  when: ('enabled' in systemd_resolved_status.stdout)
 
 - name: edit /etc/systemd/resolved.conf
   replace:
@@ -17,6 +29,7 @@
     - { name: "^((#|)MulticastDNS=.*)", value: "MulticastDNS=no" }
     - { name: "^((#|)DNSStubListener=.*)", value: "DNSStubListener=no" }
   changed_when: false
+  when: ('enabled' in systemd_resolved_status.stdout)
 
 - name: check network manager conf exists
   stat:
