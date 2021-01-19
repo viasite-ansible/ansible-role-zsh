@@ -57,7 +57,7 @@
     - ansible_virtualization_type == 'docker'
     - is_wsl == 'true'
 
-- name: add custom wsl settings in wsl/wsl.conf.j2
+- name: add custom wsl settings in /etc/wsl.conf
   ansible.builtin.template:
     src: "wsl/wsl.conf.j2"
     dest: /etc/wsl.conf
@@ -65,4 +65,4 @@
   become: yes
   when:
     - ansible_virtualization_type == 'docker'
-    - is_wsl y== 'true'
+    - is_wsl == 'true'
