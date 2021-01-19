@@ -93,25 +93,42 @@
     - bat_version.stdout is defined
     - ansible_os_family == 'Debian'
 
-- name: install justjanne/powerline-go prompt
+- name: install required powerline prompt
   block:
-  - name: install powerline-go
+  - name: get latest justjanne/powerline-go version
     shell: |
       set -o pipefail
-      /usr/local/go/bin/go get -u github.com/justjanne/powerline-go
+      curl --silent "https://api.github.com/repos/justjanne/powerline-go/releases/latest" |  grep '"tag_name":' |sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//g'
     args:
-      executable: /bin/bash
-    ignore_errors: yes
+        executable: /bin/bash
+    become: true
+    register: poweline_go_version
     changed_when: false
     when: powerline_version == "go"
+
+  - name: install powerline-go {{ poweline_go_version.stdout }}
+    get_url:
+      url: "https://github.com/justjanne/powerline-go/releases/download/v{{ poweline_go_version.stdout }}/powerline-go-linux-amd64"
+      dest: "{{ zsh_user_dir.stdout }}/go/bin/powerline-go"
+      mode: "a+x"
+    when: powerline_version == "go"
+
+#  - name: install powerline-go
+#    shell: |
+#      set -o pipefail
+#      /usr/local/go/bin/go get -u github.com/justjanne/powerline-go
+#    args:
+#      executable: /bin/bash
+#    ignore_errors: yes
+#    changed_when: false
+#    when: powerline_version == "go"
 
   - name: Install powerline-shell
     pip:
       name: powerline-shell
       executable: "{{ pip3_command }}"
     when:
-    - not ansible_check_mode
-    - powerline_version == "shell"
+      - powerline_version == "shell"
 
 - name: install nano syntax highlighting
   git:

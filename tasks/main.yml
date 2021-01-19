@@ -24,9 +24,9 @@
 - name: python pip pre-requisites
   include: python-install.yml
 
-- name: golang installation
-  include: golang-install.yml
-  when: powerline_version == "go"
+#- name: golang installation
+#  include: golang-install.yml
+#  when: powerline_version == "go"
 
 - name: installation steps
   include: install.yml
