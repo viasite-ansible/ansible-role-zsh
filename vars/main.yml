@@ -63,3 +63,10 @@ _python_requirements:
     - python3
 
 python_requirements: "{{ _python_requirements[ansible_os_family] }}"
+
+pip_packages:
+  - ansible
+  - molecule-docker
+  - yamllint
+  - ansible-lint
+  - lastversion

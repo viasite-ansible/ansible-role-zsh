@@ -40,6 +40,11 @@
   become: yes
   when: pkg_requirements is defined
 
+- name: Install required pip packages
+  pip:
+    name: "{{ pip_packages }}"
+    executable: pip3
+
 - name: get latest garabik/grc version
   shell: |
     set -o pipefail
