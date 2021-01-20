@@ -5,21 +5,21 @@
     url: "https://download.opensuse.org/repositories/home:TheLocehiliosan:yadm/CentOS_{{ ansible_distribution_major_version }}/home:TheLocehiliosan:yadm.repo"
     dest: /etc/yum.repos.d/yadm.repo
     mode: 644
-  when: ansible_os_family == 'RedHat'
+  when: (ansible_os_family == 'RedHat' and not (ansible_distribution == 'Amazon'))
 
 # https://fedoraproject.org/wiki/EPEL
 - name: add epel repository
   action: >
     {{ ansible_pkg_mgr }} name=epel-release state=present update_cache=yes
   become: yes
-  when: ansible_os_family == 'RedHat'
+  when: (ansible_os_family == 'RedHat' and not (ansible_distribution == 'Amazon'))
 
 - name: add mariadb repository
   shell: |
     set -o pipefail
     curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
   changed_when: false
-  when: ansible_os_family == 'RedHat'
+  when: (ansible_os_family == 'RedHat' and not (ansible_distribution == 'Amazon'))
 
 - name: list required packages
   debug:

@@ -20,19 +20,18 @@ _pkg_requirements:
     - zsh
     - git
     - gnupg
-    - yadm
     - wget
+    - tar
     - ruby
-    - keychain
     - whois
     - curl
     - traceroute
     - jq
     - zip
     - attr
-#    - sysstat
-#    - lnav
   Debian:
+    - yadm
+    - keychain
     - default-mysql-client
     - ipcalc
     - dnsutils
@@ -42,9 +41,10 @@ _pkg_requirements:
     - man-db
     - telnet
     - mtr
-#    - gpg
     - ruby-dev
   Ubuntu:
+    - yadm
+    - keychain
     - mysql-client
     - ipcalc
     - dnsutils
@@ -55,9 +55,14 @@ _pkg_requirements:
     - perl-doc
     - ruby-dev
   CentOS:
+    - yadm
+    - keychain
     - MariaDB-client
     - bind-utils
     - bash-completion
+    - nmap
+    - ruby-devel
+  Amazon:
     - nmap
     - ruby-devel
 
