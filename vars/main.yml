@@ -29,8 +29,8 @@ _pkg_requirements:
     - jq
     - zip
     - attr
-    - sysstat
-    - lnav
+#    - sysstat
+#    - lnav
   Debian:
     - default-mysql-client
     - ipcalc
