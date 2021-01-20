@@ -7,15 +7,15 @@
   loop:
   - "{{ python_requirements }}"
 
-#- name: "python3: get python executable"
-#  shell: |
-#    set -o pipefail
-#    which {{ python3_command }}
-#  args:
-#    executable: /bin/bash
-#  register: python3_which
-#  changed_when: false
-#  check_mode: no
+- name: "python3: get python executable"
+  shell: |
+    set -o pipefail
+    which {{ python3_command }}
+  args:
+    executable: /bin/bash
+  register: python3_which
+  changed_when: false
+  failed_when: python3_which.rc >= 2
 
 - name: "python3: install pip"
   become: true

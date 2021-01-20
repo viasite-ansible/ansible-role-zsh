@@ -1,4 +1,5 @@
 ---
+
 - name: "get status of systemd-resolved service"
   shell: |
     set -o pipefail

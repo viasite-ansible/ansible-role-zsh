@@ -1,4 +1,5 @@
 ---
+
 - name: get zsh user directory
   shell: |
     set -o pipefail

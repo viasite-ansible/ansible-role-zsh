@@ -1,4 +1,6 @@
 ---
+# https://github.com/golang/go/wiki/Ubuntu
+
 - name: get latest golang version
   shell: |
     set -o pipefail
@@ -46,7 +48,7 @@
     when:
       - not skip_golang_install
       - not latest_go_version.stdout == go_version.stdout
-      - go_version.stdout | length <= 0
+      - go_version.stdout | length >= 0
 
   - name: create go directories in home
     file:
@@ -58,6 +60,8 @@
     with_items:
       - "{{ zsh_user_dir.stdout }}/go"
       - "{{ zsh_user_dir.stdout }}/go/bin"
+      - "{{ zsh_user_dir.stdout }}/go/src"
+      - "{{ zsh_user_dir.stdout }}/go/pkg"
 
   - name: modify .bashrc
     blockinfile:
