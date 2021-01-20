@@ -19,6 +19,7 @@ _pkg_requirements:
   default:
     - zsh
     - git
+    - gnupg
     - yadm
     - wget
     - ruby
@@ -41,7 +42,7 @@ _pkg_requirements:
     - man-db
     - telnet
     - mtr
-    - gpg
+#    - gpg
     - ruby-dev
   Ubuntu:
     - mysql-client
