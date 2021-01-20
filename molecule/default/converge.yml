@@ -16,14 +16,6 @@
     zsh_autosuggestions_bind_key: "^U"
 
   pre_tasks:
-    - name: Update apt cache.
-      apt:
-        pkg:
-        - curl
-        update_cache: yes
-        cache_valid_time: 600
-      when: ansible_os_family == 'Debian'
-      changed_when: false
 
     - name: Add test user {{ zsh_user }}
       user:
