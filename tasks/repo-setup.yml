@@ -1,0 +1,48 @@
+---
+
+- name: add yadm repository
+  get_url:
+    url: "https://download.opensuse.org/repositories/home:TheLocehiliosan:yadm/CentOS_{{ ansible_distribution_major_version }}/home:TheLocehiliosan:yadm.repo"
+    dest: /etc/yum.repos.d/yadm.repo
+    mode: 644
+  when: (ansible_os_family == 'RedHat' and not (ansible_distribution == 'Amazon'))
+
+# https://fedoraproject.org/wiki/EPEL
+- name: add epel repository
+  action: >
+    {{ ansible_pkg_mgr }} name=epel-release state=present update_cache=yes
+  become: yes
+  when: (ansible_os_family == 'RedHat' and not (ansible_distribution == 'Amazon'))
+
+- name: add mariadb repository
+  shell: |
+    set -o pipefail
+    curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+  changed_when: false
+  when: (ansible_os_family == 'RedHat' and not (ansible_distribution == 'Amazon'))
+
+- name: percona repository setup
+  block:
+  - name: "Ubuntu: add percona-toolkit repository"
+    shell: |
+      set -o pipefail
+      {{ item }}
+    args:
+        executable: /bin/bash
+    become: true
+    changed_when: false
+    with_items:
+      - wget https://repo.percona.com/apt/percona-release_latest.$(lsb_release -sc)_all.deb
+      - sudo dpkg -i percona-release_latest.$(lsb_release -sc)_all.deb
+      - sudo percona-release setup ps80
+    when: ansible_distribution == 'Ubuntu'
+
+  - name: "Redhat: add percona-toolkit repository"
+    shell: |
+      set -o pipefail
+      {{ ansible_pkg_mgr }} install https://repo.percona.com/yum/percona-release-latest.noarch.rpm
+    args:
+        executable: /bin/bash
+    become: true
+    changed_when: false
+    when: ansible_os_family == 'RedHat'

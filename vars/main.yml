@@ -42,6 +42,7 @@ _pkg_requirements:
     - telnet
     - mtr
     - ruby-dev
+    - percona-toolkit
   Ubuntu:
     - yadm
     - keychain
@@ -50,10 +51,10 @@ _pkg_requirements:
     - dnsutils
     - aptitude
     - nmap
-    - moreutils
-    - percona-toolkit
     - perl-doc
     - ruby-dev
+    - telnet
+    - percona-toolkit
   CentOS:
     - yadm
     - keychain
@@ -62,6 +63,8 @@ _pkg_requirements:
     - bash-completion
     - nmap
     - ruby-devel
+    - telnet-1
+    - percona-toolkit
   Amazon:
     - nmap
     - ruby-devel
