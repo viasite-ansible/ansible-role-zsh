@@ -19,12 +19,12 @@ _pkg_requirements:
   default:
     - zsh
     - git
-    - gnupg
-    - wget
-    - tar
+#    - gnupg
+#    - wget
+#    - tar
     - ruby
     - whois
-    - curl
+#    - curl
     - traceroute
     - jq
     - zip
