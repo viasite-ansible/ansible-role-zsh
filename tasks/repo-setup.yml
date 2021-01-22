@@ -54,9 +54,9 @@
   - name: "enable percona-toolkit repository"
     shell: |
       set -o pipefail
-      sudo percona-release setup ps80
+      sudo percona-release setup -y ps80
     args:
         executable: /bin/bash
     become: true
     changed_when: false
-    when: ansible_distribution == 'Ubuntu' and ansible_os_family == 'RedHat'
+    when: ansible_distribution == 'Ubuntu' or ansible_os_family == 'RedHat'
