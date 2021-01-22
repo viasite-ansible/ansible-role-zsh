@@ -33,10 +33,11 @@
   changed_when: false
   failed_when: pip3_which.rc >= 2
 
+# https://github.com/pypa/pip/issues/5599
 - name: "python3: upgrade pip"
   shell: |
     set -o pipefail
-    {{ pip3_which.stdout }} install --upgrade pip
+    {{ python3_which.stdout }} -m pip install --upgrade pip
   args:
     executable: /bin/bash
   changed_when: false
