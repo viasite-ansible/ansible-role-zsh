@@ -37,7 +37,7 @@
 - name: "python3: upgrade pip"
   shell: |
     set -o pipefail
-    {{ python3_which.stdout }} -m pip install --upgrade pip
+    {{ python3_which.stdout }} -m pip install --upgrade --force-reinstall pip
   args:
     executable: /bin/bash
   changed_when: false
