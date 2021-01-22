@@ -17,6 +17,11 @@
 
   pre_tasks:
 
+    - name: apt-get update
+      apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+
     - name: Add test user {{ zsh_user }}
       user:
         name: "{{ zsh_user }}"
