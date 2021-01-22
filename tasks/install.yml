@@ -34,9 +34,15 @@
   when: pkg_requirements is defined
 
 - name: Install required pip packages
-  pip:
-    name: "{{ pip_packages }}"
-    executable: "{{ pip3_which.stdout }}"
+  shell: |
+    set -o pipefail
+    {{ python3_which.stdout }} -m pip install --user {{ pip_packages | join( ' ') }}
+  args:
+    executable: /bin/bash
+  changed_when: false
+#  pip:
+#    name: "{{ pip_packages }}"
+#    executable: "{{ pip3_which.stdout }}"
   when:
     - pip3_which is defined
 
