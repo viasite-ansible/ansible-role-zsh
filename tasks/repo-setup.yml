@@ -4,11 +4,6 @@
   action: >
     {{ ansible_pkg_mgr }} name={{ basic_system_packages }} state=present update_cache=yes
   become: yes
-#  with_items:
-#    - wget
-#    - curl
-#    - tar
-#    - gnupg
 
 - name: add yadm repository
   get_url:
@@ -50,7 +45,7 @@
   - name: "Redhat: add percona-toolkit repository"
     shell: |
       set -o pipefail
-      {{ ansible_pkg_mgr }} install https://repo.percona.com/yum/percona-release-latest.noarch.rpm
+      {{ ansible_pkg_mgr }} install -y https://repo.percona.com/yum/percona-release-latest.noarch.rpm
     args:
         executable: /bin/bash
     become: true
