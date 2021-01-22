@@ -39,7 +39,6 @@
     with_items:
       - wget https://repo.percona.com/apt/percona-release_latest.$(lsb_release -sc)_all.deb
       - sudo dpkg -i percona-release_latest.$(lsb_release -sc)_all.deb
-      - sudo percona-release setup ps80
     when: ansible_distribution == 'Ubuntu'
 
   - name: "Redhat: add percona-toolkit repository"
@@ -51,3 +50,13 @@
     become: true
     changed_when: false
     when: ansible_os_family == 'RedHat'
+
+  - name: "enable percona-toolkit repository"
+    shell: |
+      set -o pipefail
+      sudo percona-release setup ps80
+    args:
+        executable: /bin/bash
+    become: true
+    changed_when: false
+    when: ansible_distribution == 'Ubuntu' and ansible_os_family == 'RedHat'
