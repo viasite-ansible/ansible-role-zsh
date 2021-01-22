@@ -19,14 +19,14 @@
   changed_when: False
   register: is_wsl
 
+- name: extra repo setup
+  include: repo-setup.yml
+
 - name: systemd-resolved pre-requisites
   include: systemd-resolved.yml
 
 - name: python pip pre-requisites
   include: python-install.yml
-
-- name: extra repo setup
-  include: repo-setup.yml
 
 - name: golang installation
   include: golang-install.yml

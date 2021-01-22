@@ -1,21 +1,40 @@
 ---
 
-- name: install python3 and pip3
-  package:
-    name: "{{ item }}"
-    state: present
-  loop:
-  - "{{ python_requirements }}"
+- name: "latest python3 all other distros"
+  block:
+  - name: install python3 and pip3
+    package:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - "{{ python_requirements }}"
 
-- name: "python3: get python executable"
+  when: not (ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial')
+
+- name: "latest python3 xenial"
+  block:
+  - name: ubuntu xenial python install fix
+    shell: |
+      set -o pipefail
+      sudo add-apt-repository ppa:deadsnakes/ppa
+      sudo apt-get update -qqy
+      {{ ansible_pkg_mgr }} install -qqy python3.7 python3-pip
+    args:
+        executable: /bin/bash
+    become: true
+    changed_when: false
+
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
+
+- name: get python executable
   shell: |
     set -o pipefail
-    which {{ python3_command }}
+    ls -l /usr/bin/python3.* | grep -E "python[0-9].[0-9]{1,2}$" | awk '{print $9}' | tail -n1
   args:
     executable: /bin/bash
+  become: true
   register: python3_which
   changed_when: false
-  failed_when: python3_which.rc >= 2
 
 #- name: "python3: install pip"
 #  become: true

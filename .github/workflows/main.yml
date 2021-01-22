@@ -49,6 +49,9 @@ jobs:
           - amazonlinux2
     env:
       ANSIBLE_CALLBACK_WHITELIST: profile_tasks
+      ANSIBLE_STDOUT_CALLBACK: yaml
+      ANSIBLE_VERBOSITY: 1
+      ANSIBLE_LOAD_CALLBACK_PLUGINS: true
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v2

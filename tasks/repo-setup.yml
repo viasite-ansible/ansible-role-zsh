@@ -48,7 +48,9 @@
     args:
         executable: /bin/bash
     become: true
+    register: percona_repo_setup_redhat
     changed_when: false
+    failed_when: percona_repo_setup_redhat.rc >= 2
     when: ansible_os_family == 'RedHat'
 
   - name: "enable percona-toolkit repository"
