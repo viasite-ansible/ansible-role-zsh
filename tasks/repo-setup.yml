@@ -2,13 +2,13 @@
 
 - name: install basic system packages
   action: >
-    {{ ansible_pkg_mgr }} name={{ item }} state=present update_cache=yes
+    {{ ansible_pkg_mgr }} name={{ basic_system_packages }} state=present update_cache=yes
   become: yes
-  with_items:
-    - wget
-    - curl
-    - tar
-    - gnupg
+#  with_items:
+#    - wget
+#    - curl
+#    - tar
+#    - gnupg
 
 - name: add yadm repository
   get_url:
