@@ -106,16 +106,6 @@
       mode: "a+x"
     when: powerline_version == "go"
 
-#  - name: install powerline-go
-#    shell: |
-#      set -o pipefail
-#      /usr/local/go/bin/go get -u github.com/justjanne/powerline-go
-#    args:
-#      executable: /bin/bash
-#    ignore_errors: yes
-#    changed_when: false
-#    when: powerline_version == "go"
-
   - name: Install powerline-shell
     pip:
       name: powerline-shell

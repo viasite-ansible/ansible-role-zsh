@@ -31,16 +31,24 @@ jobs:
           ansible-lint
 
   molecule:
+    needs:
+      - lint
     name: Molecule
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
+      max-parallel: 5
       matrix:
         distro:
           - centos8
+          - centos7
           - ubuntu2004
           - ubuntu1804
+          - ubuntu1604
           - debian10
-
+          - amazonlinux2
+    env:
+      ANSIBLE_CALLBACK_WHITELIST: profile_tasks
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v2
