@@ -44,7 +44,7 @@
 #    name: "{{ pip_packages }}"
 #    executable: "{{ pip3_which.stdout }}"
   when:
-    - pip3_which is defined
+    - python3_which is defined
 
 - name: get latest garabik/grc version
   shell: |
