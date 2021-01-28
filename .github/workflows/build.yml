@@ -1,5 +1,6 @@
 ---
 name: CI
+
 'on':
   pull_request:
   push:
@@ -40,13 +41,20 @@ jobs:
       max-parallel: 5
       matrix:
         distro:
-          - centos8
-          - centos7
-          - ubuntu2004
-          - ubuntu1804
-          - ubuntu1604
-          - debian10
-          - amazonlinux2
+          - image: centos
+            tag: 8
+          - image: centos
+            tag: 7
+          - image: ubuntu
+            tag: focal
+          - image: ubuntu
+            tag: bionic
+          - image: ubuntu
+            tag: xenial
+          - image: debian
+            tag: 10
+          - image: amazonlinux
+            tag: 2
     env:
       ANSIBLE_CALLBACK_WHITELIST: profile_tasks
       ANSIBLE_STDOUT_CALLBACK: yaml
@@ -69,4 +77,5 @@ jobs:
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
-          MOLECULE_DISTRO: ${{ matrix.distro }}
+          MOLECULE_DISTRO: ${{ matrix.distro.image }}
+          MOLECULE_DISTRO_TAG: ${{ matrix.distro.tag }}

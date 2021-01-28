@@ -1,15 +1,15 @@
+---
 dependency:
   name: galaxy
-driver:
-  name: docker
-
 lint: |
   set -e
   yamllint .
   ansible-lint
+driver:
+  name: docker
 platforms:
-  - name: ansible-role-${ROLE_NAME:-fancy_console}-${MOLECULE_DISTRO:-ubuntu2004}
-    image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2004}-ansible:latest"
+  - name: ansible-role-${ROLE_NAME:-docker}-${MOLECULE_DISTRO:-ubuntu}-${MOLECULE_DISTRO_TAG:-focal}
+    image: "hybridadmin/ansible-${MOLECULE_DISTRO:-ubuntu}:${MOLECULE_DISTRO_TAG:-focal}"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -23,10 +23,8 @@ provisioner:
   config_options:
     defaults:
       callback_whitelist: profile_tasks
-      timeout: 60
       stdout_callback: yaml
       bin_ansible_callbacks: yes
       verbosity: 1
 verifier:
   name: ansible
-  enabled: False

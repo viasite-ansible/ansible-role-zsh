@@ -22,7 +22,9 @@
 - name: Disable autoupdate if zsh_shared install
   set_fact:
     zsh_update_interval: 0
-  when: zsh_shared != "no"
+  when:
+    - zsh_shared == 'yes'
+#    - zsh_shared != "no"
 
 - name: Check commands exists
   shell: "command -v {{ item.command }} || which {{ item.command }}"
