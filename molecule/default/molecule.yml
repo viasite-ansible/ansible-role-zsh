@@ -28,3 +28,4 @@ provisioner:
       verbosity: 1
 verifier:
   name: ansible
+  enabled: False
