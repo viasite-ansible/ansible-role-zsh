@@ -75,12 +75,12 @@ yum install ansible
 
 
 1. Download role:
-```
+```bash
 sudo ansible-galaxy install hybridadmin.fancy_console
 ```
 
 2. Write playbook or use [playbook.yml](playbook.yml):
-```
+```yaml
 - hosts: all
   vars:
     powerline_version: "go"
@@ -96,7 +96,7 @@ sudo ansible-galaxy install hybridadmin.fancy_console
 ```
 
 3. Provision playbook:
-```
+```bash
 sudo ansible-playbook -i "localhost," -c local playbook.yml
 ```
 
@@ -109,7 +109,7 @@ It will install zsh environment for ansible remote user. If you want to setup zs
 you should define variable `zsh_user`:
 
 Via playbook:
-```
+```yaml
 - hosts: all
   roles:
     - { role: hybridadmin.fancy_console, zsh_user: otheruser }
@@ -117,7 +117,7 @@ Via playbook:
 ```
 
 Or via command:
-```
+```bash
 ansible-playbook -i hosts zsh.yml --extra-vars="zsh_user=otheruser"
 ```
 
