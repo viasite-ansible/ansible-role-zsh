@@ -6,16 +6,16 @@ Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, Cent
 
 
 ## Includes:
-- [zsh](http://zsh.sourceforge.net)
-- [antigen](https://github.com/zsh-users/antigen)
-- [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
-- [powerline-go](https://github.com/justjanne/powerline-go) or [powerline-shell](https://github.com/b-ryan/powerline-shell)
-- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
-- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) (except Debian Squeeze),
+- [`zsh`](http://zsh.sourceforge.net)
+- [`antigen`](https://github.com/zsh-users/antigen)
+- [`oh-my-zsh`](https://github.com/robbyrussell/oh-my-zsh)
+- [`powerline-go`](https://github.com/justjanne/powerline-go) or [powerline-shell](https://github.com/b-ryan/powerline-shell)
+- [`zsh-autosuggestions`](https://github.com/zsh-users/zsh-autosuggestions)
+- [`zsh-syntax-highlighting`](https://github.com/zsh-users/zsh-syntax-highlighting) (except Debian Squeeze),
   with workaround for [#zsh-syntax-highlighting/286](https://github.com/zsh-users/zsh-syntax-highlighting/issues/286)
-- [unixorn/autoupdate-antigen.zshplugin](https://github.com/unixorn/autoupdate-antigen.zshplugin)
-- [ytet5uy4/fzf-widgets](https://github.com/ytet5uy4/fzf-widgets)
-- [urbainvaes/fzf-marks](https://github.com/popstas/urbainvaes/fzf-marks)
+- [`unixorn/autoupdate-antigen.zsh plugin`](https://github.com/unixorn/autoupdate-antigen.zshplugin)
+- [`ytet5uy4/fzf-widgets`](https://github.com/ytet5uy4/fzf-widgets)
+- [`urbainvaes/fzf-marks`](https://github.com/popstas/urbainvaes/fzf-marks)
 
 ## Features
 - default colors tested with solarized dark and default grey terminal in putty
@@ -32,7 +32,7 @@ If you using Solarized Dark scheme and `mc`, you should want to install skin, th
 
 ## Known bugs
 ### `su username` caused errors
-See [antigen issue](https://github.com/zsh-users/antigen/issues/136).
+See [`antigen issue`](https://github.com/zsh-users/antigen/issues/136).
 If both root and su user using antigen, you should use `su - username` in place of `su username`.
 
 Or you can use bundled alias `suser`.
@@ -47,7 +47,7 @@ But this alias can break you scripts, that using `su`.
 ## Install for real machine
 
 ### Zero-knowledge install:
-If you using Ubuntu or Debian and not familiar with Ansible, you can just execute [install.sh](install.sh) on target machine:
+If you using Ubuntu or Debian and not familiar with Ansible, you can just execute [`install.sh`](install.sh) on target machine:
 ```
 curl https://raw.githubusercontent.com/hybridadmin/ansible-role-zsh/master/install.sh | bash
 ```
@@ -57,7 +57,7 @@ Then [configure terminal application](#configure-terminal-application).
 
 ### Manual install
 
-[Install Ansible](http://docs.ansible.com/ansible/intro_installation.html).
+[`Install Ansible`](https://docs.ansible.com/ansible/latest/installation_guide/).
 
 For Ubuntu:
 ``` bash
@@ -79,7 +79,7 @@ yum install ansible
 sudo ansible-galaxy install hybridadmin.fancy_console
 ```
 
-2. Write playbook or use [playbook.yml](playbook.yml):
+2. Write playbook or use [`playbook.yml`](playbook.yml):
 ```yaml
 - hosts: all
   vars:
@@ -101,7 +101,7 @@ sudo ansible-playbook -i "localhost," -c local playbook.yml
 ```
 
 If you want to provision role for root user on macOS, you should install packages manually:
-```
+```bash
 brew install zsh git wget
 ```
 
@@ -121,7 +121,7 @@ Or via command:
 ansible-playbook -i hosts zsh.yml --extra-vars="zsh_user=otheruser"
 ```
 
-4. Install fzf **without shell extensions**, [download binary](https://github.com/junegunn/fzf-bin/releases)
+4. Install fzf **without shell extensions**, [`download binary`](https://github.com/junegunn/fzf/releases)
 or `brew install fzf` for macOS.
 
 Note: I don't use `tmux-fzf` and don't tested work of it.
@@ -152,14 +152,14 @@ You can still provision custom configs for several users.
 
 
 ## Configure
-You should not edit `~/.zshrc`! 
+You should not edit `~/.zshrc`!
 Add your custom config to `~/.zshrc.local` (per user) or `/etc/zshrc.local` (global).
 `.zshrc.local` will never touched by ansible.
 
 
 ### Configure terminal application
-1. Download [powerline fonts](https://github.com/powerline/fonts), install font that you prefer.
-You can see screenshots [here](https://github.com/powerline/fonts/blob/master/samples/All.md).
+1. Download [`powerline fonts`](https://github.com/powerline/fonts), install font that you prefer.
+You can see screenshots [`here`](https://github.com/powerline/fonts/blob/master/samples/All.md).
 
 2. Set color scheme.
 
@@ -173,7 +173,7 @@ Profiles - Colors - Color Presets... - select Solarized Dark
 #### Putty
 Settings - Window - Appearance - Font settings
 
-You can download [Solarized Dark for Putty](https://github.com/altercation/solarized/tree/master/putty-colors-solarized).
+You can download [`Solarized Dark for Putty`](https://github.com/altercation/solarized/tree/master/putty-colors-solarized).
 
 #### Gnome Terminal
 gnome-terminal have built-in Solarized Dark, note that you should select both background color scheme and palette scheme.
@@ -181,7 +181,7 @@ gnome-terminal have built-in Solarized Dark, note that you should select both ba
 
 
 ### Hotkeys
-You can view hotkeys in [defaults/main.yml](defaults/main.yml), `zsh_hotkeys`.
+You can view hotkeys in [`defaults/main.yml`](defaults/main.yml), `zsh_hotkeys`.
 
 Sample hotkey definitions:
 ``` yaml
@@ -232,11 +232,11 @@ zsh_aliases:
 
 
 ## Configure bundles
-You can check default bundles in [defaults/main.yml](defaults/main.yml#L37).
+You can check default bundles in [`defaults/main.yml`](defaults/main.yml#L37).
 If you like default bundles, but you want to add your bundles, use `zsh_antigen_bundles_extras` variable (see example playbook above).
 If you want to remove some default bundles, you should use `zsh_antigen_bundles` variable.
 
-Format of list matches [antigen](https://github.com/zsh-users/antigen#antigen-bundle). All bellow variants valid:
+Format of list matches [`antigen`](https://github.com/zsh-users/antigen#antigen-bundle). All bellow variants valid:
 ``` yaml
 - docker # oh-my-zsh plugin
 - zsh-users/zsh-autosuggestions # plugin from github
