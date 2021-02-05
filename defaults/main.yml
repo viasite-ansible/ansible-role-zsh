@@ -61,7 +61,7 @@ zsh_antigen_bundles:
 zsh_antigen_bundles_extras: []
 
 # useful for deploy many zsh users at host, without duplicate and without write access
-zsh_shared: no
+zsh_shared: false
 
 zsh_antigen_theme: ""
 

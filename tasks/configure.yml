@@ -23,8 +23,7 @@
   set_fact:
     zsh_update_interval: 0
   when:
-    - zsh_shared == 'yes'
-#    - zsh_shared != "no"
+    - zsh_shared | bool
 
 - name: Check commands exists
   shell: "command -v {{ item.command }} || which {{ item.command }}"
@@ -135,7 +134,7 @@
     name: "{{ zsh_user }}"
     shell: /bin/zsh
   become: true
-  when: not zsh_shared
+  when: not zsh_shared | bool
 
 - name: check zsh env exists
   stat:
