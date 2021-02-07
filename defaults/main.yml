@@ -36,6 +36,7 @@ zsh_antigen_bundles:
   - fancy-ctrl-z
   - git-extras
   - gnu-utils
+  - web-search
   - { name: httpie, command: http }
   - { name: go, command: go }
   - { name: gulp, command: gulp }
