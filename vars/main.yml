@@ -13,7 +13,13 @@ zsh_fzf_url: "https://github.com/junegunn/fzf/releases/download/{{ zsh_fzf_versi
 zsh_antigen_fzf_path: "{{ zsh_antigen_path }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-junegunn-SLASH-fzf.git"
 zsh_fzf_default_opts: "--height {{ zsh_fzf_height }}{% if zsh_fzf_reverse %} --reverse{% endif %}{% if zsh_fzf_border %} --border{% endif %}"
 
-yadm_repo_uri: "https://download.opensuse.org/repositories/home:TheLocehiliosan:yadm/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/home:TheLocehiliosan:yadm.repo"
+#yadm_repo_uri: "https://download.opensuse.org/repositories/home:TheLocehiliosan:yadm/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/home:TheLocehiliosan:yadm.repo"
+# https://copr.fedorainfracloud.org/coprs/cdayjr/yadm/
+yadm_repo_uri: "{% if 'Fedora' in ansible_distribution %}
+                https://copr.fedorainfracloud.org/coprs/cdayjr/yadm/repo/{{ ansible_distribution }}-{{ ansible_distribution_major_version }}/cdayjr-yadm-{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.repo
+                {% else %}
+                https://download.opensuse.org/repositories/home:TheLocehiliosan:yadm/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/home:TheLocehiliosan:yadm.repo
+                {% endif %}"
 
 basic_system_packages: ['wget', 'curl', 'tar', 'gnupg']
 
@@ -69,7 +75,6 @@ _pkg_requirements:
     - bash-completion
     - nmap
     - ruby-devel
-    - percona-toolkit
   Amazon:
     - nmap
     - ruby-devel
