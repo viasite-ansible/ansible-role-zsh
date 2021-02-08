@@ -53,6 +53,10 @@ jobs:
             tag: xenial
           - image: debian
             tag: 10
+          - image: fedora
+            tag: 33
+          - image: fedora
+            tag: 32
           - image: amazonlinux
             tag: 2
     env:
