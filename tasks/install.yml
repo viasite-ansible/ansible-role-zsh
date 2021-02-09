@@ -12,6 +12,17 @@
   become: yes
   when: pkg_requirements is defined
 
+- name: debian - install latest yadm
+  shell: |
+    set -o pipefail
+    git clone https://github.com/TheLocehiliosan/yadm.git ~/.yadm-project && ln -s ~/.yadm-project/yadm /usr/local/bin/yadm
+  args:
+      executable: /bin/bash
+      creates: ~/.yadm-project
+  become: true
+  changed_when: false
+  when: ansible_os_family == 'Debian'
+
 - name: Install required pip packages
   shell: |
     set -o pipefail

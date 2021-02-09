@@ -36,7 +36,6 @@ _pkg_requirements:
     - zip
     - attr
   Debian:
-    - yadm
     - keychain
     - default-mysql-client
     - ipcalc
@@ -48,8 +47,8 @@ _pkg_requirements:
     - mtr
     - ruby-dev
     - percona-toolkit
+    - pinentry-curses
   Ubuntu:
-    - yadm
     - keychain
     - mysql-client
     - ipcalc
@@ -59,6 +58,7 @@ _pkg_requirements:
     - perl-doc
     - ruby-dev
     - percona-toolkit
+    - pinentry-curses
   CentOS:
     - yadm
     - keychain
@@ -68,6 +68,7 @@ _pkg_requirements:
     - nmap
     - ruby-devel
     - percona-toolkit
+    - pinentry
   Fedora:
     - yadm
     - keychain
@@ -75,6 +76,7 @@ _pkg_requirements:
     - bash-completion
     - nmap
     - ruby-devel
+    - pinentry
   Amazon:
     - nmap
     - ruby-devel
@@ -98,6 +100,7 @@ pip_packages:
   - yamllint
   - ansible-lint
   - lastversion
+  - yq
 
 python3_command: python3
 pip3_command: pip3
