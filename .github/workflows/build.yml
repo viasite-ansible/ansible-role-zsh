@@ -10,26 +10,22 @@ name: CI
     - cron: "0 6 * * 3"
 
 jobs:
-
   lint:
-    name: Lint
-    runs-on: ubuntu-20.04
+    name: lint
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Check out the codebase.
+      - name: Checkout Code
         uses: actions/checkout@v2
-
-      - name: Set up Python 3.
-        uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          fetch-depth: 0
 
-      - name: Install test dependencies.
-        run: pip3 install ansible yamllint ansible-lint
-
-      - name: Lint code.
-        run: |
-          yamllint .
-          ansible-lint
+      - name: Lint Code Base
+        uses: github/super-linter@v3
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: master
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   molecule:
     needs:
