@@ -22,4 +22,4 @@
         name: "{{ zsh_user }}"
 
   roles:
-    - role: ansible-role-fancy-console
+    - role: hybridadmin.fancy_console
