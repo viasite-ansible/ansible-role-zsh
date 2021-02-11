@@ -38,8 +38,8 @@ jobs:
           ansible-lint
 
   molecule:
-#    needs:
-#      - lint
+    needs:
+      - lint
     name: Molecule
     runs-on: ubuntu-20.04
     strategy:
