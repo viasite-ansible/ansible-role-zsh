@@ -79,6 +79,7 @@ _pkg_requirements:
     - nmap
     - ruby-devel
     - pinentry
+    - glibc-langpack-en
   Amazon:
     - nmap
     - ruby-devel
