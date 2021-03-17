@@ -38,6 +38,7 @@ _pkg_requirements:
   Debian:
     - keychain
     - default-mysql-client
+    - xz-utils
     - ipcalc
     - dnsutils
     - aptitude
@@ -51,6 +52,7 @@ _pkg_requirements:
   Ubuntu:
     - keychain
     - mysql-client
+    - xz-utils
     - ipcalc
     - dnsutils
     - aptitude
