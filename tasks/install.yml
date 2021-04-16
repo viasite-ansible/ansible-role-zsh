@@ -5,15 +5,24 @@
     update_cache: yes
   when: ansible_os_family != 'Darwin'
 
-- name: Install zsh, git, wget
+- name: Install zsh, git, wget (package)
   package:
     name:
       - zsh
       - git
       - wget
     state: present
-  # brew don't work from root user on macOS
-  when: not (zsh_user == 'root' and ansible_os_family == 'Darwin')
+  when: ansible_os_family != 'Darwin'
+
+- name: Install zsh, git, wget (homebrew)
+  homebrew:
+    name:
+      - zsh
+      - git
+      - wget
+    state: present
+    # brew doesn't work from root user on macOS
+  when: zsh_user != 'root' and ansible_os_family == 'Darwin'
 
 - name: Clone antigen {{ zsh_antigen_version }}
   git:
