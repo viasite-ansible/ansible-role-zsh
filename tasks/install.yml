@@ -14,13 +14,13 @@
     state: present
   when: ansible_os_family != 'Darwin'
 
-- name: Install zsh, git, wget (homebrew)
+- name: Install zsh, git, wget, gtar (homebrew)
   homebrew:
     name:
       - zsh
       - git
       - wget
-      - gtar
+      - gnu-tar
     state: present
     # brew doesn't work from root user on macOS
   when: zsh_user != 'root' and ansible_os_family == 'Darwin'
@@ -73,7 +73,7 @@
   when: not zsh_shared
 
 - name: "Download fzf to {{ zsh_fzf_path_absolute }}"
-  unarchive:
+  ansible.builtin.unarchive:
     src: "{{ zsh_fzf_url }}"
     dest: "{{ zsh_fzf_path_absolute }}"
     remote_src: yes
