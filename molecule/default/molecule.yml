@@ -8,7 +8,7 @@ lint: |
 driver:
   name: docker
 platforms:
-  - name: ansible-role-${ROLE_NAME:-docker}-${MOLECULE_DISTRO:-ubuntu}-${MOLECULE_DISTRO_TAG:-focal}
+  - name: ansible-role-${ROLE_NAME:-fancy-console}-${MOLECULE_DISTRO:-ubuntu}-${MOLECULE_DISTRO_TAG:-focal}
     image: "hybridadmin/ansible-${MOLECULE_DISTRO:-ubuntu}:${MOLECULE_DISTRO_TAG:-focal}"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
