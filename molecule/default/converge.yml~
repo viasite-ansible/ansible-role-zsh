@@ -22,5 +22,5 @@
         name: "{{ zsh_user }}"
 
   roles:
-    - role: hybridadmin.fancy_console
-#    - role: ansible-role-fancy-console
+#    - role: hybridadmin.fancy_console
+    - role: ansible-role-fancy-console

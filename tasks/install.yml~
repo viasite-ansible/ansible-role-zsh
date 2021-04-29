@@ -1,14 +1,5 @@
 ---
 
-- name: Create user directories
-  file:
-    path: "{{ item }}"
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user }}"
-    state: directory
-  with_items:
-    - "{{ zsh_user_dir.stdout }}/.local/bin"
-
 - name: list required packages
   debug:
     msg: "{{ pkg_requirements }}"
