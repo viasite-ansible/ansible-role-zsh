@@ -14,6 +14,10 @@ HIST_STAMPS="{{ zsh_hist_stamps }}"
 UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
 COMPLETION_WAITING_DOTS="true"
 
+# TMUX
+ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOCONNECT=false
+
 # ADOTDIR="{{ zsh_antigen_path_compat }}"
 {% if zsh_shared %}
 ANTIGEN_AUTO_CONFIG=false # disable updates
