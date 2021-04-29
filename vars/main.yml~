@@ -47,7 +47,6 @@ _pkg_requirements:
     - man-db
     - mtr
     - ruby-dev
-    - percona-toolkit
     - pinentry-curses
   Ubuntu:
     - keychain
@@ -59,7 +58,6 @@ _pkg_requirements:
     - nmap
     - perl-doc
     - ruby-dev
-    - percona-toolkit
     - pinentry-curses
   CentOS:
     - yadm
@@ -69,7 +67,6 @@ _pkg_requirements:
     - bash-completion
     - nmap
     - ruby-devel
-    - percona-toolkit
     - pinentry
   Fedora:
     - yadm
@@ -83,7 +80,6 @@ _pkg_requirements:
   Amazon:
     - nmap
     - ruby-devel
-    - percona-toolkit
 
 pkg_requirements: "{% if 'kali' in ansible_distribution_release %}{{_pkg_requirements['default'] + _pkg_requirements['Debian']}}{% else %}{{ _pkg_requirements['default'] + _pkg_requirements[ansible_distribution] }}{% endif %}"
 

@@ -60,7 +60,6 @@ _pkg_requirements:
     - ruby-dev
     - pinentry-curses
   CentOS:
-    - yadm
     - keychain
     - MariaDB-client
     - bind-utils
@@ -69,7 +68,6 @@ _pkg_requirements:
     - ruby-devel
     - pinentry
   Fedora:
-    - yadm
     - keychain
     - bind-utils
     - bash-completion
