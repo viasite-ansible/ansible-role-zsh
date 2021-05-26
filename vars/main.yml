@@ -98,6 +98,7 @@ pip_packages:
   - ansible-lint
   - lastversion
   - yq
+  - ssh-audit
 
 python3_command: python3
 pip3_command: pip3
