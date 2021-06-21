@@ -6,6 +6,7 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user }}"
     state: directory
+    mode: '0755'
   with_items:
     - "{{ zsh_user_dir.stdout }}/.local/bin"
 
@@ -24,7 +25,7 @@
 - name: Install latest yadm
   shell: |
     set -o pipefail
-    git clone https://github.com/TheLocehiliosan/yadm.git {{ zsh_user_dir.stdout }}/.yadm-project && ln -s {{ zsh_user_dir.stdout }}/.yadm-project/yadm {{ zsh_user_dir.stdout }}/.local/bin/yadm
+    {{ yadm_install_cmd }}
   args:
       executable: /bin/bash
       creates: ~/.yadm-project
