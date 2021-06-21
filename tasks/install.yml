@@ -24,7 +24,7 @@
 - name: Install latest yadm
   shell: |
     set -o pipefail
-    git clone https://github.com/TheLocehiliosan/yadm.git ~/.yadm-project && ln -s ~/.yadm-project/yadm {{ zsh_user_dir.stdout }}/.local/bin/yadm
+    git clone https://github.com/TheLocehiliosan/yadm.git {{ zsh_user_dir.stdout }}/.yadm-project && ln -s {{ zsh_user_dir.stdout }}/.yadm-project/yadm {{ zsh_user_dir.stdout }}/.local/bin/yadm
   args:
       executable: /bin/bash
       creates: ~/.yadm-project
