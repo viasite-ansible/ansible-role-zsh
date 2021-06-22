@@ -28,7 +28,7 @@
     {{ yadm_install_cmd }}
   args:
       executable: /bin/bash
-      creates: ~/.yadm-project
+      creates: "{{ zsh_user_dir.stdout }}/.yadm-project"
   become: true
   changed_when: false
   when: ansible_os_family == 'Debian'
