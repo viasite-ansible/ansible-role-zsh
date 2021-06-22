@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   author: hybridadmin
+  role_name: fancy_console
   company: N/A
   description: oh-my-zsh with powershell-go or powerline-shell theme, fzf and other plugins
   license: MIT
