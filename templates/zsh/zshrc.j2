@@ -188,7 +188,7 @@ alias suser='su -'
 _load_settings() {
   _dir="$1"
   if [ -d "$_dir" ]; then
-    for config in "$_dir"/*.*; do
+    for config in $(find "$_dir" -maxdepth 10 -type f) ; do
       case "$config" in
         "$_dir"/*.zsh)
           source $config

@@ -94,9 +94,9 @@
   changed_when: False
   when: powerline_version == "shell"
 
-- name: Configure nanorc for syntax highlighting
-  shell: echo 'include {{ zsh_user_dir.stdout }}/.nano/*.nanorc' >> {{ zsh_user_dir.stdout }}/.nanorc
-  changed_when: False
+#- name: Configure nanorc for syntax highlighting
+#  shell: echo 'include {{ zsh_user_dir.stdout }}/.nano/*.nanorc' >> {{ zsh_user_dir.stdout }}/.nanorc
+#  changed_when: False
 
 - name: apply nanorc fix
   block:
