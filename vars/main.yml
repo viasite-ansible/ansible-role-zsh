@@ -101,6 +101,7 @@ pip_packages:
   - yq
   - ssh-audit
   - j2cli
+  - cfn-lint
 
 python3_command: python3
 pip3_command: pip3
