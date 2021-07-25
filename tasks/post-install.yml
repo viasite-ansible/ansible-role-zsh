@@ -1,5 +1,4 @@
 ---
-
 - name: Reset antigen cache
   command: "/bin/zsh -c 'source {{ zsh_config }}; antigen reset'"
   become: yes

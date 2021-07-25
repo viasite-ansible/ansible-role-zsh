@@ -1,5 +1,4 @@
 ---
-
 - name: Check zsh version
   shell: |
     set -o pipefail
@@ -59,7 +58,7 @@
     src: "zsh/zshrc.j2"
     dest: "{{ zsh_config }}"
     owner: "{{ zsh_user }}"
-    mode: '0644'
+    mode: "0644"
     group: "{{ zsh_user_group }}"
     backup: yes
   when: zsh_antigen_installed_version | length > 0
@@ -68,7 +67,7 @@
   file:
     path: "{{ zsh_user_dir.stdout }}/.config/powerline-shell"
     state: directory
-    mode: '0755'
+    mode: "0755"
   changed_when: False
   when: powerline_version == "shell"
 
@@ -77,7 +76,7 @@
     src: "powerline-shell/powerline-config.j2"
     dest: "{{ zsh_user_dir.stdout }}/.config/powerline-shell/config.json"
     owner: "{{ zsh_user }}"
-    mode: '0644'
+    mode: "0644"
     group: "{{ zsh_user_group }}"
     backup: yes
   changed_when: False
@@ -88,7 +87,7 @@
     src: "powerline-shell/powerline-theme.j2"
     dest: "{{ zsh_user_dir.stdout }}/.config/powerline-shell/powerline-theme.py"
     owner: "{{ zsh_user }}"
-    mode: '0644'
+    mode: "0644"
     group: "{{ zsh_user_group }}"
     backup: yes
   changed_when: False
@@ -100,22 +99,22 @@
 
 - name: apply nanorc fix
   block:
-  - name: html conf comment fix in nanorc
-    replace:
-      path: "{{ item }}"
-      regexp: '(.*comment.*)'
-      replace: '#\1'
-    changed_when: False
-    loop:
-    - "{{ zsh_user_dir.stdout }}/.nano/html.nanorc"
-    - "{{ zsh_user_dir.stdout }}/.nano/html.j2.nanorc"
+    - name: html conf comment fix in nanorc
+      replace:
+        path: "{{ item }}"
+        regexp: "(.*comment.*)"
+        replace: '#\1'
+      changed_when: False
+      loop:
+        - "{{ zsh_user_dir.stdout }}/.nano/html.nanorc"
+        - "{{ zsh_user_dir.stdout }}/.nano/html.j2.nanorc"
 
-  - name: etc-hosts conf comment fix in nanorc
-    replace:
-      path: "{{ zsh_user_dir.stdout }}/.nano/etc-hosts.nanorc"
-      regexp: 'normal'
-      replace: 'white'
-    changed_when: False
+    - name: etc-hosts conf comment fix in nanorc
+      replace:
+        path: "{{ zsh_user_dir.stdout }}/.nano/etc-hosts.nanorc"
+        regexp: "normal"
+        replace: "white"
+      changed_when: False
 
   when: not ansible_check_mode
 
@@ -139,5 +138,5 @@
     state: present
   become: yes
   when:
-  - ansible_distribution == 'Ubuntu'
-  - zsh_env_stats.stat.exists
+    - ansible_distribution == 'Ubuntu'
+    - zsh_env_stats.stat.exists

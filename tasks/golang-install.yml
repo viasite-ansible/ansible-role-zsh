@@ -26,58 +26,58 @@
 
 - name: install golang
   block:
-  - name: Remove old installation of Go
-    file:
-      path: /usr/local/go
-      state: absent
-    become: yes
-    changed_when: false
-    when:
-      - not skip_golang_install
-      - not latest_go_version.stdout == go_version.stdout
-      - go_version.stdout | length >= 0
+    - name: Remove old installation of Go
+      file:
+        path: /usr/local/go
+        state: absent
+      become: yes
+      changed_when: false
+      when:
+        - not skip_golang_install
+        - not latest_go_version.stdout == go_version.stdout
+        - go_version.stdout | length >= 0
 
-  - name: download golang tar
-    unarchive:
-      src: "https://dl.google.com/go/go{{ latest_go_version.stdout }}.linux-amd64.tar.gz"
-      dest: /usr/local
-      mode: '0755'
-      remote_src: yes
-    become: yes
-    changed_when: false
-    when:
-      - not skip_golang_install
-      - not latest_go_version.stdout == go_version.stdout
-      - go_version.stdout | length >= 0
+    - name: download golang tar
+      unarchive:
+        src: "https://dl.google.com/go/go{{ latest_go_version.stdout }}.linux-amd64.tar.gz"
+        dest: /usr/local
+        mode: "0755"
+        remote_src: yes
+      become: yes
+      changed_when: false
+      when:
+        - not skip_golang_install
+        - not latest_go_version.stdout == go_version.stdout
+        - go_version.stdout | length >= 0
 
-  - name: create go directories in home
-    file:
-      path: "{{ item }}"
-      state: directory
-      owner: "{{ zsh_user }}"
-      group: "{{ zsh_user }}"
-      mode: 0775
-    with_items:
-      - "{{ zsh_user_dir.stdout }}/go"
-      - "{{ zsh_user_dir.stdout }}/go/bin"
-      - "{{ zsh_user_dir.stdout }}/go/src"
-      - "{{ zsh_user_dir.stdout }}/go/pkg"
+    - name: create go directories in home
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ zsh_user }}"
+        group: "{{ zsh_user }}"
+        mode: 0775
+      with_items:
+        - "{{ zsh_user_dir.stdout }}/go"
+        - "{{ zsh_user_dir.stdout }}/go/bin"
+        - "{{ zsh_user_dir.stdout }}/go/src"
+        - "{{ zsh_user_dir.stdout }}/go/pkg"
 
-  - name: modify .bashrc
-    blockinfile:
-      dest: "$HOME/.bashrc"
-      mode: '0644'
-      block: |
-        export GOPATH=$HOME/go
-        export GOBIN=$GOPATH/bin
-        export PATH=$GOBIN:$PATH:/usr/local/go/bin
-      marker: '# {mark} ANSIBLE MANAGED BLOCK - changes for golang'
-      insertafter: EOF
-      create: yes
+    - name: modify .bashrc
+      blockinfile:
+        dest: "$HOME/.bashrc"
+        mode: "0644"
+        block: |
+          export GOPATH=$HOME/go
+          export GOBIN=$GOPATH/bin
+          export PATH=$GOBIN:$PATH:/usr/local/go/bin
+        marker: "# {mark} ANSIBLE MANAGED BLOCK - changes for golang"
+        insertafter: EOF
+        create: yes
 
-  - name: Update sources
-    command: "/bin/bash -c 'source $HOME/.bashrc'"
-    become: yes
-    become_user: "{{ zsh_user }}"
-    changed_when: false
-    failed_when: false
+    - name: Update sources
+      command: "/bin/bash -c 'source $HOME/.bashrc'"
+      become: yes
+      become_user: "{{ zsh_user }}"
+      changed_when: false
+      failed_when: false

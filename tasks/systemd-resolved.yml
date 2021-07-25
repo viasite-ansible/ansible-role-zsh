@@ -1,5 +1,4 @@
 ---
-
 - name: "get status of systemd-resolved service"
   shell: |
     set -o pipefail
@@ -22,7 +21,7 @@
 
 - name: edit /etc/systemd/resolved.conf
   replace:
-    path:  /etc/systemd/resolved.conf
+    path: /etc/systemd/resolved.conf
     regexp: "{{ item.name }}"
     replace: "{{ item.value }}"
   loop:
@@ -47,8 +46,8 @@
     - { name: "^((#|)dns=.*)", value: "dns=none" }
     - { name: "^((#|)systemd-resolved=.*)", value: "systemd-resolved=false" }
   when:
-  - ansible_os_family == 'RedHat'
-  - nmconf.stat.exists
+    - ansible_os_family == 'RedHat'
+    - nmconf.stat.exists
 
 - name: delete /etc/resolv.conf
   shell: |
@@ -66,7 +65,7 @@
   ansible.builtin.template:
     src: "resolvconf/resolv.conf.j2"
     dest: /etc/resolv.conf
-    mode: '0644'
+    mode: "0644"
   when:
     - ansible_virtualization_type == 'docker'
     - is_wsl == 'true'
@@ -75,7 +74,7 @@
   ansible.builtin.template:
     src: "wsl/wsl.conf.j2"
     dest: /etc/wsl.conf
-    mode: '0644'
+    mode: "0644"
   become: yes
   when:
     - ansible_virtualization_type == 'docker'

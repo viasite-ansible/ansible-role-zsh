@@ -1,5 +1,4 @@
 ---
-
 skip_golang_install: true
 
 zsh_user_group: "{% if ansible_os_family == 'Darwin' %}staff{% else %}{{ zsh_user }}{% endif %}"
@@ -18,12 +17,12 @@ yadm_install_cmd: "git clone https://github.com/TheLocehiliosan/yadm.git {{ zsh_
 # https://copr.fedorainfracloud.org/coprs/cdayjr/yadm/
 # https://software.opensuse.org//download.html?project=home%3ATheLocehiliosan%3Ayadm&package=yadm
 yadm_repo_uri: "{% if 'Fedora' in ansible_distribution %}
-                https://copr.fedorainfracloud.org/coprs/cdayjr/yadm/repo/{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}/cdayjr-yadm-{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}.repo
-                {% else %}
-                https://download.opensuse.org/repositories/home:TheLocehiliosan:yadm/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/home:TheLocehiliosan:yadm.repo
-                {% endif %}"
+  https://copr.fedorainfracloud.org/coprs/cdayjr/yadm/repo/{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}/cdayjr-yadm-{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}.repo
+  {% else %}
+  https://download.opensuse.org/repositories/home:TheLocehiliosan:yadm/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/home:TheLocehiliosan:yadm.repo
+  {% endif %}"
 
-basic_system_packages: ['wget', 'curl', 'tar', 'gnupg']
+basic_system_packages: ["wget", "curl", "tar", "gnupg"]
 
 # https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html#ansible-facts-distribution
 _pkg_requirements:

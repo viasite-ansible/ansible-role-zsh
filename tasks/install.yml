@@ -1,12 +1,11 @@
 ---
-
 - name: Create user directories
   file:
     path: "{{ item }}"
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user }}"
     state: directory
-    mode: '0755'
+    mode: "0755"
   with_items:
     - "{{ zsh_user_dir.stdout }}/.local/bin"
 
@@ -27,8 +26,8 @@
     set -o pipefail
     {{ yadm_install_cmd }}
   args:
-      executable: /bin/bash
-      creates: "{{ zsh_user_dir.stdout }}/.yadm-project"
+    executable: /bin/bash
+    creates: "{{ zsh_user_dir.stdout }}/.yadm-project"
   become: true
   changed_when: false
   when: ansible_os_family == 'Debian'
@@ -40,7 +39,7 @@
   args:
     executable: /bin/bash
   environment:
-    PATH: '{{ zsh_user_dir.stdout }}/.local/bin:{{ ansible_env.PATH }}'
+    PATH: "{{ zsh_user_dir.stdout }}/.local/bin:{{ ansible_env.PATH }}"
   changed_when: false
   when:
     - python3_which is defined
@@ -50,7 +49,7 @@
     set -o pipefail
     curl --silent "https://api.github.com/repos/garabik/grc/releases/latest" |  grep '"tag_name":' |sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//g'
   args:
-      executable: /bin/bash
+    executable: /bin/bash
   become: true
   register: grc_version
   changed_when: false
@@ -78,7 +77,7 @@
     set -o pipefail
     curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" |  grep '"tag_name":' |sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//g'
   args:
-      executable: /bin/bash
+    executable: /bin/bash
   become: true
   register: bat_version
   changed_when: false
@@ -93,34 +92,34 @@
 
 - name: install required powerline prompt
   block:
-  - name: get latest justjanne/powerline-go version
-    shell: |
-      set -o pipefail
-      curl --silent "https://api.github.com/repos/justjanne/powerline-go/releases/latest" |  grep '"tag_name":' |sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//g'
-    args:
+    - name: get latest justjanne/powerline-go version
+      shell: |
+        set -o pipefail
+        curl --silent "https://api.github.com/repos/justjanne/powerline-go/releases/latest" |  grep '"tag_name":' |sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//g'
+      args:
         executable: /bin/bash
-    become: true
-    register: poweline_go_version
-    changed_when: false
-    when: powerline_version == "go"
+      become: true
+      register: poweline_go_version
+      changed_when: false
+      when: powerline_version == "go"
 
-  - name: install powerline-go {{ poweline_go_version.stdout }}
-    get_url:
-      url: "https://github.com/justjanne/powerline-go/releases/download/v{{ poweline_go_version.stdout }}/powerline-go-linux-amd64"
-      dest: "{{ zsh_user_dir.stdout }}/go/bin/powerline-go"
-      mode: "a+x"
-    when: powerline_version == "go"
+    - name: install powerline-go {{ poweline_go_version.stdout }}
+      get_url:
+        url: "https://github.com/justjanne/powerline-go/releases/download/v{{ poweline_go_version.stdout }}/powerline-go-linux-amd64"
+        dest: "{{ zsh_user_dir.stdout }}/go/bin/powerline-go"
+        mode: "a+x"
+      when: powerline_version == "go"
 
-  - name: Install powerline-shell
-    pip:
-      name: powerline-shell
-      executable: "{{ pip3_command }}"
-    when:
-      - powerline_version == "shell"
+    - name: Install powerline-shell
+      pip:
+        name: powerline-shell
+        executable: "{{ pip3_command }}"
+      when:
+        - powerline_version == "shell"
 
 - name: install nano syntax highlighting
   git:
-    repo: 'https://github.com/scopatz/nanorc.git'
+    repo: "https://github.com/scopatz/nanorc.git"
     dest: "{{ zsh_user_dir.stdout }}/.nano"
     version: "master"
     force: yes
@@ -160,7 +159,7 @@
     set -o pipefail
     curl --silent "https://api.github.com/repos/junegunn/fzf/releases/latest" |  grep '"tag_name":' |sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//g'
   args:
-      executable: /bin/bash
+    executable: /bin/bash
   become: true
   register: zsh_fzf_version
   changed_when: false
@@ -169,7 +168,7 @@
   unarchive:
     src: "{{ zsh_fzf_url }}"
     dest: /usr/local/bin
-    mode: '0755'
+    mode: "0755"
     remote_src: yes
     creates: /usr/local/bin/fzf
   become: yes

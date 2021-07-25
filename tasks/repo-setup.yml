@@ -1,5 +1,4 @@
 ---
-
 - name: install basic system packages
   action: >
     {{ ansible_pkg_mgr }} name={{ basic_system_packages }} state=present update_cache=yes

@@ -1,5 +1,4 @@
 ---
-
 - name: get zsh user directory
   shell: |
     set -o pipefail
@@ -34,15 +33,15 @@
 
 - name: installation steps
   include: install.yml
-  tags: [ zsh, install ]
+  tags: [zsh, install]
 
 - name: configuration steps
   include: configure.yml
-  tags: [ zsh, configure ]
+  tags: [zsh, configure]
 
 - name: post installation steps
   include: post-install.yml
-  tags: [ zsh, install, post_install ]
+  tags: [zsh, install, post_install]
 
 - name: Reset antigen cache
   command: "/bin/zsh -c 'source {{ zsh_config }}; antigen reset'"
