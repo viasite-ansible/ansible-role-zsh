@@ -72,24 +72,6 @@
   changed_when: False
   become: yes
 
-- name: get latest sharkdp/bat version
-  shell: |
-    set -o pipefail
-    curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" |  grep '"tag_name":' |sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//g'
-  args:
-    executable: /bin/bash
-  become: true
-  register: bat_version
-  changed_when: false
-
-- name: install sharkdp/bat {{ bat_version.stdout }}
-  apt:
-    deb: "https://github.com/sharkdp/bat/releases/download/v{{ bat_version.stdout }}/bat_{{ bat_version.stdout }}_amd64.deb"
-  become: yes
-  when:
-    - bat_version.stdout is defined
-    - ansible_os_family == 'Debian'
-
 - name: install required powerline prompt
   block:
     - name: get latest justjanne/powerline-go version
