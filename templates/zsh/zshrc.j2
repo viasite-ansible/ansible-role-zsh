@@ -96,6 +96,11 @@ alias '{{ alias.alias }}'="{{ alias.action }}"
 {% endif %}
 {% endfor %}
 
+# zsh-vi-mode
+# Fix: https://github.com/jeffreytse/zsh-vi-mode/issues/24
+# https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
+zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
+
 # fzf
 export FZF_TMUX=0
 export FZF_DEFAULT_OPTS="{{ zsh_fzf_default_opts }}"
@@ -201,3 +206,7 @@ _load_settings() {
   fi
 }
 _load_settings "$HOME/.config/zsh"
+
+#fzf
+#source ~/.fzf/shell/key-bindings.zsh
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -60,6 +60,10 @@ zsh_antigen_bundles:
   #- { name: zsh-users/zsh-syntax-highlighting, when: "{{ zsh_version | default(false) | version('4.3.17', '>=') }}" }
   # bug with text paste in fast-syntax-highlighting v1.21, see https://github.com/zdharma/fast-syntax-highlighting/issues/30
   - { name: zdharma/fast-syntax-highlighting@v1.55 }
+  #https://github.com/wfxr/forgit
+  - wfxr/forgit
+  # https://github.com/Aloxaf/fzf-tab
+  - Aloxaf/fzf-tab
 
 zsh_antigen_bundles_extras: []
 
