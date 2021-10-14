@@ -5,7 +5,7 @@
     update_cache: yes
   when: ansible_os_family != 'Darwin'
 
-- name: Install zsh, git, wget (package)
+- name: Install dependencies (apt)
   package:
     name:
       - zsh
@@ -14,7 +14,7 @@
     state: present
   when: ansible_os_family != 'Darwin'
 
-- name: Install zsh, git, wget, gtar (homebrew)
+- name: Install dependencies (brew)
   homebrew:
     name:
       - zsh
