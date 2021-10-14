@@ -151,6 +151,7 @@ zsh_command_time_echo: ""
 zsh_powerlevel9k_left_prompt:
   - context
   - dir
+  - virtualenv
 
 zsh_powerlevel9k_right_prompt:
   - status
