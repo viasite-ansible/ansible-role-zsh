@@ -18,9 +18,11 @@
   homebrew:
     name:
       - zsh
+      - zsh-completions
       - git
       - wget
       - gnu-tar
+      - fzf
     state: present
     # brew doesn't work from root user on macOS
   when: zsh_user != 'root' and ansible_os_family == 'Darwin'
