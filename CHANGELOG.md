@@ -406,6 +406,3 @@
 ### Bug Fixes
 
 * setup other user than ansible_remote_user ([1c12b96](https://github.com/viasite-ansible/ansible-role-zsh/commit/1c12b96))
-
-
-

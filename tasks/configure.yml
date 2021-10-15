@@ -58,6 +58,7 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: yes
+    mode: u=rw,g=r,o=r
 
 - name: Set zsh as default shell
   user:

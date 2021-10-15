@@ -141,7 +141,7 @@ You can still provision custom configs for several users.
 
 
 ## Configure
-You should not edit `~/.zshrc`! 
+You should not edit `~/.zshrc`!
 Add your custom config to `~/.zshrc.local` (per user) or `/etc/zshrc.local` (global).
 `.zshrc.local` will never touched by ansible.
 
@@ -286,4 +286,3 @@ Also, you can try to fix it, add to `~/.zshrc.local`:
 alias su='su -'
 ```
 But this alias can break you scripts, that using `su`.
-
