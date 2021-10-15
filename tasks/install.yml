@@ -5,15 +5,27 @@
     update_cache: yes
   when: ansible_os_family != 'Darwin'
 
-- name: Install zsh, git, wget
+- name: Install dependencies (apt)
   package:
     name:
       - zsh
       - git
       - wget
     state: present
-  # brew don't work from root user on macOS
-  when: not (zsh_user == 'root' and ansible_os_family == 'Darwin')
+  when: ansible_os_family != 'Darwin'
+
+- name: Install dependencies (brew)
+  homebrew:
+    name:
+      - zsh
+      - zsh-completions
+      - git
+      - wget
+      - gnu-tar
+      - fzf
+    state: present
+    # brew doesn't work from root user on macOS
+  when: zsh_user != 'root' and ansible_os_family == 'Darwin'
 
 - name: Clone antigen {{ zsh_antigen_version }}
   git:
@@ -63,7 +75,7 @@
   when: not zsh_shared
 
 - name: "Download fzf to {{ zsh_fzf_path_absolute }}"
-  unarchive:
+  ansible.builtin.unarchive:
     src: "{{ zsh_fzf_url }}"
     dest: "{{ zsh_fzf_path_absolute }}"
     remote_src: yes
