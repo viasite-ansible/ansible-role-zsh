@@ -100,6 +100,7 @@ pip_packages:
   - lastversion
   - yq
   - ssh-audit
+  - crudini
   - j2cli
   - cfn-lint
 
