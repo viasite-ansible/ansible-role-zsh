@@ -20,16 +20,19 @@
 
 - name: extra repo setup
   include: repo-setup.yml
+  when: ansible_os_family != 'Darwin'
 
 - name: systemd-resolved pre-requisites
   include: systemd-resolved.yml
+  when: ansible_os_family != 'Darwin'
 
 - name: python pip pre-requisites
   include: python-install.yml
+  when: ansible_os_family != 'Darwin'
 
 - name: golang installation
   include: golang-install.yml
-  when: powerline_version == "go"
+  when: powerline_version == "go" and ansible_os_family != 'Darwin'
 
 - name: installation steps
   include: install.yml

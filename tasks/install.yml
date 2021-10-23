@@ -32,7 +32,7 @@
   changed_when: false
   when: ansible_os_family == 'Debian'
 
-- name: Install required pip packages
+- name: Install python packages
   shell: |
     set -o pipefail
     {{ python3_which.stdout }} -m pip install --user {{ pip_packages | join( ' ') }}
@@ -53,6 +53,7 @@
   become: true
   register: grc_version
   changed_when: false
+  when: ansible_os_family != 'Darwin'
 
 - name: clone garabik/grc {{ grc_version.stdout }}
   git:
@@ -64,6 +65,7 @@
   become_user: "{{ zsh_user }}"
   register: zsh_register_grc_clone
   changed_when: false
+  when: ansible_os_family != 'Darwin'
 
 - name: install garabik/grc {{ grc_version.stdout }}
   shell: |
@@ -71,8 +73,9 @@
     ./install.sh
   changed_when: False
   become: yes
+  when: ansible_os_family != 'Darwin'
 
-- name: install required powerline prompt
+- name: install powerline prompt
   block:
     - name: get latest justjanne/powerline-go version
       shell: |
@@ -87,7 +90,7 @@
 
     - name: install powerline-go {{ poweline_go_version.stdout }}
       get_url:
-        url: "https://github.com/justjanne/powerline-go/releases/download/v{{ poweline_go_version.stdout }}/powerline-go-linux-amd64"
+        url: "https://github.com/justjanne/powerline-go/releases/download/v{{ poweline_go_version.stdout }}/powerline-go-{{ ansible_system | lower }}-amd64"
         dest: "{{ zsh_user_dir.stdout }}/go/bin/powerline-go"
         mode: "a+x"
       when: powerline_version == "go"
@@ -145,6 +148,7 @@
   become: true
   register: zsh_fzf_version
   changed_when: false
+  when: ansible_os_family != 'Darwin'
 
 - name: Download junegunn/fzf {{ zsh_fzf_version.stdout }}
   unarchive:
@@ -154,7 +158,9 @@
     remote_src: yes
     creates: /usr/local/bin/fzf
   become: yes
-  when: zsh_register_fzf_command.rc == 1
+  when:
+    - zsh_register_fzf_command.rc == 1
+    - ansible_os_family != 'Darwin'
 
 - name: set directory permissions
   file:

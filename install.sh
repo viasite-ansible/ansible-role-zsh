@@ -7,22 +7,29 @@ title() {
 
 # https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-rhel-centos-or-fedora
 title "Install Ansible"
-if [[ -f /etc/redhat-release ]]; then
-	yum install epel-release
-	yum install ansible
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        if [[ -f /etc/redhat-release ]]; then
+                yum install -yq epel-release
+                yum install -yq ansible wget git
+        elif [[ -f /etc/os-release ]]; then
+                if [[ $(cat /etc/os-release | grep "VER.*ID" | sed -e 's/VERSION_ID="//g' | cut -d '.' -f1) -lt 20 ]]; then
+                        sudo apt-get install software-properties-common
+                        sudo apt-add-repository ppa:ansible/ansible
+                fi
+                sudo apt-get -y update && sudo apt-get -yqq install ansible python-apt zsh git wget -y
+        else
+                echo "Non-Redhat or Non-Debian os found"
+        fi
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+        brew install ansible@2.9 git wget
 else
-        if [[ $(cat /etc/os-release | grep "VER.*ID" | sed -e 's/VERSION_ID="//g' | cut -d '.' -f1) -lt 20 ]]; then
-	        sudo apt-get install software-properties-common
-	        sudo apt-add-repository ppa:ansible/ansible
-	fi
-	sudo apt-get update
-	sudo apt-get install ansible
+        echo "Unknown OS found"
 fi
 
-sudo apt-get update
-sudo apt-get install python-apt zsh git wget -y
 
-title "Install ansible-role-zsh"
+title "Install hybridadmin.fancy_console role"
 sudo ansible-galaxy install hybridadmin.fancy_console --force
 
 title "Download playbook to /tmp/zsh.yml"

@@ -93,10 +93,6 @@
   changed_when: False
   when: powerline_version == "shell"
 
-#- name: Configure nanorc for syntax highlighting
-#  shell: echo 'include {{ zsh_user_dir.stdout }}/.nano/*.nanorc' >> {{ zsh_user_dir.stdout }}/.nanorc
-#  changed_when: False
-
 - name: apply nanorc fix
   block:
     - name: html conf comment fix in nanorc
@@ -116,7 +112,7 @@
         replace: "white"
       changed_when: False
 
-  when: not ansible_check_mode
+  when: ansible_os_family != 'Darwin'
 
 - name: Set zsh as default shell
   user:

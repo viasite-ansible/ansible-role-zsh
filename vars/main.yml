@@ -6,7 +6,7 @@ zsh_antigen_path: "{% if zsh_shared %}/usr/share/zsh-config{% else %}~{{ zsh_use
 zsh_config: "{% if zsh_shared %}/usr/share/zsh-config/.zshrc{% else %}~{{ zsh_user }}/.zshrc{% endif %}"
 zsh_antigen_path_compat: "{{ zsh_antigen_path | replace('~' + zsh_user, '$HOME') }}"
 
-zsh_fzf_os: linux
+zsh_fzf_os: "{{ ansible_system | lower }}"
 zsh_fzf_arch: "{% if '64' in ansible_architecture %}amd64{% else %}386{% endif %}"
 zsh_fzf_url: "https://github.com/junegunn/fzf/releases/download/{{ zsh_fzf_version.stdout }}/fzf-{{ zsh_fzf_version.stdout }}-{{ zsh_fzf_os }}_{{ zsh_fzf_arch }}.tar.gz"
 zsh_antigen_fzf_path: "{{ zsh_antigen_path }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-junegunn-SLASH-fzf.git"
@@ -14,8 +14,6 @@ zsh_fzf_default_opts: "--height={{ zsh_fzf_height }}{% if zsh_fzf_reverse %} --l
 
 yadm_install_cmd: "git clone https://github.com/TheLocehiliosan/yadm.git {{ zsh_user_dir.stdout }}/.yadm-project && ln -s {{ zsh_user_dir.stdout }}/.yadm-project/yadm {{ zsh_user_dir.stdout }}/.local/bin/yadm"
 
-# https://copr.fedorainfracloud.org/coprs/cdayjr/yadm/
-# https://software.opensuse.org//download.html?project=home%3ATheLocehiliosan%3Ayadm&package=yadm
 yadm_repo_uri: "{% if 'Fedora' in ansible_distribution %}
   https://copr.fedorainfracloud.org/coprs/cdayjr/yadm/repo/{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}/cdayjr-yadm-{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}.repo
   {% else %}
@@ -32,10 +30,8 @@ _pkg_requirements:
     - telnet
     - ruby
     - whois
-    - traceroute
     - jq
     - zip
-    - attr
   Debian:
     - keychain
     - default-mysql-client
@@ -49,6 +45,8 @@ _pkg_requirements:
     - mtr
     - ruby-dev
     - pinentry-curses
+    - traceroute
+    - attr
   Ubuntu:
     - keychain
     - mysql-client
@@ -60,6 +58,8 @@ _pkg_requirements:
     - perl-doc
     - ruby-dev
     - pinentry-curses
+    - traceroute
+    - attr
   CentOS:
     - keychain
     - MariaDB-client
@@ -68,6 +68,8 @@ _pkg_requirements:
     - nmap
     - ruby-devel
     - pinentry
+    - traceroute
+    - attr
   Fedora:
     - keychain
     - bind-utils
@@ -76,9 +78,17 @@ _pkg_requirements:
     - ruby-devel
     - pinentry
     - glibc-langpack-en
+    - traceroute
+    - attr
   Amazon:
     - nmap
     - ruby-devel
+    - traceroute
+    - attr
+  MacOSX:
+    - go
+    - grc
+    - fzf
 
 pkg_requirements: "{% if 'kali' in ansible_distribution_release %}{{_pkg_requirements['default'] + _pkg_requirements['Debian']}}{% else %}{{ _pkg_requirements['default'] + _pkg_requirements[ansible_distribution] }}{% endif %}"
 
