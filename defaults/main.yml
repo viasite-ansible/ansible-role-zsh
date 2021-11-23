@@ -1,6 +1,7 @@
 ---
 
 zsh_user: "{{ ansible_user_id }}"
+zsh_user_group: "{{ zsh_user_group_defaults[ ansible_system ] }}"
 
 # .zshrc config
 zsh_hist_stamps: yyyy-mm-dd
