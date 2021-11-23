@@ -60,12 +60,15 @@
     backup: yes
     mode: u=rw,g=r,o=r
 
+# Assuming that iTerm2 will be installed, that will already set the user default shell
+# This causes problems on the corporate macbook due to crazy admin rights controls, so we won't
+#  do this if it's a Mac
 - name: Set zsh as default shell
   user:
     name: "{{ zsh_user }}"
     shell: /bin/zsh
   become: true
-  when: not zsh_shared and zsh_change_user_shell
+  when: not zsh_shared and zsh_change_user_shell and ansible_distribution != 'MacOSX'
 
 - name: Add skip_global_compinit for disable early compinit call in Ubuntu
   lineinfile:
