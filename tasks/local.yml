@@ -23,12 +23,6 @@
     group: "{{ zsh_user_group }}"
     mode: u=rwx
 
-    # add to ~/.zshrc_local:
-    # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-    # fi
-    # [[ ! -f ~/.p10k.zsh ]] || source local
-
 - name: Add env vars to user .profile
   when: user_profile_env_vars is defined
   loop: "{{ user_profile_env_vars }}"
@@ -39,3 +33,8 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     mode: u=rwx
+
+# add to ~/.zshrc_local for p10k auto prompt:
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi

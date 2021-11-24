@@ -1,6 +1,8 @@
 {
     "Profiles": [
         {
+            "Name": "Diehlabs",
+            "Guid": "C5A7650E-B616-4D19-86D7-F485083AA229",
             "Ansi 3 Color": {
                 "Green Component": 0.7333333492279053,
                 "Blue Component": 0,
@@ -295,7 +297,6 @@
                 "Blue Component": 1,
                 "Red Component": 0.3333333432674408
             },
-            "Name": "Default",
             "Cursor Text Color": {
                 "Green Component": 1,
                 "Blue Component": 1,
@@ -344,7 +345,6 @@
                 "Blue Component": 0,
                 "Red Component": 0
             },
-            "Guid": "C5A7650E-B616-4D19-86D7-F485083AA229",
             "Horizontal Spacing": 1
         }
     ]
