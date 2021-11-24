@@ -6,6 +6,15 @@
       - iterm2
   when: ansible_system == 'Darwin'
 
+- name: Create iTerm2 profile
+  ansible.builtin.copy:
+    src: iterm2_profile.json
+    dest: "~/Library/Application Support/iTerm2/DynamicProfiles/{{ zsh_user }}-profile.json"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: u=rw
+  when: ansible_os_family == 'Darwin'
+
 - name: Create Powerlevel 10k config
   ansible.builtin.copy:
     src: p10k.zsh
@@ -19,15 +28,6 @@
     #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
     # fi
     # [[ ! -f ~/.p10k.zsh ]] || source local
-
-- name: Create iTerm2 profile
-  ansible.builtin.copy:
-    src: iterm2_profile.json
-    dest: "~/Library/Application Support/iTerm2/DynamicProfiles/{{ zsh_user }}-profile.json"
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
-    mode: u=rw
-  when: ansible_os_family == 'Darwin'
 
 - name: Add env vars to user .profile
   when: user_profile_env_vars is defined
