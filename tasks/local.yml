@@ -1,0 +1,34 @@
+---
+- name: Create Powerlevel 10k config
+  ansible.builtin.copy:
+    src: p10k.zsh
+    dest: "~{{ zsh_user }}/.p10k.zsh"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: u=rwx
+
+    # add to ~/.zshrc_local:
+    # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    # fi
+    # [[ ! -f ~/.p10k.zsh ]] || source local
+
+- name: Create iTerm2 profile
+  ansible.builtin.copy:
+    src: iterm2_profile.json
+    dest: "~/Library/Application Support/iTerm2/DynamicProfiles/{{ zsh_user }}-profile.json"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: u=rw
+  when: ansible_os_family == 'Darwin'
+
+- name: Add env vars to user .profile
+  when: user_profile_env_vars is defined
+  loop: "{{ user_profile_env_vars }}"
+  lineinfile:
+    path: "~{{ zsh_user }}/.zshrc.local"
+    line: "[[ ! -f ~/.p10k.zsh ]] || source local"
+    create: yes
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: u=rwx
