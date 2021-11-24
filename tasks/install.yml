@@ -17,6 +17,7 @@
 - name: Install dependencies (brew)
   homebrew:
     name:
+      - iterm2
       - zsh
       - zsh-completions
       - git
