@@ -1,4 +1,11 @@
 ---
+- name: Install system packages
+  become: false
+  ansible.builtin.homebrew_cask:
+    name:
+      - iterm2
+  when: ansible_system == 'Darwin'
+
 - name: Create Powerlevel 10k config
   ansible.builtin.copy:
     src: p10k.zsh
