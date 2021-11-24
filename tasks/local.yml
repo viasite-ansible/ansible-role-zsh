@@ -12,7 +12,7 @@
     dest: "~/Library/Application Support/iTerm2/DynamicProfiles/{{ zsh_user }}-profile.json"
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
-    mode: u=rw
+    mode: u=rw,g=rw,o=rw
   when: ansible_os_family == 'Darwin'
 
 - name: Create Powerlevel 10k config
@@ -21,9 +21,9 @@
     dest: "~{{ zsh_user }}/.p10k.zsh"
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
-    mode: u=rwx
+    mode: u=rwx,g=rx,o=rx
 
-- name: Add env vars to user .profile
+- name: Add .p10k.zsh to .zshrc.local
   when: user_profile_env_vars is defined
   loop: "{{ user_profile_env_vars }}"
   lineinfile:
@@ -32,7 +32,7 @@
     create: yes
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
-    mode: u=rwx
+    mode: u=rwx,g=rx,o=rx
 
 # add to ~/.zshrc_local for p10k auto prompt:
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
