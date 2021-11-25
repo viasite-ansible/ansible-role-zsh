@@ -28,7 +28,8 @@
   loop: "{{ user_profile_env_vars }}"
   lineinfile:
     path: "~{{ zsh_user }}/.zshrc.local"
-    line: "[[ ! -f ~/.p10k.zsh ]] || source local"
+    #line: "[[ ! -f ~/.p10k.zsh ]] || source local"
+    line: "source ~/.p10k.zsh"
     create: yes
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
