@@ -2,7 +2,7 @@
 
 zsh_user: "{{ ansible_user_id }}"
 zsh_user_group: "{{ zsh_user_group_defaults[ ansible_system ] }}"
-zsh_zprofile_env_vars:
+zsh_zprofile_env_vars: []
 
 # .zshrc config
 zsh_hist_stamps: yyyy-mm-dd
