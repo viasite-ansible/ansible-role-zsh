@@ -41,7 +41,6 @@
 # fi
 
 - name: Add env vars to user .zprofile
-  when: zsh_zprofile_env_vars is defined and zsh_zprofile_env_vars|length > 0
   loop: "{{ zsh_zprofile_env_vars }}"
   lineinfile:
     path: "~{{ zsh_user }}/.zprofile"
@@ -51,3 +50,4 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     mode: u=rw,g=r,o=r
+  when: (zsh_zprofile_env_vars is defined) and (zsh_zprofile_env_vars|length > 0)
