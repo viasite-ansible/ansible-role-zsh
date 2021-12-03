@@ -19,6 +19,10 @@ galaxy_info:
       versions:
         - 7
         - 8
+    - name: Fedora
+      versions:
+        - 33
+        - 34
     - name: MacOSX
       versions:
         - 10.12

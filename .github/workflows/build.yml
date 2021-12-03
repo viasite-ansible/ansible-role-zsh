@@ -58,9 +58,9 @@ jobs:
           - image: debian
             tag: 10
           - image: fedora
-            tag: 33
+            tag: 34
           - image: fedora
-            tag: 32
+            tag: 33
           - image: amazonlinux
             tag: 2
     env:
