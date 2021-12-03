@@ -15,8 +15,10 @@ UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
 COMPLETION_WAITING_DOTS="true"
 
 # TMUX - https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/tmux
-ZSH_TMUX_AUTOSTART=true
-ZSH_TMUX_AUTOCONNECT=false
+if [ -f ~/.tmux.conf ] || [ -f ~/.tmux.conf.local ]; then
+	ZSH_TMUX_AUTOSTART=true
+	ZSH_TMUX_AUTOCONNECT=false
+fi
 
 # ADOTDIR="{{ zsh_antigen_path_compat }}"
 {% if zsh_shared %}
