@@ -89,6 +89,11 @@ _pkg_requirements:
     - go
     - grc
     - fzf
+    - iterm2
+    - keychain
+    - tree
+    - mtr
+    - ncdu
 
 pkg_requirements: "{% if 'kali' in ansible_distribution_release %}{{_pkg_requirements['default'] + _pkg_requirements['Debian']}}{% else %}{{ _pkg_requirements['default'] + _pkg_requirements[ansible_distribution] }}{% endif %}"
 
