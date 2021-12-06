@@ -4,7 +4,7 @@
 
 export TERM="{{ zsh_term }}"
 export EDITOR="{{ zsh_editor }}"
-export PATH="{{ zsh_path | join(":") }}"
+export PATH="$PATH:{{ zsh_path | join(":") }}"
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$GOBIN:$PATH:/usr/local/go/bin
@@ -13,6 +13,13 @@ HISTFILE=~/.zsh_history
 HIST_STAMPS="{{ zsh_hist_stamps }}"
 UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
 COMPLETION_WAITING_DOTS="true"
+
+# OMZ update settings
+if [ $UPDATE_ZSH_DAYS -gt 0 ]; then
+        zstyle ':omz:update' mode auto
+        # This will check for updates every 7 days
+        zstyle ':omz:update' frequency $UPDATE_ZSH_DAYS
+fi
 
 # TMUX - https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/tmux
 if [ -f ~/.tmux.conf ] || [ -f ~/.tmux.conf.local ]; then
@@ -185,6 +192,8 @@ fi
 
 # Aliases
 alias suser='su -'
+
+{% if zsh_load_etc_profile %}source /etc/profile{% endif %}
 
 # user configs
 [[ -r /etc/zsh/zshrc.local ]] && source /etc/zsh/zshrc.local

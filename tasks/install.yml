@@ -25,10 +25,11 @@
   shell: |
     set -o pipefail
     {{ yadm_install_cmd }}
+    chown -R {{ zsh_user }}:{{ zsh_user }} {{ zsh_user_dir.stdout }}/.yadm-project
   args:
     executable: /bin/bash
     creates: "{{ zsh_user_dir.stdout }}/.yadm-project"
-  become: true
+  #become: true
   changed_when: false
   when: ansible_os_family == 'Debian'
 

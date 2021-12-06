@@ -23,6 +23,8 @@ zsh_path:
   - /usr/games
   - /usr/local/games
 
+zsh_load_etc_profile: true
+
 fzf_widgets: ytet5uy4/fzf-widgets
 
 zsh_antigen_version: master
@@ -45,21 +47,17 @@ zsh_antigen_bundles:
   - { name: systemd, command: systemctl }
   - python
   - { name: tmux, command: tmux }
-  - zsh_reload
 
   # on zsh 4.3.10 autosuggestions breaks multiline commands with \
-  - { name: zsh-users/zsh-autosuggestions }
+  - { name: zsh-users/zsh-autosuggestions, when: "{{ zsh_version is version('5.0', '>=') }}" }
   - popstas/zsh-command-time
-  - {
-      name: unixorn/autoupdate-antigen.zshplugin,
-      when: "{{ zsh_update_interval > 0 }}",
-    }
+  - { name: unixorn/autoupdate-antigen.zshplugin, when: "{{ zsh_update_interval > 0 }}" }
   - urbainvaes/fzf-marks # replaces jump plugin, mark, jump and Ctrl+G
   - "{{ fzf_widgets }}"
   # must be last, don't work on zsh < 4.3.17
-  #- { name: zsh-users/zsh-syntax-highlighting, when: "{{ zsh_version | default(false) | version('4.3.17', '>=') }}" }
+  #- { name: zsh-users/zsh-syntax-highlighting, when: "{{ zsh_version | default(false) is version('4.3.17', '>=') }}" }
   # bug with text paste in fast-syntax-highlighting v1.21, see https://github.com/zdharma/fast-syntax-highlighting/issues/30
-  - { name: zdharma/fast-syntax-highlighting@v1.55 }
+  - { name: zdharma-continuum/fast-syntax-highlighting, when: "{{ zsh_version is version('4.3.17', '>=') }}" }
   #https://github.com/wfxr/forgit
   - wfxr/forgit
   # https://github.com/Aloxaf/fzf-tab

@@ -13,8 +13,7 @@ Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, Cent
 - [`oh-my-zsh`](https://github.com/robbyrussell/oh-my-zsh)
 - [`powerline-go`](https://github.com/justjanne/powerline-go) or [`powerline-shell`](https://github.com/b-ryan/powerline-shell)
 - [`zsh-autosuggestions`](https://github.com/zsh-users/zsh-autosuggestions)
-- [`zsh-syntax-highlighting`](https://github.com/zsh-users/zsh-syntax-highlighting) (except Debian Squeeze),
-  with workaround for [`#zsh-syntax-highlighting/286`](https://github.com/zsh-users/zsh-syntax-highlighting/issues/286)
+- [`zsh-syntax-highlighting`](https://github.com/zsh-users/zsh-syntax-highlighting)
 - [`unixorn/autoupdate-antigen.zsh plugin`](https://github.com/unixorn/autoupdate-antigen.zshplugin)
 - [`ytet5uy4/fzf-widgets`](https://github.com/ytet5uy4/fzf-widgets)
 - [`urbainvaes/fzf-marks`](https://github.com/popstas/urbainvaes/fzf-marks)
@@ -24,6 +23,7 @@ Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, Cent
 - default colors tested with solarized dark and default grey terminal in putty
 - add custom prompt elements from yml
 - custom zsh config with `~/.zshrc.local` or `/etc/zshrc.local`
+- load `/etc/profile.d` scripts
 - install only plugins that useful for your machine. For example, plugin `docker` will not install if you have not Docker
 
 ## screen capture
@@ -71,10 +71,9 @@ Then [`configure terminal application`](#configure-terminal-application).
 For Ubuntu:
 
 ```bash
-sudo apt-get install software-properties-common
-sudo apt-add-repository ppa:ansible/ansible
-sudo apt-get update
-sudo apt-get install ansible
+sudo apt update
+sudo apt install python3-pip -y
+sudo pip3 install ansible
 ```
 
 For CentOS:
@@ -87,7 +86,7 @@ yum install ansible
 1. Download role:
 
 ```bash
-sudo ansible-galaxy install hybridadmin.fancy_console
+sudo ansible-galaxy install hybridadmin.fancy_console --force
 ```
 
 2. Write playbook or use [`playbook.yml`](playbook.yml):

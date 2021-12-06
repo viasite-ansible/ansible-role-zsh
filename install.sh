@@ -30,10 +30,16 @@ fi
 
 
 title "Install hybridadmin.fancy_console role"
-sudo ansible-galaxy install hybridadmin.fancy_console --force
+ansible-galaxy install hybridadmin.fancy_console --force
 
 title "Download playbook to /tmp/zsh.yml"
 curl https://raw.githubusercontent.com/hybridadmin/ansible-role-fancy-console/master/playbook.yml > /tmp/zsh.yml
 
+title "Provision playbook for root"
+ansible-playbook -i "localhost," -c local -b /tmp/zsh.yml
+
 title "Provision playbook for current user: $(whoami)"
-sudo ansible-playbook -i "localhost," -c local /tmp/zsh.yml --extra-vars="zsh_user=${USER}"
+ansible-playbook -i "localhost," -c local -b /tmp/zsh.yml --extra-vars="zsh_user=${USER}"
+
+title "Finished! Please, restart your shell."
+echo ""
