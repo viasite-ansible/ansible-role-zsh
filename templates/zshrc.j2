@@ -3,8 +3,8 @@
 # antigen version: {{ zsh_antigen_installed_version }}
 
 export TERM="{{ zsh_term }}"
-export EDITOR="{{ zsh_editor }}"
-export PATH="$PATH:{{ zsh_path | join(":") }}"
+{% if zsh_editor %}export EDITOR="{{ zsh_editor }}"
+{% endif %}export PATH="$PATH:{{ zsh_path | join(":") }}"
 
 HIST_STAMPS="{{ zsh_hist_stamps }}"
 UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
