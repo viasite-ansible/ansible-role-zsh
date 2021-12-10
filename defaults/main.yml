@@ -52,7 +52,6 @@ zsh_antigen_bundles:
   - { name: viasite/drupal-scripts, command: drs }
   - { name: viasite/server-scripts, command: dbdump }
   - { name: viasite-ansible/zsh-ansible-server, command: ansible-deploy }
-  - zsh_reload
 
   # on zsh 4.3.10 autosuggestions breaks multiline commands with \
   - { name: zsh-users/zsh-autosuggestions, when: "{{ zsh_version is version_compare('5.0', '>=') }}" }
