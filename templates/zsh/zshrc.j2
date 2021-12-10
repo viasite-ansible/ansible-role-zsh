@@ -16,9 +16,9 @@ COMPLETION_WAITING_DOTS="true"
 
 # OMZ update settings
 if [ $UPDATE_ZSH_DAYS -gt 0 ]; then
-        zstyle ':omz:update' mode auto
+        zstyle :omz:update mode auto
         # This will check for updates every 7 days
-        zstyle ':omz:update' frequency $UPDATE_ZSH_DAYS
+        zstyle :omz:update frequency $UPDATE_ZSH_DAYS
 fi
 
 # TMUX - https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/tmux
