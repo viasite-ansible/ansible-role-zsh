@@ -254,6 +254,11 @@ Bundles `docker` and `docker-compose` will be added to config only if commands e
 Note: you should wrap condition in `"{{ }}"`
 
 
+## Custom config
+You can add any code in variable `zsh_custom_before`, `zsh_custom_after`.
+
+- zsh_custom_before - before include antigen.zsh
+- zsh_custom_after - before include ~/.zshrc.local
 
 ## Upgrade
 viasite-ansible.zsh v3.0 introduces antigen v2.0, it don't have backward compatibility to antigen 1.x.

@@ -63,6 +63,9 @@ zsh_antigen_bundles:
 
 zsh_antigen_bundles_extras: []
 
+zsh_custom_before: '' # any code before include ~/.zshrc.local
+zsh_custom_after: '' # any code before include ~/.zshrc.local
+
 # useful for deploy many zsh users at host, without duplicate and without write access
 zsh_shared: no
 zsh_change_user_shell: yes

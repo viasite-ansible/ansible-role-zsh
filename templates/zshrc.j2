@@ -22,6 +22,10 @@ ANTIGEN_SYSTEM_UPDATE_DAYS="{{ zsh_update_interval }}"
 
 {% if zsh_mc_solarized_skin %}export MC_SKIN="$HOME/.mc/lib/mc-solarized/solarized.ini"{% endif %}
 
+
+{% if zsh_custom_before %}# Custom configs zsh_custom_before
+{{ zsh_custom_before }}{% endif %}
+
 source "{{ zsh_antigen_path_compat }}/antigen/antigen.zsh"
 
 antigen use oh-my-zsh
@@ -163,10 +167,11 @@ POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND="{{ zsh_powerlevel9k_vcs_foreground }}"
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND="{{ zsh_powerlevel9k_command_execution_time_foreground }}"
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="{{ zsh_powerlevel9k_command_execution_time_background }}"
 
-# Aliases
-alias suser='su -'
-
 {% if zsh_load_etc_profile %}source /etc/profile{% endif %}
+
+
+{% if zsh_custom_after %}# Custom configs zsh_custom_after
+{{ zsh_custom_after }}{% endif %}
 
 # user configs
 [[ -r /etc/zsh/zshrc.local ]] && source /etc/zsh/zshrc.local
