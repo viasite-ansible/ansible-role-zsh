@@ -70,7 +70,7 @@ zsh_custom_after: '' # any code before include ~/.zshrc.local
 zsh_shared: no
 zsh_change_user_shell: yes
 
-zsh_antigen_theme: "bhilburn/powerlevel9k powerlevel9k"
+zsh_antigen_theme: "romkatv/powerlevel10k powerlevel10k"
 
 zsh_hotkeys:
   # home & end keys work
