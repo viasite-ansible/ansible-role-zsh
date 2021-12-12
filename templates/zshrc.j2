@@ -6,6 +6,18 @@ export TERM="{{ zsh_term }}"
 {% if zsh_editor %}export EDITOR="{{ zsh_editor }}"
 {% endif %}export PATH="$PATH:{{ zsh_path | join(":") }}"
 
+{% if zsh_antigen_theme == "romkatv/powerlevel10k powerlevel10k" and zsh_powerlevel10k_instant_prompt %}
+# user configs
+[[ -r "$HOME/.zshrc.local.pre-p10k" ]] && source "$HOME/.zshrc.local.pre-p10k"
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+{% endif %}
+
 HIST_STAMPS="{{ zsh_hist_stamps }}"
 UPDATE_ZSH_DAYS="{{ zsh_update_interval }}"
 COMPLETION_WAITING_DOTS="true"
@@ -176,3 +188,8 @@ POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="{{ zsh_powerlevel9k_command_exec
 # user configs
 [[ -r /etc/zsh/zshrc.local ]] && source /etc/zsh/zshrc.local
 [[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+
+{% if zsh_antigen_theme == "romkatv/powerlevel10k powerlevel10k" %}
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+{% endif %}

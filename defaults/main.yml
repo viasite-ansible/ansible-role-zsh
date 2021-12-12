@@ -190,3 +190,6 @@ zsh_powerlevel9k_vcs_untracked_background: "094" # orange
 # command execution time
 zsh_powerlevel9k_command_execution_time_foreground: "000"
 zsh_powerlevel9k_command_execution_time_background: "248"
+
+# powerlevel10k
+zsh_powerlevel10k_instant_prompt: no
