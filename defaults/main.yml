@@ -58,8 +58,7 @@ zsh_antigen_bundles:
   - "{{ fzf_widgets }}"
   # must be last, don't work on zsh < 4.3.17
   #- { name: zsh-users/zsh-syntax-highlighting, when: "{{ zsh_version | default(false) is version_compare('4.3.17', '>=') }}" }
-  # bug with text paste in fast-syntax-highlighting v1.21, see https://github.com/zdharma/fast-syntax-highlighting/issues/30
-  - { name: zdharma/fast-syntax-highlighting@v1.2, when: "{{ zsh_version is version_compare('4.3.17', '>=') }}" }
+  - { name: zdharma-continuum/fast-syntax-highlighting, when: "{{ zsh_version is version_compare('4.3.17', '>=') }}" }
 
 zsh_antigen_bundles_extras: []
 
