@@ -15,7 +15,7 @@
     - name: ubuntu xenial python install fix
       shell: |
         set -o pipefail
-        sudo add-apt-repository ppa:deadsnakes/ppa
+        sudo add-apt-repository ppa:fkrull/deadsnakes
         sudo apt-get update -qqy
         {{ ansible_pkg_mgr }} install -qqy python3.7 python3-pip
       args:
