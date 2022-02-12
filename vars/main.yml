@@ -114,6 +114,7 @@ pip_packages:
   - ansible-lint
   - lastversion
   - yq
+  - awslogs
   - ssh-audit
   - crudini
   - j2cli
