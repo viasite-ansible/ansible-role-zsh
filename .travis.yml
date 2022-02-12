@@ -17,8 +17,6 @@ env:
       MOLECULE_DISTRO_TAG: focal
     - MOLECULE_DISTRO: ubuntu
       MOLECULE_DISTRO_TAG: bionic
-    - MOLECULE_DISTRO: ubuntu
-      MOLECULE_DISTRO_TAG: xenial
     - MOLECULE_DISTRO: debian
       MOLECULE_DISTRO_TAG: 10
 services: docker
