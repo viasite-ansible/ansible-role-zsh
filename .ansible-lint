@@ -4,3 +4,4 @@ skip_list:
   - skip_ansible_lint
   - '106'
   - '702'
+  - fqcn-builtins

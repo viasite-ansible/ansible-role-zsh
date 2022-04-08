@@ -1,8 +1,13 @@
 ---
-- name: get zsh user directory
+
+- name: get user directory
   shell: |
     set -o pipefail
-    cat /etc/passwd | grep "{{ zsh_user }}" | cut -d ':' -f6 | head -n1
+    if [[ "$OSTYPE" =~ ^darwin ]]; then
+      echo $HOME
+    else
+      cat /etc/passwd | grep "{{ zsh_user }}" | cut -d ':' -f6 | head -n1
+    fi
   args:
     executable: /bin/bash
   register: zsh_user_dir
@@ -28,11 +33,11 @@
 
 - name: python pip pre-requisites
   include: python-install.yml
-  when: ansible_os_family != 'Darwin'
+#  when: ansible_os_family != 'Darwin'
 
 - name: golang installation
   include: golang-install.yml
-  when: powerline_version == "go" and ansible_os_family != 'Darwin'
+  when: powerline_version == "go"
 
 - name: installation steps
   include: install.yml

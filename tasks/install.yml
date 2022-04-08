@@ -3,7 +3,7 @@
   file:
     path: "{{ item }}"
     owner: "{{ zsh_user }}"
-    group: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
     state: directory
     mode: "0755"
   with_items:
@@ -15,28 +15,26 @@
 
 - name: Install additional packages
   action: >
-    {{ ansible_pkg_mgr }} name={{ pkg_requirements }} state=present update_cache=yes
+    {{ ansible_pkg_mgr }} name={{ pkg_requirements }} state=present {{ extra_pkg_mgr_cmds }}
     vars:
       packages: "{{ pkg_requirements }}"
-  become: yes
   when: pkg_requirements is defined
 
 - name: Install latest yadm
   shell: |
     set -o pipefail
     {{ yadm_install_cmd }}
-    chown -R {{ zsh_user }}:{{ zsh_user }} {{ zsh_user_dir.stdout }}/.yadm-project
+    chown -R {{ zsh_user }}:{{ zsh_user_group }} {{ zsh_user_dir.stdout }}/.yadm-project
   args:
     executable: /bin/bash
     creates: "{{ zsh_user_dir.stdout }}/.yadm-project"
-  #become: true
   changed_when: false
-  when: ansible_os_family == 'Debian'
+  when: ansible_os_family == 'Debian' and ansible_os_family != 'Darwin'
 
 - name: Install python packages
   shell: |
     set -o pipefail
-    {{ python3_which.stdout }} -m pip install --user {{ pip_packages | join( ' ') }}
+    python3 -m pip install --user {{ pip_packages | join( ' ') }}
   args:
     executable: /bin/bash
   environment:
@@ -87,14 +85,25 @@
       become: true
       register: poweline_go_version
       changed_when: false
-      when: powerline_version == "go"
+      when: powerline_version == "go" and ansible_os_family != 'Darwin'
 
-    - name: install powerline-go {{ poweline_go_version.stdout }}
+    - name: install powerline-go {{ poweline_go_version.stdout }} non-macOS
       get_url:
         url: "https://github.com/justjanne/powerline-go/releases/download/v{{ poweline_go_version.stdout }}/powerline-go-{{ ansible_system | lower }}-amd64"
         dest: "{{ zsh_user_dir.stdout }}/go/bin/powerline-go"
         mode: "a+x"
-      when: powerline_version == "go"
+      when: powerline_version == "go" and ansible_os_family != 'Darwin'
+
+    - name: install powerline-go macOS
+      shell: |
+        set -o pipefail
+        /opt/homebrew/bin/go install github.com/justjanne/powerline-go@latest
+      args:
+        executable: /bin/bash
+      become: true
+      register: poweline_go_version
+      changed_when: false
+      when: powerline_version == "go" and ansible_os_family == 'Darwin'
 
     - name: Install powerline-shell
       pip:
