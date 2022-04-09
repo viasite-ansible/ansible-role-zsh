@@ -4,7 +4,7 @@
 ![Ansible Role](https://img.shields.io/ansible/role/d/45707)
 ![Ansible Quality Score](https://img.shields.io/ansible/quality/45707)
 
-Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, CentOS 7, CentOS 8, Amazon Linux 2.
+Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 12.3, CentOS 7, CentOS 8, Fedora 33, Fedora 34, Amazon Linux 2.
 
 ## Includes:
 

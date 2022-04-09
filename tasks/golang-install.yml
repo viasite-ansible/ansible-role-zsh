@@ -10,7 +10,7 @@
   ignore_errors: yes
   register: latest_go_version
   changed_when: false
-  when: not skip_golang_install
+  when: not skip_golang_install and ansible_os_family != 'Darwin'
 
 - name: check current golang version
   shell: |
@@ -22,7 +22,7 @@
   register: go_version
   changed_when: false
   failed_when: go_version.rc >= 128
-  when: not skip_golang_install
+  when: not skip_golang_install and ansible_os_family != 'Darwin'
 
 - name: install golang
   block:
@@ -36,6 +36,7 @@
         - not skip_golang_install
         - not latest_go_version.stdout == go_version.stdout
         - go_version.stdout | length >= 0
+        - ansible_os_family != 'Darwin'
 
     - name: download golang tar
       unarchive:
@@ -49,13 +50,14 @@
         - not skip_golang_install
         - not latest_go_version.stdout == go_version.stdout
         - go_version.stdout | length >= 0
+        - ansible_os_family != 'Darwin'
 
     - name: create go directories in home
       file:
         path: "{{ item }}"
         state: directory
         owner: "{{ zsh_user }}"
-        group: "{{ zsh_user }}"
+        group: "{{ zsh_user_group }}"
         mode: 0775
       with_items:
         - "{{ zsh_user_dir.stdout }}/go"
@@ -74,10 +76,33 @@
         marker: "# {mark} ANSIBLE MANAGED BLOCK - changes for golang"
         insertafter: EOF
         create: yes
+      when: ansible_os_family != 'Darwin'
 
-    - name: Update sources
+    - name: modify .bashrc
+      blockinfile:
+        dest: "$HOME/.zprofile"
+        mode: "0644"
+        block: |
+          export GOPATH=$HOME/go
+          export GOBIN=$GOPATH/bin
+          export PATH=$GOBIN:$PATH:/usr/local/go/bin
+        marker: "# {mark} ANSIBLE MANAGED BLOCK - changes for golang"
+        insertafter: EOF
+        create: yes
+      when: ansible_os_family == 'Darwin'
+
+    - name: Update .bashrc sources
       command: "/bin/bash -c 'source $HOME/.bashrc'"
       become: yes
       become_user: "{{ zsh_user }}"
       changed_when: false
       failed_when: false
+      when: ansible_os_family != 'Darwin'
+
+    - name: Update .zprofile sources
+      command: "/bin/bash -c 'source $HOME/.zprofile'"
+      become: yes
+      become_user: "{{ zsh_user }}"
+      changed_when: false
+      failed_when: false
+      when: ansible_os_family == 'Darwin'

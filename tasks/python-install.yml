@@ -8,7 +8,9 @@
       loop:
         - "{{ python_requirements }}"
 
-  when: not (ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial')
+  when:
+    - not (ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial')
+    - ansible_os_family != 'Darwin'
 
 - name: "latest python3 xenial"
   block:

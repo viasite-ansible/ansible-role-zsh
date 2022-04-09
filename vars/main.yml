@@ -1,6 +1,7 @@
 ---
 skip_golang_install: true
 
+extra_pkg_mgr_cmds: "{% if ansible_os_family == 'Darwin' %}{% else %} update_cache=yes{% endif %}"
 zsh_user_group: "{% if ansible_os_family == 'Darwin' %}staff{% else %}{{ zsh_user }}{% endif %}"
 zsh_antigen_path: "{% if zsh_shared %}/usr/share/zsh-config{% else %}~{{ zsh_user }}/.antigen{% endif %}"
 zsh_config: "{% if zsh_shared %}/usr/share/zsh-config/.zshrc{% else %}~{{ zsh_user }}/.zshrc{% endif %}"
@@ -89,8 +90,6 @@ _pkg_requirements:
     - go
     - grc
     - fzf
-    - iterm2
-    - keychain
     - tree
     - mtr
     - ncdu

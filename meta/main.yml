@@ -22,9 +22,9 @@ galaxy_info:
       versions:
         - 33
         - 34
-    - name: MacOSX
+    - name: macOS
       versions:
-        - 10.12
+        - Big-Sur
   galaxy_tags:
     - system
     - shell
