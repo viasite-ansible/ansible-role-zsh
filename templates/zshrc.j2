@@ -96,9 +96,9 @@ zle -N copy-earlier-word
 
 # hotkeys
 {% for hotkey in zsh_hotkeys %}
-{% if hotkey.hotkey != '' and (hotkey.bundle is not defined or hotkey.bundle in bundles_enabled) %}
-bindkey '{{ hotkey.hotkey }}' {{ hotkey.action }}
-{% endif %}
+    {% if 'hotkey' in hotkey and hotkey.hotkey != '' and (hotkey.bundle is not defined or hotkey.bundle in bundles_enabled) %}
+        bindkey '{{ hotkey.hotkey }}' {{ hotkey.action }}
+    {% endif %}
 {% endfor %}
 
 # aliases
