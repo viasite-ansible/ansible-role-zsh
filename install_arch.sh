@@ -9,10 +9,10 @@ title() {
 
 title "Install pip and Ansible"
 sudo pacman -Sy
-sudo pacman -S ansible
+sudo pacman -S --needed ansible
 
 title "Install viasite-ansible.zsh"
-ansible-galaxy install viasite-ansible.zsh --force
+ansible-galaxy install quantumfate.ansible_role_zsh --force
 
 title "Download playbook to /tmp/zsh.yml"
 curl https://raw.githubusercontent.com/quantumfate/ansible-role-zsh/dev/playbook.yml > /tmp/zsh.yml
