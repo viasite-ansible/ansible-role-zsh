@@ -1,3 +1,7 @@
+# quantumfate/ansible-role-zsh
+
+This is a detached fork from [viasite-ansible/ansible-role-zsh](https://github.com/viasite-ansible/ansible-role-zsh). I highly doubt that my PRs will ever be merged and I want to add more features in the future because I find this essential for personal use. Anyway - this is a great project and I want to make it available for everyone by adding support and mor easy to install solutions for other distros.
+
 [![Build Status](https://travis-ci.org/viasite-ansible/ansible-role-zsh.svg?branch=master)](https://travis-ci.org/viasite-ansible/ansible-role-zsh)
 
 Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, CentOS 8.
@@ -9,7 +13,7 @@ Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, Cent
 ## Zero-knowledge install:
 If you using Ubuntu or Debian and not familiar with Ansible, you can just execute [install.sh](install.sh) on target machine:
 ```
-curl https://raw.githubusercontent.com/viasite-ansible/ansible-role-zsh/master/install.sh | bash
+curl https://raw.githubusercontent.com/quantumfate/ansible-role-zsh/master/install.sh | bash
 ```
 It will install pip3, ansible and setup zsh for root and current user.
 
