@@ -32,7 +32,7 @@
 
 - name: Merge hotkeys lists
   set_fact:
-    zsh_hotkeys: "{{ zsh_hotkeys }} + {{ zsh_hotkeys_extras }}"
+    zsh_hotkeys: "{{ zsh_hotkeys | union(zsh_hotkeys_extras) | unique }}"
 
 - name: Check antigen version
   shell: |
