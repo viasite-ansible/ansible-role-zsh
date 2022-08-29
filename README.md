@@ -73,7 +73,7 @@ sudo pip3 install ansible
 
 1. Download role:
 ```
-ansible-galaxy install viasite-ansible.zsh --force
+ansible-galaxy install quantumfate.zsh --force
 ```
 
 2. Write playbook or use [playbook.yml](playbook.yml):
@@ -85,7 +85,7 @@ ansible-galaxy install viasite-ansible.zsh --force
       - joel-porquet/zsh-dircolors-solarized
     zsh_autosuggestions_bind_key: "^U"
   roles:
-    - viasite-ansible.zsh
+    - quantumfate.zsh
 ```
 
 3. Provision playbook:
@@ -105,8 +105,8 @@ Via playbook:
 ```
 - hosts: all
   roles:
-    - { role: viasite-ansible.zsh, zsh_user: otheruser }
-    - { role: viasite-ansible.zsh, zsh_user: thirduser }
+    - { role: quantumfate.zsh, zsh_user: otheruser }
+    - { role: quantumfate.zsh, zsh_user: thirduser }
 ```
 
 Or via command:
@@ -265,7 +265,7 @@ You can add any code in variable `zsh_custom_before`, `zsh_custom_after`.
 - zsh_custom_after - before include ~/.zshrc.local
 
 ## Upgrade
-viasite-ansible.zsh v3.0 introduces antigen v2.0, it don't have backward compatibility to antigen 1.x.
+quantumfate.zsh v3.0 introduces antigen v2.0, it don't have backward compatibility to antigen 1.x.
 
 I don't spent much time for smooth upgrade, therefore you probably should do some manual actions:
 if powerlevel9k prompt don't loaded after provision role, you should execute `antigen reset`.

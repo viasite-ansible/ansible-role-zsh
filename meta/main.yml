@@ -4,6 +4,7 @@ galaxy_info:
   description: oh-my-zsh with powerlevel9k theme, fzf and other plugins
   license: MIT
   min_ansible_version: 2.0
+  role_name: zsh
   platforms:
     - name: Ubuntu
       versions:

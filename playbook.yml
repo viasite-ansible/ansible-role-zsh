@@ -6,4 +6,4 @@
     # your variables here
     # zsh_autosuggestions_bind_key: "^U"
   roles:
-    - quantumfate.ansible_role_zsh
+    - quantumfate.zsh

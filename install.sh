@@ -12,8 +12,8 @@ sudo apt update
 sudo apt install python3-pip -y
 sudo pip3 install ansible
 
-title "Install viasite-ansible.zsh"
-ansible-galaxy install quantumfate.ansible_role_zsh --force
+title "Install quantumfate.zsh"
+ansible-galaxy install quantumfate.zsh --force
 
 title "Download playbook to /tmp/zsh.yml"
 curl https://raw.githubusercontent.com/quantumfate/ansible-role-zsh/master/playbook.yml > /tmp/zsh.yml
