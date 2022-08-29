@@ -15,7 +15,7 @@ title "Install viasite-ansible.zsh"
 ansible-galaxy install viasite-ansible.zsh --force
 
 title "Download playbook to /tmp/zsh.yml"
-curl https://raw.githubusercontent.com/quantumfate/ansible-role-zsh/master/playbook.yml > /tmp/zsh.yml
+curl https://raw.githubusercontent.com/quantumfate/ansible-role-zsh/dev/playbook.yml > /tmp/zsh.yml
 
 title "Provision playbook for root"
 ansible-playbook -i "localhost," -c local -b /tmp/zsh.yml
