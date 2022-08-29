@@ -17,6 +17,12 @@ curl https://raw.githubusercontent.com/quantumfate/ansible-role-zsh/master/insta
 ```
 It will install pip3, ansible and setup zsh for root and current user.
 
+if you are using Manjaro or Arch you can use the script [install_arch.sh](install_arch.sh): 
+
+```
+curl https://raw.githubusercontent.com/quantumfate/ansible-role-zsh/master/install_arch.sh | bash
+```
+
 Then [configure terminal application](#configure-terminal-application).
 
 
