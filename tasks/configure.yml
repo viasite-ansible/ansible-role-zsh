@@ -1,5 +1,4 @@
 ---
-
 - name: Check zsh version
   shell: "set -o pipefail; zsh --version | cut -d ' ' -f2"
   args:
@@ -15,7 +14,7 @@
 
 - name: Merge bundles lists
   set_fact:
-    zsh_antigen_bundles: "{{ zsh_antigen_bundles }} + {{ zsh_antigen_bundles_extras }}"
+    zsh_antigen_bundles: "{{ zsh_antigen_bundles | union(zsh_antigen_bundles_extras) | unique }}"
 
 - name: Disable autoupdate if zsh_shared install
   set_fact:
