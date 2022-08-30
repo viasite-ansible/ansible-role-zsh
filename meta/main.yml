@@ -8,7 +8,7 @@ galaxy_info:
   platforms:
     - name: ArchLinux
       versions:
-        - 5.18.16
+        - any
     - name: Ubuntu
       versions:
         - trusty
