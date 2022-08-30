@@ -1,6 +1,6 @@
 # quantumfate/ansible-role-zsh
 
-This is a detached fork from [viasite-ansible/ansible-role-zsh](https://github.com/viasite-ansible/ansible-role-zsh). I highly doubt that my PRs will ever be merged and I want to add more features in the future because I find this essential for personal use. Anyway - this is a great project and I want to make it available for everyone by adding support and mor easy to install solutions for other distros.
+This is a detached fork from [viasite-ansible/ansible-role-zsh](History.md).
 
 [![Build Status](https://travis-ci.org/viasite-ansible/ansible-role-zsh.svg?branch=master)](https://travis-ci.org/viasite-ansible/ansible-role-zsh)
 
