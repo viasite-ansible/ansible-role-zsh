@@ -6,9 +6,9 @@ galaxy_info:
   min_ansible_version: 2.0
   role_name: zsh
   platforms:
-    - name: Manjaro
+    - name: ArchLinux
       versions:
-        - 5.15.59-1-MANJARO
+        - 5.15
     - name: Ubuntu
       versions:
         - trusty
