@@ -189,7 +189,7 @@ source {{ source.path }}"
 # EXPORT VARIABLES
 {% for export in zsh_export_vars %}
 {% if export.variable is defined and export.value is defined and export.variable != '' and export.value != '' %}
-{% export.name is defined and export.name != '' %}## {{ export.name }} {% endif %}
+{% if export.name is defined and export.name != '' %}## {{ export.name }} {% endif %}
 export {{ export.variable }}='{{ export.value }}'
 {% endif %}
 {% endfor %}
