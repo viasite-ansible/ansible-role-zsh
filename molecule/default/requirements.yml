@@ -1,4 +1,2 @@
 ---
-collections:
-  - name: community.general
-  - name: artis3n.github
+- src: geerlingguy.pip
