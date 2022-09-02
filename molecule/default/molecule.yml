@@ -1,8 +1,9 @@
 ---
+role_name_check: 1
 dependency:
   name: galaxy
 driver:
-  name: delegated
+  name: docker
 
 platforms:
   - name: geerlingguy instances
