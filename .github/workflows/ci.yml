@@ -24,9 +24,9 @@ jobs:
           - ubuntu1604
           - ubuntu1804
           - ubuntu2004
-          # - centos8
-        # distro_alt:
-        #   - arch
+          - centos8
+        distro_alt:
+          - arch
 
     steps:
       - name: Check out the codebase.
@@ -49,10 +49,10 @@ jobs:
           ANSIBLE_FORCE_COLOR: '1'
           MOLECULE_DISTRO_GEERLINGGUY: ${{ matrix.distro_geerlingguy }}
       
-      # - name: Run Molecule tests for alternative distros.
-      #   run: molecule test
-      #   env:
-      #     PY_COLORS: '1'
-      #     ANSIBLE_FORCE_COLOR: '1'
-      #     MOLECULE_DISTRO_ALT: ${{ matrix.distro_alt }}
+      - name: Run Molecule tests for alternative distros.
+        run: molecule test
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          MOLECULE_DISTRO_ALT: ${{ matrix.distro_alt }}
     

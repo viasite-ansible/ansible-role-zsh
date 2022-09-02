@@ -5,23 +5,24 @@ driver:
   name: docker
 
 platforms:
-  - name: geerlingguy instances
-    image: "geerlingguy/docker-${MOLECULE_DISTRO_GEERLINGGUY:-debian10}-ansible:latest"
+  - name: geerlingguy
+    image: "geerlingguy/docker-${MOLECULE_DISTRO_GEERLINGGUY:-ubuntu2004}-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
     pre_build_image: true
 
-  # - name: other instances
-  #   image: "artis3n/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
-  #   command: ${MOLECULE_DOCKER_COMMAND:-""}
-  #   privileged: true
-  #   pre_build_image: true
+  - name: other
+    image: "artis3n/docker-${MOLECULE_DISTRO_ALT:-centos7}-ansible:latest"
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    privileged: true
+    pre_build_image: true
   
 provisioner:
   name: ansible
   playbooks:
+    prepare: ../resources/prepare.yml
     converge: ../resources/converge.yml
   inventory:
     group_vars:
