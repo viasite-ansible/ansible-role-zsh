@@ -181,7 +181,7 @@ POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="{{ zsh_powerlevel9k_command_exec
 # SOURCES
 {% for source in zsh_sources %}
 {% if source.path is defined and source.path != '' %}
-{% source.name is defined and source.name != '' %}## {{ source.name }} {% endif %}
+{% if source.name is defined and source.name != '' %}## {{ source.name }} {% endif %}
 source {{ source.path }}"
 {% endif %}
 {% endfor %}
@@ -197,7 +197,7 @@ export {{ export.variable }}='{{ export.value }}'
 # PATHS
 {% for path in zsh_paths %}
 {% if path.path is defined and path.path != '' %}
-{% path.name is defined and path.name != '' %}## {{ path.name }} {% endif %}
+{% if path.name is defined and path.name != '' %}## {{ path.name }} {% endif %}
 export PATH="${PATH}:{{ path.path }}"
 {% endif %}
 {% endfor %}
