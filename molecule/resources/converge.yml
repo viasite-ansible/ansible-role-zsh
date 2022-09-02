@@ -1,7 +1,19 @@
 ---
 - name: Converge
   hosts: all
-  tasks:
-    - name: "Include ansible-role-zsh"
-      ansible.builtin.include_role:
-        name: "ansible-role-zsh"
+
+  pre_tasks:
+    - name: Update apt cache
+      apt: update_cache=yes cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+    
+    - name: Update pacman cache
+      pacman: name=* state=latest update_cache=yes
+      when: ansible_os_family == 'Archlinux'
+
+    - name: upgrade all packages
+      yum: name=* state=latest update_cache=yes
+      when: ansible_os_family == 'CentOS'
+
+  roles:
+    - role: 'quantumfate.zsh'

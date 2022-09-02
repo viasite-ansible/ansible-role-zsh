@@ -14,4 +14,39 @@ defaults:
 
 jobs:
   molecule:
+    name: Molecule
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro_geerlingguy:
+          - debian10
+          - debian11
+          - ubuntu1604
+          - ubuntu1804
+          - ubuntu2004
+          - centos8
+        distro_alt:
+          - arch
+
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+        with:
+          path: 'quantumfate.zsh'
+        
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install test dependencies.
+        run: pip3 install molecule docker yamllint ansible-lint
+
+      - name: Run Molecule tests.
+        run: molecule test
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          MOLECULE_DISTRO_GEERLINGGUY: ${{ matrix.distro_geerlingguy }}
+          MOLECULE_DISTRO_ALT: ${{ matrix.distro_alt }}
     

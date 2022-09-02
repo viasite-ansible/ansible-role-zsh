@@ -1,34 +1,25 @@
 ---
+dependency:
+  name: galaxy
 driver:
-  name: delegated
+  name: docker
 
 platforms:
-  - name: ansible-role-zsh-debian-10
-    image: geerlingguy/docker-debian10-ansible
+  - name: geerlingguy instances
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    privileged: true
     pre_build_image: true
 
-  - name: ansible-role-zsh-1604
-    image: geerlingguy/docker-ubuntu1604-ansible
+  - name: other instances
+    image: "artis3n/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    privileged: true
     pre_build_image: true
-
-  - name: ansible-role-zsh-1804
-    image: geerlingguy/docker-ubuntu1804-ansible
-    pre_build_image: true
-
-  - name: ansible-role-zsh-2004
-    image: geerlingguy/docker-ubuntu2004-ansible
-    pre_build_image: true
-
-  - name: ansible-role-zsh-centos-8
-    image: geerlingguy/docker-centos8-ansible
   
-  - name: ansible-role-zsh-arch
-    image: artis3n/docker-arch-ansible
-
 provisioner:
   name: ansible
   playbooks:
-    prepare: ../resources/prepare.yml
     converge: ../resources/converge.yml
   inventory:
     group_vars:
