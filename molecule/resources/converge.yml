@@ -2,7 +2,6 @@
 - name: Converge
   hosts: all
   become: yes
-  gather_facts: yes
 
   pre_tasks:
     - name: Update apt cache
