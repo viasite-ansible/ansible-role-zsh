@@ -14,7 +14,7 @@ platforms:
     pre_build_image: true
 
   - name: other
-    image: "artis3n/docker-${MOLECULE_DISTRO_ALT:-centos7}-ansible:latest"
+    image: "artis3n/docker-${MOLECULE_DISTRO_ALT:-arch}-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     privileged: true
     pre_build_image: true
