@@ -8,11 +8,17 @@
       when: ansible_os_family == 'Debian'
     
     - name: Update pacman cache
-      pacman: name=* state=latest update_cache=yes
+      community.general.pacman: 
+        name: '*' 
+        state: latest 
+        update_cache: yes
       when: ansible_os_family == 'Archlinux'
 
     - name: upgrade all packages
-      yum: name=* state=latest update_cache=yes
+      yum: 
+        name: '*' 
+        state: latest 
+        update_cache: yes
       when: ansible_os_family == 'CentOS'
 
   roles:
