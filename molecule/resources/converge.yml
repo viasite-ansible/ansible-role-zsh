@@ -10,7 +10,7 @@
       when: ansible_os_family == 'Debian'
     
     - name: Update pacman cache
-      community.general.pacman: 
+      pacman: 
         update_cache: yes
         upgrade: yes
       when: ansible_os_family == 'Archlinux'
