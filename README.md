@@ -223,7 +223,7 @@ You can add more expors by setting the following variable:
 
 ```yaml
 zsh_export_vars_extras:
-  - { name: 'Default editor', variable: 'Editor', value: '$HOME/.cache/wal/colors.sh'}
+  - { name: 'Default editor', variable: 'EDITOR', value: 'nvim'}
 ```
 
 ### PATH Variable

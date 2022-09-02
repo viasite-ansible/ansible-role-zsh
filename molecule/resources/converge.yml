@@ -3,6 +3,13 @@
   hosts: all
   become: yes
   gather_facts: true
+  vars:
+    zsh_sources_extras:
+      - { name: 'Wal Colors', path: '$HOME/.cache/wal/colors.sh'}
+    zsh_export_vars_extras:
+      - { name: 'Default editor', variable: 'EDITOR', value: 'nvim'}
+    zsh_paths_extras:
+      - { name: 'Lua language server', path: '/usr/bin/lua-language-server'}
 
   pre_tasks:
     - name: Update apt cache
@@ -24,3 +31,5 @@
 
   roles:
     - role: 'quantumfate.zsh'
+      
+
