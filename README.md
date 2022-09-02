@@ -6,10 +6,6 @@ This is a detached fork from [viasite-ansible/ansible-role-zsh](History.md).
 
 Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, CentOS 8, ArchLinux 5.18.16.
 
-**For upgrade from viasite-ansible.zsh 1.x, 2.x to 3.0 see [below](#upgrade).**
-
-
-
 ## Zero-knowledge install:
 If you using Ubuntu or Debian and not familiar with Ansible, you can just execute [install.sh](install.sh) on target machine:
 ```
@@ -54,14 +50,12 @@ Then [configure terminal application](#configure-terminal-application).
 ## Midnight Commander Solarized Dark skin
 If you using Solarized Dark scheme and `mc`, you should want to install skin, then set `zsh_mc_solarized_skin: yes`
 
-
 ## Demo install in Vagrant
 You can test work of role before install in real machine.
 Just execute `vagrant up`, then `vagrant ssh` for enter in virtual machine.
 
 Note: you cannot install vagrant on VPS like Digital Ocean or in Docker. Use local machine for it.
 [Download](https://www.vagrantup.com/downloads.html) and install vagrant for your operating system.
-
 
 
 ## Install for real machine
@@ -148,8 +142,6 @@ source /usr/share/zsh-config/.zshrc
 
 You can still provision custom configs for several users.
 
-
-
 ## Configure
 You should not edit `~/.zshrc`! 
 Add your custom config to `~/.zshrc.local` (per user) or `/etc/zshrc.local` (global).
@@ -208,8 +200,39 @@ Aliases config mostly same as hotkeys config:
 zsh_aliases:
   - { alias: 'dfh', action: 'df -h | grep -v docker' }
 # with dependency of bundle and without replace default asiases
-- zsh_aliases_extra
+- zsh_aliases_extra:
   - { alias: 'dfh', action: 'df -h | grep -v docker', bundle: }
+```
+
+## Additional configuration
+
+Providing the name is not mandatory.
+
+### Sources
+
+You can add more custom defined sources by setting the following variable:
+
+```yaml
+zsh_sources_extras:
+  - { name: 'Wal Colors', path: '$HOME/.cache/wal/colors.sh'}
+```
+
+### Export Variable
+
+You can add more expors by setting the following variable:
+
+```yaml
+zsh_export_vars_extras:
+  - { name: 'Default editor', variable: 'Editor', value: '$HOME/.cache/wal/colors.sh'}
+```
+
+### PATH Variable
+
+Append your paths to the path variable:
+
+```yaml
+zsh_paths_extras:
+  - { name: 'Lua language server', path: '/usr/bin/lua-language-server'}
 ```
 
 #### Default hotkeys from plugins:

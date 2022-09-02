@@ -125,6 +125,23 @@ zsh_aliases:
   - { alias: 'ubuntu-release',          action: 'lsb_release -a' }
   - { alias: '', action: '' }
 
+# Paths to be sourced in .zshrc
+zsh_sources:
+  - { name: '', path: ''}
+
+zsh_sources_extras: []
+
+# Variables to be exported in .zshrc
+zsh_export_vars:
+  - { name: '', variable: '', value: ''}
+
+zsh_export_vars_extras: []
+
+# Paths to be exported in .zshrc
+zsh_paths:
+  - { name: '', path: ''}
+
+zsh_paths_extras: []
 
 # zsh-autosuggestions
 zsh_autosuggestions_max_length: 15

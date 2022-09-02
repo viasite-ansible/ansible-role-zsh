@@ -178,6 +178,30 @@ POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND="{{ zsh_powerlevel9k_vcs_foreground }}"
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND="{{ zsh_powerlevel9k_command_execution_time_foreground }}"
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="{{ zsh_powerlevel9k_command_execution_time_background }}"
 
+# SOURCES
+{% for source in zsh_sources %}
+{% if source.path is defined and source.path != '' %}
+{% source.name is defined and source.name != '' %}## {{ source.name }} {% endif %}
+source {{ source.path }}"
+{% endif %}
+{% endfor %}
+
+# EXPORT VARIABLES
+{% for export in zsh_export_vars %}
+{% if export.variable is defined and export.value is defined and export.variable != '' and export.value != '' %}
+{% export.name is defined and export.name != '' %}## {{ export.name }} {% endif %}
+export {{ export.variable }}='{{ export.value }}'
+{% endif %}
+{% endfor %}
+
+# PATHS
+{% for path in zsh_paths %}
+{% if path.path is defined and path.path != '' %}
+{% path.name is defined and path.name != '' %}## {{ path.name }} {% endif %}
+export PATH="${PATH}:{{ path.path }}"
+{% endif %}
+{% endfor %}
+
 {% if zsh_load_etc_profile %}source /etc/profile{% endif %}
 
 
