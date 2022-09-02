@@ -9,9 +9,8 @@
     
     - name: Update pacman cache
       community.general.pacman: 
-        name: '*' 
-        state: latest 
         update_cache: yes
+        upgrade: yes
       when: ansible_os_family == 'Archlinux'
 
     - name: upgrade all packages
