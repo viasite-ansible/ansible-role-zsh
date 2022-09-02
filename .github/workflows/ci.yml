@@ -42,11 +42,18 @@ jobs:
       - name: Install test dependencies.
         run: pip3 install molecule docker yamllint ansible-lint
 
-      - name: Run Molecule tests.
+      - name: Run Molecule tests for main distros.
         run: molecule test
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
           MOLECULE_DISTRO_GEERLINGGUY: ${{ matrix.distro_geerlingguy }}
+          MOLECULE_DISTRO_ALT: ${{ matrix.distro_alt }}
+      
+      - name: Run Molecule tests for alternative distros.
+        run: molecule test
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
           MOLECULE_DISTRO_ALT: ${{ matrix.distro_alt }}
     
