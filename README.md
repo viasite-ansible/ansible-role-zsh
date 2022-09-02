@@ -2,7 +2,7 @@
 
 This is a detached fork from [viasite-ansible/ansible-role-zsh](History.md).
 
-[![Build Status](https://github.com/quantumfate/ansible-role-zsh/blob/master/.github/workflows/ci.yml/badge.svg)
+[![Build Status](https://github.com/quantumfate/ansible-role-zsh/actions/workflows/ci.yml/badge.svg)
 
 Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, CentOS 8, ArchLinux 5.18.16.
 
