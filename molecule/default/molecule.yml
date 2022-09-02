@@ -7,7 +7,7 @@ driver:
 
 platforms:
   - name: geerlingguy instances
-    image: "geerlingguy/docker-${MOLECULE_DISTRO_GEERLINGGUY:}-ansible:latest"
+    image: "geerlingguy/docker-debian10-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     privileged: true
     pre_build_image: true
