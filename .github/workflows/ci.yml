@@ -1,0 +1,17 @@
+---
+name: CI
+'on':
+  pull_request:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: "0 4 * * 5"
+
+defaults:
+  run:
+    working-directory: 'quantumfate.zsh'
+
+jobs:
+  molecule:
+    

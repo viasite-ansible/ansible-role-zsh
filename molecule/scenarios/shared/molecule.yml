@@ -1,6 +1,6 @@
 ---
 scenario:
-  name: user
+  name: shared
 driver:
   name: docker
 platforms:
@@ -22,13 +22,17 @@ platforms:
 
   - name: ansible-role-zsh-centos-8
     image: geerlingguy/docker-centos8-ansible
+  
+  - name: ansible-role-zsh-arch
+    image: artis3n/docker-arch-ansible
+
 
 provisioner:
   name: ansible
   playbooks:
-    prepare: prepare.yml
+    prepare: ../resources/prepare.yml
     converge: ../resources/converge.yml
   inventory:
     group_vars:
       all:
-        zsh_user: testuser
+        zsh_shared: yes

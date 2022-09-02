@@ -1,6 +1,7 @@
+
 ---
 scenario:
-  name: shared
+  name: user
 driver:
   name: docker
 platforms:
@@ -26,9 +27,9 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
-    prepare: ../resources/prepare.yml
+    prepare: prepare.yml
     converge: ../resources/converge.yml
   inventory:
     group_vars:
       all:
-        zsh_shared: yes
+        zsh_user: testuser

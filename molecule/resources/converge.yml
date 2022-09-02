@@ -1,4 +1,7 @@
 ---
-- hosts: all
-  roles:
-    - ansible-role-zsh
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include ansible-role-zsh"
+      ansible.builtin.include_role:
+        name: "ansible-role-zsh"

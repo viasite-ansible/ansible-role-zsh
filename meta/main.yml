@@ -5,6 +5,7 @@ galaxy_info:
   license: MIT
   min_ansible_version: 2.0
   role_name: zsh
+  namespace: quantumfate
   platforms:
     - name: ArchLinux
       versions:

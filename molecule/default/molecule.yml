@@ -1,6 +1,7 @@
 ---
 driver:
-  name: docker
+  name: delegated
+
 platforms:
   - name: ansible-role-zsh-debian-10
     image: geerlingguy/docker-debian10-ansible
@@ -20,17 +21,9 @@ platforms:
 
   - name: ansible-role-zsh-centos-8
     image: geerlingguy/docker-centos8-ansible
-
-#driver:
-#  name: vagrant
-#  provider:
-#    name: virtualbox
-#platforms:
-#  - name: xenial64
-#    box: bento/ubuntu-16.04
-
-#verifier:
-#  name: testinfra
+  
+  - name: ansible-role-zsh-arch
+    image: artis3n/docker-arch-ansible
 
 provisioner:
   name: ansible
@@ -47,3 +40,6 @@ provisioner:
           - { name: test/not-in-list, when: false }
           - { name: test/command-exists, command: zsh }
           - { name: test/command-not-exists, command: not-exists-commanddd }
+
+verifier:
+  name: ansible
