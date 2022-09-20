@@ -14,7 +14,20 @@
       - wget
     state: present
   # brew don't work from root user on macOS
+  become: yes
   when: not (zsh_user == 'root' and ansible_os_family == 'Darwin')
+
+- name: check if {{zsh_antigen_path}} exist
+  stat: 
+    path: "{{zsh_antigen_path}}"
+  register: zsh_antigen_path_present
+- name: create direcoty {{zsh_antigen_path}}
+  become: yes
+  file:
+    dest: "{{zsh_antigen_path}}"
+    mode: '0755'
+    state: directory
+  when: not zsh_antigen_path_present.stat.exists
 
 - name: Clone antigen {{ zsh_antigen_version }}
   git:
@@ -23,7 +36,7 @@
     version: "{{ zsh_antigen_version }}"
     force: yes
   become: yes
-  become_user: "{{ zsh_user }}"
+  #become_user: "{{ zsh_user }}"
   register: zsh_register_antigen_clone
 
 - name: Clone iwfmp/mc-solarized-skin
@@ -64,6 +77,7 @@
   when: not zsh_shared
 
 - name: "Download fzf to {{ zsh_fzf_path_absolute }}"
+  become: yes
   unarchive:
     src: "{{ zsh_fzf_url }}"
     dest: "{{ zsh_fzf_path_absolute }}"
@@ -72,6 +86,7 @@
   when: zsh_register_fzf_command.rc == 1
 
 - name: Set directory permissions
+  become: yes
   file:
     name: "{{ zsh_antigen_path }}"
     owner: "{{ zsh_user }}"

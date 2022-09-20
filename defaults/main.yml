@@ -26,7 +26,7 @@ zsh_load_etc_profile: yes
 fzf_widgets: ytet5uy4/fzf-widgets
 
 zsh_antigen_version: master
-zsh_fzf_version: 0.28.0
+zsh_fzf_version: 0.29.0
 
 zsh_antigen_bundles:
   - { name: command-not-found, when: "{{ ansible_os_family != 'Darwin' }}" } # too slow on OSX
@@ -67,6 +67,7 @@ zsh_custom_after: '' # any code before include ~/.zshrc.local
 
 # useful for deploy many zsh users at host, without duplicate and without write access
 zsh_shared: no
+zsh_source_for_all_users: no
 zsh_change_user_shell: yes
 
 zsh_antigen_theme: "romkatv/powerlevel10k powerlevel10k"
