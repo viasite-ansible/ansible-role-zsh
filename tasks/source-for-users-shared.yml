@@ -6,12 +6,12 @@
 
 - name: Get Ubuntu/Debian users
   shell: "egrep '^.*:.*:[1-9][0-9]{3,4}:.*:.*:.*:.*(bash|zsh)$' /etc/passwd | awk -F: '{print $1}'"
-  register: users
+  register: zsh_users
   when: ansible_os_family == 'Debian' and paths is defined and paths.stdout != ""
   changed_when: false
 - name: Format user list
   set_fact:
-    list_users: "{{['root','root'] + users.stdout.splitlines()| list}}"
+    zsh_list_users: "{{['root','root'] + zsh_users.stdout.splitlines()| list}}"
   when: ansible_os_family == 'Debian' and paths is defined and paths.stdout != ""
 
 - name: Merge the users path and root/skel to list
@@ -28,7 +28,7 @@
   copy:
     content: source /usr/share/zsh-config/.zshrc
     dest: "{{item}}/.zshrc"
-    owner: "{{list_users[id]| default('root')}}"
+    owner: "{{zsh_list_users[id]| default('root')}}"
     mode: '0644'
   loop: "{{allpaths}}"
   loop_control:
