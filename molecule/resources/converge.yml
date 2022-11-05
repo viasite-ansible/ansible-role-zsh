@@ -3,6 +3,7 @@
   hosts: all
   become: yes
   gather_facts: true
+<<<<<<< Updated upstream
   vars:
     zsh_sources_extras:
       - { name: 'Wal Colors', path: '$HOME/.cache/wal/colors.sh'}
@@ -10,11 +11,13 @@
       - { name: 'Default editor', variable: 'EDITOR', value: 'nvim'}
     zsh_paths_extras:
       - { name: 'Lua language server', path: '/usr/bin/lua-language-server'}
+=======
+>>>>>>> Stashed changes
 
-  pre_tasks:
-    - name: Update apt cache
-      apt: update_cache=yes cache_valid_time=600
-      when: ansible_os_family == 'Debian'
+  # pre_tasks:
+  #   - name: Update apt cache
+  #     apt: update_cache=yes cache_valid_time=600
+  #     when: ansible_os_family == 'Debian'
     
     - name: Update pacman cache
       pacman: 
@@ -22,12 +25,21 @@
         upgrade: yes
       when: ansible_os_family == 'Archlinux'
 
+<<<<<<< Updated upstream
     - name: upgrade all packages
       yum: 
         name: '*' 
         state: latest 
         update_cache: yes
       when: ansible_os_family == 'CentOS'
+=======
+    # - name: upgrade all packages
+    #   yum: 
+        # name: '*' 
+    #     state: latest 
+    #     update_cache: yes
+    #   when: ansible_os_family == 'CentOS'
+>>>>>>> Stashed changes
 
   roles:
     - role: 'quantumfate.zsh'
