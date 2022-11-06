@@ -5,13 +5,8 @@ driver:
   name: docker
 
 platforms:
-<<<<<<< Updated upstream
   - name: geerlingguy
     image: "geerlingguy/docker-${MOLECULE_DISTRO_GEERLINGGUY:-ubuntu2004}-ansible:latest"
-=======
-  - name: geerlingguy instances
-    image: "geerlingguy/docker-${MOLECULE_DISTRO_GEERLINGGUY:-centos8}-ansible:latest"
->>>>>>> Stashed changes
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
