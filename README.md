@@ -147,6 +147,16 @@ You should not edit `~/.zshrc`!
 Add your custom config to `~/.zshrc.local` (per user) or `/etc/zshrc.local` (global).
 `.zshrc.local` will never touched by ansible.
 
+### Distros that make use of /etc/skel
+
+By default this role will write everything to `.zshrc` and your changes belong into `~/.zshrc.local`. 
+Tho, there are some distros that use the script `/etc/skel` to configure your home directory. 
+To keep your changes from being affected set the following variables:
+
+```yaml
+zsh_personal_config: true
+zsh_alternative_name: /.zshrc_personal # Optional | Use the value skel uses to load your personal configs
+```
 
 ### Configure terminal application
 1. Download [powerline fonts](https://github.com/powerline/fonts), install font that you prefer.
@@ -192,12 +202,28 @@ zsh_hotkeys_extras:
   - { hotkey: '^[,', action: copy-earlier-word } # ctrl+,
 ```
 
+#### Default hotkeys from plugins:
+- <kbd>&rarr;</kbd> - accept autosuggestion
+- <kbd>Ctrl+Z</kbd> - move current application to background, press again for return to foreground
+- <kbd>Ctrl+G</kbd> - jump to bookmarked directory. Use `mark` in directory for add to bookmarks
+- <kbd>Ctrl+R</kbd> - show command history
+- <kbd>Ctrl+@</kbd> - show all fzf-widgets
+- <kbd>Ctrl+@,C</kbd> - fzf-change-dir, press fast!
+- <kbd>Ctrl+\\</kbd> - fzf-change-recent-dir
+- <kbd>Ctrl+@,G</kbd> - fzf-change-repository
+- <kbd>Ctrl+@,F</kbd> - fzf-edit-files
+- <kbd>Ctrl+@,.</kbd> - fzf-edit-dotfiles
+- <kbd>Ctrl+@,S</kbd> - fzf-exec-ssh (using your ~/.ssh/config)
+- <kbd>Ctrl+@,G,A</kbd> - fzf-git-add-file
+- <kbd>Ctrl+@,G,B</kbd> - fzf-git-checkout-branch
+- <kbd>Ctrl+@,G,D</kbd> - fzf-git-delete-branches
+
 ### Aliases
 You can use aliases for your command with easy deploy.
 Aliases config mostly same as hotkeys config:
 
 ``` yaml
-zsh_aliases:
+zsh_aliases_extra:
   - { alias: 'dfh', action: 'df -h | grep -v docker' }
 # with dependency of bundle and without replace default asiases
 zsh_aliases_extra:
@@ -234,24 +260,6 @@ Append your paths to the path variable:
 zsh_paths_extras:
   - { name: 'Lua language server', path: '/usr/bin/lua-language-server'}
 ```
-
-#### Default hotkeys from plugins:
-- <kbd>&rarr;</kbd> - accept autosuggestion
-- <kbd>Ctrl+Z</kbd> - move current application to background, press again for return to foreground
-- <kbd>Ctrl+G</kbd> - jump to bookmarked directory. Use `mark` in directory for add to bookmarks
-- <kbd>Ctrl+R</kbd> - show command history
-- <kbd>Ctrl+@</kbd> - show all fzf-widgets
-- <kbd>Ctrl+@,C</kbd> - fzf-change-dir, press fast!
-- <kbd>Ctrl+\\</kbd> - fzf-change-recent-dir
-- <kbd>Ctrl+@,G</kbd> - fzf-change-repository
-- <kbd>Ctrl+@,F</kbd> - fzf-edit-files
-- <kbd>Ctrl+@,.</kbd> - fzf-edit-dotfiles
-- <kbd>Ctrl+@,S</kbd> - fzf-exec-ssh (using your ~/.ssh/config)
-- <kbd>Ctrl+@,G,A</kbd> - fzf-git-add-file
-- <kbd>Ctrl+@,G,B</kbd> - fzf-git-checkout-branch
-- <kbd>Ctrl+@,G,D</kbd> - fzf-git-delete-branches
-
-
 
 ## Configure bundles
 You can check default bundles in [defaults/main.yml](defaults/main.yml#L37).
