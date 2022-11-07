@@ -2,7 +2,7 @@ galaxy_info:
   author: Leon Connor Holm
   namespace: quantumfate
   role_name: zsh
-  description: oh-my-zsh with powerlevel9k theme, fzf and other plugins
+  description: oh-my-zsh with powerlevel10k theme, fzf and other plugins
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value

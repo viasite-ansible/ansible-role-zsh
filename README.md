@@ -6,7 +6,17 @@ This is a detached fork from [viasite-ansible/ansible-role-zsh](History.md).
 
 Tested on Debian 10, Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.12, CentOS 8, ArchLinux 5.18.16.
 
-## Zero-knowledge install:
+- [Easy Zero-knowlegde Install](#zero-knowledge-install)
+- [Features](#features)
+- [Install](#install)
+- [Theming](#theming)
+- [Basic Configuration](#basic-bonfiguration)
+- [Additional Configuration](#additional-bonfiguration)
+- [Notes](#notes)
+- [Known Bugs](#known-bugs)
+
+
+## Zero-knowledge install
 If you using Ubuntu or Debian and not familiar with Ansible, you can just execute [install.sh](install.sh) on target machine:
 ```
 curl https://raw.githubusercontent.com/quantumfate/ansible-role-zsh/master/install.sh | bash
@@ -21,44 +31,27 @@ curl https://raw.githubusercontent.com/quantumfate/ansible-role-zsh/master/insta
 
 Then [configure terminal application](#configure-terminal-application).
 
-
-## Includes:
-- zsh
-- [antigen](https://github.com/zsh-users/antigen)
-- [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
-- [powerlevel9k theme](https://github.com/bhilburn/powerlevel9k)
-- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
-- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
-- [unixorn/autoupdate-antigen.zshplugin](https://github.com/unixorn/autoupdate-antigen.zshplugin)
-- [ytet5uy4/fzf-widgets](https://github.com/ytet5uy4/fzf-widgets)
-- [urbainvaes/fzf-marks](https://github.com/popstas/urbainvaes/fzf-marks)
-
 ## Features
-- customize powerlevel9k theme prompt segments and colors
+- theming
+- customize powerlevel10k theme prompt segments and colors
 - default colors tested with solarized dark and default grey terminal in putty
 - add custom prompt elements from yml
 - custom zsh config with `~/.zshrc.local` or `/etc/zshrc.local`
 - load `/etc/profile.d` scripts
 - install only plugins that useful for your machine. For example, plugin `docker` will not install if you have not Docker
 
-## 1.5 mins demo
-![1.5 mins demo](https://github.com/popstas/popstas.github.io/blob/master/images/2017-03/ansible-role-zsh-demo.gif?raw=true)
-
-## Color schemes
-![colors demo](https://github.com/popstas/popstas.github.io/blob/master/images/2017-03/ansible-role-zsh-colors.gif?raw=true)
-
-## Midnight Commander Solarized Dark skin
-If you using Solarized Dark scheme and `mc`, you should want to install skin, then set `zsh_mc_solarized_skin: yes`
-
-## Demo install in Vagrant
-You can test work of role before install in real machine.
-Just execute `vagrant up`, then `vagrant ssh` for enter in virtual machine.
-
-Note: you cannot install vagrant on VPS like Digital Ocean or in Docker. Use local machine for it.
-[Download](https://www.vagrantup.com/downloads.html) and install vagrant for your operating system.
+### Includes:
+- [zsh](https://www.zsh.org/)
+- [antigen](https://github.com/zsh-users/antigen)
+- [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+- [unixorn/autoupdate-antigen.zshplugin](https://github.com/unixorn/autoupdate-antigen.zshplugin)
+- [ytet5uy4/fzf-widgets](https://github.com/ytet5uy4/fzf-widgets)
+- [urbainvaes/fzf-marks](https://github.com/popstas/urbainvaes/fzf-marks)
 
 
-## Install for real machine
+## Install
 Zero-knowledge install: see [above](#zero-knowledge-install).
 
 ### Manual install
@@ -119,9 +112,7 @@ or `brew install fzf` for macOS.
 
 Note: I don't use `tmux-fzf` and don't tested work of it.
 
-
-
-## Multiuser shared install
+### Multiuser shared install
 If you have 10+ users on host, probably you don't want manage tens of configurations and thousands of files.
 
 In this case you can deploy single zsh config and include it to all users.
@@ -142,7 +133,20 @@ source /usr/share/zsh-config/.zshrc
 
 You can still provision custom configs for several users.
 
-## Configure
+## Theming
+
+By default [pk10 theme](https://github.com/romkatv/powerlevel10k) will be used. Follow their [docs](https://github.com/romkatv/powerlevel10k/blob/master/README.md) for additional theme configuration.
+
+
+### Using a different theme
+
+You can use any theme. Just use the following variable and your theme will be applied after reloading your shell.
+
+```yaml
+zsh_antigen_theme: <yourtheme>
+```
+
+## Basic Configuration
 You should not edit `~/.zshrc`! 
 Add your custom config to `~/.zshrc.local` (per user) or `/etc/zshrc.local` (global).
 `.zshrc.local` will never touched by ansible.
@@ -157,29 +161,6 @@ To keep your changes from being affected set the following variables:
 zsh_personal_config: true
 zsh_alternative_name: /.zshrc_personal # Optional | Use the value skel uses to load your personal configs
 ```
-
-### Configure terminal application
-1. Download [powerline fonts](https://github.com/powerline/fonts), install font that you prefer.
-You can see screenshots [here](https://github.com/powerline/fonts/blob/master/samples/All.md).
-
-2. Set color scheme.
-
-Personaly, I prefer Solarized Dark color sceme, Droid Sans Mono for Powerline in iTerm and DejaVu Sans Mono in Putty.
-
-#### iTerm
-Profiles - Text - Change Font - select font "for Powerline"
-
-Profiles - Colors - Color Presets... - select Solarized Dark
-
-#### Putty
-Settings - Window - Appearance - Font settings
-
-You can download [Solarized Dark for Putty](https://github.com/altercation/solarized/tree/master/putty-colors-solarized).
-
-#### Gnome Terminal
-gnome-terminal have built-in Solarized Dark, note that you should select both background color scheme and palette scheme.
-
-
 
 ### Hotkeys
 You can view hotkeys in [defaults/main.yml](defaults/main.yml), `zsh_hotkeys`.
@@ -218,6 +199,8 @@ zsh_hotkeys_extras:
 - <kbd>Ctrl+@,G,B</kbd> - fzf-git-checkout-branch
 - <kbd>Ctrl+@,G,D</kbd> - fzf-git-delete-branches
 
+## Additional configuration
+
 ### Aliases
 You can use aliases for your command with easy deploy.
 Aliases config mostly same as hotkeys config:
@@ -229,8 +212,6 @@ zsh_aliases_extra:
 zsh_aliases_extra:
   - { alias: 'dfh', action: 'df -h | grep -v docker', bundle: }
 ```
-
-## Additional configuration
 
 Providing the name is not mandatory.
 
@@ -261,7 +242,7 @@ zsh_paths_extras:
   - { name: 'Lua language server', path: '/usr/bin/lua-language-server'}
 ```
 
-## Configure bundles
+### Configure bundles
 You can check default bundles in [defaults/main.yml](defaults/main.yml#L37).
 If you like default bundles, but you want to add your bundles, use `zsh_antigen_bundles_extras` variable (see example playbook above).
 If you want to remove some default bundles, you should use `zsh_antigen_bundles` variable.
@@ -295,30 +276,23 @@ Bundles `docker` and `docker-compose` will be added to config only if commands e
 Note: you should wrap condition in `"{{ }}"`
 
 
-## Custom config
+### Custom config
 You can add any code in variable `zsh_custom_before`, `zsh_custom_after`.
 
 - zsh_custom_before - before include antigen.zsh
 - zsh_custom_after - before include ~/.zshrc.local
 
-## Upgrade
-quantumfate.zsh v3.0 introduces antigen v2.0, it don't have backward compatibility to antigen 1.x.
+## Notes
 
-I don't spent much time for smooth upgrade, therefore you probably should do some manual actions:
-if powerlevel9k prompt don't loaded after provision role, you should execute `antigen reset`.
+### Midnight Commander Solarized Dark skin
+If you using Solarized Dark scheme and `mc`, you should want to install skin, then set `zsh_mc_solarized_skin: yes`
 
-After reopen shell all should be done.
+### Demo install in Vagrant
+You can test work of role before install in real machine.
+Just execute `vagrant up`, then `vagrant ssh` for enter in virtual machine.
 
-### Downgrade to antigen v1
-Antigen v2 much faster (up to 2x more faster startup), but if something went wrong, you can downgrade to antigen v1,
-see note for zsh 4.3 users below.
-
-### For users with zsh 4.x
-Antigen v2 not work on zsh < 5.0, if you use zsh 4.x, please add to you playbook:
-``` yaml
-zsh_antigen_version: v1.4.1
-```
-
+Note: you cannot install vagrant on VPS like Digital Ocean or in Docker. Use local machine for it.
+[Download](https://www.vagrantup.com/downloads.html) and install vagrant for your operating system.
 
 ## Known bugs
 ### `su username` caused errors
