@@ -10,6 +10,9 @@ zsh_editor: # mcedit
 zsh_term: xterm-256color
 zsh_mc_solarized_skin: no
 
+zsh_personal_config: false
+zsh_alternative_name: /.zshrc_personal
+
 zsh_path:
   - "{{ zsh_fzf_path }}"
   - /usr/local/sbin
