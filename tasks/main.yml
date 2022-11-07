@@ -1,7 +1,4 @@
 ---
-
-- include_tasks: mergevars.yml
-
 - include_tasks: install.yml
   tags:
     - zsh
