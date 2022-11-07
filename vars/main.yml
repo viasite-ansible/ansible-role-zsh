@@ -1,7 +1,4 @@
 ---
-zsh_personal_config: false
-zsh_alternative_name: /.zshrc_personal
-
 zsh_user_group: "{% if ansible_os_family == 'Darwin' %}staff{% else %}{{ zsh_user }}{% endif %}"
 zsh_antigen_path: "{% if zsh_shared %}/usr/share/zsh-config{% else %}~{{ zsh_user }}/.antigen{% endif %}"
 
