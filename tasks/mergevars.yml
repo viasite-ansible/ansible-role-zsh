@@ -1,0 +1,22 @@
+- name: Merge all extra vars
+  block:
+    
+  - name: Merge bundles lists
+    set_fact:
+      zsh_antigen_bundles: "{{ zsh_antigen_bundles | union(zsh_antigen_bundles_extras) | unique }}"
+
+  - name: Merge source lists
+    set_fact:
+      zsh_sources: "{{ zsh_sources | union(zsh_sources_extras) | unique }}"
+
+  - name: Merge export vars lists
+    set_fact:
+      zsh_export_vars: "{{ zsh_export_vars | union(zsh_export_vars_extras) | unique }}"
+
+  - name: Merge path lists
+    set_fact:
+      zsh_paths: "{{ zsh_paths | union(zsh_paths_extras) | unique }}"
+
+  - name: Merge hotkeys lists
+    set_fact:
+      zsh_hotkeys: "{{ zsh_hotkeys | union(zsh_hotkeys_extras) | unique }}"
