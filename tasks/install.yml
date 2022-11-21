@@ -15,7 +15,7 @@
 
 - name: Install additional packages
   action: >
-    {{ ansible_pkg_mgr }} name={{ pkg_requirements }} state=present {{ extra_pkg_mgr_cmds }}
+    {{ os_pkg_manager }} name={{ pkg_requirements }} state=present {{ extra_pkg_mgr_cmds }}
     vars:
       packages: "{{ pkg_requirements }}"
   when: pkg_requirements is defined
@@ -30,18 +30,6 @@
     creates: "{{ zsh_user_dir.stdout }}/.yadm-project"
   changed_when: false
   when: ansible_os_family == 'Debian' and ansible_os_family != 'Darwin'
-
-- name: Install python packages
-  shell: |
-    set -o pipefail
-    python3 -m pip install --user {{ pip_packages | join( ' ') }}
-  args:
-    executable: /bin/bash
-  environment:
-    PATH: "{{ zsh_user_dir.stdout }}/.local/bin:{{ ansible_env.PATH }}"
-  changed_when: false
-  when:
-    - python3_which is defined
 
 - name: get latest garabik/grc version
   shell: |
@@ -64,7 +52,6 @@
   become_user: "{{ zsh_user }}"
   register: zsh_register_grc_clone
   changed_when: false
-  when: ansible_os_family != 'Darwin'
 
 - name: install garabik/grc {{ grc_version.stdout }}
   shell: |
@@ -120,7 +107,7 @@
     force: yes
   become: yes
   become_user: "{{ zsh_user }}"
-  changed_when: False
+  changed_when: false
 
 - name: clone antigen {{ zsh_antigen_version }}
   git:

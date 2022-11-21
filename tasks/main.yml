@@ -33,7 +33,6 @@
 
 - name: python pip pre-requisites
   include: python-install.yml
-#  when: ansible_os_family != 'Darwin'
 
 - name: golang installation
   include: golang-install.yml

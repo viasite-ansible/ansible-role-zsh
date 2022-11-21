@@ -23,11 +23,13 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-        brew install ansible@2.9 git wget
+        brew install ansible git wget gpg yadm gnu-sed pinentry-mac
 else
         echo "Unknown OS found"
 fi
 
+title "Install required collections"
+ansible-galaxy collection install community.general
 
 title "Install hybridadmin.fancy_console role"
 ansible-galaxy install hybridadmin.fancy_console --force
@@ -39,7 +41,7 @@ title "Provision playbook for root"
 ansible-playbook -i "localhost," -c local -b /tmp/zsh.yml
 
 title "Provision playbook for current user: $(whoami)"
-ansible-playbook -i "localhost," -c local -b /tmp/zsh.yml --extra-vars="zsh_user=${USER}"
+ansible-playbook -i "localhost," -c local /tmp/zsh.yml --extra-vars="zsh_user=${USER}"
 
 title "Finished! Please, restart your shell."
 echo ""
