@@ -5,6 +5,7 @@ name: CI
   push:
     branches:
       - master
+      - tc/more-mac-mods
   schedule:
     - cron: "0 6 * * 3"
 
