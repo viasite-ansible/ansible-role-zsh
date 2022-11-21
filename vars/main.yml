@@ -1,7 +1,7 @@
 ---
 skip_golang_install: true
 
-os_pkg_manager: '{% if 'Darwin' in ansible_os_family %}brew{% else %}{{ ansible_pkg_mgr }}{% endif %}'
+os_pkg_manager: "{% if 'Darwin' in ansible_os_family %}brew{% else %}{{ ansible_pkg_mgr }}{% endif %}"
 
 extra_pkg_mgr_cmds: "{% if ansible_os_family == 'Darwin' %}{% else %} update_cache=yes{% endif %}"
 zsh_user_group: "{% if ansible_os_family == 'Darwin' %}staff{% else %}{{ zsh_user }}{% endif %}"
