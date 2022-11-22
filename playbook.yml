@@ -1,5 +1,7 @@
 ---
-- hosts: localhost
+
+- name: Deploy
+  hosts: localhost
   vars:
     powerline_version: "go"
     zsh_antigen_bundles_extras:
