@@ -1,17 +1,17 @@
 ---
-- name: install basic system packages
+- name: Install basic system packages
   action: >
     {{ ansible_pkg_mgr }} name={{ basic_system_packages }} state=present update_cache=yes
   become: yes
 
 # https://fedoraproject.org/wiki/EPEL
-- name: add epel repository
+- name: Add epel repository
   action: >
     {{ ansible_pkg_mgr }} name=epel-release state=present update_cache=yes
   become: yes
   when: (ansible_os_family == 'RedHat' and not (ansible_distribution == 'Amazon' or ansible_distribution == 'Fedora'))
 
-- name: add mariadb repository
+- name: Add mariadb repository
   shell: |
     set -o pipefail
     curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash

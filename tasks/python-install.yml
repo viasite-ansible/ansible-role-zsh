@@ -1,7 +1,8 @@
 ---
-- name: "latest python3 all other distros"
+
+- name: "Latest python3 all other distros"
   block:
-    - name: install python3 and pip3
+    - name: Install python3 and pip3
       package:
         name: "{{ item }}"
         state: present
@@ -12,9 +13,9 @@
     - not (ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial')
     - ansible_os_family != 'Darwin'
 
-- name: "latest python3 xenial"
+- name: "Latest python3 xenial"
   block:
-    - name: ubuntu xenial python install fix
+    - name: Ubuntu xenial python install fix
       shell: |
         set -o pipefail
         sudo add-apt-repository ppa:fkrull/deadsnakes
@@ -27,7 +28,7 @@
 
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
 
-- name: get python executable
+- name: Get python executable
   shell: |
     set -o pipefail
     ls -l /usr/bin/python3.* | grep -E "python[0-9].[0-9]{1,2}$" | awk '{print $9}' | tail -n1
@@ -37,13 +38,13 @@
   register: python3_which
   changed_when: false
 
-#- name: "python3: install pip"
+#- name: "Python3: install pip"
 #  become: true
 #  command: "{{ python3_command }} -m ensurepip"
 #  changed_when: false
 #  when: ansible_os_family == 'RedHat'
 
-#- name: "python3: get pip executable"
+#- name: "Python3: get pip executable"
 #  shell: |
 #    set -o pipefail
 #    which {{ pip3_command }}
@@ -54,7 +55,7 @@
 #  failed_when: pip3_which.rc >= 2
 
 # https://github.com/pypa/pip/issues/5599
-- name: "python3: upgrade pip"
+- name: "Python3: upgrade pip"
   shell: |
     set -o pipefail
     {{ python3_which.stdout }} -m pip install --upgrade --force-reinstall pip

@@ -1,5 +1,10 @@
 # https://ansible-lint.readthedocs.io/en/latest/configuring.html#configuration-file
 
+exclude_paths:
+  - meta/
+  - .github/
+  - molecule/
+
 skip_list:
   - skip_ansible_lint
   - '106'

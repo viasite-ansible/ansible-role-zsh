@@ -1,6 +1,6 @@
 ---
 
-- name: get user directory
+- name: Get user directory
   shell: |
     set -o pipefail
     if [[ "$OSTYPE" =~ ^darwin ]]; then
@@ -14,7 +14,7 @@
   check_mode: no
   changed_when: false
 
-- name: check if wsl
+- name: Check if wsl
   shell: |
     set -o pipefail
     if [[ "$(uname -a | grep 'microsoft.*standard')" =~ .*"microsoft".* ]]; then echo "true"; else echo "false"; fi
@@ -23,30 +23,30 @@
   changed_when: False
   register: is_wsl
 
-- name: extra repo setup
+- name: Extra repo setup
   include: repo-setup.yml
   when: ansible_os_family != 'Darwin'
 
-- name: systemd-resolved pre-requisites
+- name: Systemd-resolved pre-requisites
   include: systemd-resolved.yml
   when: ansible_os_family != 'Darwin'
 
-- name: python pip pre-requisites
+- name: Python pip pre-requisites
   include: python-install.yml
 
-- name: golang installation
+- name: Golang installation
   include: golang-install.yml
   when: powerline_version == "go"
 
-- name: installation steps
+- name: Installation steps
   include: install.yml
   tags: [zsh, install]
 
-- name: configuration steps
+- name: Configuration steps
   include: configure.yml
   tags: [zsh, configure]
 
-- name: post installation steps
+- name: Post installation steps
   include: post-install.yml
   tags: [zsh, install, post_install]
 

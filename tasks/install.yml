@@ -9,7 +9,7 @@
   with_items:
     - "{{ zsh_user_dir.stdout }}/.local/bin"
 
-- name: list required packages
+- name: List required packages
   debug:
     msg: "{{ pkg_requirements }}"
 
@@ -31,7 +31,7 @@
   changed_when: false
   when: ansible_os_family == 'Debian' and ansible_os_family != 'Darwin'
 
-- name: get latest garabik/grc version
+- name: Get latest garabik/grc version
   shell: |
     set -o pipefail
     curl --silent "https://api.github.com/repos/garabik/grc/releases/latest" |  grep '"tag_name":' |sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//g'
@@ -42,7 +42,7 @@
   changed_when: false
   when: ansible_os_family != 'Darwin'
 
-- name: clone garabik/grc {{ grc_version.stdout }}
+- name: Clone garabik/grc {{ grc_version.stdout }}
   git:
     repo: https://github.com/garabik/grc.git
     dest: "/tmp/grc"
@@ -53,7 +53,7 @@
   register: zsh_register_grc_clone
   changed_when: false
 
-- name: install garabik/grc {{ grc_version.stdout }}
+- name: Install garabik/grc {{ grc_version.stdout }}
   shell: |
     cd /tmp/grc
     ./install.sh
@@ -61,9 +61,9 @@
   become: yes
   when: ansible_os_family != 'Darwin'
 
-- name: install powerline prompt
+- name: Install powerline prompt
   block:
-    - name: get latest justjanne/powerline-go version
+    - name: Get latest justjanne/powerline-go version
       shell: |
         set -o pipefail
         curl --silent "https://api.github.com/repos/justjanne/powerline-go/releases/latest" |  grep '"tag_name":' |sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//g'
@@ -74,14 +74,14 @@
       changed_when: false
       when: powerline_version == "go" and ansible_os_family != 'Darwin'
 
-    - name: install powerline-go {{ poweline_go_version.stdout }} non-macOS
+    - name: Non-MacOS install powerline-go {{ poweline_go_version.stdout }}
       get_url:
         url: "https://github.com/justjanne/powerline-go/releases/download/v{{ poweline_go_version.stdout }}/powerline-go-{{ ansible_system | lower }}-amd64"
         dest: "{{ zsh_user_dir.stdout }}/go/bin/powerline-go"
         mode: "a+x"
       when: powerline_version == "go" and ansible_os_family != 'Darwin'
 
-    - name: install powerline-go macOS
+    - name: MacOS - Install powerline-go
       shell: |
         set -o pipefail
         /opt/homebrew/bin/go install github.com/justjanne/powerline-go@latest
@@ -99,7 +99,7 @@
       when:
         - powerline_version == "shell"
 
-- name: install nano syntax highlighting
+- name: Install nano syntax highlighting
   git:
     repo: "https://github.com/scopatz/nanorc.git"
     dest: "{{ zsh_user_dir.stdout }}/.nano"
@@ -109,7 +109,7 @@
   become_user: "{{ zsh_user }}"
   changed_when: false
 
-- name: clone antigen {{ zsh_antigen_version }}
+- name: Clone antigen {{ zsh_antigen_version }}
   git:
     repo: https://github.com/zsh-users/antigen.git
     dest: "{{ zsh_antigen_path }}/antigen"
@@ -119,7 +119,7 @@
   become_user: "{{ zsh_user }}"
   register: zsh_register_antigen_clone
 
-- name: clone iwfmp/mc-solarized-skin
+- name: Clone iwfmp/mc-solarized-skin
   git:
     repo: https://github.com/iwfmp/mc-solarized-skin.git
     version: master
@@ -129,14 +129,14 @@
   become_user: "{{ zsh_user }}"
   when: zsh_mc_solarized_skin and not zsh_shared | bool
 
-- name: check fzf installed
+- name: Check fzf installed
   command: which fzf
   changed_when: false
   failed_when: false
   check_mode: no
   register: zsh_register_fzf_command
 
-- name: get latest junegunn/fzf version
+- name: Get latest junegunn/fzf version
   shell: |
     set -o pipefail
     curl --silent "https://api.github.com/repos/junegunn/fzf/releases/latest" |  grep '"tag_name":' |sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//g'
@@ -159,7 +159,7 @@
     - zsh_register_fzf_command.rc == 1
     - ansible_os_family != 'Darwin'
 
-- name: set directory permissions
+- name: Set directory permissions
   file:
     name: "{{ zsh_antigen_path }}"
     owner: "{{ zsh_user }}"

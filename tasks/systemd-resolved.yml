@@ -1,5 +1,5 @@
 ---
-- name: "get status of systemd-resolved service"
+- name: "Get status of systemd-resolved service"
   shell: |
     set -o pipefail
     systemctl is-enabled systemd-resolved
@@ -10,7 +10,7 @@
   changed_when: false
   register: systemd_resolved_status
 
-- name: stop and disable systemd-resolved
+- name: Stop and disable systemd-resolved
   systemd:
     name: systemd-resolved
     state: stopped
@@ -19,7 +19,7 @@
   changed_when: false
   when: ('enabled' in systemd_resolved_status.stdout)
 
-- name: edit /etc/systemd/resolved.conf
+- name: Edit /etc/systemd/resolved.conf
   replace:
     path: /etc/systemd/resolved.conf
     regexp: "{{ item.name }}"
@@ -31,12 +31,12 @@
   changed_when: false
   when: ('enabled' in systemd_resolved_status.stdout)
 
-- name: check network manager conf exists
+- name: Check network manager conf exists
   stat:
     path: /etc/NetworkManager/NetworkManager.conf
   register: nmconf
 
-- name: edit /etc/NetworkManager/NetworkManager.conf
+- name: Edit /etc/NetworkManager/NetworkManager.conf
   lineinfile:
     path: /etc/NetworkManager/NetworkManager.conf
     regexp: "{{ item.name }}"
@@ -49,7 +49,7 @@
     - ansible_os_family == 'RedHat'
     - nmconf.stat.exists
 
-- name: delete /etc/resolv.conf
+- name: Delete /etc/resolv.conf
   shell: |
     set -o pipefail
     rm -rf /etc/resolv.conf
@@ -61,7 +61,7 @@
     - ansible_virtualization_type == 'docker'
     - is_wsl == 'true'
 
-- name: add custom nameservers in /etc/resolv.conf
+- name: Add custom nameservers in /etc/resolv.conf
   ansible.builtin.template:
     src: "resolvconf/resolv.conf.j2"
     dest: /etc/resolv.conf
@@ -70,7 +70,7 @@
     - ansible_virtualization_type == 'docker'
     - is_wsl == 'true'
 
-- name: add custom wsl settings in /etc/wsl.conf
+- name: Add custom wsl settings in /etc/wsl.conf
   ansible.builtin.template:
     src: "wsl/wsl.conf.j2"
     dest: /etc/wsl.conf

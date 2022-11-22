@@ -1,7 +1,7 @@
 ---
 # https://github.com/golang/go/wiki/Ubuntu
 
-- name: get latest golang version
+- name: Get latest golang version
   shell: |
     set -o pipefail
     curl -s https://github.com/golang/go/releases | grep "rel.*-branch.go1" | head -n1 | cut -d ' ' -f8 | sed 's/go//'
@@ -12,7 +12,7 @@
   changed_when: false
   when: not skip_golang_install and ansible_os_family != 'Darwin'
 
-- name: check current golang version
+- name: Check current golang version
   shell: |
     set -o pipefail
     /usr/local/go/bin/go version|sed -e 's/go version go//g'|cut -d ' ' -f1
@@ -24,7 +24,7 @@
   failed_when: go_version.rc >= 128
   when: not skip_golang_install and ansible_os_family != 'Darwin'
 
-- name: install golang
+- name: Install golang
   block:
     - name: Remove old installation of Go
       file:
@@ -38,7 +38,7 @@
         - go_version.stdout | length >= 0
         - ansible_os_family != 'Darwin'
 
-    - name: download golang tar
+    - name: Download golang tar
       unarchive:
         src: "https://dl.google.com/go/go{{ latest_go_version.stdout }}.linux-amd64.tar.gz"
         dest: /usr/local
@@ -52,7 +52,7 @@
         - go_version.stdout | length >= 0
         - ansible_os_family != 'Darwin'
 
-    - name: create go directories in home
+    - name: Create go directories in home
       file:
         path: "{{ item }}"
         state: directory
@@ -65,7 +65,7 @@
         - "{{ zsh_user_dir.stdout }}/go/src"
         - "{{ zsh_user_dir.stdout }}/go/pkg"
 
-    - name: modify .bashrc
+    - name: Modify .bashrc
       blockinfile:
         dest: "$HOME/.bashrc"
         mode: "0644"
@@ -78,7 +78,7 @@
         create: yes
       when: ansible_os_family != 'Darwin'
 
-    - name: modify .bashrc
+    - name: Modify .bashrc
       blockinfile:
         dest: "$HOME/.zprofile"
         mode: "0644"

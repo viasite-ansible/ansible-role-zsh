@@ -93,9 +93,9 @@
   changed_when: False
   when: powerline_version == "shell"
 
-- name: apply nanorc fix
+- name: Apply nanorc fix
   block:
-    - name: html conf comment fix in nanorc
+    - name: Html conf comment fix in nanorc
       replace:
         path: "{{ item }}"
         regexp: "(.*comment.*)"
@@ -105,7 +105,7 @@
         - "{{ zsh_user_dir.stdout }}/.nano/html.nanorc"
         - "{{ zsh_user_dir.stdout }}/.nano/html.j2.nanorc"
 
-    - name: etc-hosts conf comment fix in nanorc
+    - name: Etc-hosts conf comment fix in nanorc
       replace:
         path: "{{ zsh_user_dir.stdout }}/.nano/etc-hosts.nanorc"
         regexp: "normal"
@@ -121,7 +121,7 @@
   become: true
   when: not zsh_shared | bool
 
-- name: check zsh env exists
+- name: Check zsh env exists
   stat:
     path: "/etc/zsh/zshenv"
   register: zsh_env_stats
