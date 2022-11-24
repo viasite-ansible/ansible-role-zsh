@@ -29,7 +29,7 @@ jobs:
           python-version: "3.9"
 
       - name: Install test dependencies.
-        run: pip3 install ansible yamllint ansible-lint
+        run: pip3 install yamllint ansible-lint
 
       - name: Lint code.
         run: |
@@ -79,7 +79,7 @@ jobs:
           python-version: "3.9"
 
       - name: Install test dependencies.
-        run: pip3 install ansible molecule-docker yamllint ansible-lint
+        run: pip3 install ansible==6.6.0 molecule-docker==2.1.0
 
       - name: Run Molecule tests.
         run: molecule test
