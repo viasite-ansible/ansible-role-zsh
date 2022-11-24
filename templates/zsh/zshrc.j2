@@ -131,7 +131,8 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240" # gray highlight
 POWERLINE_BIN="$(which powerline-go)"
 POWERLINE_FONT_MODE="patched"
 POWERLINE_MODULES_LEFT="time,venv,user,host,ssh,cwd,perms,git,hg,ssh,root"
-POWERLINE_MODULES_RIGHT="exit,duration,git,vgo,docker,kube"
+POWERLINE_MODULES_RIGHT="exit,duration,vgo,docker,kube"
+# removed - git
 
 if [ -n "${SSH_CLIENT}" ] ; then
     POWERLINE_MODULES_LEFT="host,user,cwd,perms,jobs"
@@ -153,7 +154,7 @@ function powerline_precmd() {
     __DURATION="$(($__ERT - ${__TIMER:-__ERT}))"
   fi
 
-  eval "$($GOPATH/bin/powerline-go -error $__ERRCODE -modules ${POWERLINE_MODULES_LEFT} -shell zsh -eval -duration $__DURATION -numeric-exit-codes -modules-right ${POWERLINE_MODULES_RIGHT})"
+  eval "$($GOPATH/bin/powerline-go -error $__ERRCODE -modules ${POWERLINE_MODULES_LEFT} -shell zsh -eval -duration $__DURATION -numeric-exit-codes -modules-right ${POWERLINE_MODULES_RIGHT} -cwd-max-depth 2)"
   unset __TIMER
 }
 

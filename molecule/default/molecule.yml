@@ -20,7 +20,7 @@ provisioner:
   name: ansible
   log: true
   options:
-    v: true
+    vvv: true
   config_options:
     defaults:
       callback_whitelist: profile_tasks
