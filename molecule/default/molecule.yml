@@ -21,12 +21,14 @@ provisioner:
   log: true
   options:
     vvv: true
+  env:
+    ANSIBLE_VERBOSITY: 5
   config_options:
     defaults:
       callback_whitelist: profile_tasks
       stdout_callback: yaml
       bin_ansible_callbacks: yes
-      verbosity: 1
+      verbosity: 6
 verifier:
   name: ansible
   enabled: False
