@@ -16,7 +16,7 @@
 
 - name: Merge bundles lists
   set_fact:
-    zsh_antigen_bundles: "{{ zsh_antigen_bundles }} + {{ zsh_antigen_bundles_extras }}"
+    zsh_antigen_bundles: "{{ zsh_antigen_bundles }}"
 
 - name: Disable autoupdate if zsh_shared install
   set_fact:
@@ -35,7 +35,7 @@
 
 - name: Merge hotkeys lists
   set_fact:
-    zsh_hotkeys: "{{ zsh_hotkeys }}"
+    zsh_hotkeys: "{{ zsh_hotkeys + zsh_hotkeys_extras }}"
 
 - name: Check antigen version
   shell: |

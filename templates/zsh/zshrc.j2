@@ -79,6 +79,13 @@ antigen bundle {{ bundle }}
 {% endif %}
 {% endfor %}
 
+# additional bundles
+{% if zsh_antigen_bundles_extras is defined -%}
+{% for bundle_item in zsh_antigen_bundles_extras %}
+antigen bundle {{ bundle_item }}
+{% endfor %}
+{% endif %}
+
 antigen apply
 
 ###
