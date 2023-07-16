@@ -132,6 +132,9 @@ It causes some limitations:
 For install shared configuration you should set `zsh_shared: yes`.
 Configuration will install to `/usr/share/zsh-config`, then you just can include to user config:
 
+## Install for all users
+Set `zsh_source_for_all_users: yes`
+
 ``` bash
 source /usr/share/zsh-config/.zshrc
 ```

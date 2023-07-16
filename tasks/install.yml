@@ -23,6 +23,7 @@
   register: zsh_antigen_path_present
 - name: create direcoty {{zsh_antigen_path}}
   become: yes
+  become_user: "{{ zsh_user }}"
   file:
     dest: "{{zsh_antigen_path}}"
     mode: '0755'
@@ -36,7 +37,7 @@
     version: "{{ zsh_antigen_version }}"
     force: yes
   become: yes
-  #become_user: "{{ zsh_user }}"
+  become_user: "{{ zsh_user }}"
   register: zsh_register_antigen_clone
 
 - name: Clone iwfmp/mc-solarized-skin
