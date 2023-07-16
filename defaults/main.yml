@@ -169,6 +169,9 @@ zsh_powerlevel9k_prompt_on_newline: no
 zsh_powerlevel9k_shorten_dir_length: 3
 zsh_powerlevel9k_status_verbose: 0
 
+# separators
+zsh_segment_separators: yes
+
 # dir (context) colors
 zsh_powerlevel9k_context_default_foreground: "255" # white
 zsh_powerlevel9k_context_default_background: "024" # blue
@@ -182,6 +185,7 @@ zsh_powerlevel9k_dir_path_highlight_foreground: "{{ zsh_powerlevel9k_dir_foregro
 zsh_powerlevel9k_dir_path_highlight_background: "{{ zsh_powerlevel9k_dir_background }}"
 
 # vcs colors
+# list colors: for code ({000..255}) print -P -- "$code: %F{white}%K{$code}user@hostname%f%k\n\n"
 zsh_powerlevel9k_vcs_foreground: "232" # about black on any palette
 zsh_powerlevel9k_vcs_clean_background: "100" # dirty green
 zsh_powerlevel9k_vcs_modified_background: "094" # orange

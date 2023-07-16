@@ -178,6 +178,11 @@ POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND="{{ zsh_powerlevel9k_vcs_foreground }}"
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND="{{ zsh_powerlevel9k_command_execution_time_foreground }}"
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="{{ zsh_powerlevel9k_command_execution_time_background }}"
 
+{% if not zsh_segment_separators %}
+POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=""
+POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=""
+{% endif %}
+
 {% if zsh_load_etc_profile %}source /etc/profile{% endif %}
 
 

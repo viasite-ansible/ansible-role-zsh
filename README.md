@@ -24,7 +24,7 @@ Then [configure terminal application](#configure-terminal-application).
 - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 - [unixorn/autoupdate-antigen.zshplugin](https://github.com/unixorn/autoupdate-antigen.zshplugin)
-- [ytet5uy4/fzf-widgets](https://github.com/ytet5uy4/fzf-widgets)
+- [sorenson-axial/fzf-widgets](https://github.com/sorenson-axial/fzf-widgets)
 - [urbainvaes/fzf-marks](https://github.com/popstas/urbainvaes/fzf-marks)
 
 ## Features
