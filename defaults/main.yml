@@ -23,7 +23,7 @@ zsh_path:
 
 zsh_load_etc_profile: yes
 
-fzf_widgets: ytet5uy4/fzf-widgets
+fzf_widgets: sorenson-axial/fzf-widgets
 
 zsh_antigen_version: master
 zsh_fzf_version: 0.42.0
