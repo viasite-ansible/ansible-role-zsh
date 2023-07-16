@@ -43,11 +43,10 @@ source "{{ zsh_antigen_path_compat }}/antigen/antigen.zsh"
 antigen use oh-my-zsh
 
 {% set bundles_enabled = [] %}
-
 {% for bundle in zsh_antigen_bundles -%}
     {%- if bundle is mapping -%}
         {% set valid = true -%}
-        {% set command_not_exists = [] -%}
+        {%- set command_exists = true -%}
 
         {%- if bundle.when is defined and not bundle.when -%}
             {% set valid = false -%}
@@ -56,12 +55,12 @@ antigen use oh-my-zsh
         {% if bundle.command is defined -%}
             {% for cmd in zsh_register_commands_exists.results -%}
                 {% if cmd.cmd is defined and cmd.rc != 0 and cmd.item.command == bundle.command -%}
-                    {% if command_not_exists.append(1) %}{% endif -%}
+                    {%- set command_exists = false -%}
                 {% endif -%}
             {% endfor -%}
         {% endif -%}
 
-        {% if valid and not command_not_exists %}
+        {% if valid and command_exists %}
             {%- if 'zsh-syntax-highlighting' in bundle.name or 'fast-syntax-highlighting' in bundle.name -%}
 # will fixed in zsh-autosuggestion v0.4 - https://github.com/zsh-users/zsh-autosuggestions/pull/218
 if (( ZSHRC_LOAD_ONCE++ == 0 )); then
@@ -96,7 +95,7 @@ zle -N copy-earlier-word
 
 # hotkeys
 {% for hotkey in zsh_hotkeys %}
-{% if hotkey.hotkey != '' and (hotkey.bundle is not defined or hotkey.bundle in bundles_enabled) %}
+{% if 'hotkey' in hotkey and hotkey.hotkey != '' and (hotkey.bundle is not defined or hotkey.bundle in bundles_enabled) %}
 bindkey '{{ hotkey.hotkey }}' {{ hotkey.action }}
 {% endif %}
 {% endfor %}
