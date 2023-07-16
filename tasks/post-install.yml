@@ -13,3 +13,14 @@
   become_user: "{{ zsh_user }}"
   changed_when: false
   failed_when: false
+
+- name: Create cache dirs
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: yes
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user }}"
+  become: yes
+  with_items:
+    - "{{ zsh_antigen_path }}/bundles/robbyrussell/oh-my-zsh/cache/completions"
