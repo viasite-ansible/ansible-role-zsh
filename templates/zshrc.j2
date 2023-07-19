@@ -42,6 +42,8 @@ source "{{ zsh_antigen_path_compat }}/antigen/antigen.zsh"
 
 antigen use oh-my-zsh
 
+alias fd=fdfind # for correct working of sorenson-axial/fzf-widgets
+
 {% set bundles_enabled = [] %}
 {% for bundle in zsh_antigen_bundles -%}
     {%- if bundle is mapping -%}
