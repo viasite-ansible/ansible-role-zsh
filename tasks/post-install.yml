@@ -20,7 +20,7 @@
     state: directory
     recurse: yes
     owner: "{{ zsh_user }}"
-    group: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
   become: yes
   with_items:
     - "{{ zsh_antigen_path }}/bundles/robbyrussell/oh-my-zsh/cache/completions"
