@@ -20,15 +20,16 @@
   become: yes
   when: not (zsh_user == 'root' and ansible_os_family == 'Darwin')
 
-- name: check if {{zsh_antigen_path}} exist
+- name: Check if {{ zsh_antigen_path }} exist
   stat: 
-    path: "{{zsh_antigen_path}}"
+    path: "{{ zsh_antigen_path }}"
   register: zsh_antigen_path_present
-- name: create direcoty {{zsh_antigen_path}}
+
+- name: Create directory {{ zsh_antigen_path}}
   become: yes
   become_user: "{{ zsh_user }}"
   file:
-    dest: "{{zsh_antigen_path}}"
+    dest: "{{ zsh_antigen_path }}"
     mode: '0755'
     state: directory
   when: not zsh_antigen_path_present.stat.exists

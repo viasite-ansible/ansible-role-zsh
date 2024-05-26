@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/viasite-ansible/ansible-role-zsh.svg?branch=master)](https://travis-ci.org/viasite-ansible/ansible-role-zsh)
 
-Tested on Ubuntu 18.04, Ubuntu 20.04, Ubuntu 22.04, macOS 10.12, CentOS 8.
+Tested on Ubuntu 18.04, Ubuntu 20.04, Ubuntu 22.04, Ubuntu 24.04.
+
+Tested long time ago: macOS 10.12, CentOS 8
 
 **For upgrade from viasite-ansible.zsh 1.x, 2.x to 3.0 see [below](#upgrade).**
 
