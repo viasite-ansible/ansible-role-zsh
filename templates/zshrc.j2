@@ -38,11 +38,13 @@ ANTIGEN_SYSTEM_UPDATE_DAYS="{{ zsh_update_interval }}"
 {% if zsh_custom_before %}# Custom configs zsh_custom_before
 {{ zsh_custom_before }}{% endif %}
 
+{% if ansible_distribution_version is version_compare('20.04', '>=') %}
+alias fd=fdfind # for correct working of sorenson-axial/fzf-widgets
+{% endif %}
+
 source "{{ zsh_antigen_path_compat }}/antigen/antigen.zsh"
 
 antigen use oh-my-zsh
-
-alias fd=fdfind # for correct working of sorenson-axial/fzf-widgets
 
 {% set bundles_enabled = [] %}
 {% for bundle in zsh_antigen_bundles -%}
