@@ -39,7 +39,7 @@
 - name: Check antigen version
   shell: |
     set -o pipefail
-    cat {{ zsh_antigen_path }}/antigen/VERSION | tr -d 'v'
+    cat {{ zsh_antigen_path }}/antigen/VERSION | sed 's/^v//'
   args:
     executable: /bin/bash
   register: zsh_register_antigen_version

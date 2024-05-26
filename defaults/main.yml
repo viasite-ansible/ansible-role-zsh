@@ -26,7 +26,11 @@ zsh_load_etc_profile: yes
 fzf_widgets: sorenson-axial/fzf-widgets
 #fzf_widgets: ytet5uy4/fzf-widgets
 
-zsh_antigen_version: master
+#zsh_antigen_repo: https://github.com/zsh-users/antigen.git
+# patch broken compdef - https://github.com/zsh-users/antigen/pull/737
+zsh_antigen_repo: https://github.com/viasite-ansible/antigen
+zsh_antigen_version: patch-1
+
 zsh_fzf_version: 0.46.0
 
 zsh_antigen_bundles:

@@ -35,7 +35,7 @@
 
 - name: Clone antigen {{ zsh_antigen_version }}
   git:
-    repo: https://github.com/zsh-users/antigen.git
+    repo: "{{ zsh_antigen_repo }}"
     dest: "{{ zsh_antigen_path }}/antigen"
     version: "{{ zsh_antigen_version }}"
     force: yes
