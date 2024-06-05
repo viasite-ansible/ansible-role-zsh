@@ -5,7 +5,7 @@ zsh_config: "{% if zsh_shared %}/usr/share/zsh-config/.zshrc{% else %}~{{ zsh_us
 zsh_antigen_path_compat: "{{ zsh_antigen_path | replace('~' + zsh_user, '$HOME') }}"
 
 zsh_fzf_os: linux
-zsh_fzf_arch: "{% if '64' in ansible_architecture %}amd64{% elif 'armv7' in ansible_architecture %}armv7{% elif 'arm' in ansible_architecture %}arm64{% else %}386{% endif %}"
+zsh_fzf_arch: "{% if 'aarch64' in ansible_architecture %}armv7{% elif 'arm' in ansible_architecture %}arm64{% elif '64' in ansible_architecture %}amd64{% elif 'armv7' in ansible_architecture %}armv7{% else %}386{% endif %}"
 zsh_fzf_url: "https://github.com/junegunn/fzf/releases/download/{{ zsh_fzf_version }}/fzf-{{ zsh_fzf_version }}-{{ zsh_fzf_os }}_{{ zsh_fzf_arch }}.tar.gz"
 zsh_antigen_fzf_path: "{{ zsh_antigen_path }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-junegunn-SLASH-fzf.git"
 zsh_fzf_default_opts: "--height {{ zsh_fzf_height }}{% if zsh_fzf_reverse %} --reverse{% endif %}{% if zsh_fzf_border %} --border{% endif %}"
