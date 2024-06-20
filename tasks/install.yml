@@ -19,6 +19,7 @@
     state: present
   # brew don't work from root user on macOS
   become: yes
+  become_user: "{{ zsh_user }}"
   when: not (zsh_user == 'root' and ansible_os_family == 'Darwin')
 
 - name: Check if {{ zsh_antigen_path }} exist
