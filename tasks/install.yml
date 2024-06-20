@@ -7,7 +7,7 @@
   become: yes
   when: ansible_os_family != 'Darwin'
 
-- name: Install zsh, git, wget, fd-find
+- name: Install zsh, git, wget, fd-find, fzf
   package:
     name:
       - zsh
@@ -15,6 +15,7 @@
       - wget
       - "{{ 'fd-find' if ansible_distribution_version is version_compare('20.04', '>=') else 'curl' }}"  # fd-find for ubuntu 20.04
       - "{{ 'fd' if ansible_os_family == 'Darwin' else 'curl' }}"
+      - "{{ 'fzf' if ansible_os_family == 'Darwin' else 'curl' }}"
     state: present
   # brew don't work from root user on macOS
   become: yes

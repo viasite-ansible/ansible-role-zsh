@@ -1,19 +1,25 @@
 [![Build Status](https://travis-ci.org/viasite-ansible/ansible-role-zsh.svg?branch=master)](https://travis-ci.org/viasite-ansible/ansible-role-zsh)
 
-Tested on Ubuntu 18.04, Ubuntu 20.04, Ubuntu 22.04, Ubuntu 24.04.
+Tested on Ubuntu 18.04, Ubuntu 20.04, Ubuntu 22.04, Ubuntu 24.04, MacOS 14.4.
 
-Tested long time ago: macOS 10.12, CentOS 8
+Tested long time ago: MacOS 10.12, CentOS 8
 
 **For upgrade from viasite-ansible.zsh 1.x, 2.x to 3.0 see [below](#upgrade).**
 
 
 
 ## Zero-knowledge install:
-If you using Ubuntu or Debian and not familiar with Ansible, you can just execute [install.sh](install.sh) on target machine:
+If you are using Ubuntu or Debian and not familiar with Ansible, you can just execute [install.sh](install.sh) on target machine:
 ```
 curl https://raw.githubusercontent.com/viasite-ansible/ansible-role-zsh/master/install.sh | bash
 ```
 It will install pip3, ansible and setup zsh for root and current user.
+
+## MacOS zero-knowledge install:
+Requirements: brew, python. Asks user's password. [install-macos.sh](install-macos.sh) will install ansible, and setup zsh for current user and optionally for root:
+```
+curl https://raw.githubusercontent.com/viasite-ansible/ansible-role-zsh/master/install-macos.sh | bash
+```
 
 Then [configure terminal application](#configure-terminal-application).
 
@@ -44,7 +50,7 @@ Then [configure terminal application](#configure-terminal-application).
 ![colors demo](https://github.com/popstas/popstas.github.io/blob/master/images/2017-03/ansible-role-zsh-colors.gif?raw=true)
 
 ## Midnight Commander Solarized Dark skin
-If you using Solarized Dark scheme and `mc`, you should want to install skin, then set `zsh_mc_solarized_skin: yes`
+If you are using Solarized Dark scheme and `mc`, you should want to install skin, then set `zsh_mc_solarized_skin: yes`
 
 
 ## Demo install in Vagrant
