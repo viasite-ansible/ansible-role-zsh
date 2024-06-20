@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/viasite-ansible/ansible-role-zsh.svg?branch=master)](https://travis-ci.org/viasite-ansible/ansible-role-zsh)
-
 Tested on Ubuntu 18.04, Ubuntu 20.04, Ubuntu 22.04, Ubuntu 24.04, MacOS 14.4.
 
 Tested long time ago: MacOS 10.12, CentOS 8
