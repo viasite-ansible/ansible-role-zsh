@@ -18,8 +18,7 @@ zsh_path:
   - /usr/bin
   - /sbin
   - /bin
-  - /usr/games
-  - /usr/local/games
+  - /opt/homebrew/bin
 
 zsh_load_etc_profile: yes
 
@@ -83,6 +82,13 @@ zsh_hotkeys:
   # home & end keys work
   - { hotkey: '\e[1~', action: beginning-of-line }
   - { hotkey: '\e[4~', action: end-of-line }
+  - { hotkey: '^[[H', action: beginning-of-line, bundle: brew } # home/end has different codes on MacOS
+  - { hotkey: '^[[F', action: end-of-line, bundle: brew }
+  - { hotkey: '^[[1;5D', action: backward-word, bundle: brew }
+  - { hotkey: '^[[1;5C', action: forward-word, bundle: brew }
+
+  # alt+M for insert last word
+  - { hotkey: '^[m', action: copy-earlier-word }
 
   # fzf-widgets
   - { hotkey: '^@' ,   action: fzf-select-widget,            bundle: "{{ fzf_widgets }}" }
