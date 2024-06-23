@@ -1,6 +1,6 @@
-Tested on Ubuntu 18.04, Ubuntu 20.04, Ubuntu 22.04, Ubuntu 24.04, MacOS 14.4.
+Tested on Ubuntu 20.04, Ubuntu 22.04, Ubuntu 24.04, MacOS 14.4.
 
-Tested long time ago: MacOS 10.12, CentOS 8
+Tested long time ago: Ubuntu 18.04, MacOS 10.12, CentOS 8
 
 **For upgrade from viasite-ansible.zsh 1.x, 2.x to 3.0 see [below](#upgrade).**
 

@@ -2,14 +2,17 @@
 galaxy_info:
   author: Stanislav Popov
   company: Viasite
-  description: oh-my-zsh with powerlevel9k theme, fzf and other plugins
+  description: oh-my-zsh with powerlevel10k theme, fzf and other plugins
   license: MIT
-  min_ansible_version: 2.0
+  min_ansible_version: "2.0"
   platforms:
     - name: Ubuntu
       versions:
         - trusty
         - xenial
+        - focal
+        - jammy
+        - noble
     - name: Debian
       versions:
         - squeeze
@@ -20,7 +23,8 @@ galaxy_info:
         - 7
     - name: MacOSX
       versions:
-        - 10.12
+        - "10.12"
+        - "14.4"
   galaxy_tags:
     - system
     - shell
