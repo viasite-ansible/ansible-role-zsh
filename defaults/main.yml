@@ -35,7 +35,7 @@ zsh_fzf_version: 0.52.1
 
 zsh_antigen_bundles:
   - { name: command-not-found, when: "{{ ansible_os_family != 'Darwin' }}" } # too slow on OSX
-  - { name: brew, command: brew }
+  - { name: brew, when: "{{ ansible_os_family == 'Darwin' }}" }
   - { name: docker, command: docker }
   - { name: docker-compose, command: docker-compose }
   - fancy-ctrl-z
