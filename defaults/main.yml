@@ -86,6 +86,8 @@ zsh_hotkeys:
   - { hotkey: '^[[F', action: end-of-line, bundle: brew }
   - { hotkey: '^[[1;5D', action: backward-word, bundle: brew }
   - { hotkey: '^[[1;5C', action: forward-word, bundle: brew }
+  - { hotkey: '[D', action: backward-word, bundle: brew }
+  - { hotkey: '[C', action: forward-word, bundle: brew }
 
   # alt+M for insert last word
   - { hotkey: '^[m', action: copy-earlier-word }
