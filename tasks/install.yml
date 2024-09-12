@@ -5,7 +5,13 @@
     update_cache: yes
     cache_valid_time: 86400
   become: yes
-  when: ansible_os_family != 'Darwin'
+  when: ansible_os_family != 'Darwin' and ansible_pkg_mgr != 'dnf'
+
+- name: Update package cache (dnf)
+  package:
+    update_cache: yes
+  become: yes
+  when: ansible_pkg_mgr == 'dnf'
 
 - name: Install zsh, git, wget, fd-find, fzf
   package:
@@ -23,7 +29,7 @@
   when: not (zsh_user == 'root' and ansible_os_family == 'Darwin')
 
 - name: Check if {{ zsh_antigen_path }} exist
-  stat: 
+  stat:
     path: "{{ zsh_antigen_path }}"
   register: zsh_antigen_path_present
 
