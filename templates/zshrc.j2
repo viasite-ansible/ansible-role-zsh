@@ -38,8 +38,8 @@ ANTIGEN_SYSTEM_UPDATE_DAYS="{{ zsh_update_interval }}"
 {% if zsh_custom_before %}# Custom configs zsh_custom_before
 {{ zsh_custom_before }}{% endif %}
 
-{% if ansible_distribution_version is version_compare('20.04', '>=') %}
-alias fd=fdfind # for correct working of sorenson-axial/fzf-widgets
+{% if ansible_os_family == 'Debian' %}
+alias fd={{ zsh_fd_binary }} # for correct working of sorenson-axial/fzf-widgets
 {% endif %}
 
 source "{{ zsh_antigen_path_compat }}/antigen/antigen.zsh"
@@ -120,6 +120,10 @@ export FZF_DEFAULT_OPTS="{{ zsh_fzf_default_opts }}"
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 {% endif %}
+# Configure fd command for fzf-widgets
+export FZF_WIDGETS_FIND_COMMAND="{{ zsh_fd_command }}"
+export FZF_WIDGET_FIND_COMMAND="{{ zsh_fd_command }}"
+
 declare -p FZF_WIDGETS_OPTS > /dev/null 2>&1 && FZF_WIDGETS_OPTS[insert-history]="{{ zsh_fzf_ctrl_r_opts }}"
 declare -p FZF_WIDGET_OPTS > /dev/null 2>&1 && FZF_WIDGET_OPTS[insert-history]="{{ zsh_fzf_ctrl_r_opts }}"
 
