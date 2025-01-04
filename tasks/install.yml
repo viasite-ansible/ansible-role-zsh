@@ -5,7 +5,7 @@
     update_cache: yes
     cache_valid_time: 86400
   become: yes
-  when: ansible_os_family != 'Darwin' and ansible_pkg_mgr != 'dnf'
+  when: ansible_os_family != 'Darwin' and not ansible_pkg_mgr is regex('^dnf')
 
 - name: Update package cache (dnf)
   package:
