@@ -38,6 +38,7 @@ zsh_antigen_bundles:
   - { name: brew, when: "{{ ansible_os_family == 'Darwin' }}" }
   - { name: docker, command: docker }
   - { name: docker-compose, command: docker-compose }
+  - { name: docker-compose, command: docker compose }
   - fancy-ctrl-z
   - git-extras
   - gnu-utils
