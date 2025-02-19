@@ -19,7 +19,7 @@
       - zsh
       - git
       - wget
-      - "{{ 'fd-find' if ansible_distribution_version is version_compare('20.04', '>=') else 'curl' }}"  # fd-find for ubuntu 20.04
+      - "{{ 'fd-find' if (ansible_distribution == 'Ubuntu' and ansible_distribution_version is version_compare('20.04', '>=') or ansible_distribution == 'Debian' and ansible_distribution_version is version_compare('11', '>=')) else 'curl' }}"  # fd-find for ubuntu >=20.04 and Debian >=11
       - "{{ 'fd' if ansible_os_family == 'Darwin' else 'curl' }}"
       - "{{ 'fzf' if ansible_os_family == 'Darwin' else 'curl' }}"
     state: present
