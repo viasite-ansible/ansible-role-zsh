@@ -9,8 +9,10 @@ title() {
 
 title "Install pip and Ansible"
 sudo apt update
-sudo apt install python3-pip -y
-sudo pip3 install ansible
+sudo apt install python3-venv python3-pip -y
+python3 -m venv ~/ansible-venv
+source ~/ansible-venv/bin/activate
+pip install ansible
 
 title "Install viasite-ansible.zsh"
 ansible-galaxy install viasite-ansible.zsh --force
