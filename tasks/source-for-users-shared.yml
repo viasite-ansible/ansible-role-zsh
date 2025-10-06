@@ -1,13 +1,13 @@
-- name: Get Ubuntu/Debian users's home path
+- name: Get Ubuntu/Debian/Redhat users's home path
   shell: "egrep '^.*:.*:[1-9][0-9]{3,4}:.*:.*:.*:.*(bash|zsh)$' /etc/passwd | awk -F: '{print $6}'"
   register: paths
-  when: ansible_os_family == 'Debian'
+  when: ansible_os_family in ['Debian', 'RedHat']
   changed_when: false
 
-- name: Get Ubuntu/Debian users
+- name: Get Ubuntu/Debian/Redhat users
   shell: "egrep '^.*:.*:[1-9][0-9]{3,4}:.*:.*:.*:.*(bash|zsh)$' /etc/passwd | awk -F: '{print $1}'"
   register: zsh_users
-  when: ansible_os_family == 'Debian' and paths is defined and paths.stdout != ""
+  when: ansible_os_family in ['Debian', 'RedHat'] and paths is defined and paths.stdout != ""
   changed_when: false
 - name: Format user list
   set_fact:
