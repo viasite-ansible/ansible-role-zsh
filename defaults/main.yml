@@ -47,6 +47,7 @@ zsh_antigen_bundles:
   - { name: gulp, command: gulp }
   - { name: helm, command: helm }
   - { name: kubectl, command: kubectl }
+  - { name: popstas/npm-run-zsh-completion, command: npm }
   - { name: pip, command: pip }
   - { name: rake, command: rake }
   - { name: symfony2, command: symfony }
