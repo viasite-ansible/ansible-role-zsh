@@ -31,7 +31,7 @@ fzf_widgets: viasite-ansible/fzf-widgets # fork of sorenson-axial/fzf-widgets
 zsh_antigen_repo: https://github.com/viasite-ansible/antigen
 zsh_antigen_version: patch-1
 
-zsh_fzf_version: 0.52.1
+zsh_fzf_version: 0.68.0
 
 zsh_antigen_bundles:
   - { name: command-not-found, when: "{{ ansible_os_family != 'Darwin' }}" } # too slow on OSX

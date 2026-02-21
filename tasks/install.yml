@@ -89,13 +89,28 @@
     state: directory
   when: not zsh_shared
 
-- name: "Download fzf to {{ zsh_fzf_path_absolute }}"
+- name: Download fzf tarball
+  become: yes
+  get_url:
+    url: "{{ zsh_fzf_url }}"
+    dest: "/tmp/fzf-{{ zsh_fzf_version }}.tar.gz"
+    mode: '0644'
+  when: zsh_register_fzf_command.rc == 1 and ansible_os_family != 'Darwin'
+
+- name: Extract fzf to {{ zsh_fzf_path_absolute }}
   become: yes
   unarchive:
-    src: "{{ zsh_fzf_url }}"
+    src: "/tmp/fzf-{{ zsh_fzf_version }}.tar.gz"
     dest: "{{ zsh_fzf_path_absolute }}"
     remote_src: yes
     creates: "{{ zsh_fzf_path_absolute }}/fzf"
+  when: zsh_register_fzf_command.rc == 1 and ansible_os_family != 'Darwin'
+
+- name: Remove fzf tarball
+  become: yes
+  file:
+    path: "/tmp/fzf-{{ zsh_fzf_version }}.tar.gz"
+    state: absent
   when: zsh_register_fzf_command.rc == 1 and ansible_os_family != 'Darwin'
 
 - name: Set directory permissions
