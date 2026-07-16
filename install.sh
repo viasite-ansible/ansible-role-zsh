@@ -63,13 +63,21 @@ if ! sudo -n true 2>/dev/null; then
     become=(-b -K)
 fi
 
+# Ansible's interpreter discovery can pick a version manager shim (asdf, pyenv,
+# mise) that fails to execute, so pin the interpreter that runs ansible itself.
+interpreter=()
+ansible_shebang="$(head -n1 "$(command -v ansible)" 2>/dev/null | sed -e 's/^#!//' -e 's/[[:space:]].*//')"
+case "$ansible_shebang" in
+    /*/python*) interpreter=(-e "ansible_python_interpreter=$ansible_shebang") ;;
+esac
+
 title "Provision playbook for $(whoami)"
-ansible-playbook -i "localhost," -c local "${become[@]}" "$playbook" --extra-vars="zsh_user=$(whoami)"
+ansible-playbook -i "localhost," -c local "${become[@]}" ${interpreter[@]+"${interpreter[@]}"} "$playbook" --extra-vars="zsh_user=$(whoami)"
 
 # Set ZSH_INSTALL_ROOT=1 to also provision the root user.
 if [ "${ZSH_INSTALL_ROOT:-0}" = "1" ]; then
     title "Provision playbook for root"
-    ansible-playbook -i "localhost," -c local "${become[@]}" "$playbook"
+    ansible-playbook -i "localhost," -c local "${become[@]}" ${interpreter[@]+"${interpreter[@]}"} "$playbook"
 fi
 
 title "Finished! Please, restart your shell."
