@@ -18,6 +18,7 @@ jobs:
       - name: Check out the codebase
         uses: actions/checkout@v5
         with:
+          ref: master  # commit the regenerated CHANGELOG back to master
           fetch-depth: 0  # git-cliff needs full history
 
       - name: Generate release notes
@@ -35,6 +36,26 @@ jobs:
           body: ${{ steps.release_notes.outputs.content }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Regenerate CHANGELOG.md
+        uses: orhun/git-cliff-action@v4
+        with:
+          config: cliff.toml
+        env:
+          OUTPUT: CHANGELOG.md
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit CHANGELOG.md to master
+        run: |
+          if git diff --quiet -- CHANGELOG.md; then
+            echo "CHANGELOG.md already up to date"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md
+          git commit -m "chore(release): update CHANGELOG for ${{ github.ref_name }} [skip ci]"
+          git push origin HEAD:master
 
   galaxy:
     name: Import to Ansible Galaxy
