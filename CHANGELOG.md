@@ -2,10 +2,28 @@
 
 All notable changes to this project are documented in this file.
 
-## [Unreleased]
+## [4.0.1](https://github.com/viasite-ansible/ansible-role-zsh/releases/tag/v4.0.1) - 2026-07-16
+
+### Bug Fixes
+
+- Align Galaxy namespace to viasite-ansible ([1bc339c](https://github.com/viasite-ansible/ansible-role-zsh/commit/1bc339c898521393f348d666075367b98ba6fc62))
+
+### CI
+
+- Add ansible-lint workflow and fix all lint findings ([26a9075](https://github.com/viasite-ansible/ansible-role-zsh/commit/26a90756a8b94595229b84bc1a1a1d9b7d167481))
+
+## [4.0.0](https://github.com/viasite-ansible/ansible-role-zsh/releases/tag/v4.0.0) - 2026-07-15
 
 ### Features
 
+- Selectable prompt theme (powerlevel10k | starship) + Windows installer (#88) ([4a2e097](https://github.com/viasite-ansible/ansible-role-zsh/commit/4a2e09711cd3393f56bce1512575f00659a23b8a))
+- **windows:** Ctrl+R fzf history in cmd.exe via embedded clink script ([36e04a0](https://github.com/viasite-ansible/ansible-role-zsh/commit/36e04a09a4edae6f031da79c9de5ae5a66b3f726))
+- **windows:** Install actions and orchestrator for install.ps1 ([9329bd7](https://github.com/viasite-ansible/ansible-role-zsh/commit/9329bd770c443cb695e1882dc1efd43cdd7069be))
+- **windows:** Feature resolution and idempotent profile-block merge ([c764e0b](https://github.com/viasite-ansible/ansible-role-zsh/commit/c764e0bed624f30a57deebd5e60d6536a3a4be30))
+- **windows:** Install.ps1 scaffold with package-manager detection ([0d09c43](https://github.com/viasite-ansible/ansible-role-zsh/commit/0d09c439f58282a11a27ec4a4d8bf6b89245df3e))
+- **windows:** Render static starship.toml with drift guard ([8ab2468](https://github.com/viasite-ansible/ansible-role-zsh/commit/8ab24686f653b3bde2e71618c2806e152afee54d))
+- **install:** Support GIT_REPO/GIT_BRANCH to install role from git ([302c4d3](https://github.com/viasite-ansible/ansible-role-zsh/commit/302c4d34035ff17289a58006ab9913c5f4f0ccc4))
+- Default prompt theme is now starship **[BREAKING]** ([a0599e4](https://github.com/viasite-ansible/ansible-role-zsh/commit/a0599e42bb0d4407919cbb82abbf692499e12bc8))
 - Unify zero-knowledge install into one OS-detecting install.sh ([cc6bb6f](https://github.com/viasite-ansible/ansible-role-zsh/commit/cc6bb6ff3791c996be456128b547fa2e4c3a101f))
 - Deep-merge user overrides into generated starship config ([e3f5ced](https://github.com/viasite-ansible/ansible-role-zsh/commit/e3f5cedc2010b51611b389e16e950db4c3929cd9))
 - Verify starship theme acceptance criteria ([2317cdc](https://github.com/viasite-ansible/ansible-role-zsh/commit/2317cdc6ecd6779aecbca327e42675cc9a47be9a))
@@ -19,6 +37,14 @@ All notable changes to this project are documented in this file.
 
 ### Bug Fixes
 
+- **windows:** Correct cmd Ctrl+R fzf (session history + binding syntax) ([4f9b1cf](https://github.com/viasite-ansible/ansible-role-zsh/commit/4f9b1cf3502b27b2af1d711949b8088d079331c5))
+- **windows:** Ensure clink loads our scripts (installscripts + PATH refresh) ([3562403](https://github.com/viasite-ansible/ansible-role-zsh/commit/3562403f3e46a758a5d739405761904211905017))
+- **windows:** Embed starship.toml in install.ps1 (no download) ([4799b48](https://github.com/viasite-ansible/ansible-role-zsh/commit/4799b48380bbb1e532ae8e50ff9fa027a02c36fc))
+- **windows:** Make install.ps1 work under 'irm | iex' ([0664024](https://github.com/viasite-ansible/ansible-role-zsh/commit/06640248c346aa629408bdcb630ef87c086de562))
+- **windows:** Reliable CI manager, binary exit-code checks, summary + test polish ([03d1973](https://github.com/viasite-ansible/ansible-role-zsh/commit/03d19732069f257a59245e6ab92452e1c762281e))
+- **windows:** Match Ansible trim_blocks when rendering starship.toml ([a398e90](https://github.com/viasite-ansible/ansible-role-zsh/commit/a398e907bdc7c18614f002c3a56b1353a613d523))
+- **starship:** Extract via tar to support macOS ([58d1925](https://github.com/viasite-ansible/ansible-role-zsh/commit/58d19250083edf0952e4509724f2086acf96a66d))
+- Render each antigen bundle at most once ([53c6722](https://github.com/viasite-ansible/ansible-role-zsh/commit/53c6722a0fb389662b123a8c8cfa6d1525dc6c0f))
 - Migrate bare ansible_* facts to ansible_facts[...] ([2f7dc60](https://github.com/viasite-ansible/ansible-role-zsh/commit/2f7dc60415c2602a29d9d628b37736d8f6546e82))
 - **starship:** Make verbatim-override conditional boolean-typed ([e36dc03](https://github.com/viasite-ansible/ansible-role-zsh/commit/e36dc030ddf5bb90b03d0d6619b3af2762436fc1))
 - **starship:** Support Python <3.11 in starship.toml merge helper ([7bd4523](https://github.com/viasite-ansible/ansible-role-zsh/commit/7bd452308df2b7e31aae48838609e65bb4bf961d))
@@ -26,12 +52,31 @@ All notable changes to this project are documented in this file.
 - Run starship.toml config under the configure tag ([edc57c3](https://github.com/viasite-ansible/ansible-role-zsh/commit/edc57c3939d284a95de243fc8993c2822fc66147))
 - Address review findings ([7871a63](https://github.com/viasite-ansible/ansible-role-zsh/commit/7871a63270b4c493d64e51e9150cdc87f41df8d3))
 
+### Documentation
+
+- Add Windows PowerShell/cmd install section ([b51fc80](https://github.com/viasite-ansible/ansible-role-zsh/commit/b51fc80a2864c9e91c2854211f2977034e65fd11))
+- Implementation plan for Windows PowerShell/cmd installer ([47a68e5](https://github.com/viasite-ansible/ansible-role-zsh/commit/47a68e5989fc7493902a4c2617e6d8bac4595aee))
+- Design for Windows PowerShell/cmd installer ([9d5b20c](https://github.com/viasite-ansible/ansible-role-zsh/commit/9d5b20cb6a73a643eb25e0c002c43762ae258473))
+- Refresh README and drop Vagrant support ([a2a6cc6](https://github.com/viasite-ansible/ansible-role-zsh/commit/a2a6cc638ea6257a298c7b20549b246d2fd67c5a))
+
 ### Testing
 
+- **windows:** Exercise regex-token safety and PSFzf/prediction gating ([74f47b8](https://github.com/viasite-ansible/ansible-role-zsh/commit/74f47b84b6395092dcef54aed3c2092e85fa3f35))
+- **windows:** Assert package-manager ordering and -Prefer-absent ([2580035](https://github.com/viasite-ansible/ansible-role-zsh/commit/25800358e594a402ec2b857e51ebc1f89719cf90))
 - **molecule:** Modernize scenarios to run on current molecule/ansible ([504870f](https://github.com/viasite-ansible/ansible-role-zsh/commit/504870f8fbc8710a3afddcbcd4e7669b109bce72))
+
+### CI
+
+- Import role to Ansible Galaxy on release; refresh meta platforms ([43956e8](https://github.com/viasite-ansible/ansible-role-zsh/commit/43956e8ae6f351e502efc39a574516b997b134f3))
+- Bump checkout@v5 and setup-python@v6 (drop Node 20 deprecation) ([ebf24a7](https://github.com/viasite-ansible/ansible-role-zsh/commit/ebf24a7e1d437526b7ac6eef1a5c28219cd65179))
+- **windows:** Run e2e asserts with -NoProfile and refresh PATH for starship ([a65fe81](https://github.com/viasite-ansible/ansible-role-zsh/commit/a65fe8182e4f611c3bd9adaa3222c48249bbef45))
+- **windows:** Fail e2e job when starship --version exits non-zero ([92075a9](https://github.com/viasite-ansible/ansible-role-zsh/commit/92075a902762f3b9df06f5f3e5abac4497047819))
+- **windows:** E2e install job plus Pester and drift checks ([84fdc5c](https://github.com/viasite-ansible/ansible-role-zsh/commit/84fdc5c73bd49a3d44ef137c9b9e431c8bb20794))
+- Adopt git-cliff for changelog and GitHub release notes ([e192da2](https://github.com/viasite-ansible/ansible-role-zsh/commit/e192da2fc31347a5f5b9f996c3b4c392cba6a279))
 
 ### Miscellaneous
 
+- Clear completed TODO items (shipped in #88) ([2c06a85](https://github.com/viasite-ansible/ansible-role-zsh/commit/2c06a85c442e9aa0e88e27992e62eb5d9ee0a860))
 - Add zero-knowledge install simplification task ([54e351e](https://github.com/viasite-ansible/ansible-role-zsh/commit/54e351edba178e48aeae7788d2138466b5a8a081))
 - Mark starship theme support done ([8151a45](https://github.com/viasite-ansible/ansible-role-zsh/commit/8151a45d52f13b27b7309d5874d0b8d5e91c7947))
 - Add starship theme support implementation plan ([e01ea2f](https://github.com/viasite-ansible/ansible-role-zsh/commit/e01ea2ff1a5c30db5c809deee0c10ba64095d65c))
