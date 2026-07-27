@@ -61,6 +61,16 @@
     mode: "0644"
     backup: true
 
+- name: Write fzf options file
+  ansible.builtin.template:
+    src: fzfrc.j2
+    dest: "{{ zsh_fzf_opts_file }}"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: "0644"
+    backup: true
+  when: zsh_fzf_manage_opts_file
+
 - name: Set zsh as default shell
   ansible.builtin.user:
     name: "{{ zsh_user }}"

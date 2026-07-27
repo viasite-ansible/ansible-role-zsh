@@ -20,6 +20,7 @@ provisioner:
         zsh_user: root
         zsh_theme: powerlevel10k
         zsh_mc_solarized_skin: true
+        zsh_fzf_manage_opts_file: true
         zsh_antigen_bundles_extras:
           - { name: test/in-list, when: true }
           - { name: test/not-in-list, when: false }

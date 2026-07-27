@@ -168,6 +168,17 @@ zsh_fzf_reverse: true
 zsh_fzf_border: false
 zsh_fzf_ctrl_r_opts: "--exact"
 
+# fzf options file ($FZF_DEFAULT_OPTS_FILE), for options that don't survive
+# the shell quoting of FZF_DEFAULT_OPTS (nested quotes, runtime $VARS).
+# Opt-in: enabling it overwrites ~/.fzfrc (a backup is kept)
+zsh_fzf_manage_opts_file: false
+zsh_fzf_opts_extra: [] # extra verbatim lines for the options file
+# below applies only when zsh_fzf_manage_opts_file is enabled:
+# ЙЦУКЕН -> QWERTY fallback for queries without matches, needs the `ruen` script
+# from viasite/server-scripts; without it the bind is a no-op
+zsh_fzf_ruen: true
+zsh_fzf_ruen_command: ruen
+
 # command-time
 zsh_command_time_min_seconds: 3
 zsh_command_time_echo: ""

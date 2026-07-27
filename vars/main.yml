@@ -12,6 +12,8 @@ zsh_fzf_arch: "{% if 'aarch64' in ansible_facts['architecture'] %}armv7{% elif '
 zsh_fzf_url: "https://github.com/junegunn/fzf/releases/download/v{{ zsh_fzf_version }}/fzf-{{ zsh_fzf_version }}-{{ zsh_fzf_os }}_{{ zsh_fzf_arch }}.tar.gz"
 zsh_antigen_fzf_path: "{{ zsh_antigen_path }}/repos/https-COLON--SLASH--SLASH-github.com-SLASH-junegunn-SLASH-fzf.git"
 zsh_fzf_default_opts: "--height {{ zsh_fzf_height }}{% if zsh_fzf_reverse %} --reverse{% endif %}{% if zsh_fzf_border %} --border{% endif %}"
+zsh_fzf_opts_file: "{% if zsh_shared %}/usr/share/zsh-config/fzfrc{% else %}~{{ zsh_user }}/.fzfrc{% endif %}"
+zsh_fzf_opts_file_compat: "{{ zsh_fzf_opts_file | replace('~' + zsh_user, '$HOME') }}"
 
 # starship
 zsh_starship_path_absolute: "{{ zsh_starship_path | replace('$HOME', '~' + zsh_user) }}"

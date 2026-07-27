@@ -1,0 +1,14 @@
+# {{ ansible_managed }}
+# fzf default options, loaded via $FZF_DEFAULT_OPTS_FILE (fzf >= 0.48).
+# One option per line, `#` starts a comment. Older fzf ignores the file.
+{% if zsh_fzf_ruen %}
+# Keyboard layout fallback: when the query matched nothing, assume it was typed
+# in the russian layout (ЙЦУКЕН) and retype it to QWERTY with `{{ zsh_fzf_ruen_command }}`.
+# A query that does match is left alone, so searching russian text still works.
+# `command -v` keeps the bind a no-op on hosts without `{{ zsh_fzf_ruen_command }}`,
+# instead of wiping the query.
+--bind='result:transform:[ $FZF_MATCH_COUNT -eq 0 ] && command -v {{ zsh_fzf_ruen_command }} > /dev/null && echo "transform-query({{ zsh_fzf_ruen_command }} {q})"'
+{% endif %}
+{% for opt in zsh_fzf_opts_extra %}
+{{ opt }}
+{% endfor %}

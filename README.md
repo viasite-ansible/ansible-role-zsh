@@ -340,7 +340,38 @@ zsh_aliases:
 - <kbd>Ctrl+@,G,B</kbd> - fzf-git-checkout-branch
 - <kbd>Ctrl+@,G,D</kbd> - fzf-git-delete-branches
 
+### fzf options file
+Simple fzf options are exported in `FZF_DEFAULT_OPTS` (see `zsh_fzf_height`, `zsh_fzf_reverse`,
+`zsh_fzf_border`). Options that don't survive shell quoting — nested quotes, `$VARS` that must be
+expanded by fzf at runtime — go to a separate options file, rendered to `~/.fzfrc`
+(`/usr/share/zsh-config/fzfrc` when `zsh_shared`) and exported as `FZF_DEFAULT_OPTS_FILE`.
+The file needs fzf >= 0.48, older versions just ignore it.
 
+The whole thing is **opt-in**, nothing changes until you set `zsh_fzf_manage_opts_file: yes`:
+
+``` yaml
+- hosts: all
+  vars:
+    zsh_fzf_manage_opts_file: true
+  roles:
+    - viasite-ansible.zsh
+```
+
+Note that enabling it overwrites an existing `~/.fzfrc` (the old one is kept as a backup).
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `zsh_fzf_manage_opts_file` | `no` | Render the options file and export `FZF_DEFAULT_OPTS_FILE`. |
+| `zsh_fzf_opts_extra` | `[]` | Extra verbatim lines for the options file, one option per line. |
+| `zsh_fzf_ruen` | `yes` | ЙЦУКЕН &rarr; QWERTY fallback for queries typed in the wrong keyboard layout. |
+| `zsh_fzf_ruen_command` | `ruen` | Command that converts the query. |
+
+With `zsh_fzf_ruen` a query that matched **nothing** is retyped from the russian layout
+to latin, so `ыукср` becomes `search` and the search keeps going. Queries that do match
+are left untouched, so searching russian text still works.
+It needs the [`ruen`](https://github.com/viasite/server-scripts/blob/master/bin/ruen) script from
+`viasite/server-scripts` (installed by the `viasite-ansible.server-scripts` role); on hosts without
+it the bind is guarded by `command -v` and does nothing.
 
 ## Configure bundles
 You can check default bundles in [defaults/main.yml](defaults/main.yml#L37).

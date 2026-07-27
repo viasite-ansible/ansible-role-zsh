@@ -123,6 +123,9 @@ alias '{{ alias.alias }}'="{{ alias.action }}"
 # fzf
 export FZF_TMUX=0
 export FZF_DEFAULT_OPTS="{{ zsh_fzf_default_opts }}"
+{% if zsh_fzf_manage_opts_file %}
+export FZF_DEFAULT_OPTS_FILE="{{ zsh_fzf_opts_file_compat }}"
+{% endif %}
 
 # fzf-widgets: fzf-change-reset-dir
 {% if zsh_version is version_compare('5.0', '>=') -%}
