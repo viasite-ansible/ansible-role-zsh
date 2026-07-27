@@ -13,7 +13,7 @@
     # is only on PATH inside .zshrc, not in Ansible's noninteractive shell, so
     # check the binary at its install location rather than via `which`.
     starship_bin: /root/bin/starship
-    expected_starship_version: "1.23.0"
+    expected_starship_version: "1.26.0"
   tasks:
     - name: Stat starship binary at install location
       ansible.builtin.stat:

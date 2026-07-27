@@ -124,7 +124,7 @@ starship-related variables:
 | Variable | Default | Description |
 | --- | --- | --- |
 | `zsh_theme` | `starship` | Prompt theme: `starship` or `powerlevel10k`. |
-| `zsh_starship_version` | `"1.23.0"` | Pinned starship binary version to install. |
+| `zsh_starship_version` | `"1.26.0"` | Pinned starship binary version to install. |
 | `zsh_starship_path` | `"$HOME/bin"` | Install directory for the starship binary (already on PATH; `/usr/local/bin` when `zsh_shared`). |
 | `zsh_starship_manage_config` | `yes` | Render and manage `~/.config/starship.toml` (and export `STARSHIP_CONFIG`). Set `no` to leave the config alone. |
 | `zsh_starship_config` | `""` | Raw verbatim `starship.toml` content. When set, it is written as-is instead of the generated preset (and no merge happens). |

@@ -32,7 +32,7 @@ fzf_widgets: viasite-ansible/fzf-widgets # fork of sorenson-axial/fzf-widgets
 zsh_antigen_repo: https://github.com/viasite-ansible/antigen
 zsh_antigen_version: patch-1
 
-zsh_fzf_version: 0.73.1
+zsh_fzf_version: 0.74.1
 
 zsh_antigen_bundles:
   - { name: command-not-found, when: "{{ ansible_facts['os_family'] != 'Darwin' }}" } # too slow on OSX
@@ -84,7 +84,7 @@ zsh_theme: starship
 zsh_antigen_theme: "romkatv/powerlevel10k powerlevel10k"
 
 # starship (used when zsh_theme == 'starship')
-zsh_starship_version: "1.23.0"
+zsh_starship_version: "1.26.0"
 zsh_starship_path: "$HOME/bin"
 zsh_starship_manage_config: true
 zsh_starship_config: "" # raw verbatim starship.toml override; empty = use generated preset
