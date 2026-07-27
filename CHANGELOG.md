@@ -2,6 +2,20 @@
 
 All notable changes to this project are documented in this file.
 
+## [4.1.0](https://github.com/viasite-ansible/ansible-role-zsh/releases/tag/v4.1.0) - 2026-07-27
+
+### Features
+
+- **fzf:** Support options file with russian layout fallback ([bfdc09d](https://github.com/viasite-ansible/ansible-role-zsh/commit/bfdc09d9399e0b31c4061b6ba88312d639e0693a))
+
+### Bug Fixes
+
+- **install:** Reset sudo cache before passwordless probe ([a0ee169](https://github.com/viasite-ansible/ansible-role-zsh/commit/a0ee1698025c3ac86dd22ee752b4d3bb01cbc146))
+
+### Miscellaneous
+
+- **deps:** Bump fzf to 0.74.1 and starship to 1.26.0 ([ff0ace3](https://github.com/viasite-ansible/ansible-role-zsh/commit/ff0ace3ba89c4f966221bb699eae0d6c8c5ca36b))
+
 ## [4.0.2](https://github.com/viasite-ansible/ansible-role-zsh/releases/tag/v4.0.2) - 2026-07-16
 
 ### CI
